@@ -61,7 +61,7 @@ export const apiPut = <T = any>(url: string, data?: any, config?: AxiosRequestCo
 export const apiPatch = <T = any>(url: string, data?: any, config?: AxiosRequestConfig) => apiCall<T>("patch", url, data, config);
 export const apiDelete = <T = any>(url: string, config?: AxiosRequestConfig) => apiCall<T>("delete", url, undefined, config);
 
-// 나중에 파일업로드 필요 시 주석 해제
+// 나중에 파일업로드 필요 시 주석 해제.
 // export const apiUpload = async <T = any>(url: string, formData: FormData, config?: AxiosRequestConfig): Promise<ApiResponse<T>> => {
 //     try {
 //         const instance = getAxiosInstance();

@@ -56,7 +56,7 @@ const dummyOptions = [
 
 export default function ProductDetail() {
     return (
-        <div className="max-w-[1440px] w-full mx-auto my-[80px]">
+        <div className="max-w-[1488px] min-w-[1248px] px-6 w-full mx-auto my-[80px]">
             <section className="w-full flex gap-[137px]">
                 <div className="w-[712px]">
                     <Image src={DummyImage} alt="product" height={476} className="w-full mb-1" />

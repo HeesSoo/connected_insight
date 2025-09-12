@@ -1,10 +1,17 @@
 "use client";
 
+import Checkbox from "@/components/Checkbox";
 import Rangebar from "@/components/Rangebar";
 import { Arrow2UpIco } from "@/icons/icons";
 import { useState } from "react";
 
 export default function Filter() {
+    // 섹션 확장/축소 상태
+    const [sectionExpanded, setSectionExpanded] = useState({
+        type: true,
+        resolution: true,
+    });
+
     // Type 체크박스 상태
     const [typeFilters, setTypeFilters] = useState({
         PLUS: true,
@@ -47,82 +54,159 @@ export default function Filter() {
         }));
     };
 
+    // 섹션 토글 핸들러
+    const handleSectionToggle = (section: keyof typeof sectionExpanded) => {
+        setSectionExpanded((prev) => ({
+            ...prev,
+            [section]: !prev[section],
+        }));
+    };
+
+    // 섹션 체크박스 상태 계산 함수
+    const getSectionCheckboxState = (section: "type" | "resolution") => {
+        if (section === "type") {
+            const values = Object.values(typeFilters);
+            const checkedCount = values.filter(Boolean).length;
+            const totalCount = values.length;
+
+            if (checkedCount === 0) {
+                return { checked: false, indeterminate: false };
+            } else if (checkedCount === totalCount) {
+                return { checked: true, indeterminate: false };
+            } else {
+                return { checked: true, indeterminate: true };
+            }
+        } else if (section === "resolution") {
+            const values = Object.values(resolutionFilters);
+            const checkedCount = values.filter(Boolean).length;
+            const totalCount = values.length;
+
+            if (checkedCount === 0) {
+                return { checked: false, indeterminate: false };
+            } else if (checkedCount === totalCount) {
+                return { checked: true, indeterminate: false };
+            } else {
+                return { checked: true, indeterminate: true };
+            }
+        }
+        return { checked: false, indeterminate: false };
+    };
+
+    // 섹션 체크박스 클릭 핸들러
+    const handleSectionCheckboxClick = (section: "type" | "resolution") => {
+        if (section === "type") {
+            const currentState = getSectionCheckboxState("type");
+            const shouldSelectAll = !currentState.checked || currentState.indeterminate;
+
+            setTypeFilters({
+                PLUS: shouldSelectAll,
+                MAX: shouldSelectAll,
+                MAX_PRO: shouldSelectAll,
+                COLOR: shouldSelectAll,
+            });
+        } else if (section === "resolution") {
+            const currentState = getSectionCheckboxState("resolution");
+            const shouldSelectAll = !currentState.checked || currentState.indeterminate;
+
+            setResolutionFilters({
+                "300DPI": shouldSelectAll,
+                "600DPI": shouldSelectAll,
+                "1200DPI": shouldSelectAll,
+                "1800DPI": shouldSelectAll,
+                "3600DPI": shouldSelectAll,
+            });
+        }
+    };
+
     // 체크박스 컴포넌트
-    const CheckboxItem = ({ checked, onChange, label }: { checked: boolean; onChange: () => void; label: string }) => (
-        <div className="flex items-center gap-2 py-1">
-            <div className="w-3 h-3 border border-gray-300"></div>
-            <button onClick={onChange} className="flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900">
-                <div
-                    className={`w-4 h-4 border-2 rounded flex items-center justify-center ${
-                        checked ? "border-red-500 bg-red-500" : "border-gray-300 bg-white"
-                    }`}
-                >
-                    {checked && (
-                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                fillRule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clipRule="evenodd"
-                            />
-                        </svg>
-                    )}
-                </div>
-                <span>{label}</span>
-            </button>
+    const CheckboxItem = ({ checked, onChange, label, value }: { checked: boolean; onChange: () => void; label: string; value: string }) => (
+        <div className="flex items-center gap-1">
+            <div className="w-4 h-[1px] bg-g200"></div>
+            <Checkbox checked={checked} onChange={onChange} label={label} value={value} textCls="text-sm !font-medium text-g500" />
         </div>
     );
 
     // 섹션 헤더 컴포넌트
-    const SectionHeader = ({ title, isExpanded, onToggle }: { title: string; isExpanded: boolean; onToggle: () => void }) => (
-        <button onClick={onToggle} className="w-full flex items-center justify-between text-left">
-            <div className="flex items-center gap-2">
-                <div
-                    className={`w-4 h-4 border-2 rounded flex items-center justify-center ${
-                        isExpanded ? "border-red-500 bg-red-500" : "border-gray-300 bg-white"
-                    }`}
-                >
-                    {isExpanded && (
-                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                fillRule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clipRule="evenodd"
-                            />
-                        </svg>
-                    )}
-                </div>
-                <span className="text-base font-semibold text-gray-900">{title}</span>
-            </div>
+    const SectionHeader = ({
+        title,
+        isExpanded,
+        onToggle,
+        section,
+    }: {
+        title: string;
+        isExpanded: boolean;
+        onToggle: () => void;
+        section: "type" | "resolution";
+    }) => {
+        const checkboxState = getSectionCheckboxState(section);
 
-            <div className={`transition-transform duration-200 ${isExpanded ? "" : "rotate-180"}`}>
-                <Arrow2UpIco />
+        return (
+            <div className="w-full flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                    <Checkbox
+                        checked={checkboxState.checked}
+                        indeterminate={checkboxState.indeterminate}
+                        onChange={() => handleSectionCheckboxClick(section)}
+                        label={title}
+                        value={title}
+                        textCls="text-base font-semibold text-gray-900"
+                    />
+                </div>
+
+                <div className={`cursor-pointer ${isExpanded ? "rotate-0" : "rotate-180"} transition-transform duration-200`} onClick={onToggle}>
+                    <Arrow2UpIco />
+                </div>
             </div>
-        </button>
-    );
+        );
+    };
 
     return (
         <div className="w-[329px] bg-white">
             {/* Type 섹션 */}
             <div className="border-b border-gray-200 pb-4">
-                <SectionHeader title="Type" isExpanded={true} onToggle={() => {}} />
-                <div className="mt-3 space-y-1">
-                    <CheckboxItem checked={typeFilters.PLUS} onChange={() => handleTypeChange("PLUS")} label="PLUS" />
-                    <CheckboxItem checked={typeFilters.MAX} onChange={() => handleTypeChange("MAX")} label="MAX" />
-                    <CheckboxItem checked={typeFilters.MAX_PRO} onChange={() => handleTypeChange("MAX_PRO")} label="MAX PRO" />
-                    <CheckboxItem checked={typeFilters.COLOR} onChange={() => handleTypeChange("COLOR")} label="COLOR" />
-                </div>
+                <SectionHeader title="Type" isExpanded={sectionExpanded.type} onToggle={() => handleSectionToggle("type")} section="type" />
+                {sectionExpanded.type && (
+                    <div className="mt-3 space-y-2">
+                        <CheckboxItem checked={typeFilters.PLUS} onChange={() => handleTypeChange("PLUS")} label="PLUS" value="PLUS" />
+                        <CheckboxItem checked={typeFilters.MAX} onChange={() => handleTypeChange("MAX")} label="MAX" value="MAX" />
+                        <CheckboxItem checked={typeFilters.MAX_PRO} onChange={() => handleTypeChange("MAX_PRO")} label="MAX PRO" value="MAX_PRO" />
+                        <CheckboxItem checked={typeFilters.COLOR} onChange={() => handleTypeChange("COLOR")} label="COLOR" value="COLOR" />
+                    </div>
+                )}
             </div>
 
             {/* Resolution 섹션 */}
             <div className="border-b border-gray-200 py-4">
-                <SectionHeader title="Resolution (DPI)" isExpanded={true} onToggle={() => {}} />
-                <div className="mt-3 space-y-1">
-                    <CheckboxItem checked={resolutionFilters["300DPI"]} onChange={() => handleResolutionChange("300DPI")} label="300DPI" />
-                    <CheckboxItem checked={resolutionFilters["600DPI"]} onChange={() => handleResolutionChange("600DPI")} label="600DPI" />
-                    <CheckboxItem checked={resolutionFilters["1200DPI"]} onChange={() => handleResolutionChange("1200DPI")} label="1200DPI" />
-                    <CheckboxItem checked={resolutionFilters["1800DPI"]} onChange={() => handleResolutionChange("1800DPI")} label="1800DPI" />
-                    <CheckboxItem checked={resolutionFilters["3600DPI"]} onChange={() => handleResolutionChange("3600DPI")} label="3600DPI" />
-                </div>
+                <SectionHeader
+                    title="Resolution (DPI)"
+                    isExpanded={sectionExpanded.resolution}
+                    onToggle={() => handleSectionToggle("resolution")}
+                    section="resolution"
+                />
+                {sectionExpanded.resolution && (
+                    <div className="mt-3 space-y-1">
+                        <CheckboxItem checked={resolutionFilters["300DPI"]} onChange={() => handleResolutionChange("300DPI")} label="300DPI" value="300DPI" />
+                        <CheckboxItem checked={resolutionFilters["600DPI"]} onChange={() => handleResolutionChange("600DPI")} label="600DPI" value="600DPI" />
+                        <CheckboxItem
+                            checked={resolutionFilters["1200DPI"]}
+                            onChange={() => handleResolutionChange("1200DPI")}
+                            label="1200DPI"
+                            value="1200DPI"
+                        />
+                        <CheckboxItem
+                            checked={resolutionFilters["1800DPI"]}
+                            onChange={() => handleResolutionChange("1800DPI")}
+                            label="1800DPI"
+                            value="1800DPI"
+                        />
+                        <CheckboxItem
+                            checked={resolutionFilters["3600DPI"]}
+                            onChange={() => handleResolutionChange("3600DPI")}
+                            label="3600DPI"
+                            value="3600DPI"
+                        />
+                    </div>
+                )}
             </div>
 
             <div className="flex flex-col gap-6 mt-6">

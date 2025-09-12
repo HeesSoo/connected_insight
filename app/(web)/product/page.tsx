@@ -9,7 +9,7 @@ export default function ProductList() {
     const [tab, setTab] = useState<string>("cis_camera");
 
     return (
-        <div className="max-w-[1824px] w-full mx-auto mt-[80px]">
+        <div className="max-w-[1872px] min-w-[1248px] px-6 w-full mx-auto mt-[80px]">
             <Tab
                 items={[
                     { value: "cis_camera", label: "CIS Camera" },

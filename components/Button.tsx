@@ -21,7 +21,17 @@ interface ButtonProps {
     className?: string;
 }
 
-export default function Button({ label, onClick, type = "button", btnType = "primary", size = "large", icLeft, icRight, disabled = false, className = "" }: ButtonProps) {
+export default function Button({
+    label,
+    onClick,
+    type = "button",
+    btnType = "primary",
+    size = "large",
+    icLeft,
+    icRight,
+    disabled = false,
+    className = "",
+}: ButtonProps) {
     const buttonStyles = {
         primary: "bg-taskmateRed text-n0 border border-transparent hover:bg-[#f54b4a] disabled:bg-n400 disabled:text-n600",
         secondary: "bg-n800 text-n0 border border-transparent hover:bg-[#333952] disabled:bg-n400 disabled:text-n600",

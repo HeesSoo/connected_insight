@@ -37,6 +37,7 @@ const config: Config = {
                 large: ["20px", { lineHeight: "30px", letterSpacing: "-0.02em" }],
                 titleSmall: ["24px", { lineHeight: "36px", letterSpacing: "-0.02em" }],
                 title: ["32px", { lineHeight: "48px", letterSpacing: "-0.02em" }],
+                h3: ["28px", { lineHeight: "42px", letterSpacing: "-0.02em" }],
             },
             width: {
                 base: "200px",

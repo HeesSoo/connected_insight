@@ -27,6 +27,18 @@ const config: Config = {
                 brand: {
                     primary: "#E83837",
                 },
+                g50: "#f6f6f6",
+                g100: "#e7e7e7",
+                g200: "#d1d1d1",
+                g300: "#b0b0b0",
+                g400: "#888888",
+                g500: "#6d6d6d",
+                g600: "#5d5d5d",
+                g700: "#4f4f4f",
+                g800: "#454545",
+                g900: "#3d3d3d",
+                g950: "#111111",
+                ePrimary: "#E83837",
             },
             spacing: {
                 base: "4.5rem",

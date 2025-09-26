@@ -1,12 +1,12 @@
 "use client";
 
 import Tab from "@/components/Tab";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import Filter from "./_component/Filter";
 import ProductItems from "./_component/ProductItems";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
-export default function ProductList() {
+function ProductListContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
@@ -59,5 +59,28 @@ export default function ProductList() {
                 <ProductItems />
             </div>
         </div>
+    );
+}
+
+// 로딩 컴포넌트
+function ProductListLoading() {
+    return (
+        <div className="max-w-[1872px] min-w-[1248px] px-6 w-full mx-auto pt-[120px] pb-[160px]">
+            <div className="animate-pulse">
+                <div className="h-12 bg-gray-200 rounded mb-8"></div>
+                <div className="mt-[80px] w-full flex gap-[131px]">
+                    <div className="w-1/4 h-96 bg-gray-200 rounded"></div>
+                    <div className="w-3/4 h-96 bg-gray-200 rounded"></div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default function ProductList() {
+    return (
+        <Suspense fallback={<ProductListLoading />}>
+            <ProductListContent />
+        </Suspense>
     );
 }

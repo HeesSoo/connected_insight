@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * items: 탭 아이템 배열
@@ -20,6 +20,13 @@ interface TabProps {
 export default function Tab({ items, defaultTab, onChange }: TabProps) {
     const [tab, setTab] = useState(defaultTab || items[0]?.value);
 
+    // defaultTab이 변경될 때 내부 상태도 업데이트
+    useEffect(() => {
+        if (defaultTab) {
+            setTab(defaultTab);
+        }
+    }, [defaultTab]);
+
     const handleTabChange = (value: string) => {
         setTab(value);
         onChange?.(value);
@@ -31,7 +38,7 @@ export default function Tab({ items, defaultTab, onChange }: TabProps) {
                 {items.map((item) => (
                     <div
                         key={item.value}
-                        className={`w-fit cursor-pointer px-12 pb-4 text-[24px] leading-[36px] ${
+                        className={`w-fit cursor-pointer px-9 pb-4 text-[24px] leading-[36px] ${
                             tab === item.value ? "border-b-4 border-ePrimary text-ePrimary font-semibold" : "border-none text-g400 font-medium"
                         }`}
                         onClick={() => handleTabChange(item.value)}

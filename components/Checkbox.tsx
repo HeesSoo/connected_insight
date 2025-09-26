@@ -14,6 +14,7 @@ interface CheckboxProps {
     label?: string;
     onChange: (value: string, checked: boolean) => void;
     textCls?: string;
+    className?: string;
 }
 export default function Checkbox({ checked = false, indeterminate = false, value, label, onChange, textCls }: CheckboxProps) {
     const [isChecked, setIsChecked] = useState(checked);

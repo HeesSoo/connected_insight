@@ -67,17 +67,20 @@ export default function Footer() {
                                 <h3 className="text-white font-semibold mb-4 text-large">Products</h3>
                                 <ul className="space-y-2">
                                     <li>
-                                        <Link href="/cis-cameras" className="text-gray-300 hover:text-white transition-colors text-small">
+                                        <Link href="/product?tab=cis-camera" className="text-gray-300 hover:text-white transition-colors text-small">
                                             CIS Cameras
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/vision-software" className="text-gray-300 hover:text-white transition-colors text-small">
+                                        <Link href="/product?tab=vision-software" className="text-gray-300 hover:text-white transition-colors text-small">
                                             Vision Software
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/industry-control-devices" className="text-gray-300 hover:text-white transition-colors text-small">
+                                        <Link
+                                            href="/product?tab=industry-control-devices"
+                                            className="text-gray-300 hover:text-white transition-colors text-small"
+                                        >
                                             Industry Control Devices
                                         </Link>
                                     </li>

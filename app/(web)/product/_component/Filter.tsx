@@ -161,7 +161,7 @@ export default function Filter() {
     };
 
     return (
-        <div className="w-[329px] bg-white">
+        <div className="w-[329px] bg-white mt-[46px]">
             {/* Type 섹션 */}
             <div className="border-b border-gray-200 pb-4">
                 <SectionHeader title="Type" isExpanded={sectionExpanded.type} onToggle={() => handleSectionToggle("type")} section="type" />

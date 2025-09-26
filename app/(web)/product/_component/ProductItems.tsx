@@ -89,8 +89,8 @@ export default function ProductItems() {
 
     return (
         <div className="flex-1">
-            <h3 className="text-xl leading-[30px] font-semibold text-g950 mb-4">
-                Total&nbsp;<span className="text-base leading-[30px] font-bold text-g400">(24)</span>
+            <h3 className="text-large leading-[30px] font-semibold text-g950 mb-4">
+                Total&nbsp;<span className="text-base leading-[30px] font-bold text-g400 ">(24)</span>
             </h3>
 
             <section className={`grid ${hasFilter ? "grid-cols-3" : "grid-cols-4"} gap-x-4 gap-y-12`}>
@@ -109,7 +109,7 @@ const ProductItem = ({ item }: { item: ProductItemType }) => {
 
             <div>
                 <div className="mb-1 text-g400 text-base font-medium">{item.category}</div>
-                <h4 className="text-g950 text-xl leading-[30px] font-semibold">{item.title}</h4>
+                <h4 className="text-g950 text-large leading-[30px] font-semibold">{item.title}</h4>
             </div>
         </Link>
     );

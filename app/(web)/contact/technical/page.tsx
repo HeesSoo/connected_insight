@@ -7,6 +7,9 @@ import Input from "../_component/Input";
 import Textarea from "../_component/Textarea";
 import Button from "@/components/Button";
 import Upload from "@/public/svgs/upload.svg";
+import Checkbox from "@/components/Checkbox";
+
+const inputRequiredClass = "after:content-['*'] after:text-brand-primary after:ml-1 after:absolute ";
 
 const Technical: React.FC = () => {
     const name = useInput("");
@@ -14,9 +17,9 @@ const Technical: React.FC = () => {
     const contact = useInput("");
     const site = useInput("");
     const content = useInput("");
-    const privacy = useInput(false);
+    const [privacy, setPrivacy] = useState(false);
 
-    const isFormComplete = name.value && email.value && contact.value && content.value && privacy.value;
+    const isFormComplete = name.value && email.value && contact.value && content.value && privacy;
     const fileAccept =
         "application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.presentationml.presentation, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, image/jpeg, image/png";
 
@@ -45,19 +48,30 @@ const Technical: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-between align-center mt-[111px]">
-                    <div className="flex gap-2 align-center">
-                        <input type="checkbox" id="privacy" value={privacy.value} onChange={privacy.onChange} className="w-[24px] h-[24px]" />
+                <div className="flex justify-between items-center mt-[111px]">
+                    <div className="flex gap-2 items-center">
+                        <div className="rounded-[100%] flex items-center">
+                            <Checkbox
+                                checked={privacy}
+                                indeterminate={false}
+                                value="privacy"
+                                onChange={(value, checked) => setPrivacy(checked)}
+                                className="w-[24px] h-[24px] rounded-[25px] overflow-hidden"
+                            />
+                            <input type="checkbox" id="privacy" onChange={(checked) => setPrivacy(checked.target.checked)} className="w-[0px] h-[0px]" />
+                        </div>
                         <label htmlFor="privacy" className="flex align-center text-small">
                             <span className="text-small text-brand-primary underline underline-offset-4">개인정보 보호정책</span>에 동의합니다.
                         </label>
                     </div>
-                    <Button
-                        label="제출"
+                    <button
                         disabled={!isFormComplete}
-                        className="flex align-center justify-center w-[124px] h-[48px] :disabled:bg-gray-200 :disabled:text-gray-400"
+                        className={`flex items-center justify-center w-[124px] h-[48px] 
+                            bg-ePrimary text-white disabled:bg-gray-200 rounded-[2px]`}
                         onClick={() => {}}
-                    />
+                    >
+                        제출
+                    </button>
                 </div>
             </div>
         </div>

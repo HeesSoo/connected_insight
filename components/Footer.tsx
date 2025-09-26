@@ -51,8 +51,8 @@ export default function Footer() {
                                 <h3 className="text-white font-semibold mb-4 text-large">Solutions</h3>
                                 <ul className="space-y-2">
                                     <li>
-                                        <Link href="/industry-applications" className="text-gray-300 hover:text-white transition-colors text-small">
-                                            Industry Applications
+                                        <Link href="/solutions/cis-application" className="text-gray-300 hover:text-white transition-colors text-small">
+                                            CIS Application
                                         </Link>
                                     </li>
                                     <li>
@@ -93,7 +93,7 @@ export default function Footer() {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/downloads" className="text-gray-300 hover:text-white transition-colors text-small">
+                                        <Link href="/support/download" className="text-gray-300 hover:text-white transition-colors text-small">
                                             Downloads
                                         </Link>
                                     </li>
@@ -104,12 +104,12 @@ export default function Footer() {
                                 <h3 className="text-white font-semibold mb-4 text-large">Contact</h3>
                                 <ul className="space-y-2">
                                     <li>
-                                        <Link href="/technical-team" className="text-gray-300 hover:text-white transition-colors text-small">
+                                        <Link href="/contact/technical" className="text-gray-300 hover:text-white transition-colors text-small">
                                             Technical Team
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/sales-team" className="text-gray-300 hover:text-white transition-colors text-small">
+                                        <Link href="/contact/sales" className="text-gray-300 hover:text-white transition-colors text-small">
                                             Sales Team
                                         </Link>
                                     </li>

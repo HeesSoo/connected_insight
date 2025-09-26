@@ -3,4 +3,25 @@
 @tailwind utilities;
 
 :root {
+    --brand-primary: #e83837;
+}
+
+/* Swiper pagination 텍스트만 표시 */
+.swiper-pagination-bullet {
+    background: none !important;
+    border: none !important;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 0 !important;
+    opacity: 1 !important;
+    margin: 0 8px !important;
+    color: #fff !important;
+}
+
+.swiper-pagination {
+    bottom: 59px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 172px;
 }

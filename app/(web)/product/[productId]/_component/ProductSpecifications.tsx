@@ -17,13 +17,13 @@ const dummyItems = [
 export default function ProductSpecifications() {
     return (
         <div className="w-full flex mt-[80px]">
-            <h2 className="flex-1 pl-9 text-[32px] leading-48px font-bold text-g950">Information</h2>
+            <h2 className="flex-1 pl-9 text-title font-bold text-g950">Information</h2>
             <div className="w-[955px]">
                 {dummyItems.map((item) => {
                     return (
                         <div key={item.key} className="w-full border-b border-g200 flex">
-                            <h3 className="w-[348px] px-4 py-5 text-g400 text-xl leading-[30px] font-medium">{item.key}</h3>
-                            <div className="flex-1 px-4 py-5 text-g950 text-xl leading-[30px] font-semibold">{item.value}</div>
+                            <h3 className="w-[348px] px-4 py-5 text-g400 text-large font-medium">{item.key}</h3>
+                            <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">{item.value}</div>
                         </div>
                     );
                 })}

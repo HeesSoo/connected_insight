@@ -10,7 +10,7 @@ import Image from "next/image";
  * subtitle: 부제목
  * description: 설명
  * detail: 상세 정보
- * onClick: 클릭 이벤트
+ *
  */
 interface PropsType {
     variant?: "default" | "product" | "case";
@@ -19,6 +19,8 @@ interface PropsType {
     category?: string;
     title: string;
     description?: string;
+    inpectorTarget?: string;
+    core?: string;
     detail?: string;
     width?: number;
     height?: number;
@@ -46,7 +48,7 @@ const cardConfig = {
     },
 };
 
-export default function Card({ variant = "default", image, caption, category, title, description, detail, width, height }: PropsType) {
+export default function Card({ variant = "default", image, caption, category, title, description, detail, width, height, core, inpectorTarget }: PropsType) {
     const baseClasses = "";
     // const clickableClasses = onClick ? "cursor-pointer hover:shadow-lg hover:scale-[1.02]" : "";
     const config = cardConfig[variant];
@@ -55,20 +57,32 @@ export default function Card({ variant = "default", image, caption, category, ti
         <div className={`${baseClasses}`}>
             <div className="w-full">
                 {/* 이미지 영역 */}
-                <div className={config.imageWrapper}>
+                <div className={`${config.imageWrapper} relative`}>
                     <Image src={image} alt={title} width={width} height={height} className="w-auto h-[296px] object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                    <div className="absolute bottom-6 left-6">
+                        {caption && variant === "case" && <div className="text-g200 text-base mb-1">{caption}</div>}
+                        <h3 className={`font-[600] text-white text-primary-950 ${config.titleSpacing}`}>{title}</h3>
+                    </div>
                 </div>
 
                 {/* 콘텐츠 영역 */}
                 <div className="">
-                    {caption && variant === "case" && <div className="text-brand-primary text-base mb-1">{caption}</div>}
-
                     {category && <div className={`text-xs text-gray-500 uppercase tracking-wide ${config.categorySpacing}`}>{category}</div>}
-
-                    <h3 className={`font-semibold text-primary-950 ${config.titleSpacing}`}>{title}</h3>
-
                     {description && <p className="text-small text-gray-700 leading-relaxed">{description}</p>}
 
+                    {inpectorTarget && (
+                        <div className="mb-6">
+                            <div className="text-brand-primary text-base mb-1 text-[500]">주요 가치</div>
+                            <div className={`text-large text-g950 leading-relaxed text-[600] h-[60px]`}>{inpectorTarget}</div>
+                        </div>
+                    )}
+                    {core && (
+                        <div>
+                            <div className="text-brand-primary text-base mb-1 text-[500]">핵심 검사 대상</div>
+                            <div className={`text-large text-g950 leading-relaxed text-[600]`}>{core}</div>
+                        </div>
+                    )}
                     {detail && <div className={config.detailClasses}>{detail}</div>}
                 </div>
             </div>

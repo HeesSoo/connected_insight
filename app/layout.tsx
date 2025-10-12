@@ -1,5 +1,6 @@
 import { SpinnerProvider } from "@/components/Spinner";
 import QueryProviderWrapper from "@/components/wrappers/QueryProviderWrapper";
+import TranslationProvider from "@/components/TranslationProvider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -28,7 +29,9 @@ export default function RootLayout({
             </head>
             <body className={inter.className}>
                 <QueryProviderWrapper>
-                    <SpinnerProvider>{children}</SpinnerProvider>
+                    <TranslationProvider>
+                        <SpinnerProvider>{children}</SpinnerProvider>
+                    </TranslationProvider>
                 </QueryProviderWrapper>
             </body>
         </html>

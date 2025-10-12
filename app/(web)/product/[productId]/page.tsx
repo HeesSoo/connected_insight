@@ -3,6 +3,7 @@ import Image from "next/image";
 import DummyImage from "../_dummys/DummyProductImg.png";
 import ProductDownloads from "./_component/ProductDownloads";
 import ProductSpecifications from "./_component/ProductSpecifications";
+import ProductDrawing from "./_component/ProductDrawing";
 
 const dummyKeyFeatures = [
     {
@@ -70,18 +71,18 @@ export default function ProductDetail() {
                 <section className="flex flex-col gap-12 flex-1">
                     <div>
                         <div className="text-g950 font-semibold text-base mb-2">LineX CIS Plus</div>
-                        <h1 className="text-[32px] leading-[48px] font-bold text-g950">INS-CHVS-550-10GM</h1>
+                        <h1 className="text-[32px] font-bold text-g950">INS-CHVS-550-10GM</h1>
                     </div>
 
                     <div>
-                        <h2 className="text-ePrimary text-xl leading-[30px] font-bold pb-2 border-b border-g200 mb-4">Key Feature</h2>
+                        <h2 className="text-ePrimary text-large font-bold pb-2 border-b border-g200 mb-4">Key Feature</h2>
 
                         <div className="grid grid-cols-2 gap-y-9">
                             {dummyKeyFeatures.map((v) => {
                                 return (
                                     <div key={v.id}>
                                         <div className="text-g400 font-medium text-sm mb-0.5">{v.key}</div>
-                                        <div className="text-g950 font-semibold text-xl leading-[30px]">{v.value}</div>
+                                        <div className="text-g950 font-semibold text-large ">{v.value}</div>
                                     </div>
                                 );
                             })}
@@ -89,14 +90,14 @@ export default function ProductDetail() {
                     </div>
 
                     <div>
-                        <h2 className="text-ePrimary text-xl leading-[30px] font-bold pb-2 border-b border-g200 mb-4">Options</h2>
+                        <h2 className="text-ePrimary text-large font-bold pb-2 border-b border-g200 mb-4">Options</h2>
 
                         <div className="grid grid-cols-2 gap-y-9">
                             {dummyOptions.map((v) => {
                                 return (
                                     <div key={v.id}>
                                         <div className="text-g400 font-medium text-sm mb-0.5">{v.key}</div>
-                                        <div className="text-g950 font-semibold text-xl leading-[30px]">{v.value}</div>
+                                        <div className="text-g950 font-semibold text-large">{v.value}</div>
                                     </div>
                                 );
                             })}
@@ -110,6 +111,7 @@ export default function ProductDetail() {
                     items={[
                         { value: "specifications", label: "Specifications", children: <ProductSpecifications /> },
                         { value: "downloads", label: "Downloads", children: <ProductDownloads /> },
+                        { value: "drawing", label: "Drawing", children: <ProductDrawing /> },
                     ]}
                     defaultTab="specifications"
                 />

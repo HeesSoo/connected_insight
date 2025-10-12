@@ -33,22 +33,18 @@ export default function Button({
     className = "",
 }: ButtonProps) {
     const buttonStyles = {
-        primary: "bg-taskmateRed text-n0 border border-transparent hover:bg-[#f54b4a] disabled:bg-n400 disabled:text-n600",
-        secondary: "bg-n800 text-n0 border border-transparent hover:bg-[#333952] disabled:bg-n400 disabled:text-n600",
-        line_red: "bg-white text-taskmateRed border border-taskmateRed hover:bg-taskmateRed/5 disabled:bg-n400 disabled:text-n600 disabled:border-transparent",
-        line: "bg-white text-n800 border border-n500 hover:bg-n75 disabled:bg-n400 disabled:text-n600 disabled:border-transparent",
-        minimal: "bg-white text-n800 border border-transparent hover:bg-n75 disabled:bg-n400 disabled:text-n600",
+        primary: "flex items-center gap-3 justify-center text-white",
+        secondary: "flex items-center gap-3 justify-center text-white bg-ePrimary",
     };
 
     const buttonSizeStyles = {
-        large: "px-4 h-12 text-baseEmphasize",
-        medium: "px-4 h-[46px] text-smEmphasize",
-        small: "px-3 h-8 text-smEmphasize",
+        large: "text-base",
+        medium: "text-base",
     };
 
     return (
         <button
-            className={`rounded-md transition-colors flex items-center justify-center gap-1 ${buttonStyles[btnType]} ${buttonSizeStyles[size]} ${className}`}
+            className={`rounded-md transition-colors flex items-center justify-center gap-1 font-[600] ${buttonStyles[btnType]} ${buttonSizeStyles[size]} ${className}`}
             onClick={onClick}
             type={type}
             disabled={disabled}

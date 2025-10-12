@@ -51,13 +51,8 @@ export default function Footer() {
                                 <h3 className="text-white font-semibold mb-4 text-large">Solutions</h3>
                                 <ul className="space-y-2">
                                     <li>
-                                        <Link href="/solutions/cis-application" className="text-gray-300 hover:text-white transition-colors text-small">
+                                        <Link href="/solutions" className="text-gray-300 hover:text-white transition-colors text-small">
                                             CIS Application
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/use-cases" className="text-gray-300 hover:text-white transition-colors text-small">
-                                            Use Cases
                                         </Link>
                                     </li>
                                 </ul>
@@ -67,21 +62,8 @@ export default function Footer() {
                                 <h3 className="text-white font-semibold mb-4 text-large">Products</h3>
                                 <ul className="space-y-2">
                                     <li>
-                                        <Link href="/product?tab=cis-camera" className="text-gray-300 hover:text-white transition-colors text-small">
+                                        <Link href="/product" className="text-gray-300 hover:text-white transition-colors text-small">
                                             CIS Cameras
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/product?tab=vision-software" className="text-gray-300 hover:text-white transition-colors text-small">
-                                            Vision Software
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            href="/product?tab=industry-control-devices"
-                                            className="text-gray-300 hover:text-white transition-colors text-small"
-                                        >
-                                            Industry Control Devices
                                         </Link>
                                     </li>
                                 </ul>
@@ -107,13 +89,8 @@ export default function Footer() {
                                 <h3 className="text-white font-semibold mb-4 text-large">Contact</h3>
                                 <ul className="space-y-2">
                                     <li>
-                                        <Link href="/contact/technical" className="text-gray-300 hover:text-white transition-colors text-small">
-                                            Technical Team
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/contact/sales" className="text-gray-300 hover:text-white transition-colors text-small">
-                                            Sales Team
+                                        <Link href="/contact" className="text-gray-300 hover:text-white transition-colors text-small">
+                                            Contact Us
                                         </Link>
                                     </li>
                                 </ul>

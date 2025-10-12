@@ -2,16 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { useInput } from "@/hooks/hooks";
-import ContactLeft from "../_component/contact_left";
-import Input from "../_component/Input";
-import Textarea from "../_component/Textarea";
+import ContactLeft from "./_component/contact_left";
+import Input from "./_component/Input";
+import Textarea from "./_component/Textarea";
 import Button from "@/components/Button";
 import Upload from "@/public/svgs/upload.svg";
 import Checkbox from "@/components/Checkbox";
 
 const inputRequiredClass = "after:content-['*'] after:text-brand-primary after:ml-1 after:absolute ";
 
-const Technical: React.FC = () => {
+const Sales: React.FC = () => {
     const name = useInput("");
     const email = useInput("");
     const contact = useInput("");
@@ -78,4 +78,4 @@ const Technical: React.FC = () => {
     );
 };
 
-export default Technical;
+export default Sales;

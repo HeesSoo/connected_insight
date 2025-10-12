@@ -12,21 +12,45 @@
 }
 
 /* Swiper pagination 텍스트만 표시 */
-.swiper-pagination-bullet {
-    background: none !important;
-    border: none !important;
-    width: auto !important;
-    height: auto !important;
-    border-radius: 0 !important;
-    opacity: 1 !important;
-    margin: 0 8px !important;
-    color: #fff !important;
+.mySwiper .swiper-pagination-bullet {
+    background: none;
+    border: none;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    display: flex;
 }
 
-.swiper-pagination {
-    bottom: 59px !important;
+.mySwiper .swiper-pagination-bullet:is(.swiper-pagination-bullet-active) {
+    color: var(--brand-primary);
+}
+
+.mySwiper .swiper-horizontal > .swiper-pagination-bullets,
+.mySwiper .swiper-pagination-bullets.swiper-pagination-horizontal,
+.mySwiper .swiper-pagination-bullets .swiper-pagination,
+.mySwiper .swiper-pagination-bullets.swiper-pagination-horizontal .swiper-pagination {
+    top: 50%;
+    transform: translateY(-50%);
+    left: 48px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 172px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 32px;
+}
+
+.mySwiper .swiper-pagination-bullet.swiper-pagination-bullet-active::before {
+    content: "";
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: var(--brand-primary);
+    border-radius: 50%;
+    margin-inline: 12px;
 }

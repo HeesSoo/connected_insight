@@ -32,19 +32,19 @@ const cardConfig = {
         imageWrapper: "relative mb-5",
         categorySpacing: "",
         titleSpacing: "text-titleSmall",
-        detailClasses: "text-small text-gray-600 border-t border-gray-100 pt-3",
+        detailClasses: "text-small text-g600 border-t border-g100 pt-3",
     },
     product: {
         imageWrapper: "relative mb-5",
         categorySpacing: "mb-2",
         titleSpacing: "text-titleSmall",
-        detailClasses: "text-small text-gray-600 border-t border-gray-100 pt-3",
+        detailClasses: "text-small text-g600 border-t border-g100 pt-3",
     },
     case: {
         imageWrapper: "relative mb-5",
         categorySpacing: "",
         titleSpacing: "text-titleSmall",
-        detailClasses: "text-small text-gray-700 bg-gray-50 p-3 rounded-md",
+        detailClasses: "text-small text-g700 bg-g50 p-3 rounded-md",
     },
 };
 
@@ -62,24 +62,24 @@ export default function Card({ variant = "default", image, caption, category, ti
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                     <div className="absolute bottom-6 left-6">
                         {caption && variant === "case" && <div className="text-g200 text-base mb-1">{caption}</div>}
-                        <h3 className={`font-[600] text-white text-primary-950 ${config.titleSpacing}`}>{title}</h3>
+                        <h3 className={`font-[600] text-white text-g950 ${config.titleSpacing}`}>{title}</h3>
                     </div>
                 </div>
 
                 {/* 콘텐츠 영역 */}
                 <div className="">
-                    {category && <div className={`text-xs text-gray-500 uppercase tracking-wide ${config.categorySpacing}`}>{category}</div>}
-                    {description && <p className="text-small text-gray-700 leading-relaxed">{description}</p>}
+                    {category && <div className={`text-xs text-g500 uppercase tracking-wide ${config.categorySpacing}`}>{category}</div>}
+                    {description && <p className="text-small text-g700 leading-relaxed">{description}</p>}
 
                     {inpectorTarget && (
                         <div className="mb-6">
-                            <div className="text-brand-primary text-base mb-1 text-[500]">주요 가치</div>
+                            <div className="text-ePrimary text-base mb-1 text-[500]">주요 가치</div>
                             <div className={`text-large text-g950 leading-relaxed text-[600] h-[60px]`}>{inpectorTarget}</div>
                         </div>
                     )}
                     {core && (
                         <div>
-                            <div className="text-brand-primary text-base mb-1 text-[500]">핵심 검사 대상</div>
+                            <div className="text-ePrimary text-base mb-1 text-[500]">핵심 검사 대상</div>
                             <div className={`text-large text-g950 leading-relaxed text-[600]`}>{core}</div>
                         </div>
                     )}

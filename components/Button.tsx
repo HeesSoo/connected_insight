@@ -32,23 +32,22 @@ export default function Button({
     disabled = false,
     className = "",
 }: ButtonProps) {
+    const baseClass = `
+        flex items-center gap-3 justify-center text-white 
+        rounded-md transition-colors flex items-center justify-center gap-1 font-[600]
+    `;
     const buttonStyles = {
-        primary: "flex items-center gap-3 justify-center text-white",
-        secondary: "flex items-center gap-3 justify-center text-white bg-ePrimary",
+        primary: "bg-g950 :hover:bg-ePrimary",
+        secondary: "bg-ePrimary",
     };
 
     const buttonSizeStyles = {
-        large: "text-base",
-        medium: "text-base",
+        large: "text-titleSmall h-[60px]",
+        medium: "text-base h-[48px]",
     };
 
     return (
-        <button
-            className={`rounded-md transition-colors flex items-center justify-center gap-1 font-[600] ${buttonStyles[btnType]} ${buttonSizeStyles[size]} ${className}`}
-            onClick={onClick}
-            type={type}
-            disabled={disabled}
-        >
+        <button className={`${buttonStyles[btnType]} ${buttonSizeStyles[size]} ${className}`} onClick={onClick} type={type} disabled={disabled}>
             {icLeft}
             {label}
             {icRight}

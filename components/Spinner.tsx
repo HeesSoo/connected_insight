@@ -51,7 +51,7 @@ export function SpinnerProvider({ children }: { children: ReactNode }) {
 // 전체 화면을 덮는 Spinner (기존 방식)
 function Spinner() {
     return (
-        <div className="w-screen h-screen bg-gray-500 bg-opacity-40 z-[9999] flex justify-center items-center fixed top-0 left-0">
+        <div className="w-screen h-screen bg-g500 bg-opacity-40 z-[9999] flex justify-center items-center fixed top-0 left-0">
             <SpinnerIcon />
         </div>
     );
@@ -88,9 +88,9 @@ export function renderSpinnerInElement(
     if (!element) return null;
 
     const spinnerElement = document.createElement("div");
-    spinnerElement.className = `spinner-container ${options.overlay ? "absolute inset-0 bg-white bg-opacity-80 flex justify-center items-center z-10" : "flex justify-center items-center"} ${
-        options.className || ""
-    }`;
+    spinnerElement.className = `spinner-container ${
+        options.overlay ? "absolute inset-0 bg-white bg-opacity-80 flex justify-center items-center z-10" : "flex justify-center items-center"
+    } ${options.className || ""}`;
 
     // 원본 내용을 숨기고 spinner만 보여주기
     if (options.hideContent) {

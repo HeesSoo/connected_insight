@@ -15,7 +15,7 @@ export default function TranslationTest() {
             <div className="flex items-center gap-4">
                 <h2 className="text-xl font-bold">번역 테스트</h2>
                 <LanguageSwitcher />
-                <span className="text-sm text-gray-500">현재 언어: {currentLanguage}</span>
+                <span className="text-sm text-g500">현재 언어: {currentLanguage}</span>
             </div>
 
             <div className="space-y-2">

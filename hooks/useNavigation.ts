@@ -57,7 +57,7 @@ export const useNavigation = (navigationItems: NavigationItem[]) => {
     // CSS 클래스 생성
     const getItemClasses = (itemId: string, baseClasses: string = ""): string => {
         const isActive = isItemActive(itemId);
-        const activeClasses = isActive ? "text-primary-600 font-semibold" : "text-primary-950";
+        const activeClasses = isActive ? "text-primary-600 font-semibold" : "text-g950";
         return `${baseClasses} ${activeClasses} transition-colors duration-200`;
     };
 

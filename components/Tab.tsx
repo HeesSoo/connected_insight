@@ -38,7 +38,7 @@ export default function Tab({ items, defaultTab, onChange }: TabProps) {
                 {items.map((item) => (
                     <div
                         key={item.value}
-                        className={`w-fit cursor-pointer px-9 pb-4 text-[24px] leading-[36px] ${
+                        className={`w-fit cursor-pointer px-9 pb-4 text-[24px] leading-[36px] transition-all duration-150 ${
                             tab === item.value ? "border-b-4 border-ePrimary text-ePrimary font-semibold mb-[-2px]" : "border-none text-g400 font-medium"
                         }`}
                         onClick={() => handleTabChange(item.value)}

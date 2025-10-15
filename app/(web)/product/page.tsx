@@ -67,10 +67,10 @@ function ProductListLoading() {
     return (
         <div className="max-w-[1872px] min-w-[1248px] px-6 w-full mx-auto pt-[120px] pb-[160px]">
             <div className="animate-pulse">
-                <div className="h-12 bg-gray-200 rounded mb-8"></div>
+                <div className="h-12 bg-g200 rounded mb-8"></div>
                 <div className="mt-[80px] w-full flex gap-[131px]">
-                    <div className="w-1/4 h-96 bg-gray-200 rounded"></div>
-                    <div className="w-3/4 h-96 bg-gray-200 rounded"></div>
+                    <div className="w-1/4 h-96 bg-g200 rounded"></div>
+                    <div className="w-3/4 h-96 bg-g200 rounded"></div>
                 </div>
             </div>
         </div>

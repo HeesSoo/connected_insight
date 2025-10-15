@@ -4,7 +4,7 @@ import case1 from "@/public/solutions/cis-application/cis_case_1.png";
 const Support: React.FC = () => {
     return (
         <div className="w-full">
-            <div className="flex items-center justify-center w-full h-[400px] bg-primary-950">
+            <div className="flex items-center justify-center w-full h-[400px] bg-g950">
                 <h2 className="text-white text-[32px] font-bold line-height-[48px]">Reservation Lab</h2>
             </div>
             <div className="w-full max-w-[1440px] mx-auto flex mx-auto pt-[80px] pb-[160px] gap-[137px]">

@@ -9,8 +9,6 @@ import Button from "@/components/Button";
 import Upload from "@/public/svgs/upload.svg";
 import Checkbox from "@/components/Checkbox";
 
-const inputRequiredClass = "after:content-['*'] after:text-brand-primary after:ml-1 after:absolute ";
-
 const Sales: React.FC = () => {
     const name = useInput("");
     const email = useInput("");
@@ -27,8 +25,8 @@ const Sales: React.FC = () => {
         <div className="flex w-[1440px] mx-auto pt-[80px] pb-[160px] justify-between gap-[137px]">
             <ContactLeft />
             <div>
-                <h4 className="text-titleSmall text-brand-primary font-semibold">Contact Information</h4>
-                <hr className="mt-2 mb-4 bg-gray-200" />
+                <h4 className="text-titleSmall text-ePrimary font-semibold">Contact Information</h4>
+                <hr className="mt-2 mb-4 bg-g200" />
                 <div className="grid grid-cols-2 gap-x-[15px] gap-y-[24px] w-[591px]">
                     <Input {...name} label="이름" type="text" data-name="name" data-required={true} isRequired={true} />
                     <Input {...email} label="이메일" type="text" data-name="email" data-required={true} isRequired={true} />
@@ -38,13 +36,13 @@ const Sales: React.FC = () => {
                 </div>
                 <div className="mt-[24px]">
                     <div className="flex items-center gap-4">
-                        <label htmlFor="file" className="flex gap-1 text-base font-semibold text-gray-900 align-center">
+                        <label htmlFor="file" className="flex gap-1 text-base font-semibold text-g900 align-center">
                             파일첨부
                             <Upload width={24} height={24} />
                         </label>
                         <input type="file" id="file" accept={fileAccept} className="w-0 h-0" />
                         <div className="flex items-center gap-2">
-                            <span className="text-small text-gray-400">참고 문서를 업로드해 주세요. (최대 50MB) pdf, ppt, word, excel, jpg, png</span>
+                            <span className="text-small text-g400">참고 문서를 업로드해 주세요. (최대 50MB) pdf, ppt, word, excel, jpg, png</span>
                         </div>
                     </div>
                 </div>
@@ -61,13 +59,13 @@ const Sales: React.FC = () => {
                             <input type="checkbox" id="privacy" onChange={(checked) => setPrivacy(checked.target.checked)} className="w-[0px] h-[0px]" />
                         </div>
                         <label htmlFor="privacy" className="flex align-center text-small">
-                            <span className="text-small text-brand-primary underline underline-offset-4">개인정보 보호정책</span>에 동의합니다.
+                            <span className="text-small text-ePrimary underline underline-offset-4">개인정보 보호정책</span>에 동의합니다.
                         </label>
                     </div>
                     <button
                         disabled={!isFormComplete}
                         className={`flex items-center justify-center w-[124px] h-[48px] 
-                            bg-ePrimary text-white disabled:bg-gray-200 rounded-[2px]`}
+                            bg-ePrimary text-white disabled:bg-g200 rounded-[2px]`}
                         onClick={() => {}}
                     >
                         제출

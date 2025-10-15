@@ -22,7 +22,7 @@ const Content = ({
                             <div key={index}>
                                 <span className="font-bold">{index + 1}.&nbsp;</span>
                                 <span className="font-bold">{prop.name}</span>&nbsp;
-                                <span className="text-gray-500">({prop.type})</span>&nbsp;:&nbsp;
+                                <span className="text-g500">({prop.type})</span>&nbsp;:&nbsp;
                                 <span>{prop.description}</span>
                             </div>
                         );

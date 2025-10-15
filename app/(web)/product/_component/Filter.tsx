@@ -149,7 +149,7 @@ export default function Filter() {
                         onChange={() => handleSectionCheckboxClick(section)}
                         label={title}
                         value={title}
-                        textCls="text-base font-semibold text-gray-900"
+                        textCls="text-base font-semibold text-g900"
                     />
                 </div>
 
@@ -163,7 +163,7 @@ export default function Filter() {
     return (
         <div className="w-[329px] bg-white mt-[46px]">
             {/* Type 섹션 */}
-            <div className="border-b border-gray-200 pb-4">
+            <div className="border-b border-g200 pb-4">
                 <SectionHeader title="Type" isExpanded={sectionExpanded.type} onToggle={() => handleSectionToggle("type")} section="type" />
                 {sectionExpanded.type && (
                     <div className="mt-3 space-y-2">
@@ -176,7 +176,7 @@ export default function Filter() {
             </div>
 
             {/* Resolution 섹션 */}
-            <div className="border-b border-gray-200 py-4">
+            <div className="border-b border-g200 py-4">
                 <SectionHeader
                     title="Resolution (DPI)"
                     isExpanded={sectionExpanded.resolution}

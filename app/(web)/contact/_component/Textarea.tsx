@@ -56,15 +56,15 @@ export default function Input({
     return (
         <div className={`flex-1 relative col-span-full`}>
             {!value && label !== "" && (
-                <div className="text-base text-gray-400 absolute top-[4px] left-[4px]">
+                <div className="text-base text-g400 absolute top-[4px] left-[4px]">
                     {label}
-                    {isRequired && <span className="text-base text-brand-primary ml-1">*</span>}
+                    {isRequired && <span className="text-base text-ePrimary ml-1">*</span>}
                 </div>
             )}
 
             <div className={`w-full flex gap-2`}>
                 <textarea
-                    className={`flex-1 h-[160px] border-0 border-b border-gray-200 pl-[4px] pt-[4px] text-base ${className}`}
+                    className={`flex-1 h-[160px] border-0 border-b border-g200 pl-[4px] pt-[4px] text-base ${className}`}
                     onChange={onChange}
                     placeholder={placeholder}
                     disabled={disabled}

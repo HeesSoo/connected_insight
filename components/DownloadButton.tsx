@@ -1,4 +1,6 @@
 import { DownloadIco } from "@/icons/icons";
+import Button from "./Button";
+import Download from "@/app/(web)/support/download/page";
 
 interface Props {
     label?: string;
@@ -28,9 +30,10 @@ export default function DownloadButton({ label = "Download", type = "g950", file
     };
 
     return (
-        <button className={`h-12 flex gap-3 items-center px-5 rounded-sm ${type === "g950" ? "bg-g950" : "bg-ePrimary"}`} onClick={onClick}>
-            <div className="text-white">{label}</div>
-            <DownloadIco fill={"#ffffff"} />
-        </button>
+        <Button size="medium" btnType="primary" label="Download" icRight={<DownloadIco fill={"#ffffff"} />} onClick={() => {}} />
+        // <button className={`h-12 flex gap-3 items-center px-5 rounded-sm ${type === "g950" ? "bg-g950" : "bg-ePrimary"}`} onClick={onClick}>
+        //     <div className="text-white">{label}</div>
+        //     <DownloadIco fill={"#ffffff"} />
+        // </button>
     );
 }

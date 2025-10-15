@@ -135,7 +135,8 @@ export default function Home() {
                                 onClick={() => {
                                     router.push("/contact");
                                 }}
-                                className="w-[227px] h-[60px] text-titleSmall"
+                                size="large"
+                                className="text-titleSmall"
                             />
                         </Link>
                     </div>

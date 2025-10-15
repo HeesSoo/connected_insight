@@ -1,11 +1,15 @@
 import { SpinnerProvider } from "@/components/Spinner";
 import QueryProviderWrapper from "@/components/wrappers/QueryProviderWrapper";
 import TranslationProvider from "@/components/TranslationProvider";
+import { initializeTranslationScheduler } from "@/lib/translations";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+
+// 서버 시작 시 번역 스케줄러 초기화
+initializeTranslationScheduler();
 
 export const metadata: Metadata = {
     title: "EYEON",

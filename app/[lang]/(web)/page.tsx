@@ -83,6 +83,8 @@ export default function Home() {
         );
     };
 
+    console.log(t?.title, " : title")
+
     return (
         <main className="min-h-screen">
             <div className="max-w-full">

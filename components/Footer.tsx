@@ -3,8 +3,11 @@
 import React from "react";
 import Logo from "@/public/svgs/logo.svg";
 import Link from "next/link";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 
 export default function Footer() {
+    const localizedPath = useLocalizedPath();
+
     return (
         <footer role="contentinfo" className="bg-g950 text-white">
             <div className="max-w-max-full mx-auto pt-[60px] pb-[120px]">
@@ -51,7 +54,7 @@ export default function Footer() {
                                 <h3 className="text-white font-semibold mb-4 text-large">Solutions</h3>
                                 <ul className="space-y-2">
                                     <li>
-                                        <Link href="/solutions" className="text-g300 hover:text-white transition-colors text-small">
+                                        <Link href={localizedPath("/solutions")} className="text-g300 hover:text-white transition-colors text-small">
                                             CIS Application
                                         </Link>
                                     </li>
@@ -62,7 +65,7 @@ export default function Footer() {
                                 <h3 className="text-white font-semibold mb-4 text-large">Products</h3>
                                 <ul className="space-y-2">
                                     <li>
-                                        <Link href="/product" className="text-g300 hover:text-white transition-colors text-small">
+                                        <Link href={localizedPath("/product")} className="text-g300 hover:text-white transition-colors text-small">
                                             CIS Cameras
                                         </Link>
                                     </li>
@@ -73,12 +76,12 @@ export default function Footer() {
                                 <h3 className="text-white font-semibold mb-4 text-large">Support</h3>
                                 <ul className="space-y-2">
                                     <li>
-                                        <Link href="/support" className="text-g300 hover:text-white transition-colors text-small">
+                                        <Link href={localizedPath("/support")} className="text-g300 hover:text-white transition-colors text-small">
                                             Support
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/support/download" className="text-g300 hover:text-white transition-colors text-small">
+                                        <Link href={localizedPath("/support/download")} className="text-g300 hover:text-white transition-colors text-small">
                                             Downloads
                                         </Link>
                                     </li>
@@ -89,7 +92,7 @@ export default function Footer() {
                                 <h3 className="text-white font-semibold mb-4 text-large">Contact</h3>
                                 <ul className="space-y-2">
                                     <li>
-                                        <Link href="/contact" className="text-g300 hover:text-white transition-colors text-small">
+                                        <Link href={localizedPath("/contact")} className="text-g300 hover:text-white transition-colors text-small">
                                             Contact Us
                                         </Link>
                                     </li>

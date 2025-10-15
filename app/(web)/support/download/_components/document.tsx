@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/components/Button";
 import Download from "@/public/svgs/download.svg";
 
 const Document = () => {
@@ -12,40 +13,52 @@ const Document = () => {
                         <p className="text-g400 text-small mb-1">25.11.23 Updated</p>
                         <p className="text-g950 font-bold text-large">Document Origin Name</p>
                     </div>
-                    <button className="flex items-center justify-center bg-primay-950 text-white bg-g950 rounded-[2px] h-[48px] px-3 py-6 gap-3">
-                        Download
-                        <Download width={24} height={24} fill={"#ffffff"} />
-                    </button>
+                    <Button
+                        size="medium"
+                        btnType="primary"
+                        label="Download"
+                        icRight={<Download width={24} height={24} fill={"#ffffff"} />}
+                        onClick={() => {}}
+                    />
                 </li>
                 <li className="w-full flex justify-between items-center py-6 border-b border-g200">
                     <div>
                         <p className="text-g400 text-small mb-1">25.11.23 Updated</p>
                         <p className="text-g950 font-bold text-large">Document Origin Name</p>
                     </div>
-                    <button className="flex items-center justify-center bg-primay-950 text-white bg-g950 rounded-[2px] h-[48px] px-3 py-6 gap-3">
-                        Download
-                        <Download width={24} height={24} fill={"#ffffff"} />
-                    </button>
+                    <Button
+                        size="medium"
+                        btnType="primary"
+                        label="Download"
+                        icRight={<Download width={24} height={24} fill={"#ffffff"} />}
+                        onClick={() => {}}
+                    />
                 </li>
                 <li className="w-full flex justify-between items-center py-6 border-b border-g200">
                     <div>
                         <p className="text-g400 text-small mb-1">25.11.23 Updated</p>
                         <p className="text-g950 font-bold text-large">Document Origin Name</p>
                     </div>
-                    <button className="flex items-center justify-center bg-primay-950 text-white bg-g950 rounded-[2px] h-[48px] px-3 py-6 gap-3">
-                        Download
-                        <Download width={24} height={24} fill={"#ffffff"} />
-                    </button>
+                    <Button
+                        size="medium"
+                        btnType="primary"
+                        label="Download"
+                        icRight={<Download width={24} height={24} fill={"#ffffff"} />}
+                        onClick={() => {}}
+                    />
                 </li>
                 <li className="w-full flex justify-between items-center py-6 border-b border-g200">
                     <div>
                         <p className="text-g400 text-small mb-1">25.11.23 Updated</p>
                         <p className="text-g950 font-bold text-large">Document Origin Name</p>
                     </div>
-                    <button className="flex items-center justify-center bg-primay-950 text-white bg-g950 rounded-[2px] h-[48px] px-3 py-6 gap-3">
-                        Download
-                        <Download width={24} height={24} fill={"#ffffff"} />
-                    </button>
+                    <Button
+                        size="medium"
+                        btnType="primary"
+                        label="Download"
+                        icRight={<Download width={24} height={24} fill={"#ffffff"} />}
+                        onClick={() => {}}
+                    />
                 </li>
             </div>
         </div>

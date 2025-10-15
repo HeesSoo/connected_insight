@@ -13,8 +13,8 @@ interface ButtonProps {
     label: React.ReactNode;
     onClick: (e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>) => void;
     type?: "submit" | "button" | "reset" | undefined;
-    btnType?: "primary" | "secondary" | "line_red" | "line" | "minimal";
-    size?: "large" | "medium" | "small";
+    btnType?: "primary" | "secondary";
+    size?: "large" | "medium";
     icLeft?: React.ReactNode;
     icRight?: React.ReactNode;
     disabled?: boolean;
@@ -34,20 +34,20 @@ export default function Button({
 }: ButtonProps) {
     const baseClass = `
         flex items-center gap-3 justify-center text-white 
-        rounded-md transition-colors flex items-center justify-center gap-1 font-[600]
+        rounded-[2px] transition-colors flex items-center justify-center gap-1 font-[600] disabled:bg-g200
     `;
     const buttonStyles = {
-        primary: "bg-g950 :hover:bg-ePrimary",
+        primary: "bg-g950 hover:bg-ePrimary",
         secondary: "bg-ePrimary",
     };
 
     const buttonSizeStyles = {
-        large: "text-titleSmall h-[60px]",
-        medium: "text-base h-[48px]",
+        large: "text-titleSmall h-[60px] px-12 py-3",
+        medium: "text-base h-[48px] px-6 px-3",
     };
 
     return (
-        <button className={`${buttonStyles[btnType]} ${buttonSizeStyles[size]} ${className}`} onClick={onClick} type={type} disabled={disabled}>
+        <button className={`${baseClass} ${buttonStyles[btnType]} ${buttonSizeStyles[size]} ${className}`} onClick={onClick} type={type} disabled={disabled}>
             {icLeft}
             {label}
             {icRight}

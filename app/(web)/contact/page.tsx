@@ -62,14 +62,7 @@ const Sales: React.FC = () => {
                             <span className="text-small text-ePrimary underline underline-offset-4">개인정보 보호정책</span>에 동의합니다.
                         </label>
                     </div>
-                    <button
-                        disabled={!isFormComplete}
-                        className={`flex items-center justify-center w-[124px] h-[48px] 
-                            bg-ePrimary text-white disabled:bg-g200 rounded-[2px]`}
-                        onClick={() => {}}
-                    >
-                        제출
-                    </button>
+                    <Button label="제출" disabled={!isFormComplete} className={`w-[124px]`} size="medium" btnType="secondary" onClick={() => {}} />
                 </div>
             </div>
         </div>

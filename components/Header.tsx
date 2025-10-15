@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Logo from "@/public/svgs/logo.svg";
 import { navigationConfig } from "@/data/navigation";
 import { useNavigation } from "@/hooks/useNavigation";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import { NavigationItem } from "@/types/navigation";
 import { ArrowIco } from "@/icons/icons";
 
@@ -14,6 +15,7 @@ const renderNavigationItem = (
     isOpen: boolean,
     onToggle: () => void,
     onKeyDown: (event: React.KeyboardEvent, itemId: string) => void,
+    localizedPath: (path: string) => string,
     level: number = 0
 ): React.ReactNode => {
     const hasLink = item.href && item.href !== "#";
@@ -27,7 +29,7 @@ const renderNavigationItem = (
     return (
         <>
             {hasLink ? (
-                <Link href={item.href} {...commonProps}>
+                <Link href={localizedPath(item.href)} {...commonProps}>
                     <span>{item.label}</span>
                     {item?.children && item?.children?.length && (
                         <span
@@ -58,7 +60,7 @@ const renderNavigationItem = (
             {/* 드롭다운 메뉴 */}
             {item?.children && item?.children?.length && (
                 <div
-                    className="absolute top-[calc(100%+1px)] left-[-22px] flex p-6 
+                    className="absolute top-[calc(100%+1px)] left-[-22px] flex p-6
                         bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200
                         border border-g200 rounded border-t-0 rounded-t-none"
                     // className="absolute top-[calc(100%+1px)] left-[-22px]
@@ -83,7 +85,7 @@ const renderNavigationItem = (
                                         }}
                                         // onMouseLeave={() => setExternal([])}
                                     >
-                                        <Link href={child.href || "#"} className="relative min-w-[120px] group-hover:block">
+                                        <Link href={child.href ? localizedPath(child.href) : "#"} className="relative min-w-[120px] group-hover:block">
                                             {child.label}
                                         </Link>
                                     </li>
@@ -137,6 +139,7 @@ const renderNavigationItem = (
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { isItemActive, isDropdownOpen, toggleDropdown, handleKeyDown, getItemClasses } = useNavigation(navigationConfig.items);
+    const localizedPath = useLocalizedPath();
 
     return (
         <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-g200" role="banner">
@@ -144,7 +147,7 @@ export default function Header() {
                 <div className="flex items-center justify-center">
                     {/* Logo */}
                     <div className="flex-shrink-0">
-                        <Link href="/" className="flex items-center">
+                        <Link href={localizedPath("/")} className="flex items-center">
                             <Logo width={116} height={40} />
                         </Link>
                     </div>
@@ -154,7 +157,7 @@ export default function Header() {
                         <ul role="menubar" className="flex gap-6 ">
                             {navigationConfig.items.map((item) => (
                                 <li key={item.id} role="none" className="py-[15px] px-2 relative group">
-                                    {renderNavigationItem(item, isItemActive(item.id), isDropdownOpen(item.id), () => toggleDropdown(item.id), handleKeyDown)}
+                                    {renderNavigationItem(item, isItemActive(item.id), isDropdownOpen(item.id), () => toggleDropdown(item.id), handleKeyDown, localizedPath)}
                                 </li>
                             ))}
                         </ul>

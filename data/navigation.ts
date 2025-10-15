@@ -95,7 +95,7 @@ export const navigationConfig: NavigationConfig = {
                 {
                     id: "reservation-lab",
                     label: "Reservation Lab",
-                    href: "/support/reservation",
+                    href: "/support",
                 },
                 {
                     id: "downloads",

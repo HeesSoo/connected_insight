@@ -2,11 +2,13 @@
   "en": {
     "title": "title",
     "desc": "description",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact Us",
+    "test": "test"
   },
   "ko": {
     "title": "제목",
     "desc": "설명",
-    "contactUs": "컨택어스"
+    "contactUs": "컨택어스",
+    "test": "테스트"
   }
 }

@@ -83,7 +83,7 @@ export default function Home() {
         );
     };
 
-    console.log(t?.title, " : title")
+    console.log(t?.test, " : title")
 
     return (
         <main className="min-h-screen">

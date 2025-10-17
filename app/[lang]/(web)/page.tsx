@@ -8,7 +8,6 @@ import "swiper/css/pagination";
 
 import Image from "next/image";
 import ContactUs from "@/public/main/contact_us.png";
-import ArrowRight from "@/public/svgs/arrow-right.svg";
 import Tab from "@/components/Tab";
 import EVBattery from "@/public/main/evbattery.png";
 import ElectronicDevices from "@/public/main/electronic_device.png";
@@ -18,6 +17,7 @@ import Button from "@/components/Button";
 import router from "next/router";
 import Link from "next/link";
 import { useTranslation } from "@/hooks/useTranslation";
+import { ArrowRightIco } from "@/icons/icons";
 
 const tempData = [
     {
@@ -133,7 +133,7 @@ export default function Home() {
                                 // label={t.contactUs}
                                 label="문의하기"
                                 btnType="secondary"
-                                icRight={<ArrowRight />}
+                                icRight={<ArrowRightIco fill="#FFF" />}
                                 onClick={() => {
                                     router.push("/contact");
                                 }}

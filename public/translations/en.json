@@ -2,5 +2,6 @@
   "title": "title",
   "desc": "description",
   "contactUs": "Contact Us",
-  "test": "test"
+  "test": "test",
+  "not-found-error": "Not Found Error"
 }

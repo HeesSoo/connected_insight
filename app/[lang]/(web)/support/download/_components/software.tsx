@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/Button";
-import Download from "@/public/svgs/download.svg";
+import { DownloadIco } from "@/icons/icons";
 
 const Software = () => {
     return (
@@ -17,7 +17,7 @@ const Software = () => {
                         size="medium"
                         btnType="primary"
                         label="Download"
-                        icRight={<Download width={24} height={24} fill={"#ffffff"} />}
+                        icRight={<DownloadIco fill={"#ffffff"} />}
                         onClick={() => {}}
                     />
                 </li>
@@ -30,7 +30,7 @@ const Software = () => {
                         size="medium"
                         btnType="primary"
                         label="Download"
-                        icRight={<Download width={24} height={24} fill={"#ffffff"} />}
+                        icRight={<DownloadIco fill={"#ffffff"} />}
                         onClick={() => {}}
                     />
                 </li>
@@ -43,7 +43,7 @@ const Software = () => {
                         size="medium"
                         btnType="primary"
                         label="Download"
-                        icRight={<Download width={24} height={24} fill={"#ffffff"} />}
+                        icRight={<DownloadIco fill={"#ffffff"} />}
                         onClick={() => {}}
                     />
                 </li>
@@ -56,7 +56,7 @@ const Software = () => {
                         size="medium"
                         btnType="primary"
                         label="Download"
-                        icRight={<Download width={24} height={24} fill={"#ffffff"} />}
+                        icRight={<DownloadIco fill={"#ffffff"} />}
                         onClick={() => {}}
                     />
                 </li>

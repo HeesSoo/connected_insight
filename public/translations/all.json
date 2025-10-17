@@ -3,12 +3,14 @@
     "title": "title",
     "desc": "description",
     "contactUs": "Contact Us",
-    "test": "test"
+    "test": "test",
+    "not-found-error": "Not Found Error"
   },
   "ko": {
     "title": "제목",
     "desc": "설명",
     "contactUs": "컨택어스",
-    "test": "테스트"
+    "test": "테스트",
+    "not-found-error": "에러가 발생했습니다."
   }
 }

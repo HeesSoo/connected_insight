@@ -7,7 +7,7 @@ import { navigationConfig } from "@/data/navigation";
 import { useNavigation } from "@/hooks/useNavigation";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import { NavigationItem } from "@/types/navigation";
-import { ArrowIco } from "@/icons/icons";
+import { ArrowDiagonalRight, ArrowIco } from "@/icons/icons";
 
 const renderNavigationItem = (
     item: NavigationItem,
@@ -16,6 +16,7 @@ const renderNavigationItem = (
     onToggle: () => void,
     onKeyDown: (event: React.KeyboardEvent, itemId: string) => void,
     localizedPath: (path: string) => string,
+    isChildActive: (itemId: string) => boolean,
     level: number = 0
 ): React.ReactNode => {
     const hasLink = item.href && item.href !== "#";
@@ -75,22 +76,28 @@ const renderNavigationItem = (
                     <ul id={`submenu-${item.id}`} role="menu" className={`flex flex-col gap-y-6 w-max`}>
                         {item.children &&
                             item.children.length > 0 &&
-                            item.children.map((child, childIndex) => (
-                                <div key={child.id}>
-                                    <li
-                                        role="none"
-                                        className="relative min-w-[120px] flex group"
-                                        onMouseEnter={() => {
-                                            setExternal(child.external);
-                                        }}
-                                        // onMouseLeave={() => setExternal([])}
-                                    >
-                                        <Link href={child.href ? localizedPath(child.href) : "#"} className="relative min-w-[120px] group-hover:block">
-                                            {child.label}
-                                        </Link>
-                                    </li>
-                                </div>
-                            ))}
+                            item.children.map((child, childIndex) => {
+                                const isChildItemActive = isChildActive(child.id);
+                                return (
+                                    <div key={child.id}>
+                                        <li
+                                            role="none"
+                                            className="relative min-w-[120px] flex group"
+                                            onMouseEnter={() => {
+                                                setExternal(child.external);
+                                            }}
+                                            // onMouseLeave={() => setExternal([])}
+                                        >
+                                            <Link
+                                                href={child.href ? localizedPath(child.href) : "#"}
+                                                className={`relative min-w-[120px] group-hover:block ${isChildItemActive ? "text-ePrimary" : ""}`}
+                                            >
+                                                {child.label}
+                                            </Link>
+                                        </li>
+                                    </div>
+                                );
+                            })}
                     </ul>
                     <div
                         className={`flex transition-all duration-200 ease-out ${
@@ -104,13 +111,22 @@ const renderNavigationItem = (
                             <>
                                 <div className="w-[1px] h-full bg-g200 mx-6"></div>
                                 <ul className={`flex flex-col gap-y-6`}>
-                                    {external.map((external) => (
-                                        <li key={external.id} role="none" className="min-w-[120px] w-max">
-                                            <Link href={external.href} className="min-w-[120px]" target="_blank" rel="noopener noreferrer">
-                                                {external.label}
-                                            </Link>
-                                        </li>
-                                    ))}
+                                    {external.map((externalItem) => {
+                                        const isExternalItemActive = isChildActive(externalItem.id);
+                                        return (
+                                            <li key={externalItem.id} role="none" className="min-w-[120px] flex justify-between gap-6 min-w-max">
+                                                <Link
+                                                    href={externalItem.href}
+                                                    className={`w-full`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    {externalItem.label}
+                                                </Link>
+                                                <ArrowDiagonalRight />
+                                            </li>
+                                        );
+                                    })}
                                 </ul>
                             </>
                         )}
@@ -157,7 +173,7 @@ export default function Header() {
                         <ul role="menubar" className="flex gap-6 ">
                             {navigationConfig.items.map((item) => (
                                 <li key={item.id} role="none" className="py-[15px] px-2 relative group">
-                                    {renderNavigationItem(item, isItemActive(item.id), isDropdownOpen(item.id), () => toggleDropdown(item.id), handleKeyDown, localizedPath)}
+                                    {renderNavigationItem(item, isItemActive(item.id), isDropdownOpen(item.id), () => toggleDropdown(item.id), handleKeyDown, localizedPath, isItemActive)}
                                 </li>
                             ))}
                         </ul>

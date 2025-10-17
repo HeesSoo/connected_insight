@@ -3,26 +3,43 @@
 import { usePathname } from "next/navigation";
 import { useMemo, useState } from "react";
 import { NavigationItem } from "@/types/navigation";
+import { usePathWithoutLang } from "@/hooks/useLocalizedPath";
 
 export const useNavigation = (navigationItems: NavigationItem[]) => {
-    const pathname = usePathname();
+    const pathname = usePathWithoutLang();
     const [dropdownStates, setDropdownStates] = useState<Record<string, boolean>>({});
 
-    // 현재 활성화된 아이템 찾기
-    const activeItem = useMemo(() => {
-        const findActiveItem = (items: NavigationItem[]): string | null => {
+    // 현재 활성화된 아이템들 찾기 (자식 + 부모 모두 포함)
+    const activeItems = useMemo(() => {
+        const activeSet = new Set<string>();
+
+        const findActiveItem = (items: NavigationItem[], parentIds: string[] = []): boolean => {
             for (const item of items) {
-                if (item.href === pathname || (pathname.startsWith(item.href) && item.href !== "/")) {
-                    return item.id;
+                // 현재 아이템이 활성화되어 있는지 확인
+                const isCurrentActive = item.href && (item.href === pathname || (pathname.startsWith(item.href) && item.href !== "/"));
+
+                if (isCurrentActive) {
+                    // 현재 아이템과 모든 부모 아이템을 활성화
+                    activeSet.add(item.id);
+                    parentIds.forEach(parentId => activeSet.add(parentId));
+                    return true;
                 }
+
+                // 자식 메뉴가 있으면 재귀적으로 확인
                 if (item.children) {
-                    const childActive = findActiveItem(item.children);
-                    if (childActive) return item.id;
+                    const childActive = findActiveItem(item.children, [...parentIds, item.id]);
+                    if (childActive) {
+                        activeSet.add(item.id);
+                        parentIds.forEach(parentId => activeSet.add(parentId));
+                        return true;
+                    }
                 }
             }
-            return null;
+            return false;
         };
-        return findActiveItem(navigationItems);
+
+        findActiveItem(navigationItems);
+        return activeSet;
     }, [pathname, navigationItems]);
 
     // 드롭다운 열림 상태 (클릭)
@@ -30,9 +47,9 @@ export const useNavigation = (navigationItems: NavigationItem[]) => {
         return dropdownStates[itemId] || false;
     };
 
-    // 아이템 활성화 상태
+    // 아이템 활성화 상태 (자식이 활성화되어 있으면 부모도 활성화)
     const isItemActive = (itemId: string): boolean => {
-        return activeItem === itemId;
+        return activeItems.has(itemId);
     };
 
     // 드롭다운 토글
@@ -62,7 +79,7 @@ export const useNavigation = (navigationItems: NavigationItem[]) => {
     };
 
     return {
-        activeItem,
+        activeItem: activeItems,
         isItemActive,
         isDropdownOpen,
         toggleDropdown,

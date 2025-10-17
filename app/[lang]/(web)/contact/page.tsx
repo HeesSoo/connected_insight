@@ -6,8 +6,8 @@ import ContactLeft from "./_component/contact_left";
 import Input from "./_component/Input";
 import Textarea from "./_component/Textarea";
 import Button from "@/components/Button";
-import Upload from "@/public/svgs/upload.svg";
 import Checkbox from "@/components/Checkbox";
+import { UploadIco } from "@/icons/icons";
 
 const Sales: React.FC = () => {
     const name = useInput("");
@@ -38,7 +38,7 @@ const Sales: React.FC = () => {
                     <div className="flex items-center gap-4">
                         <label htmlFor="file" className="flex gap-1 text-base font-semibold text-g900 align-center">
                             파일첨부
-                            <Upload width={24} height={24} />
+                            <UploadIco />
                         </label>
                         <input type="file" id="file" accept={fileAccept} className="w-0 h-0" />
                         <div className="flex items-center gap-2">

@@ -49,7 +49,8 @@ function ProductListContent() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis`);
+                // const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/cis`);
 
                 if (response.status === 200) {
                     setData(response.data.data);

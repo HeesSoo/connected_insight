@@ -24,7 +24,8 @@ export default function Banner() {
     useEffect(() => {
         const getBanners = async () => {
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/main/banner`);
+                // const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/main/banner`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/main/banner`);
                 if (response.status === 200) {
                     setBanners(response.data.data);
                 }

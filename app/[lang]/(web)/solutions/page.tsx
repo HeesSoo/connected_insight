@@ -24,7 +24,8 @@ const CISApplication: React.FC = ({}) => {
     useEffect(() => {
         const getApplications = async () => {
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution`);
+                // const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/solution`);
 
                 if (response.status === 200) {
                     setData(response.data.data);

@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import Logo from "@/public/svgs/logo.svg";
 import Link from "next/link";
-import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 
 export default function Footer() {
     const localizedPath = useLocalizedPath();
@@ -20,7 +19,7 @@ export default function Footer() {
                             <dl className="">
                                 <div className="flex text-g300 text-small">
                                     <dt>주소&nbsp;:&nbsp;</dt>
-                                    <dd>서울특별시 금천구 사원대로 390, 대륭 307호</dd>
+                                    <dd>충청남도 천안시 서북구 불당36길 63, 충남지식산업센터 307호</dd>
                                 </div>
 
                                 <div className="flex text-g300 text-small">

@@ -3,9 +3,10 @@
 import Checkbox from "@/components/Checkbox";
 import Rangebar from "@/components/Rangebar";
 import { Arrow2UpIco } from "@/icons/icons";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import { Filter as FilterType } from "../page";
 
-export default function Filter() {
+export default function Filter({ setFilter }: { setFilter: Dispatch<SetStateAction<FilterType>> }) {
     // 섹션 확장/축소 상태
     const [sectionExpanded, setSectionExpanded] = useState({
         type: true,
@@ -14,35 +15,57 @@ export default function Filter() {
 
     // Type 체크박스 상태
     const [typeFilters, setTypeFilters] = useState({
-        PLUS: true,
-        MAX: true,
-        MAX_PRO: true,
-        COLOR: true,
+        PLUS: false,
+        MAX: false,
+        MAX_PRO: false,
+        COLOR: false,
     });
 
     // Resolution 체크박스 상태
     const [resolutionFilters, setResolutionFilters] = useState({
         "300DPI": false,
-        "600DPI": true,
-        "1200DPI": true,
+        "600DPI": false,
+        "900DPI": false,
+        "1200DPI": false,
         "1800DPI": false,
         "3600DPI": false,
     });
 
     // Frame Rate 범위 상태
-    const [frameRate, setFrameRate] = useState<[number, number]>([11, 160]);
+    const [lineRate, setLineRate] = useState<[number, number]>([10, 160]);
 
     // FOV 범위 상태
-    const [fov, setFov] = useState<[number, number]>([165, 1600]);
+    const [fov, setFov] = useState<[number, number]>([90, 1937]);
 
     // WD 범위 상태
-    const [wd, setWd] = useState<[number, number]>([7, 11]);
+    const [wd, setWd] = useState<[number, number]>([7, 48]);
 
     // Type 체크박스 핸들러
     const handleTypeChange = (type: keyof typeof typeFilters) => {
         setTypeFilters((prev) => ({
             ...prev,
             [type]: !prev[type],
+        }));
+
+        let types = [];
+        Object.entries(typeFilters).forEach(([key, value]) => {
+            if (key === type) {
+                if (!value) {
+                    types.push(key === "PLUS" ? "plus" : key === "MAX" ? "max" : key === "MAX_PRO" ? "max pro" : "color");
+                }
+            } else if (value) {
+                types.push(key === "PLUS" ? "plus" : key === "MAX" ? "max" : key === "MAX_PRO" ? "max pro" : "color");
+            }
+        });
+
+        if (types.length === 0) {
+            // 아무것도 선택되지 않았을 때 모두 선택된 상태로 변경
+            types = ["plus", "max", "max pro", "color"];
+        }
+
+        setFilter((prev) => ({
+            ...prev,
+            type: [...types],
         }));
     };
 
@@ -51,6 +74,27 @@ export default function Filter() {
         setResolutionFilters((prev) => ({
             ...prev,
             [resolution]: !prev[resolution],
+        }));
+
+        let resolutions = [];
+        Object.entries(resolutionFilters).forEach(([key, value]) => {
+            if (key === resolution) {
+                if (!value) {
+                    resolutions.push(key === "300DPI" ? 300 : key === "600DPI" ? 600 : key === "1200DPI" ? 1200 : key === "1800DPI" ? 1800 : 3600);
+                }
+            } else if (value) {
+                resolutions.push(key === "300DPI" ? 300 : key === "600DPI" ? 600 : key === "900DPI" ? 900 : key === "1200DPI" ? 1200 : key === "1800DPI" ? 1800 : 3600);
+            }
+        });
+
+        if (resolutions.length === 0) {
+            // 아무것도 선택되지 않았을 때 모두 선택된 상태로 변경
+            resolutions = [300, 600, 900, 1200, 1800, 3600];
+        }
+
+        setFilter((prev) => ({
+            ...prev,
+            resolution: [...resolutions],
         }));
     };
 
@@ -104,6 +148,11 @@ export default function Filter() {
                 MAX_PRO: shouldSelectAll,
                 COLOR: shouldSelectAll,
             });
+
+            setFilter((prev) => ({
+                ...prev,
+                type: ["plus", "max", "max pro", "color"],
+            }));
         } else if (section === "resolution") {
             const currentState = getSectionCheckboxState("resolution");
             const shouldSelectAll = !currentState.checked || currentState.indeterminate;
@@ -111,10 +160,16 @@ export default function Filter() {
             setResolutionFilters({
                 "300DPI": shouldSelectAll,
                 "600DPI": shouldSelectAll,
+                "900DPI": shouldSelectAll,
                 "1200DPI": shouldSelectAll,
                 "1800DPI": shouldSelectAll,
                 "3600DPI": shouldSelectAll,
             });
+
+            setFilter((prev) => ({
+                ...prev,
+                resolution: [300, 600, 900, 1200, 1800, 3600],
+            }));
         }
     };
 
@@ -127,17 +182,7 @@ export default function Filter() {
     );
 
     // 섹션 헤더 컴포넌트
-    const SectionHeader = ({
-        title,
-        isExpanded,
-        onToggle,
-        section,
-    }: {
-        title: string;
-        isExpanded: boolean;
-        onToggle: () => void;
-        section: "type" | "resolution";
-    }) => {
+    const SectionHeader = ({ title, isExpanded, onToggle, section }: { title: string; isExpanded: boolean; onToggle: () => void; section: "type" | "resolution" }) => {
         const checkboxState = getSectionCheckboxState(section);
 
         return (
@@ -160,6 +205,32 @@ export default function Filter() {
         );
     };
 
+    const onChangeLineRate = (value: [number, number]) => {
+        setLineRate(value);
+        setFilter((prev) => ({
+            ...prev,
+            line_rate_min: value[0],
+            line_rate_max: value[1],
+        }));
+    };
+
+    const onChangeFov = (value: [number, number]) => {
+        setFov(value);
+        setFilter((prev) => ({
+            ...prev,
+            fov_min: value[0],
+            fov_max: value[1],
+        }));
+    };
+    const onChangeWd = (value: [number, number]) => {
+        setWd(value);
+        setFilter((prev) => ({
+            ...prev,
+            wd_min: value[0],
+            wd_max: value[1],
+        }));
+    };
+
     return (
         <div className="w-[329px] bg-white mt-[46px]">
             {/* Type 섹션 */}
@@ -177,46 +248,27 @@ export default function Filter() {
 
             {/* Resolution 섹션 */}
             <div className="border-b border-g200 py-4">
-                <SectionHeader
-                    title="Resolution (DPI)"
-                    isExpanded={sectionExpanded.resolution}
-                    onToggle={() => handleSectionToggle("resolution")}
-                    section="resolution"
-                />
+                <SectionHeader title="Resolution (DPI)" isExpanded={sectionExpanded.resolution} onToggle={() => handleSectionToggle("resolution")} section="resolution" />
                 {sectionExpanded.resolution && (
                     <div className="mt-3 space-y-1">
                         <CheckboxItem checked={resolutionFilters["300DPI"]} onChange={() => handleResolutionChange("300DPI")} label="300DPI" value="300DPI" />
                         <CheckboxItem checked={resolutionFilters["600DPI"]} onChange={() => handleResolutionChange("600DPI")} label="600DPI" value="600DPI" />
-                        <CheckboxItem
-                            checked={resolutionFilters["1200DPI"]}
-                            onChange={() => handleResolutionChange("1200DPI")}
-                            label="1200DPI"
-                            value="1200DPI"
-                        />
-                        <CheckboxItem
-                            checked={resolutionFilters["1800DPI"]}
-                            onChange={() => handleResolutionChange("1800DPI")}
-                            label="1800DPI"
-                            value="1800DPI"
-                        />
-                        <CheckboxItem
-                            checked={resolutionFilters["3600DPI"]}
-                            onChange={() => handleResolutionChange("3600DPI")}
-                            label="3600DPI"
-                            value="3600DPI"
-                        />
+                        <CheckboxItem checked={resolutionFilters["900DPI"]} onChange={() => handleResolutionChange("900DPI")} label="900DPI" value="900DPI" />
+                        <CheckboxItem checked={resolutionFilters["1200DPI"]} onChange={() => handleResolutionChange("1200DPI")} label="1200DPI" value="1200DPI" />
+                        <CheckboxItem checked={resolutionFilters["1800DPI"]} onChange={() => handleResolutionChange("1800DPI")} label="1800DPI" value="1800DPI" />
+                        <CheckboxItem checked={resolutionFilters["3600DPI"]} onChange={() => handleResolutionChange("3600DPI")} label="3600DPI" value="3600DPI" />
                     </div>
                 )}
             </div>
 
             <div className="flex flex-col gap-6 mt-6">
-                {/* Frame Rate 섹션 */}
+                {/* Line Rate 섹션 */}
                 <Rangebar
-                    label="Frame Rate"
-                    min={11}
+                    label="Line Rate"
+                    min={10}
                     max={160}
-                    value={frameRate}
-                    onChange={setFrameRate}
+                    value={lineRate}
+                    onChange={onChangeLineRate}
                     unit="kHz"
                     parseValue={(text) => {
                         const cleaned = text.replace(/[^0-9.-]/g, "");
@@ -227,10 +279,10 @@ export default function Filter() {
                 {/* FOV 섹션 */}
                 <Rangebar
                     label="FOV"
-                    min={165}
-                    max={1600}
+                    min={90}
+                    max={1937}
                     value={fov}
-                    onChange={setFov}
+                    onChange={onChangeFov}
                     unit="mm"
                     parseValue={(text) => {
                         const cleaned = text.replace(/[^0-9.-]/g, "");
@@ -242,9 +294,9 @@ export default function Filter() {
                 <Rangebar
                     label="WD"
                     min={7}
-                    max={11}
+                    max={48}
                     value={wd}
-                    onChange={setWd}
+                    onChange={onChangeWd}
                     unit="mm"
                     parseValue={(text) => {
                         const cleaned = text.replace(/[^0-9.-]/g, "");

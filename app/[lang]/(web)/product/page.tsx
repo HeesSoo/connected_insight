@@ -80,7 +80,14 @@ function ProductListContent() {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/cis`);
 
                 if (response.status === 200) {
-                    setData(response.data.data.cis);
+                    if (tab === "cis") {
+                        setData(response.data.data.cis);
+                    } else if (tab === "lingchen") {
+                        setData(response.data.data.lingchen);
+                    } else if (tab === "tokk") {
+                        setData(response.data.data.tokk);
+                    }
+
                     setAllCisData(response.data.data.cis);
                     setLingchenData(response.data.data.lingchen);
                     setTokkData(response.data.data.tokk);

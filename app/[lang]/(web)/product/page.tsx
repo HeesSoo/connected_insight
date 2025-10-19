@@ -55,7 +55,7 @@ function ProductListContent() {
     const [tab, setTab] = useState<"cis" | "lingchen" | "tokk">("cis");
     const [filter, setFilter] = useState<Filter>({
         type: ["plus", "max", "max pro", "color"],
-        resolution: [300, 600, 1200, 1800, 3600],
+        resolution: [300, 600, 900, 1200, 1800, 3600],
         line_rate_min: 10,
         line_rate_max: 160,
         fov_min: 90,
@@ -77,6 +77,7 @@ function ProductListContent() {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/cis`);
 
                 if (response.status === 200) {
+                    console.log("cisData:::", response.data.data.cis);
                     setData(response.data.data.cis);
                     setAllCisData(response.data.data.cis);
                     setLingchenData(response.data.data.lingchen);
@@ -103,10 +104,10 @@ function ProductListContent() {
             filteredData = [...allCisData];
 
             // 상세 필터링
-            if (filter.type && filter.type.length > 0) {
+            if (filter.type && filter.type.length >= 0) {
                 filteredData = filteredData.filter((item) => filter.type.includes(item.type));
             }
-            if (filter.resolution && filter.resolution.length > 0) {
+            if (filter.resolution && filter.resolution.length >= 0) {
                 filteredData = filteredData.filter((item) => filter.resolution.includes(item.resolution));
             }
             if (filter.line_rate_min !== null) {
@@ -154,7 +155,7 @@ function ProductListContent() {
             />
 
             <div className={`${tab === "cis" ? "mt-[40px]" : "mt-[80px]"} w-full flex gap-[131px]`}>
-                {tab === "cis" && <Filter setFilter={setFilter} />}
+                {tab === "cis" && <Filter filter={filter} setFilter={setFilter} />}
                 <ProductItems tab={tab} data={data} loading={loading} hasFilter={tab === "cis"} />
             </div>
         </div>

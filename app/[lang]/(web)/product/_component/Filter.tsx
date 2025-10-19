@@ -3,10 +3,10 @@
 import Checkbox from "@/components/Checkbox";
 import Rangebar from "@/components/Rangebar";
 import { Arrow2UpIco } from "@/icons/icons";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Filter as FilterType } from "../page";
 
-export default function Filter({ setFilter }: { setFilter: Dispatch<SetStateAction<FilterType>> }) {
+export default function Filter({ filter, setFilter }: { filter: FilterType; setFilter: Dispatch<SetStateAction<FilterType>> }) {
     // 섹션 확장/축소 상태
     const [sectionExpanded, setSectionExpanded] = useState({
         type: true,
@@ -40,6 +40,29 @@ export default function Filter({ setFilter }: { setFilter: Dispatch<SetStateActi
     // WD 범위 상태
     const [wd, setWd] = useState<[number, number]>([7, 48]);
 
+    useEffect(() => {
+        // 초기 필터 상태 설정
+        setTypeFilters({
+            PLUS: filter.type.includes("plus"),
+            MAX: filter.type.includes("max"),
+            MAX_PRO: filter.type.includes("max pro"),
+            COLOR: filter.type.includes("color"),
+        });
+
+        setResolutionFilters({
+            "300DPI": filter.resolution.includes(300),
+            "600DPI": filter.resolution.includes(600),
+            "900DPI": filter.resolution.includes(900),
+            "1200DPI": filter.resolution.includes(1200),
+            "1800DPI": filter.resolution.includes(1800),
+            "3600DPI": filter.resolution.includes(3600),
+        });
+
+        setLineRate([filter.line_rate_min || 10, filter.line_rate_max || 160]);
+        setFov([filter.fov_min || 90, filter.fov_max || 1937]);
+        setWd([filter.wd_min || 7, filter.wd_max || 48]);
+    }, []);
+
     // Type 체크박스 핸들러
     const handleTypeChange = (type: keyof typeof typeFilters) => {
         setTypeFilters((prev) => ({
@@ -58,11 +81,6 @@ export default function Filter({ setFilter }: { setFilter: Dispatch<SetStateActi
             }
         });
 
-        if (types.length === 0) {
-            // 아무것도 선택되지 않았을 때 모두 선택된 상태로 변경
-            types = ["plus", "max", "max pro", "color"];
-        }
-
         setFilter((prev) => ({
             ...prev,
             type: [...types],
@@ -80,17 +98,12 @@ export default function Filter({ setFilter }: { setFilter: Dispatch<SetStateActi
         Object.entries(resolutionFilters).forEach(([key, value]) => {
             if (key === resolution) {
                 if (!value) {
-                    resolutions.push(key === "300DPI" ? 300 : key === "600DPI" ? 600 : key === "1200DPI" ? 1200 : key === "1800DPI" ? 1800 : 3600);
+                    resolutions.push(key === "300DPI" ? 300 : key === "600DPI" ? 600 : key === "900DPI" ? 900 : key === "1200DPI" ? 1200 : key === "1800DPI" ? 1800 : 3600);
                 }
             } else if (value) {
                 resolutions.push(key === "300DPI" ? 300 : key === "600DPI" ? 600 : key === "900DPI" ? 900 : key === "1200DPI" ? 1200 : key === "1800DPI" ? 1800 : 3600);
             }
         });
-
-        if (resolutions.length === 0) {
-            // 아무것도 선택되지 않았을 때 모두 선택된 상태로 변경
-            resolutions = [300, 600, 900, 1200, 1800, 3600];
-        }
 
         setFilter((prev) => ({
             ...prev,
@@ -149,10 +162,17 @@ export default function Filter({ setFilter }: { setFilter: Dispatch<SetStateActi
                 COLOR: shouldSelectAll,
             });
 
-            setFilter((prev) => ({
-                ...prev,
-                type: ["plus", "max", "max pro", "color"],
-            }));
+            if (shouldSelectAll) {
+                setFilter((prev) => ({
+                    ...prev,
+                    type: ["plus", "max", "max pro", "color"],
+                }));
+            } else {
+                setFilter((prev) => ({
+                    ...prev,
+                    type: [],
+                }));
+            }
         } else if (section === "resolution") {
             const currentState = getSectionCheckboxState("resolution");
             const shouldSelectAll = !currentState.checked || currentState.indeterminate;
@@ -166,10 +186,17 @@ export default function Filter({ setFilter }: { setFilter: Dispatch<SetStateActi
                 "3600DPI": shouldSelectAll,
             });
 
-            setFilter((prev) => ({
-                ...prev,
-                resolution: [300, 600, 900, 1200, 1800, 3600],
-            }));
+            if (shouldSelectAll) {
+                setFilter((prev) => ({
+                    ...prev,
+                    resolution: [300, 600, 900, 1200, 1800, 3600],
+                }));
+            } else {
+                setFilter((prev) => ({
+                    ...prev,
+                    resolution: [],
+                }));
+            }
         }
     };
 

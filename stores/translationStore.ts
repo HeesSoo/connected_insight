@@ -40,7 +40,7 @@ const getLanguageFromURL = (): string => {
 export const useTranslationStore = create<TranslationState>()(
     persist(
         (set, get) => ({
-            currentLanguage: getLanguageFromURL(),
+            currentLanguage: "ko", // 서버 초기값은 항상 "ko"
 
             setLanguage: (language: string) => {
                 if (preloadedTranslations[language]) {
@@ -82,6 +82,7 @@ export const useTranslationStore = create<TranslationState>()(
             partialize: (state) => ({
                 currentLanguage: state.currentLanguage,
             }),
+            skipHydration: false,
         }
     )
 );

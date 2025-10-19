@@ -98,7 +98,7 @@ export default function Filter({ filter, setFilter }: { filter: FilterType; setF
         Object.entries(resolutionFilters).forEach(([key, value]) => {
             if (key === resolution) {
                 if (!value) {
-                    resolutions.push(key === "300DPI" ? 300 : key === "600DPI" ? 600 : key === "1200DPI" ? 1200 : key === "1800DPI" ? 1800 : 3600);
+                    resolutions.push(key === "300DPI" ? 300 : key === "600DPI" ? 600 : key === "900DPI" ? 900 : key === "1200DPI" ? 1200 : key === "1800DPI" ? 1800 : 3600);
                 }
             } else if (value) {
                 resolutions.push(key === "300DPI" ? 300 : key === "600DPI" ? 600 : key === "900DPI" ? 900 : key === "1200DPI" ? 1200 : key === "1800DPI" ? 1800 : 3600);

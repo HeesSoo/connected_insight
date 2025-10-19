@@ -1,6 +1,5 @@
 import { DownloadIco } from "@/icons/icons";
 import Button from "./Button";
-import Download from "@/app/(web)/support/download/page";
 
 interface Props {
     label?: string;

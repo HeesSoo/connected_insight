@@ -30,6 +30,8 @@ export default function RootLayout({
                     crossOrigin="anonymous"
                     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
                 />
+                {/* TODO: https 활성화되면 삭제 */}
+                {/* <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> */}
             </head>
             <body className={inter.className}>
                 <QueryProviderWrapper>

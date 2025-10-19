@@ -5,6 +5,7 @@ import MainSolution from "./_component/Solution";
 import Tokk from "./_component/Tokk";
 import RedirectAlert from "./_component/RedirectAlert";
 import axios from "axios";
+import { Suspense } from "react";
 import { SolutionItem } from "@/types/solution"; 
 import { LingchenItem } from "@/types/lingchen";
 import { MainBanner } from "@/types/banner";
@@ -69,7 +70,9 @@ export default async function Home() {
 
     return (
         <main className="min-h-screen">
-            <RedirectAlert />
+            <Suspense fallback={null}>
+                <RedirectAlert />
+            </Suspense>
             <Banner banners={banners} />
 
             <section className="w-full max-w-[1440px] mx-auto mt-[120px] mb-[160px] flex flex-col gap-[120px]">

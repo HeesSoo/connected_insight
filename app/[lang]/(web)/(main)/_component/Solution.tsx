@@ -39,15 +39,15 @@ export default function MainSolution({ data }: MainSolutionProps) {
                         <Image src={AlternativeImg} alt="Alternative Image" width={849} height={474} className="w-[444px] h-[auto] object-cover" />
                     </div>
                     <div className="w-[591px] bg-g50 px-12 py-20 flex flex-col justify-between">
-                        <h3 className="g-950 text-[32px] leading-[48px] tracking-[-0.2px] font-bold">Alternative</h3>
+                        <h3 className="g-950 text-[32px] leading-[48px] tracking-[-0.2px] font-bold">-</h3>
                         <div>
                             <div className="mb-6">
                                 <div className="text-ePrimary text-base mb-1 font-[500]">{t["solution-core-inspector-target"]}</div>
-                                <div className={`text-large text-g950 font-[600]`}>Alternative</div>
+                                <div className={`text-large text-g950 font-[600]`}>-</div>
                             </div>
                             <div>
                                 <div className="text-ePrimary text-base mb-1 font-[500]">{t["solution-core-value"]}</div>
-                                <div className={`text-large text-g950 font-[600]`}>Alternative</div>
+                                <div className={`text-large text-g950 font-[600]`}>-</div>
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
                                         <Image src={item.image} alt={item.name} width={849} height={474} className="w-full h-[474px] object-cover" />
                                     </div>
                                     <div className="w-[591px] bg-g50 px-12 pt-12 pb-20 flex flex-col justify-between">
-                                        <h3 className="g-950 text-[32px] leading-[48px] tracking-[-0.2px] font-bold">{item.name}</h3>
+                                        <h3 className="g-950 text-[32px] leading-[48px] tracking-[-0.2px] font-bold">{item?.[`name_${currentLanguage}`]}</h3>
 
                                         <div>
                                             {item.core_inspector_target_ko && (

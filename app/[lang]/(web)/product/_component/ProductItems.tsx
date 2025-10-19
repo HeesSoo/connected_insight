@@ -3,20 +3,20 @@ import AlternativeImg from "@/public/common/alternativeImg.png";
 import TokkFinderImg from "@/public/main/tokk_finder.png";
 import Image from "next/image";
 import Link from "next/link";
-import { CisData, LingchenData, TokkData } from "../page";
+import { CisData, LingchenData, TokkData } from "./ProductListClient";
 
 const dummyData: CisData | LingchenData | TokkData = {
-    fov: 1937,
-    line_rate: 160,
-    name: "Dummy Name",
-    resolution: 3600,
+    fov: 0,
+    line_rate: 0,
+    name: "-",
+    resolution: 300,
     thumbnail: AlternativeImg,
-    type: "plus",
+    type: "-",
     uuid: "dummy-uuid-1",
-    wd: 48,
+    wd: 0,
 };
 
-export default function ProductItems({ tab, data, hasFilter, loading }: { tab: "cis" | "lingchen" | "tokk"; data: CisData[] | LingchenData[] | TokkData[]; loading: boolean; hasFilter: boolean }) {
+export default function ProductItems({ tab, data, hasFilter }: { tab: "cis" | "lingchen" | "tokk"; data: CisData[] | LingchenData[] | TokkData[]; hasFilter: boolean }) {
     return (
         <div className="flex-1">
             {tab === "tokk" && (
@@ -49,16 +49,16 @@ export default function ProductItems({ tab, data, hasFilter, loading }: { tab: "
                 Total&nbsp;<span className="text-base leading-[30px] font-bold text-g400 ">({data.length})</span>
             </h3>
 
-            {loading && (
+            {/* {loading && (
                 <section className={`grid ${hasFilter ? "grid-cols-3" : "grid-cols-4"} gap-x-4 gap-y-12`}>
                     {[1, 2, 3, 4, 5, 6].map((item, idx) => (
                         <ProductItem key={idx} type={tab} item={dummyData} />
                     ))}
                 </section>
-            )}
+            )} */}
 
-            {!loading && data.length === 0 && <div className="w-full text-gray-500 text-center pt-[240px]">검색된 제품이 없습니다.</div>}
-            {!loading && data.length > 0 && (
+            {data.length === 0 && <div className="w-full text-gray-500 text-center pt-[240px]">검색된 제품이 없습니다.</div>}
+            {data.length > 0 && (
                 <section className={`grid ${hasFilter ? "grid-cols-3" : "grid-cols-4"} gap-x-4 gap-y-12`}>
                     {data.map((item) => (
                         <ProductItem key={item.uuid} type={tab} item={item} />
@@ -93,6 +93,7 @@ const ProductItem = ({ item, type }: { item: CisData | LingchenData | TokkData; 
                         {item.type === "max" && "LineX Max"}
                         {item.type === "max pro" && "LineX MAX PRO"}
                         {item.type === "color" && "LineX COLOR"}
+                        {item.type === "-" && "-"}
                     </div>
                     <h4 className="text-g950 text-large leading-[30px] font-semibold">{item.name}</h4>
                 </div>

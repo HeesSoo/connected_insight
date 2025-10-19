@@ -78,7 +78,7 @@ export default async function Home() {
             <section className="w-full max-w-[1440px] mx-auto mt-[120px] mb-[160px] flex flex-col gap-[120px]">
                 <MainSolution data={solutions} />
                 <Linchen data={lingchenData} />
-                <Tokk data={tokkData}/>
+                <Tokk data={tokkData} />
                 <Contactus />
             </section>
         </main>

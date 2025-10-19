@@ -1,63 +1,12 @@
 import Image from "next/image";
-import DummyImage from "../../_dummys/DummyProductImg.png";
 import { ProductDetail } from "../page";
-
-const dummyItems = [
-    {
-        key: "drawing",
-        title: "Drawing",
-        image: DummyImage,
-    },
-    {
-        key: "drawing",
-        title: "Drawing",
-        image: DummyImage,
-    },
-    {
-        key: "drawing",
-        title: "Drawing",
-        image: DummyImage,
-    },
-    {
-        key: "drawing",
-        title: "Drawing",
-        image: DummyImage,
-    },
-    {
-        key: "drawing",
-        title: "Drawing",
-        image: DummyImage,
-    },
-    {
-        key: "drawing",
-        title: "Drawing",
-        image: DummyImage,
-    },
-    {
-        key: "drawing",
-        title: "Drawing",
-        image: DummyImage,
-    },
-    {
-        key: "drawing",
-        title: "Drawing",
-        image: DummyImage,
-    },
-];
 
 export default function ProductDrawing({ data }: { data: ProductDetail }) {
     return (
         <div className="w-full flex mt-[80px]">
             <h2 className="flex-1 pl-9 text-title font-bold text-g950">Drawing</h2>
-            <div className="w-[955px] grid grid-cols-2 gap-6">
-                {dummyItems.map((item) => {
-                    return (
-                        <div key={item.key} className="">
-                            <h3 className="border-l-[5px] border-ePrimary text-g400 text-base mb-2 pl-2">{item.title}</h3>
-                            <Image src={item.image} alt="product" height={500} className="w-full" />
-                        </div>
-                    );
-                })}
+            <div className="w-[955px]">
+                <Image src={data.drawing_img[0].s3_url} alt={data.drawing_img[0].name} width={955} height={2400} className="object-cover" />
             </div>
         </div>
     );

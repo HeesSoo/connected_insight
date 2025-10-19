@@ -32,7 +32,7 @@ export default function ProductSpecifications({ data }: { data: ProductDetail })
 
                 <div className="w-full border-b border-g200 flex">
                     <h3 className="w-[348px] px-4 py-5 text-g400 text-large font-medium">DOF (mm)</h3>
-                    <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">{data.dof}</div>
+                    <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">±&nbsp;{data.dof}</div>
                 </div>
 
                 <div className="w-full border-b border-g200 flex">

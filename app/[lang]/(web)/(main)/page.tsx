@@ -1,15 +1,14 @@
+import { MainBanner } from "@/types/banner";
+import { LingchenItem } from "@/types/lingchen";
+import { SolutionItem } from "@/types/solution";
+import axios from "axios";
+import { Suspense } from "react";
 import Banner from "./_component/Banner";
 import Contactus from "./_component/ContactUs";
 import Linchen from "./_component/Lingchen";
+import RedirectAlert from "./_component/RedirectAlert";
 import MainSolution from "./_component/Solution";
 import Tokk from "./_component/Tokk";
-import RedirectAlert from "./_component/RedirectAlert";
-import axios from "axios";
-import { Suspense } from "react";
-import { SolutionItem } from "@/types/solution"; 
-import { LingchenItem } from "@/types/lingchen";
-import { MainBanner } from "@/types/banner";
-import { TokkData } from "../product/page";
 
 async function getBanners(): Promise<MainBanner[]> {
     try {
@@ -61,12 +60,7 @@ async function getTokk(): Promise<LingchenItem[]> {
 
 export default async function Home() {
     // 서버에서 병렬로 데이터 fetch
-    const [banners, solutions, lingchenData, tokkData] = await Promise.all([
-        getBanners(),
-        getSolutions(),
-        getLingchen(),
-        getTokk(),
-    ]);
+    const [banners, solutions, lingchenData, tokkData] = await Promise.all([getBanners(), getSolutions(), getLingchen(), getTokk()]);
 
     return (
         <main className="min-h-screen">

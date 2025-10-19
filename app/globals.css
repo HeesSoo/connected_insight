@@ -19,6 +19,7 @@
     display: flex;
     border-radius: 23px;
     background: #d1d1d1;
+    opacity: 1;
 }
 
 .mySwiper .swiper-pagination-bullet:is(.swiper-pagination-bullet-active) {

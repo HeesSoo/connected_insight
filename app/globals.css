@@ -58,10 +58,15 @@
     margin-right: 4px;
 }
 
+:is(.mainLingchenSwiper.swiper, .mainTokkSwiper.swiper) {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 :is(.mainLingchenSwiper, .mainTokkSwiper) > .swiper-pagination.swiper-pagination-bullets {
     position: relative;
     bottom: 0;
-    margin-top: 32px;
+    margin-bottom: 32px;
 }
 
 :is(.mainLingchenSwiper, .mainTokkSwiper) .swiper-pagination-bullet {

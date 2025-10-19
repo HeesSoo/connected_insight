@@ -27,7 +27,7 @@ export default function Tokk({ data }: LingchenProps) {
                     <div className="w-[712px] h-[474px] flex justify-center items-center bg-[#EFEFEF]">
                         <Image src={AlternativeImg} alt="Alternative Image" width={849} height={474} className="w-[444px] h-[auto] object-cover" />
                     </div>
-                    <div className="flex-1 py-20 px-[136px]">
+                    <div className="flex-1 pt-12 pb-20 px-[136px]">
                         <h3 className="text-ePrimary font-[700] text-xl mb-20">Linear Actuator</h3>
                         <div>
                             <h4 className="mb-2 font-[700] text-h3 text-g950">-</h4>
@@ -56,7 +56,7 @@ export default function Tokk({ data }: LingchenProps) {
                                     <div className="w-[712px]">
                                         <Image src={item.image || AlternativeImg} alt="Alternative Image" width={849} height={474} className="w-full h-[474px] object-cover" />
                                     </div>
-                                    <div className="flex-1 py-20 px-[136px]">
+                                    <div className="flex-1 pt-12 pb-20 px-[136px]">
                                         <h3 className="text-ePrimary font-[700] text-xl mb-20">Linear Actuator</h3>
                                         <div>
                                             <h4 className="mb-2 font-[700] text-h3 text-g950">{item.name}</h4>

@@ -2,7 +2,7 @@
 
 import Tab from "@/components/Tab";
 import { StaticImageData } from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Filter from "./Filter";
 import ProductItems from "./ProductItems";
@@ -51,7 +51,6 @@ export interface Filter {
 }
 
 export default function ProductListClient({ initialData }: { initialData: { cis?: CisData[]; lingchen?: LingchenData[]; tokk?: TokkData[] } }) {
-    console.log("Initial data received in ProductListClient:", initialData);
     const searchParams = useSearchParams();
     const category = (searchParams?.get("t") as "cis" | "lingchen" | "tokk") || "cis";
 
@@ -88,6 +87,11 @@ export default function ProductListClient({ initialData }: { initialData: { cis?
     }, [tab, initialData]);
 
     useEffect(() => {
+        const category = (searchParams?.get("t") as "cis" | "lingchen" | "tokk") || "cis";
+        setTab(category);
+    }, [searchParams]);
+
+    useEffect(() => {
         let filteredData: any[] = [];
 
         if (tab === "cis") {
@@ -107,10 +111,12 @@ export default function ProductListClient({ initialData }: { initialData: { cis?
         }
 
         setData(filteredData);
-    }, [tab, filter, allCisData, lingchenData, tokkData]);
+    }, [tab, filter]);
+
+    const router = useRouter();
 
     const handleTabChange = (newTab: "cis" | "lingchen" | "tokk") => {
-        setTab(newTab);
+        router.push(`/product?t=${newTab}`);
     };
 
     return (

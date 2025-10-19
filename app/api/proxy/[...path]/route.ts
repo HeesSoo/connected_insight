@@ -7,11 +7,18 @@ export async function GET(request: NextRequest, { params }: { params: { path: st
   const url = `${BACKEND_URL}/api/${path}`;
 
   try {
+    // 원본 요청의 헤더 복사
+    const headers = new Headers();
+    request.headers.forEach((value, key) => {
+      // Host 헤더는 제외
+      if (key.toLowerCase() !== 'host') {
+        headers.set(key, value);
+      }
+    });
+
     const response = await fetch(url, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
     });
 
     const data = await response.json();
@@ -25,15 +32,107 @@ export async function GET(request: NextRequest, { params }: { params: { path: st
 export async function POST(request: NextRequest, { params }: { params: { path: string[] } }) {
   const path = params.path.join("/");
   const url = `${BACKEND_URL}/api/${path}`;
-  const body = await request.json();
 
   try {
+    const contentType = request.headers.get("content-type") || "";
+
+    // 원본 요청의 헤더 복사
+    const headers = new Headers();
+    request.headers.forEach((value, key) => {
+      // Host 헤더는 제외
+      if (key.toLowerCase() !== 'host') {
+        headers.set(key, value);
+      }
+    });
+
+    let body: FormData | string;
+
+    // Content-Type에 따라 body 처리
+    if (contentType.includes("multipart/form-data")) {
+      // FormData는 그대로 전달 (boundary가 자동 설정됨)
+      body = await request.formData();
+      // multipart/form-data의 경우 Content-Type 헤더를 제거하여 fetch가 자동으로 설정하도록 함
+      headers.delete("content-type");
+    } else if (contentType.includes("application/json")) {
+      // JSON 데이터 처리
+      const jsonBody = await request.json();
+      body = JSON.stringify(jsonBody);
+      headers.set("Content-Type", "application/json");
+    } else {
+      // 기타 데이터는 그대로 전달
+      body = await request.text();
+    }
+
     const response = await fetch(url, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
+      headers,
+      body,
+    });
+
+    const data = await response.json();
+    return NextResponse.json(data, { status: response.status });
+  } catch (error) {
+    console.error("Proxy error:", error);
+    return NextResponse.json({ error: "Failed to fetch from backend" }, { status: 500 });
+  }
+}
+
+export async function PUT(request: NextRequest, { params }: { params: { path: string[] } }) {
+  const path = params.path.join("/");
+  const url = `${BACKEND_URL}/api/${path}`;
+
+  try {
+    const contentType = request.headers.get("content-type") || "";
+
+    const headers = new Headers();
+    request.headers.forEach((value, key) => {
+      if (key.toLowerCase() !== 'host') {
+        headers.set(key, value);
+      }
+    });
+
+    let body: FormData | string;
+
+    if (contentType.includes("multipart/form-data")) {
+      body = await request.formData();
+      headers.delete("content-type");
+    } else if (contentType.includes("application/json")) {
+      const jsonBody = await request.json();
+      body = JSON.stringify(jsonBody);
+      headers.set("Content-Type", "application/json");
+    } else {
+      body = await request.text();
+    }
+
+    const response = await fetch(url, {
+      method: "PUT",
+      headers,
+      body,
+    });
+
+    const data = await response.json();
+    return NextResponse.json(data, { status: response.status });
+  } catch (error) {
+    console.error("Proxy error:", error);
+    return NextResponse.json({ error: "Failed to fetch from backend" }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: NextRequest, { params }: { params: { path: string[] } }) {
+  const path = params.path.join("/");
+  const url = `${BACKEND_URL}/api/${path}`;
+
+  try {
+    const headers = new Headers();
+    request.headers.forEach((value, key) => {
+      if (key.toLowerCase() !== 'host') {
+        headers.set(key, value);
+      }
+    });
+
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers,
     });
 
     const data = await response.json();

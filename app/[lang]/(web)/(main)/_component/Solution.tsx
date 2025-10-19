@@ -10,12 +10,14 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface MainSolutionProps {
     data: SolutionItem[];
 }
 
 export default function MainSolution({ data }: MainSolutionProps) {
+    const { t } = useTranslation();
     const { currentLanguage } = useTranslationStore();
 
     const [swiper, setSwiper] = useState<SwiperClass>();
@@ -71,13 +73,13 @@ export default function MainSolution({ data }: MainSolutionProps) {
                                         <div>
                                             {item.core_inspector_target_ko && (
                                                 <div className="mb-6">
-                                                    <div className="text-ePrimary text-base mb-1 font-[500]">핵심 검사 대상</div>
+                                                    <div className="text-ePrimary text-base mb-1 font-[500]">{t['solution-core-inspector-target']}</div>
                                                     <div className={`text-large text-g950 font-[600]`}>{item?.[`core_inspector_target_${currentLanguage}`]}</div>
                                                 </div>
                                             )}
                                             {item.core_value_ko && (
                                                 <div>
-                                                    <div className="text-ePrimary text-base mb-1 font-[500]">주요 가치</div>
+                                                    <div className="text-ePrimary text-base mb-1 font-[500]">{t['solution-core-value']}</div>
                                                     <div className={`text-large text-g950 font-[600]`}>{item?.[`core_value_${currentLanguage}`]}</div>
                                                 </div>
                                             )}

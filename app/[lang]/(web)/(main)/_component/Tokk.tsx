@@ -17,6 +17,7 @@ interface LingchenProps {
 
 export default function Tokk({ data }: LingchenProps) {
     const { currentLanguage } = useTranslationStore();
+    console.log(data)
 
     const [swiper, setSwiper] = useState<SwiperClass>();
 

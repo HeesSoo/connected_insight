@@ -3,6 +3,7 @@
 import Button from "@/components/Button";
 import Checkbox from "@/components/Checkbox";
 import { useInput } from "@/hooks/hooks";
+import { useTranslation } from "@/hooks/useTranslation";
 import Upload from "@/public/svgs/upload.svg";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -65,6 +66,8 @@ const privacyPolicy = `
 `;
 
 const Sales: React.FC = () => {
+    const { t } = useTranslation();
+
     const router = useRouter();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -144,31 +147,35 @@ const Sales: React.FC = () => {
                 <hr className="mt-2 mb-4 bg-g200" />
                 <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-2 gap-x-[15px] gap-y-[24px] w-[591px]">
-                        <Input {...name} label="이름" type="text" data-name="name" data-required={true} isRequired={true} />
-                        <Input {...email} label="이메일" type="text" data-name="email" data-required={true} isRequired={true} />
-                        <Input {...contact} label="연락처" type="text" data-name="contact" data-required={true} isRequired={true} />
-                        <Input {...account} label="회사명" type="text" data-name="account" data-required={true} isRequired={true} />
-                        <Input {...department} label="부서" type="text" data-name="department" data-required={false} isRequired={false} />
-                        <Input {...position} label="직급" type="text" data-name="position" data-required={false} isRequired={false} />
+                        <Input {...name} label={t["contact-name"]} type="text" data-name="name" data-required={true} isRequired={true} />
+                        <Input {...email} label={t["contact-email"]} type="text" data-name="email" data-required={true} isRequired={true} />
+                        <Input {...contact} label={t["contact-contact"]} type="text" data-name="contact" data-required={true} isRequired={true} />
+                        <Input {...account} label={t["contact-account"]} type="text" data-name="account" data-required={true} isRequired={true} />
+                        <Input {...department} label={t["contact-department"]} type="text" data-name="department" data-required={false} isRequired={false} />
+                        <Input {...position} label={t["contact-position"]} type="text" data-name="position" data-required={false} isRequired={false} />
                     </div>
 
                     <div className="mt-[15px] flex flex-col gap-[15px]">
-                        <Input {...site} label="사이트 주소" type="text" />
-                        <Textarea {...content} label="문의 내용" data-name="content" data-required={true} isRequired={true} className="col-span-2" />
+                        <Input {...site} label={t["contact-site-url"]} type="text" />
+                        <Textarea {...content} label={t["contact-content"]} data-name="content" data-required={true} isRequired={true} className="col-span-2" />
                     </div>
 
                     <div className="mt-[24px]">
                         <div className="flex items-center gap-4">
                             <label htmlFor="file" className="flex gap-1 text-base font-semibold text-g900 align-center cursor-pointer">
-                                파일첨부
+                                {t["contact-file-attach"]}
                                 <Upload width={24} height={24} />
                             </label>
                             <input type="file" id="file" accept={fileAccept} className="w-0 h-0" onChange={onChangeFile} />
                             <div className="flex items-center gap-2">
-                                <span className="text-small text-g400">참고 문서를 업로드해 주세요. (최대 50MB) pdf, ppt, word, excel, jpg, png</span>
+                                <span className="text-small text-g400">{t["contact-file-guide"]}</span>
                             </div>
                         </div>
-                        {file && <div className="mt-2 text-small text-g600">첨부파일: {file.name}</div>}
+                        {file && (
+                            <div className="mt-2 text-small text-g600">
+                                {t["contact-file-attach"]}: {file.name}
+                            </div>
+                        )}
                     </div>
 
                     <div className="flex justify-between items-center mt-[111px]">
@@ -183,16 +190,39 @@ const Sales: React.FC = () => {
                                 />
                                 <input type="checkbox" id="privacy" onChange={(checked) => setPrivacy(checked.target.checked)} className="w-[0px] h-[0px]" />
                             </div>
+
+                            {/* render localized "common" with clickable policy label injected into {0} */}
                             <label htmlFor="privacy" className="flex align-center text-small">
-                                <span className="text-small text-ePrimary underline underline-offset-4 cursor-pointer" onClick={() => setIsModalOpen(true)}>
-                                    개인정보 보호정책
-                                </span>
-                                에 동의합니다.
+                                {(() => {
+                                    const common = t["common"] || "{0}에 동의합니다.";
+                                    const parts = common.split("{0}");
+                                    // left part, policy clickable element, right part
+                                    return (
+                                        <>
+                                            <span>{parts[0]}</span>
+                                            <span
+                                                role="button"
+                                                tabIndex={0}
+                                                className="text-small text-ePrimary underline underline-offset-4 cursor-pointer mx-1"
+                                                onClick={() => setIsModalOpen(true)}
+                                                onKeyDown={(e) => {
+                                                    if (e.key === "Enter" || e.key === " ") {
+                                                        e.preventDefault();
+                                                        setIsModalOpen(true);
+                                                    }
+                                                }}
+                                            >
+                                                {t["contact-privacy-policy"]}
+                                            </span>
+                                            <span>{parts[1]}</span>
+                                        </>
+                                    );
+                                })()}
                             </label>
                         </div>
                         <div>
                             <Button
-                                label={submitting ? "전송중..." : "제출"}
+                                label={submitting ? "전송중..." : t["contact-submit-success"]}
                                 disabled={!isFormComplete || submitting}
                                 className={`w-[124px]`}
                                 size="medium"

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ProductDetail } from "../page";
+import { ProductDetail } from "./ProductDetailClient";
 
 export default function ProductDrawing({ data }: { data: ProductDetail }) {
     return (

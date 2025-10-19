@@ -1,9 +1,11 @@
+import { useTranslation } from "@/hooks/useTranslation";
 import AlternativeImg from "@/public/common/alternativeImg.png";
 import { useTranslationStore } from "@/stores/translationStore";
 import { SolutionItem } from "@/types/solution";
 import Image from "next/image";
 
 export default function Card({ item }: { item: SolutionItem }) {
+    const { t } = useTranslation();
     const { currentLanguage } = useTranslationStore();
 
     return (
@@ -24,13 +26,13 @@ export default function Card({ item }: { item: SolutionItem }) {
                     <div className="flex flex-col h-[170px] justify-between">
                         {item.core_inspector_target_ko && (
                             <div>
-                                <div className="text-ePrimary text-base mb-1 font-[500]">핵심 검사 대상</div>
+                                <div className="text-ePrimary text-base mb-1 font-[500]">{t["solution-core-inspector-target"]}</div>
                                 <div className={`text-large text-g950 font-[600]`}>{item.core_inspector_target_ko}</div>
                             </div>
                         )}
                         {item.core_value_ko && (
                             <div>
-                                <div className="text-ePrimary text-base mb-1 font-[500]">주요 가치</div>
+                                <div className="text-ePrimary text-base mb-1 font-[500]">{t["solution-core-value"]}</div>
                                 <div className={`text-large text-g950 font-[600]`}>{item.core_value_ko}</div>
                             </div>
                         )}
@@ -41,13 +43,13 @@ export default function Card({ item }: { item: SolutionItem }) {
                     <div className="flex flex-col h-[170px] justify-between">
                         {item.core_inspector_target_en && (
                             <div>
-                                <div className="text-ePrimary text-base mb-1 font-[500]">핵심 검사 대상</div>
+                                <div className="text-ePrimary text-base mb-1 font-[500]">{t["solution-core-inspector-target"]}</div>
                                 <div className={`text-large text-g950 font-[600]`}>{item.core_inspector_target_en}</div>
                             </div>
                         )}
                         {item.core_value_en && (
                             <div>
-                                <div className="text-ePrimary text-base mb-1 font-[500]">주요 가치</div>
+                                <div className="text-ePrimary text-base mb-1 font-[500]">{t["solution-core-value"]}</div>
                                 <div className={`text-large text-g950 font-[600]`}>{item.core_value_en}</div>
                             </div>
                         )}

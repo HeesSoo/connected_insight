@@ -68,6 +68,16 @@ export default function Footer() {
                                             CIS Cameras
                                         </Link>
                                     </li>
+                                    <li>
+                                        <Link href={localizedPath("/product?t=lingchen")} className="text-g300 hover:text-white transition-colors text-small">
+                                            Industrial Control Devices
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href={localizedPath("/product?t=tokk")} className="text-g300 hover:text-white transition-colors text-small">
+                                            Linear Actuator
+                                        </Link>
+                                    </li>
                                 </ul>
                             </section>
 

@@ -1,4 +1,4 @@
-import { ProductDetail } from "../page";
+import { ProductDetail } from "./ProductDetailClient";
 
 export default function ProductSpecifications({ data }: { data: ProductDetail }) {
     return (

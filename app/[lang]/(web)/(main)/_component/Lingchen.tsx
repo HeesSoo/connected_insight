@@ -24,7 +24,7 @@ export default function Lingchen({ data }: LingchenProps) {
         <div>
             {(!data || data.length === 0) ? (
                 <div className="w-full flex">
-                    <div className="flex-1 py-20 px-[136px]">
+                    <div className="flex-1 pt-12 pb-20 px-[136px]">
                         <h3 className="text-ePrimary font-[700] text-xl mb-20">Industril Control Devices</h3>
                         <div>
                             <h4 className="mb-2 font-[700] text-h3 text-g950">-</h4>
@@ -53,7 +53,7 @@ export default function Lingchen({ data }: LingchenProps) {
                         {data.map((item, index) => (
                             <SwiperSlide key={index}>
                                 <div className="w-full h-[474px] flex">
-                                    <div className="flex-1 py-20 px-[136px]">
+                                    <div className="flex-1 pt-12 pb-20 px-[136px]">
                                         <h3 className="text-ePrimary font-[700] text-xl mb-20">Industril Control Devices</h3>
                                         <div>
                                             <h4 className="mb-2 font-[700] text-h3 text-g950">{item.name}</h4>

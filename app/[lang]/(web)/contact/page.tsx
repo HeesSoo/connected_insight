@@ -204,10 +204,20 @@ const Sales: React.FC = () => {
                                                 role="button"
                                                 tabIndex={0}
                                                 className="text-small text-ePrimary underline underline-offset-4 cursor-pointer mx-1"
-                                                onClick={() => setIsModalOpen(true)}
+                                                onMouseDown={(e) => {
+                                                    // prevent label from toggling the checkbox on mousedown
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                }}
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    setIsModalOpen(true);
+                                                }}
                                                 onKeyDown={(e) => {
                                                     if (e.key === "Enter" || e.key === " ") {
                                                         e.preventDefault();
+                                                        e.stopPropagation();
                                                         setIsModalOpen(true);
                                                     }
                                                 }}

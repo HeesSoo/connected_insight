@@ -1,33 +1,71 @@
-import Image from "next/image";
-import DummyImage from "../../_dummys/DummyProductImg.png";
+import { ProductDetail } from "../page";
 
-const dummyItems = [
-    { key: "Scanning Width", value: "550mm" },
-    { key: "Pixel", value: "4498" },
-    { key: "Mono / Color", value: "Mono" },
-    { key: "Resolution (DPI)", value: "330DPI" },
-    { key: "Accuracy (μm)", value: "84μm" },
-    { key: "Working Distance (mm)", value: "7mm" },
-    { key: "D.O.F (mm)", value: "± 1.3" },
-    { key: "Line Frequency (kHz)", value: "110kHz" },
-    { key: "Working Speed (m/s)", value: "2.8m/s" },
-    { key: "Demension", value: "330mm * 70mm * 108mm" },
-];
-
-export default function ProductSpecifications() {
+export default function ProductSpecifications({ data }: { data: ProductDetail }) {
     return (
         <div className="w-full flex mt-[80px]">
             <h2 className="flex-1 pl-9 text-title font-bold text-g950">Information</h2>
             <div className="w-[955px]">
-                {dummyItems.map((item) => {
-                    return (
-                        <div key={item.key} className="w-full border-b border-g200 flex">
-                            <h3 className="w-[348px] px-4 py-5 text-g400 text-large font-medium">{item.key}</h3>
-                            <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">{item.value}</div>
-                        </div>
-                    );
-                })}
-                <Image src={DummyImage} alt="product" height={500} className="w-full" />
+                <div className="w-full border-b border-g200 flex">
+                    <h3 className="w-[348px] px-4 py-5 text-g400 text-large font-medium">Mono or Color</h3>
+                    <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">{data.mono_or_color}</div>
+                </div>
+
+                <div className="w-full border-b border-g200 flex">
+                    <h3 className="w-[348px] px-4 py-5 text-g400 text-large font-medium">Interface</h3>
+                    <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">{data.interface}</div>
+                </div>
+
+                <div className="w-full border-b border-g200 flex">
+                    <h3 className="w-[348px] px-4 py-5 text-g400 text-large font-medium">FOV (mm)</h3>
+                    <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">{data.fov}</div>
+                </div>
+
+                <div className="w-full border-b border-g200 flex">
+                    <h3 className="w-[348px] px-4 py-5 text-g400 text-large font-medium">Resolution (DPI)</h3>
+                    <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">{data.resolution}</div>
+                </div>
+
+                <div className="w-full border-b border-g200 flex">
+                    <h3 className="w-[348px] px-4 py-5 text-g400 text-large font-medium">Accuracy (μm)</h3>
+                    <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">{data.accuracy}</div>
+                </div>
+
+                <div className="w-full border-b border-g200 flex">
+                    <h3 className="w-[348px] px-4 py-5 text-g400 text-large font-medium">DOF (mm)</h3>
+                    <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">{data.dof}</div>
+                </div>
+
+                <div className="w-full border-b border-g200 flex">
+                    <h3 className="w-[348px] px-4 py-5 text-g400 text-large font-medium">WD (mm)</h3>
+                    <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">{data.wd}</div>
+                </div>
+
+                <div className="w-full border-b border-g200 flex">
+                    <h3 className="w-[348px] px-4 py-5 text-g400 text-large font-medium">Line Rate (kHz)</h3>
+                    <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">{data.line_rate}</div>
+                </div>
+
+                <div className="w-full border-b border-g200 flex">
+                    <h3 className="w-[348px] px-4 py-5 text-g400 text-large font-medium">WS (m/s)</h3>
+                    <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">{data.ws}</div>
+                </div>
+
+                <div className="w-full border-b border-g200 flex">
+                    <h3 className="w-[348px] px-4 py-5 text-g400 text-large font-medium">Ethernet Port</h3>
+                    <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">{data.ethernet_port}</div>
+                </div>
+
+                <div className="w-full border-b border-g200 flex">
+                    <h3 className="w-[348px] px-4 py-5 text-g400 text-large font-medium">Pixel (k)</h3>
+                    <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">{data.pixel}</div>
+                </div>
+
+                <div className="w-full border-b border-g200 flex">
+                    <h3 className="w-[348px] px-4 py-5 text-g400 text-large font-medium">Size</h3>
+                    <div className="flex-1 px-4 py-5 text-g950 text-large font-semibold">
+                        {data.size_width}mm*{data.size_height}mm*{data.size_length}mm
+                    </div>
+                </div>
             </div>
         </div>
     );

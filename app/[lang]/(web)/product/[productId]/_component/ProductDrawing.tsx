@@ -1,5 +1,6 @@
 import Image from "next/image";
 import DummyImage from "../../_dummys/DummyProductImg.png";
+import { ProductDetail } from "../page";
 
 const dummyItems = [
     {
@@ -44,7 +45,7 @@ const dummyItems = [
     },
 ];
 
-export default function ProductSpecifications() {
+export default function ProductDrawing({ data }: { data: ProductDetail }) {
     return (
         <div className="w-full flex mt-[80px]">
             <h2 className="flex-1 pl-9 text-title font-bold text-g950">Drawing</h2>

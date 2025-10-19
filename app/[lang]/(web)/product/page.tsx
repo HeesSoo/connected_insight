@@ -7,7 +7,7 @@ import { Suspense, useEffect, useState } from "react";
 import Filter from "./_component/Filter";
 import ProductItems from "./_component/ProductItems";
 
-export interface ProductItem {
+export interface CisData {
     fov: number;
     line_rate: number;
     name: string;
@@ -16,6 +16,27 @@ export interface ProductItem {
     type: "plus" | "max" | "max pro" | "color";
     uuid: string;
     wd: number;
+}
+
+export interface LingchenData {
+    uuid: string;
+    url: string;
+    type: string;
+    name: string;
+    image: string;
+    file: {
+        s3_url: string;
+    };
+}
+export interface TokkData {
+    uuid: string;
+    url: string;
+    type: string;
+    name: string;
+    image: string;
+    file: {
+        s3_url: string;
+    };
 }
 
 export interface Filter {
@@ -31,7 +52,7 @@ export interface Filter {
 
 function ProductListContent() {
     const [loading, setLoading] = useState<boolean>(true);
-    const [tab, setTab] = useState<string>("cis-camera");
+    const [tab, setTab] = useState<"cis" | "lingchen" | "tokk">("cis");
     const [filter, setFilter] = useState<Filter>({
         type: ["plus", "max", "max pro", "color"],
         resolution: [300, 600, 1200, 1800, 3600],
@@ -43,8 +64,11 @@ function ProductListContent() {
         wd_max: 48,
     });
 
-    const [allData, setAllData] = useState<ProductItem[]>([]);
-    const [data, setData] = useState<ProductItem[]>([]);
+    const [allCisData, setAllCisData] = useState<CisData[]>([]);
+    const [lingchenData, setLingchenData] = useState<LingchenData[]>([]);
+    const [tokkData, setTokkData] = useState<TokkData[]>([]);
+
+    const [data, setData] = useState<CisData[] | LingchenData[] | TokkData[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -52,8 +76,10 @@ function ProductListContent() {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis`);
 
                 if (response.status === 200) {
-                    setData(response.data.data);
-                    setAllData(response.data.data);
+                    setData(response.data.data.cis);
+                    setAllCisData(response.data.data.cis);
+                    setLingchenData(response.data.data.lingchen);
+                    setTokkData(response.data.data.tokk);
                 }
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -66,51 +92,51 @@ function ProductListContent() {
     }, []);
 
     useEffect(() => {
+        if (loading) return;
+
         // 필터 또는 탭이 변경될 때마다 데이터 다시 불러오기
-        let filteredData = allData;
+        let filteredData = [];
 
         // 탭에 따른 필터링
-        // if (tab === "cis-camera") {
-        //     filteredData = filteredData.filter((item) => item.type === "cis camera");
-        // } else if (tab === "vision-software") {
-        //     filteredData = filteredData.filter((item) => item.type === "vision software");
-        // } else if (tab === "industry-control-devices") {
-        //     filteredData = filteredData.filter((item) => item.type === "industry control devices");
-        // } else if (tab === "stage") {
-        //     filteredData = filteredData.filter((item) => item.type === "stage");
-        // }
+        if (tab === "cis") {
+            filteredData = [...allCisData];
 
-        // 상세 필터링
-        if (filter.type && filter.type.length > 0) {
-            filteredData = filteredData.filter((item) => filter.type.includes(item.type));
-        }
-        if (filter.resolution && filter.resolution.length > 0) {
-            filteredData = filteredData.filter((item) => filter.resolution.includes(item.resolution));
-        }
-        if (filter.line_rate_min !== null) {
-            filteredData = filteredData.filter((item) => item.line_rate >= filter.line_rate_min!);
-        }
-        if (filter.line_rate_max !== null) {
-            filteredData = filteredData.filter((item) => item.line_rate <= filter.line_rate_max!);
-        }
-        if (filter.fov_min !== null) {
-            filteredData = filteredData.filter((item) => item.fov >= filter.fov_min!);
-        }
-        if (filter.fov_max !== null) {
-            filteredData = filteredData.filter((item) => item.fov <= filter.fov_max!);
-        }
-        if (filter.wd_min !== null) {
-            filteredData = filteredData.filter((item) => item.wd >= filter.wd_min!);
-        }
-        if (filter.wd_max !== null) {
-            filteredData = filteredData.filter((item) => item.wd <= filter.wd_max!);
+            // 상세 필터링
+            if (filter.type && filter.type.length > 0) {
+                filteredData = filteredData.filter((item) => filter.type.includes(item.type));
+            }
+            if (filter.resolution && filter.resolution.length > 0) {
+                filteredData = filteredData.filter((item) => filter.resolution.includes(item.resolution));
+            }
+            if (filter.line_rate_min !== null) {
+                filteredData = filteredData.filter((item) => item.line_rate >= filter.line_rate_min!);
+            }
+            if (filter.line_rate_max !== null) {
+                filteredData = filteredData.filter((item) => item.line_rate <= filter.line_rate_max!);
+            }
+            if (filter.fov_min !== null) {
+                filteredData = filteredData.filter((item) => item.fov >= filter.fov_min!);
+            }
+            if (filter.fov_max !== null) {
+                filteredData = filteredData.filter((item) => item.fov <= filter.fov_max!);
+            }
+            if (filter.wd_min !== null) {
+                filteredData = filteredData.filter((item) => item.wd >= filter.wd_min!);
+            }
+            if (filter.wd_max !== null) {
+                filteredData = filteredData.filter((item) => item.wd <= filter.wd_max!);
+            }
+        } else if (tab === "lingchen") {
+            filteredData = [...lingchenData];
+        } else if (tab === "tokk") {
+            filteredData = [...tokkData];
         }
 
         setData(filteredData);
     }, [tab, filter]);
 
     // 탭 변경 시 URL 업데이트
-    const handleTabChange = (newTab: string) => {
+    const handleTabChange = (newTab: "cis" | "lingchen" | "tokk") => {
         setTab(newTab);
     };
 
@@ -118,18 +144,17 @@ function ProductListContent() {
         <div className="max-w-[1872px] min-w-[1248px] px-6 w-full mx-auto pt-[120px] pb-[160px]">
             <Tab
                 items={[
-                    { value: "cis-camera", label: "CIS Camera" },
-                    { value: "vision-software", label: "Vision Software" },
-                    { value: "industry-control-devices", label: "Industry Control Devices" },
-                    { value: "stage", label: "Stage" },
+                    { value: "cis", label: "CIS Camera" },
+                    { value: "lingchen", label: "INDUSTRIAL CONTROL DEVICES" },
+                    { value: "tokk", label: "LINEAR ACTUATOR" },
                 ]}
                 defaultTab={tab}
                 onChange={handleTabChange}
             />
 
-            <div className="mt-[40px] w-full flex gap-[131px]">
-                <Filter setFilter={setFilter} />
-                <ProductItems data={data} loading={loading} />
+            <div className={`${tab === "cis" ? "mt-[40px]" : "mt-[80px]"} w-full flex gap-[131px]`}>
+                {tab === "cis" && <Filter setFilter={setFilter} />}
+                <ProductItems tab={tab} data={data} loading={loading} hasFilter={tab === "cis"} />
             </div>
         </div>
     );

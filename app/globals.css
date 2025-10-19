@@ -30,6 +30,7 @@
 .mySwiper .swiper-pagination-bullets.swiper-pagination-horizontal,
 .mySwiper .swiper-pagination-bullets .swiper-pagination,
 .mySwiper .swiper-pagination-bullets.swiper-pagination-horizontal .swiper-pagination {
+    width: fit-content;
     top: 50%;
     transform: translateY(-50%);
     left: 48px;

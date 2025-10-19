@@ -14,7 +14,7 @@ const AlternativeData: SolutionItem = {
     core_value_ko: "대체 주요 가치",
     core_value_en: "Alternative Core Value",
     index: 0,
-    image: AlternativeImg,
+    image: '',
 };
 
 const CISApplication: React.FC = ({}) => {

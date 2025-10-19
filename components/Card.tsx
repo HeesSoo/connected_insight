@@ -11,14 +11,7 @@ export default function Card({ item }: { item: SolutionItem }) {
             <div className="w-full">
                 {/* 이미지 영역 */}
                 <div className={`relative mb-5`}>
-                    <Image
-                        src={item.image}
-                        alt={item.name}
-                        width={469}
-                        height={352}
-                        className="w-auto h-[352px] object-cover"
-                        onError={() => <Image src={AlternativeImg} alt="Alternative Image" width={469} height={352} className="w-auto h-[352px] object-cover" />}
-                    />
+                    <Image src={item.image || AlternativeImg} alt={item.name} width={469} height={352} className="w-auto h-[352px] object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                     <div className="absolute bottom-6 left-6">
                         <div className="text-g200 text-base mb-1">Case 0{item.index + 1}</div>

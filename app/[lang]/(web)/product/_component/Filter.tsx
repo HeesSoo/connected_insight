@@ -4,7 +4,7 @@ import Checkbox from "@/components/Checkbox";
 import Rangebar from "@/components/Rangebar";
 import { Arrow2UpIco } from "@/icons/icons";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Filter as FilterType } from "../page";
+import { Filter as FilterType } from "./ProductListClient";
 
 export default function Filter({ filter, setFilter }: { filter: FilterType; setFilter: Dispatch<SetStateAction<FilterType>> }) {
     // 섹션 확장/축소 상태

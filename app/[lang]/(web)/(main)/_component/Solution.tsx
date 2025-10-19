@@ -88,7 +88,21 @@ export default function MainSolution() {
                                     <div className="w-[591px] bg-g50 px-12 py-20 flex flex-col justify-between">
                                         <h3 className="g-950 text-[32px] leading-[48px] tracking-[-0.2px] font-bold">{item.name}</h3>
 
-                                        {currentLanguage === "ko" && (
+                                        <div>
+                                            {item.core_inspector_target_ko && (
+                                                <div className="mb-6">
+                                                    <div className="text-ePrimary text-base mb-1 font-[500]">핵심 검사 대상</div>
+                                                    <div className={`text-large text-g950 font-[600]`}>{item?.[`core_inspector_target_${currentLanguage}`]}</div>
+                                                </div>
+                                            )}
+                                            {item.core_value_ko && (
+                                                <div>
+                                                    <div className="text-ePrimary text-base mb-1 font-[500]">주요 가치</div>
+                                                    <div className={`text-large text-g950 font-[600]`}>{item?.[`core_value_${currentLanguage}`]}</div>
+                                                </div>
+                                            )}
+                                        </div>
+                                        {/* {currentLanguage === "ko" && (
                                             <div>
                                                 {item.core_inspector_target_ko && (
                                                     <div className="mb-6">
@@ -120,7 +134,7 @@ export default function MainSolution() {
                                                     </div>
                                                 )}
                                             </div>
-                                        )}
+                                        )} */}
                                     </div>
                                 </div>
                             </SwiperSlide>

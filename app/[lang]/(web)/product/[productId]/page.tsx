@@ -67,7 +67,7 @@ export default function ProductDetail() {
         const fetchData = async () => {
             try {
                 if (productId) {
-                    const response = await axios(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/detail/${productId}`);
+                    const response = await axios(`${process.env.NEXT_PUBLIC_API_BASE_URL}/cis/detail/${productId}`);
                     if (response.status === 200) {
                         const productData: ProductDetail = response.data.data;
                         setData(productData);

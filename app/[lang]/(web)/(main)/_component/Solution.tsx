@@ -3,6 +3,7 @@
 import { SolutionItem } from "@/types/solution";
 import { useState } from "react";
 
+import { useTranslation } from "@/hooks/useTranslation";
 import AlternativeImg from "@/public/common/alternativeImg.png";
 import { useTranslationStore } from "@/stores/translationStore";
 import Image from "next/image";
@@ -10,7 +11,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
-import { useTranslation } from "@/hooks/useTranslation";
 
 interface MainSolutionProps {
     data: SolutionItem[];
@@ -33,7 +33,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
         <div>
             <h2 className="font-bold text-xl text-g950 mb-[58px]">CIS Application</h2>
 
-            {(!data || data.length === 0) ? (
+            {!data || data.length === 0 ? (
                 <div className="w-full flex">
                     <div className="flex justify-center items-center flex-1 bg-[#EFEFEF] w-full h-[474px]">
                         <Image src={AlternativeImg} alt="Alternative Image" width={849} height={474} className="w-[444px] h-[auto] object-cover" />
@@ -42,11 +42,11 @@ export default function MainSolution({ data }: MainSolutionProps) {
                         <h3 className="g-950 text-[32px] leading-[48px] tracking-[-0.2px] font-bold">Alternative</h3>
                         <div>
                             <div className="mb-6">
-                                <div className="text-ePrimary text-base mb-1 font-[500]">핵심 검사 대상</div>
+                                <div className="text-ePrimary text-base mb-1 font-[500]">{t["solution-core-inspector-target"]}</div>
                                 <div className={`text-large text-g950 font-[600]`}>Alternative</div>
                             </div>
                             <div>
-                                <div className="text-ePrimary text-base mb-1 font-[500]">주요 가치</div>
+                                <div className="text-ePrimary text-base mb-1 font-[500]">{t["solution-core-value"]}</div>
                                 <div className={`text-large text-g950 font-[600]`}>Alternative</div>
                             </div>
                         </div>
@@ -73,13 +73,13 @@ export default function MainSolution({ data }: MainSolutionProps) {
                                         <div>
                                             {item.core_inspector_target_ko && (
                                                 <div className="mb-6">
-                                                    <div className="text-ePrimary text-base mb-1 font-[500]">{t['solution-core-inspector-target']}</div>
+                                                    <div className="text-ePrimary text-base mb-1 font-[500]">{t["solution-core-inspector-target"]}</div>
                                                     <div className={`text-large text-g950 font-[600]`}>{item?.[`core_inspector_target_${currentLanguage}`]}</div>
                                                 </div>
                                             )}
                                             {item.core_value_ko && (
                                                 <div>
-                                                    <div className="text-ePrimary text-base mb-1 font-[500]">{t['solution-core-value']}</div>
+                                                    <div className="text-ePrimary text-base mb-1 font-[500]">{t["solution-core-value"]}</div>
                                                     <div className={`text-large text-g950 font-[600]`}>{item?.[`core_value_${currentLanguage}`]}</div>
                                                 </div>
                                             )}

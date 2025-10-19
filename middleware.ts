@@ -41,8 +41,37 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // 이미 언어 코드가 있는 경로는 그대로 진행
+  // 언어 코드가 있는지 확인
   const locale = getLocale(pathname);
+  const pathnameWithoutLocale = locale ? pathname.replace(`/${locale}`, "") || "/" : pathname;
+
+  const allowUrl = ["/", "/solutions", "/product", "/product/:id"];
+
+  // allowUrl에 포함된 경로인지 확인 (언어 코드 제외한 경로로 체크)
+  const isAllowedUrl = allowUrl.some((url) => {
+    // :id와 같은 동적 경로 처리
+    if (url.includes(":")) {
+      const urlPattern = url.replace(/:[^/]+/g, "[^/]+");
+      const regex = new RegExp(`^${urlPattern}$`);
+      return regex.test(pathnameWithoutLocale);
+    }
+    // 루트 경로는 정확히 일치해야 함
+    if (url === "/") {
+      return pathnameWithoutLocale === "/";
+    }
+    // 그 외 경로는 정확히 일치하거나 해당 경로로 시작하는지 확인 (예: /product, /product/123)
+    return pathnameWithoutLocale === url || pathnameWithoutLocale.startsWith(url + "/");
+  });
+
+  // allowUrl에 없는 경로면 루트(/)로 리다이렉트
+  if (!isAllowedUrl) {
+    const url = request.nextUrl.clone();
+    url.pathname = locale ? `/${locale}` : "/";
+    url.searchParams.set("redirected", "true");
+    return NextResponse.redirect(url);
+  }
+
+  // 이미 언어 코드가 있는 경로는 그대로 진행
   if (locale) {
     return NextResponse.next();
   }

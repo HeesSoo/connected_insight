@@ -262,13 +262,13 @@ export default function Filter({ filter, setFilter }: { filter: FilterType; setF
         <div className="w-[329px] bg-white mt-[46px]">
             {/* Type 섹션 */}
             <div className="border-b border-g200 pb-4">
-                <SectionHeader title="Type" isExpanded={sectionExpanded.type} onToggle={() => handleSectionToggle("type")} section="type" />
+                <SectionHeader title="Model" isExpanded={sectionExpanded.type} onToggle={() => handleSectionToggle("type")} section="type" />
                 {sectionExpanded.type && (
                     <div className="mt-3 space-y-2">
-                        <CheckboxItem checked={typeFilters.PLUS} onChange={() => handleTypeChange("PLUS")} label="PLUS" value="PLUS" />
-                        <CheckboxItem checked={typeFilters.MAX} onChange={() => handleTypeChange("MAX")} label="MAX" value="MAX" />
-                        <CheckboxItem checked={typeFilters.MAX_PRO} onChange={() => handleTypeChange("MAX_PRO")} label="MAX PRO" value="MAX_PRO" />
-                        <CheckboxItem checked={typeFilters.COLOR} onChange={() => handleTypeChange("COLOR")} label="COLOR" value="COLOR" />
+                        <CheckboxItem checked={typeFilters.PLUS} onChange={() => handleTypeChange("PLUS")} label="PLUS (300dpi, 600dpi, 1200dpi)" value="PLUS" />
+                        <CheckboxItem checked={typeFilters.MAX} onChange={() => handleTypeChange("MAX")} label="MAX (900dpi, 1800dpi)" value="MAX" />
+                        <CheckboxItem checked={typeFilters.MAX_PRO} onChange={() => handleTypeChange("MAX_PRO")} label="MAX PRO (3600dpi)" value="MAX_PRO" />
+                        <CheckboxItem checked={typeFilters.COLOR} onChange={() => handleTypeChange("COLOR")} label="COLOR (300dpi, 600dpi, 900dpi, 1800dpi)" value="COLOR" />
                     </div>
                 )}
             </div>

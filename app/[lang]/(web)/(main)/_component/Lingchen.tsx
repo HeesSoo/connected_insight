@@ -25,10 +25,10 @@ export default function Lingchen({ data }: LingchenProps) {
             {(!data || data.length === 0) ? (
                 <div className="w-full flex">
                     <div className="flex-1 py-20 px-[136px]">
-                        <h3 className="text-ePrimary font-[700] text-xl mb-20">LINGCHEN</h3>
+                        <h3 className="text-ePrimary font-[700] text-xl mb-20">Industril Control Devices</h3>
                         <div>
-                            <h4 className="mb-2 font-[700] text-h3 text-g950">LINGCHEN MODEL</h4>
-                            <h4 className="text-large font-[500] text-g950">LINGCHEN ALTANATIVE</h4>
+                            <h4 className="mb-2 font-[700] text-h3 text-g950">-</h4>
+                            <h4 className="text-large font-[500] text-g950">-</h4>
                         </div>
                     </div>
                     <div className="flex justify-center items-center w-[712px] h-[474px] bg-[#EFEFEF]">
@@ -54,7 +54,7 @@ export default function Lingchen({ data }: LingchenProps) {
                             <SwiperSlide key={index}>
                                 <div className="w-full h-[474px] flex">
                                     <div className="flex-1 py-20 px-[136px]">
-                                        <h3 className="text-ePrimary font-[700] text-xl mb-20">LINGCHEN</h3>
+                                        <h3 className="text-ePrimary font-[700] text-xl mb-20">Industril Control Devices</h3>
                                         <div>
                                             <h4 className="mb-2 font-[700] text-h3 text-g950">{item.name}</h4>
                                             <h4 className="text-large font-[500] text-g950">{item?.[`description_${currentLanguage}`]}</h4>

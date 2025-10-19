@@ -116,7 +116,7 @@ const Sales: React.FC = () => {
 
         try {
             setSubmitting(true);
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/contactus`, formData, {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/contactus`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },

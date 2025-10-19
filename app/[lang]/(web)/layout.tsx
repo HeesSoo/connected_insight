@@ -1,5 +1,5 @@
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import { navigationConfig } from "@/data/navigation";
 import axios from "axios";
 
@@ -21,6 +21,11 @@ async function getGnbData() {
             const newNav = JSON.parse(JSON.stringify(navigationConfig));
             const productsItem = newNav.items?.find((i: any) => i.id === "products");
             if (productsItem && Array.isArray(productsItem.children)) {
+                const cisChildren = productsItem.children.find((c: any) => c.id === "cis-camera");
+                if (cisChildren) {
+                    cisChildren.href = "/product?t=cis";
+                }
+
                 const lingchenChild = productsItem.children.find((c: any) => c.id === "lingchen");
                 if (lingchenChild) {
                     lingchenChild.external = (fetched.lingchen || []).map((p: any) => ({
@@ -29,6 +34,8 @@ async function getGnbData() {
                         href: p.url,
                         isExternal: true,
                     }));
+
+                    lingchenChild.href = "/product?t=lingchen";
                 }
 
                 const tokkChild = productsItem.children.find((c: any) => c.id === "tokk");
@@ -39,6 +46,8 @@ async function getGnbData() {
                         href: p.url,
                         isExternal: true,
                     }));
+
+                    tokkChild.href = "/product?t=tokk";
                 }
             }
 

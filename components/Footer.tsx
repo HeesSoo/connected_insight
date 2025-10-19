@@ -64,7 +64,7 @@ export default function Footer() {
                                 <h3 className="text-white font-semibold mb-4 text-large">Products</h3>
                                 <ul className="space-y-2">
                                     <li>
-                                        <Link href={localizedPath("/product")} className="text-g300 hover:text-white transition-colors text-small">
+                                        <Link href={localizedPath("/product?t=cis")} className="text-g300 hover:text-white transition-colors text-small">
                                             CIS Cameras
                                         </Link>
                                     </li>

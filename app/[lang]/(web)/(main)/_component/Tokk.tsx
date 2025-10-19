@@ -4,51 +4,30 @@ import { useState } from "react";
 
 import AlternativeImg from "@/public/common/alternativeImg.png";
 import { useTranslationStore } from "@/stores/translationStore";
-import axios from "axios";
 import Image from "next/image";
-import { useEffect } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Navigation, Pagination } from "swiper/modules";
+import { Pagination } from "swiper/modules";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import { LingchenItem } from "@/types/lingchen";
 
-export default function Tokk() {
+interface LingchenProps {
+    data: LingchenItem[];
+}
+
+export default function Tokk({ data }: LingchenProps) {
     const { currentLanguage } = useTranslationStore();
 
     const [swiper, setSwiper] = useState<SwiperClass>();
 
-    const [data, setData] = useState<LingchenItem[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution`);
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/cis/tokk`);
-
-                console.log('response >>>> ', response);
-                if (response.status === 200) {
-                    setData(response.data.data);
-                }
-            } catch (err: unknown) {
-                console.error("Error fetching solutions:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchData();
-    }, []);
-
     return (
         <div>
-            {loading ? (
+            {(!data || data.length === 0) ? (
                 <div className="w-full flex">
-                    <div className="w-[712px]">
-                        <Image src={AlternativeImg} alt="Alternative Image" width={849} height={474} className="w-full h-[474px] object-cover" />
+                    <div className="w-[712px] h-[474px] flex justify-center items-center bg-[#EFEFEF]">
+                        <Image src={AlternativeImg} alt="Alternative Image" width={849} height={474} className="w-[444px] h-[auto] object-cover" />
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 py-20 px-[136px]">
                         <h3 className="text-ePrimary font-[700] text-xl mb-20">TOKK</h3>
                         <div>
                             <h4 className="mb-2 font-[700] text-h3 text-g950">TOKK MODEL</h4>
@@ -56,7 +35,7 @@ export default function Tokk() {
                         </div>
                     </div>
                 </div>
-            ) : data.length > 0 ? (
+            ) : (
                 <div className="relative">
                     <Swiper
                         modules={[Pagination]}
@@ -89,8 +68,6 @@ export default function Tokk() {
                         ))}
                     </Swiper>
                 </div>
-            ) : (
-                <div>No solutions available.</div>
             )}
         </div>
     );

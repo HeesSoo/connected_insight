@@ -5,40 +5,20 @@ import { useState } from "react";
 
 import AlternativeImg from "@/public/common/alternativeImg.png";
 import { useTranslationStore } from "@/stores/translationStore";
-import axios from "axios";
 import Image from "next/image";
-import { useEffect } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 
-export default function MainSolution() {
+interface MainSolutionProps {
+    data: SolutionItem[];
+}
+
+export default function MainSolution({ data }: MainSolutionProps) {
     const { currentLanguage } = useTranslationStore();
 
     const [swiper, setSwiper] = useState<SwiperClass>();
-
-    const [data, setData] = useState<SolutionItem[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution`);
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/solution`);
-
-                if (response.status === 200) {
-                    setData(response.data.data);
-                }
-            } catch (err: unknown) {
-                console.error("Error fetching solutions:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchData();
-    }, []);
 
     const handlePrev = () => {
         swiper?.slidePrev();
@@ -51,10 +31,10 @@ export default function MainSolution() {
         <div>
             <h2 className="font-bold text-xl text-g950 mb-[58px]">CIS Application</h2>
 
-            {loading ? (
+            {(!data || data.length === 0) ? (
                 <div className="w-full flex">
-                    <div className="flex-1">
-                        <Image src={AlternativeImg} alt="Alternative Image" width={849} height={474} className="w-full h-[474px] object-cover" />
+                    <div className="flex justify-center items-center flex-1 bg-[#EFEFEF] w-full h-[474px]">
+                        <Image src={AlternativeImg} alt="Alternative Image" width={849} height={474} className="w-[444px] h-[auto] object-cover" />
                     </div>
                     <div className="w-[591px] bg-g50 px-12 py-20 flex flex-col justify-between">
                         <h3 className="g-950 text-[32px] leading-[48px] tracking-[-0.2px] font-bold">Alternative</h3>
@@ -70,7 +50,7 @@ export default function MainSolution() {
                         </div>
                     </div>
                 </div>
-            ) : data.length > 0 ? (
+            ) : (
                 <div className="relative h-[474px]">
                     <Swiper
                         modules={[Navigation]}
@@ -152,8 +132,6 @@ export default function MainSolution() {
                         </svg>
                     </button>
                 </div>
-            ) : (
-                <div>No solutions available.</div>
             )}
         </div>
     );

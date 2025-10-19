@@ -3,45 +3,23 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import AlternativeImg from "@/public/common/alternativeImg.png";
-import axios from "axios";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
+import { MainBanner } from "@/types/banner";
 
-interface MainBanner {
-    image: string;
-    index: number;
-    name: string;
-    uuid: string;
+interface BannerProps {
+    banners: MainBanner[];
 }
 
-export default function Banner() {
-    const [loading, setLoading] = useState<boolean>(true);
-    const [banners, setBanners] = useState<MainBanner[]>([]);
-
-    useEffect(() => {
-        const getBanners = async () => {
-            try {
-                // const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/main/banner`);
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/main/banner`);
-                if (response.status === 200) {
-                    setBanners(response.data.data);
-                }
-            } catch (err: any) {
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        getBanners();
-    }, []);
+export default function Banner({ banners }: BannerProps) {
 
     return (
         <div className="max-w-full">
-            {loading && <Image src={AlternativeImg} alt="Loading..." width={1920} height={640} className="w-full h-auto max-h-[640px] object-cover" />}
+            {(!banners || banners.length === 0) && (<div className="flex bg-[#EFEFEF] justify-center items-center h-[640px]">
+                <Image src={AlternativeImg} alt="Loading..." width={1920} height={640} className="w-[444px] h-auto max-h-[640px] object-cover" />
+            </div>)}
             {banners && banners.length > 0 && (
                 <Swiper
                     modules={[Pagination]}

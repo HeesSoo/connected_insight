@@ -3,6 +3,7 @@
 import Tab from "@/components/Tab";
 import axios from "axios";
 import { StaticImageData } from "next/image";
+import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import Filter from "./_component/Filter";
 import ProductItems from "./_component/ProductItems";
@@ -51,8 +52,11 @@ export interface Filter {
 }
 
 function ProductListContent() {
+    const searchParams = useSearchParams();
+    const category = searchParams.get("t") || "cis";
+
     const [loading, setLoading] = useState<boolean>(true);
-    const [tab, setTab] = useState<"cis" | "lingchen" | "tokk">("cis");
+    const [tab, setTab] = useState<"cis" | "lingchen" | "tokk">(category as "cis" | "lingchen" | "tokk");
     const [filter, setFilter] = useState<Filter>({
         type: ["plus", "max", "max pro", "color"],
         resolution: [300, 600, 900, 1200, 1800, 3600],
@@ -73,11 +77,9 @@ function ProductListContent() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis`);
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/cis`);
 
                 if (response.status === 200) {
-                    console.log("cisData:::", response.data.data.cis);
                     setData(response.data.data.cis);
                     setAllCisData(response.data.data.cis);
                     setLingchenData(response.data.data.lingchen);

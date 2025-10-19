@@ -64,7 +64,7 @@ export default function Input({
 
             <div className={`w-full h-[46px] flex gap-2`}>
                 <input
-                    className={`flex-1 h-[40px] border-0 border-b border-g200 pl-[4px] text-base`}
+                    className={`flex-1 h-[40px] border-0 border-b border-g200 pl-[4px] text-base outline-none`}
                     type={type}
                     value={value}
                     onChange={onChange}

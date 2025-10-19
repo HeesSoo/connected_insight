@@ -64,10 +64,11 @@ export default function Input({
 
             <div className={`w-full flex gap-2`}>
                 <textarea
-                    className={`flex-1 h-[160px] border-0 border-b border-g200 pl-[4px] pt-[4px] text-base ${className}`}
+                    className={`flex-1 h-[160px] border-0 border-b border-g200 pl-[4px] pt-[4px] text-base outline-none ${className}`}
                     onChange={onChange}
                     placeholder={placeholder}
                     disabled={disabled}
+                    value={value}
                     // onKeyDown={onKeyDown}
                     // onKeyUp={onKeyUp}
                     // onFocus={onFocus}
@@ -75,9 +76,7 @@ export default function Input({
                     // maxLength={maxLength}
                     // minLength={minLength}
                     // onInput={onInput}
-                >
-                    {value}
-                </textarea>
+                ></textarea>
             </div>
             {isErr && <div className="text-red text-xs mt-2">{errMsg}</div>}
         </div>

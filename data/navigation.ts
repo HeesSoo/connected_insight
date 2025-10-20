@@ -26,7 +26,7 @@ export const navigationConfig: NavigationConfig = {
           external: [
             {
               id: "lingchen-ipc",
-              label: "IPC",
+              label: "SERVO SYSTEM",
               href: "https://www.naver.com",
             },
             {

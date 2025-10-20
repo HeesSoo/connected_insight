@@ -5,9 +5,9 @@ import axios from "axios";
 
 interface WebLayoutProps {
     children: React.ReactNode;
-    params: Promise<{
+    params: {
         lang: string;
-    }>;
+    };
 }
 
 async function getGnbData() {
@@ -60,7 +60,7 @@ async function getGnbData() {
 }
 
 export default async function WebLayout({ children, params }: WebLayoutProps) {
-    const { lang } = await params;
+    const { lang } = params;
     const gnbData = await getGnbData();
 
     return (

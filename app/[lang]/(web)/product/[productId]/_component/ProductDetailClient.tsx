@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import ProductDrawing from "./ProductDrawing";
 import ProductSpecifications from "./ProductSpecifications";
+import ProductDownloads from "./ProductDownloads";
 
 export interface MediaItem {
     order: number;
@@ -212,7 +213,7 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
                 <Tab
                     items={[
                         { value: "specifications", label: "Specifications", children: <ProductSpecifications data={data} /> },
-                        // { value: "downloads", label: "Downloads", children: <ProductDownloads /> },
+                        { value: "downloads", label: "Downloads", children: <ProductDownloads data={data} /> },
                         { value: "drawing", label: "Drawing", children: <ProductDrawing data={data} /> },
                     ]}
                     defaultTab="specifications"

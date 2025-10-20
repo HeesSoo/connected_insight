@@ -29,7 +29,7 @@ export default function DownloadButton({ label = "Download", type = "g950", file
     };
 
     return (
-        <Button size="medium" btnType="primary" label="Download" icRight={<DownloadIco fill={"#ffffff"} />} onClick={() => {}} />
+        <Button size="medium" btnType="primary" label="Download" icRight={<DownloadIco fill={"#ffffff"} />} onClick={onClick} />
         // <button className={`h-12 flex gap-3 items-center px-5 rounded-sm ${type === "g950" ? "bg-g950" : "bg-ePrimary"}`} onClick={onClick}>
         //     <div className="text-white">{label}</div>
         //     <DownloadIco fill={"#ffffff"} />

@@ -10,12 +10,9 @@
     },
     "dependencies": {
         "@svgr/webpack": "^8.1.0",
-        "@tanstack/react-query": "^5.67.3",
-        "@tanstack/react-query-devtools": "^5.67.3",
         "axios": "^1.10.0",
         "dotenv": "^17.0.1",
         "googleapis": "^161.0.0",
-        "iron-session": "^8.0.4",
         "next": "14.2.3",
         "react": "^18",
         "react-dom": "^18",

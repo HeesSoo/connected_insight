@@ -1,5 +1,4 @@
 import { SpinnerProvider } from "@/components/Spinner";
-import QueryProviderWrapper from "@/components/wrappers/QueryProviderWrapper";
 import TranslationProvider from "@/components/TranslationProvider";
 import { initializeTranslationScheduler } from "@/lib/translations";
 import type { Metadata } from "next";
@@ -34,11 +33,9 @@ export default function RootLayout({
                 {/* <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> */}
             </head>
             <body className={inter.className}>
-                <QueryProviderWrapper>
-                    <TranslationProvider>
-                        <SpinnerProvider>{children}</SpinnerProvider>
-                    </TranslationProvider>
-                </QueryProviderWrapper>
+                <TranslationProvider>
+                    <SpinnerProvider>{children}</SpinnerProvider>
+                </TranslationProvider>
             </body>
         </html>
     );

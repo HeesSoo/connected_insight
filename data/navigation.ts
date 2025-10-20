@@ -10,7 +10,7 @@ export const navigationConfig: NavigationConfig = {
     {
       id: "products",
       label: "Products",
-      // href: "javascript:void(0)",
+      href: "/product",
       hasDropdown: true,
       children: [
         {

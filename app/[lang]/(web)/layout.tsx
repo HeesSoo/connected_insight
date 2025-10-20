@@ -66,7 +66,7 @@ export default async function WebLayout({ children, params }: WebLayoutProps) {
     return (
         <>
             <Header lang={lang} gnbData={gnbData} />
-            <main className="px-5">{children}</main>
+            <main className="px-8">{children}</main>
             <Footer />
         </>
     );

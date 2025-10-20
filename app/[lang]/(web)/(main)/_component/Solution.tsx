@@ -90,12 +90,12 @@ export default function MainSolution({ data }: MainSolutionProps) {
                         ))}
                     </Swiper>
 
-                    <button className="absolute top-1/2 -translate-y-[50%] -left-24 w-12 h-12 rounded-full bg-ePrimary flex justify-center items-center cursor-pointer" onClick={handlePrev}>
+                    <button className="absolute top-1/2 -translate-y-[50%] -left-24 [@media(max-width:1600px)]:-left-[2%] z-[1] w-12 h-12 rounded-full bg-ePrimary flex justify-center items-center cursor-pointer" onClick={handlePrev}>
                         <svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.23063 17.4808L10.8116 15.854L5.08275 10.1252H23.25V7.87516H5.08275L10.8116 2.14628L9.23063 0.519531L0.75 9.00016L9.23063 17.4808Z" fill="white" />
                         </svg>
                     </button>
-                    <button className="absolute top-1/2 -translate-y-[50%] -right-24 w-12 h-12 rounded-full bg-ePrimary flex justify-center items-center cursor-pointer" onClick={handleNext}>
+                    <button className="absolute top-1/2 -translate-y-[50%] -right-24 [@media(max-width:1600px)]:-right-[2%] z-[1] w-12 h-12 rounded-full bg-ePrimary flex justify-center items-center cursor-pointer" onClick={handleNext}>
                         <svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M14.7694 17.4808L13.1884 15.854L18.9173 10.1252H0.75V7.87516H18.9173L13.1884 2.14628L14.7694 0.519531L23.25 9.00016L14.7694 17.4808Z" fill="white" />
                         </svg>

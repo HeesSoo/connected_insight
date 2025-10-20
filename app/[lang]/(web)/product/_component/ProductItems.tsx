@@ -24,7 +24,8 @@ export default function ProductItems({ tab, data, hasFilter }: { tab: "cis" | "l
                     <div className="absolute w-full h-[420px] p-[60px] flex flex-col justify-end">
                         <div className="mb-2 text-[32px] leading-[48px] font-bold tracking-[-0.2px]">Find the Perfect TOKK Solution</div>
                         <div className="mb-12 text-2xl leading-9 tracking-[-0.2px] font-medium">for Every Requeirement</div>
-                        <a href="http://tokk.comp.yunqi3d.com/#/" target="_blank" rel="noopener noreferrer">
+                        {/* <a href="http://tokk.comp.yunqi3d.com/#/" target="_blank" rel="noopener noreferrer"> */}
+                        <a href="http://tokk.comp.yunqi3d.com/#/selection/params" target="_blank" rel="noopener noreferrer">
                             <Button
                                 label="Product Finder"
                                 btnType="secondary"

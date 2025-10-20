@@ -27,17 +27,17 @@ export default function ProductCreate() {
 
     const handleSave = () => {
         // TODO: Implement save logic
-        console.log("Product save:", {
-            productName: productName.value,
-            category: category.value,
-            shortDescription: shortDescription.value,
-            detailDescription: detailDescription.value,
-            price: price.value,
-            stock: stock.value,
-            sku: sku.value,
-            specifications: specifications.value,
-            images,
-        });
+        // console.log("Product save:", {
+        //     productName: productName.value,
+        //     category: category.value,
+        //     shortDescription: shortDescription.value,
+        //     detailDescription: detailDescription.value,
+        //     price: price.value,
+        //     stock: stock.value,
+        //     sku: sku.value,
+        //     specifications: specifications.value,
+        //     images,
+        // });
     };
 
     const handleCancel = () => {

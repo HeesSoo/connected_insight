@@ -54,7 +54,8 @@ export default function Banner({ banners }: BannerProps) {
                                         TOKK Solution
                                     </div>
                                     <div className="mb-12 text-2xl leading-9 tracking-[-0.2px] font-medium">for Every Requeirement</div>
-                                    <a href="http://tokk.comp.yunqi3d.com/#/" target="_blank" rel="noopener noreferrer">
+                                    {/* <a href="http://tokk.comp.yunqi3d.com/#/" target="_blank" rel="noopener noreferrer"> */}
+                                    <a href="http://tokk.comp.yunqi3d.com/#/selection/params" target="_blank" rel="noopener noreferrer">
                                         <Button
                                             label="Product Finder"
                                             btnType="secondary"

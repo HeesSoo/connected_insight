@@ -12,33 +12,45 @@ interface WebLayoutProps {
 
 async function getGnbData() {
     try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis`);
+        const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis`
+        );
 
         if (response.status === 200) {
             const fetched = response.data.data;
 
             // deep copy base navigation and inject lingchen & tokk externals from backend
             const newNav = JSON.parse(JSON.stringify(navigationConfig));
-            const productsItem = newNav.items?.find((i: any) => i.id === "products");
+            const productsItem = newNav.items?.find(
+                (i: any) => i.id === "products"
+            );
             if (productsItem && Array.isArray(productsItem.children)) {
-                const cisChildren = productsItem.children.find((c: any) => c.id === "cis-camera");
+                const cisChildren = productsItem.children.find(
+                    (c: any) => c.id === "cis-camera"
+                );
                 if (cisChildren) {
                     cisChildren.href = "/product?t=cis";
                 }
 
-                const lingchenChild = productsItem.children.find((c: any) => c.id === "lingchen");
+                const lingchenChild = productsItem.children.find(
+                    (c: any) => c.id === "lingchen"
+                );
                 if (lingchenChild) {
-                    lingchenChild.external = (fetched.lingchen || []).map((p: any) => ({
-                        id: p.uuid,
-                        label: p.name,
-                        href: p.url,
-                        isExternal: true,
-                    }));
+                    lingchenChild.external = (fetched.lingchen || []).map(
+                        (p: any) => ({
+                            id: p.uuid,
+                            label: p.name,
+                            href: p.url,
+                            isExternal: true,
+                        })
+                    );
 
                     lingchenChild.href = "/product?t=lingchen";
                 }
 
-                const tokkChild = productsItem.children.find((c: any) => c.id === "tokk");
+                const tokkChild = productsItem.children.find(
+                    (c: any) => c.id === "tokk"
+                );
                 if (tokkChild) {
                     tokkChild.external = (fetched.tokk || []).map((p: any) => ({
                         id: p.uuid,
@@ -66,7 +78,7 @@ export default async function WebLayout({ children, params }: WebLayoutProps) {
     return (
         <>
             <Header lang={lang} gnbData={gnbData} />
-            <main className="px-8">{children}</main>
+            <main>{children}</main>
             <Footer />
         </>
     );

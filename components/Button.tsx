@@ -11,7 +11,11 @@
  */
 interface ButtonProps {
     label: React.ReactNode;
-    onClick: (e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>) => void;
+    onClick: (
+        e:
+            | React.FormEvent<HTMLFormElement>
+            | React.MouseEvent<HTMLButtonElement>
+    ) => void;
     type?: "submit" | "button" | "reset" | undefined;
     btnType?: "primary" | "secondary";
     size?: "large" | "medium";
@@ -38,7 +42,7 @@ export default function Button({
     `;
     const buttonStyles = {
         primary: "bg-g950 hover:bg-ePrimary",
-        secondary: "bg-ePrimary",
+        secondary: "bg-ePrimary hover:bg-ePrimary/90",
     };
 
     const buttonSizeStyles = {
@@ -47,7 +51,12 @@ export default function Button({
     };
 
     return (
-        <button className={`${baseClass} ${buttonStyles[btnType]} ${buttonSizeStyles[size]} ${className}`} onClick={onClick} type={type} disabled={disabled}>
+        <button
+            className={`${baseClass} ${buttonStyles[btnType]} ${buttonSizeStyles[size]} ${className}`}
+            onClick={onClick}
+            type={type}
+            disabled={disabled}
+        >
             {icLeft}
             {label}
             {icRight}

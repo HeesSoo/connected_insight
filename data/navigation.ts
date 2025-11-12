@@ -20,7 +20,7 @@ export const navigationConfig: NavigationConfig = {
         },
         {
           id: "lingchen",
-          label: "Industrial Control Devices",
+          label: "Control Devices",
           // href: "/product?tab=lingchen",
           hasDropdown: true,
           external: [

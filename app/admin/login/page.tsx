@@ -1,21 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useInput } from "@/hooks/hooks";
 import Button from "@/components/Button";
-import Checkbox from "@/components/Checkbox";
 import Logo from "@/public/svgs/logo.svg";
+import Apis from "@/hooks/api";
 
 export default function AdminLogin() {
-    const email = useInput("");
+    const router = useRouter();
+    const id = useInput("");
     const password = useInput("");
-    const [rememberMe, setRememberMe] = useState(false);
 
-    const isFormComplete = email.value && password.value;
+    const isFormComplete = id.value && password.value;
 
-    const handleLogin = () => {
-        // TODO: Implement login logic
-        console.log("Login attempt:", { email: email.value, password: password.value, rememberMe });
+    const handleLogin = async () => {
+        try {
+            const loginResponse = await Apis.post('/auth/login', { id: id.value, password: password.value });
+            console.log('Login Response >>>> ', loginResponse?.data);
+
+            // 로그인 성공 시 /admin으로 리다이렉트
+            if (loginResponse?.data?.accessToken) {
+                router.push("/admin");
+            }
+        } catch (err) {
+            console.error('Login Error >>>> ', err);
+            // TODO: 에러 메시지 표시
+        }
     };
 
     return (
@@ -32,18 +42,17 @@ export default function AdminLogin() {
 
                 {/* Login Form */}
                 <div className="space-y-6">
-                    {/* Email Input */}
+                    {/* Id Input */}
                     <div className="relative">
-                        {!email.value && (
+                        {!id.value && (
                             <div className="text-base text-g400 absolute top-[50%] left-[4px] translate-y-[-50%] pointer-events-none">
                                 이메일 <span className="text-ePrimary">*</span>
                             </div>
                         )}
                         <input
                             className="w-full h-[46px] border-0 border-b border-g200 pl-[4px] text-base focus:outline-none focus:border-ePrimary transition-colors"
-                            type="email"
-                            value={email.value}
-                            onChange={email.onChange}
+                            value={id.value}
+                            onChange={id.onChange}
                         />
                     </div>
 
@@ -62,14 +71,6 @@ export default function AdminLogin() {
                         />
                     </div>
 
-                    {/* Remember Me */}
-                    <div className="flex items-center gap-2">
-                        <Checkbox checked={rememberMe} value="remember" onChange={(value, checked) => setRememberMe(checked)} />
-                        <label className="text-base text-g700 cursor-pointer" onClick={() => setRememberMe(!rememberMe)}>
-                            로그인 상태 유지
-                        </label>
-                    </div>
-
                     {/* Login Button */}
                     <div className="pt-4">
                         <Button
@@ -81,13 +82,6 @@ export default function AdminLogin() {
                             className="w-full text-large"
                         />
                     </div>
-                </div>
-
-                {/* Forgot Password Link */}
-                <div className="mt-6 text-center">
-                    <a href="#" className="text-small text-g400 hover:text-ePrimary transition-colors">
-                        비밀번호를 잊으셨나요?
-                    </a>
                 </div>
             </div>
         </div>

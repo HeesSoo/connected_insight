@@ -12,7 +12,9 @@ import Tokk from "./_component/Tokk";
 
 async function getBanners(): Promise<MainBanner[]> {
     try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/main/banner`);
+        const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/main/banner`
+        );
         if (response.status === 200) {
             return response.data.data || [];
         }
@@ -24,7 +26,9 @@ async function getBanners(): Promise<MainBanner[]> {
 
 async function getSolutions(): Promise<SolutionItem[]> {
     try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution`);
+        const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution`
+        );
         if (response.status === 200) {
             return response.data.data || [];
         }
@@ -36,7 +40,9 @@ async function getSolutions(): Promise<SolutionItem[]> {
 
 async function getLingchen(): Promise<LingchenItem[]> {
     try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/lingchen`);
+        const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/lingchen`
+        );
         if (response.status === 200) {
             return response.data.data || [];
         }
@@ -48,7 +54,9 @@ async function getLingchen(): Promise<LingchenItem[]> {
 
 async function getTokk(): Promise<LingchenItem[]> {
     try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/tokk`);
+        const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/tokk`
+        );
         if (response.status === 200) {
             return response.data.data || [];
         }
@@ -60,7 +68,12 @@ async function getTokk(): Promise<LingchenItem[]> {
 
 export default async function Home() {
     // 서버에서 병렬로 데이터 fetch
-    const [banners, solutions, lingchenData, tokkData] = await Promise.all([getBanners(), getSolutions(), getLingchen(), getTokk()]);
+    const [banners, solutions, lingchenData, tokkData] = await Promise.all([
+        getBanners(),
+        getSolutions(),
+        getLingchen(),
+        getTokk(),
+    ]);
 
     return (
         <main className="min-h-screen">
@@ -69,7 +82,7 @@ export default async function Home() {
             </Suspense>
             <Banner banners={banners} />
 
-            <section className="w-full max-w-[1440px] mx-auto mt-[120px] mb-[160px] flex flex-col gap-[120px]">
+            <section className="w-full max-w-[1504px] mx-auto mt-[120px] mb-[160px] flex flex-col gap-[120px] px-8">
                 <MainSolution data={solutions} />
                 <Linchen data={lingchenData} />
                 <Tokk data={tokkData} />

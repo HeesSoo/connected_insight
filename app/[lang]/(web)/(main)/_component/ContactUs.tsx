@@ -19,7 +19,7 @@ export default function Contactus() {
                     <br />
                     {t["main-contact-us-guide_2"]}
                 </div>
-                <Link href="/contact">
+                <Link href="/contact" className="inline-flex">
                     <Button
                         label={t["main-contact-us-inquiry"]}
                         btnType="secondary"

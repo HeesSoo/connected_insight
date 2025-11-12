@@ -32,7 +32,7 @@ const renderNavigationItem = (
         <>
             {hasLink ? (
                 <Link href={localizedPath(item.href)} {...commonProps}>
-                    <span>{item.label}</span>
+                    <span className="hover:text-ePrimary">{item.label}</span>
                     {item?.children && item?.children?.length && (
                         <span
                             className={`inline-flex items-center transition-transform duration-200 ${
@@ -46,7 +46,7 @@ const renderNavigationItem = (
             ) : (
                 // 링크가 없는 경우: Button 사용
                 <button onClick={onToggle} {...commonProps}>
-                    <span>{item.label}</span>
+                    <span className="hover:text-ePrimary">{item.label}</span>
                     {item?.children && item?.children?.length && (
                         <span
                             className={`inline-flex items-center transition-transform duration-200 ${

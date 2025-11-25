@@ -7,6 +7,7 @@ async function fetchProduct(productId: string): Promise<ProductDetailType | null
         console.log('Server URL:', process.env.NEXT_PUBLIC_SERVER_URL);
 
         const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/detail/${productId}`);
+        console.log(res, " : res")
 
         // console.log('Response status:', res.status);
         // console.log('Response data:', res.data);

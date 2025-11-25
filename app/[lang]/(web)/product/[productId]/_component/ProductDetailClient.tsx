@@ -59,6 +59,7 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
     const [swiper, setSwiper] = useState<SwiperClass>();
 
     if (!data) {
+        console.log("Product Detail >>>> ", data)
         return <div>No product data available.</div>;
     }
     return (

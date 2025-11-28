@@ -32,7 +32,9 @@ const renderNavigationItem = (
         <>
             {hasLink ? (
                 <Link href={localizedPath(item.href)} {...commonProps}>
-                    <span>{item.label}</span>
+                    <span className="select-none leading-[60px]">
+                        {item.label}
+                    </span>
                     {item?.children && item?.children?.length && (
                         <span
                             className={`inline-flex items-center transition-transform duration-200 ${
@@ -46,7 +48,9 @@ const renderNavigationItem = (
             ) : (
                 // 링크가 없는 경우: Button 사용
                 <button onClick={onToggle} {...commonProps}>
-                    <span>{item.label}</span>
+                    <span className="select-none leading-[60px]">
+                        {item.label}
+                    </span>
                     {item?.children && item?.children?.length && (
                         <span
                             className={`inline-flex items-center transition-transform duration-200 ${
@@ -62,7 +66,7 @@ const renderNavigationItem = (
             {/* 드롭다운 메뉴 */}
             {item?.children && item?.children?.length && (
                 <div
-                    className="absolute top-[calc(100%+1px)] left-[-22px] flex p-6
+                    className="absolute top-[calc(100%+1px)] left-[-22px] flex py-3
                         bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200
                         border border-g200 rounded border-t-0 rounded-t-none"
                     // className="absolute top-[calc(100%+1px)] left-[-22px]
@@ -77,7 +81,7 @@ const renderNavigationItem = (
                     <ul
                         id={`submenu-${item.id}`}
                         role="menu"
-                        className={`flex flex-col gap-y-6 w-max`}
+                        className={`flex flex-col w-max`}
                     >
                         {item.children &&
                             item.children.length > 0 &&
@@ -97,7 +101,7 @@ const renderNavigationItem = (
                                                     ? localizedPath(child.href)
                                                     : "#"
                                             }
-                                            className="relative min-w-[120px] group-hover:block hover:text-ePrimary"
+                                            className="relative min-w-[120px] group-hover:block hover:text-ePrimary select-none w-full px-6 py-3 hover:bg-g50"
                                         >
                                             {child.label}
                                         </Link>
@@ -114,23 +118,23 @@ const renderNavigationItem = (
                         style={{
                             height:
                                 external && external.length > 0
-                                    ? `${external.length * 48}px`
+                                    ? `auto`
                                     : "0px",
                         }}
                     >
                         {external && external.length > 0 && (
                             <>
-                                <div className="w-[1px] h-full bg-g200 mx-6"></div>
-                                <ul className={`flex flex-col gap-y-6`}>
+                                <div className="w-[1px] h-full bg-g200 ml-6"></div>
+                                <ul className={`flex flex-col`}>
                                     {external.map((external) => (
                                         <li
                                             key={external.id}
                                             role="none"
-                                            className="min-w-[120px] w-max"
+                                            className="min-w-[120px] w-full"
                                         >
                                             <Link
                                                 href={external.href}
-                                                className="min-w-[280px] flex justify-between items-center hover:text-ePrimary"
+                                                className="min-w-[280px] w-full flex justify-between items-center hover:text-ePrimary select-none hover:bg-g50 px-6 py-3"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                             >
@@ -191,6 +195,8 @@ export default function Header({ lang, gnbData }: HeaderProps) {
     } = useNavigation(gnbData.items);
     const localizedPath = useLocalizedPath();
 
+    console.log("gnbData in Header:", gnbData);
+
     return (
         <header
             className="bg-white shadow-sm sticky top-0 z-50 border-b border-g200"
@@ -215,7 +221,7 @@ export default function Header({ lang, gnbData }: HeaderProps) {
                                 <li
                                     key={item.id}
                                     role="none"
-                                    className="py-[15px] px-2 relative group"
+                                    className="px-2 relative group"
                                 >
                                     {renderNavigationItem(
                                         item,

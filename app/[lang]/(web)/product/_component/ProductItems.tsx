@@ -41,6 +41,7 @@ export default function ProductItems({
                             href="http://tokk.comp.yunqi3d.com/#/selection/params"
                             target="_blank"
                             rel="noopener noreferrer"
+                            className="w-fit"
                         >
                             <Button
                                 label="Product Finder"
@@ -125,7 +126,7 @@ const ProductItem = ({
         return (
             <Link
                 href={`/product/${item.uuid}`}
-                className="w-full bg-white shadow-md hover:shadow-lg p-8 rounded-xl border border-gray-50 transition-shadow"
+                className="w-full bg-white shadow-md hover:shadow-lg p-8 rounded-xl border border-gray-50 transition-shadow select-none"
             >
                 <Image
                     src={src}
@@ -158,7 +159,7 @@ const ProductItem = ({
             <a
                 href={(item as any).url}
                 target="_blank"
-                className="w-full cursor-pointer bg-white shadow-md hover:shadow-lg p-8 rounded-xl border border-gray-50 transition-shadow"
+                className="w-full cursor-pointer bg-white shadow-md hover:shadow-lg p-8 rounded-xl border border-gray-50 transition-shadow select-none"
                 rel="noopener noreferrer"
             >
                 <Image

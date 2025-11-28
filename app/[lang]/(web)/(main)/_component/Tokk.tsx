@@ -22,16 +22,28 @@ export default function Tokk({ data }: LingchenProps) {
 
     return (
         <div>
-            {(!data || data.length === 0) ? (
+            {!data || data.length === 0 ? (
                 <div className="w-full flex">
                     <div className="w-[712px] h-[474px] flex justify-center items-center bg-[#EFEFEF]">
-                        <Image src={AlternativeImg} alt="Alternative Image" width={849} height={474} className="w-[444px] h-[auto] object-cover" />
+                        <Image
+                            src={AlternativeImg}
+                            alt="Alternative Image"
+                            width={849}
+                            height={474}
+                            className="w-[444px] h-[auto] object-cover"
+                        />
                     </div>
                     <div className="flex-1 pt-12 pb-20 px-[136px]">
-                        <h3 className="text-ePrimary font-[700] text-xl mb-20">Linear Actuator</h3>
+                        <h3 className="text-ePrimary font-[700] text-xl mb-20">
+                            Linear Actuator
+                        </h3>
                         <div>
-                            <h4 className="mb-2 font-[700] text-h3 text-g950">-</h4>
-                            <h4 className="text-large font-[500] text-g950">-</h4>
+                            <h4 className="mb-2 font-[700] text-h3 text-g950">
+                                -
+                            </h4>
+                            <h4 className="text-large font-[500] text-g950">
+                                -
+                            </h4>
                         </div>
                     </div>
                 </div>
@@ -45,22 +57,38 @@ export default function Tokk({ data }: LingchenProps) {
                         pagination={{
                             clickable: true,
                             renderBullet: (index, className) => {
-                                return `<span class="${className} font-semibold text-large text-white bg-g200 px-5 py-2">${data[index].name}</span>`;
+                                return `<span class="${className} font-semibold text-large text-white bg-g200 px-5 py-2 select-none">${data[index].name}</span>`;
                             },
                         }}
                         className="mainTokkSwiper"
                     >
                         {data.map((item, index) => (
                             <SwiperSlide key={index}>
-                                <div className="w-full h-[474px] flex">
+                                <div className="w-full h-[474px] flex select-none">
                                     <div className="w-[712px]">
-                                        <Image src={item.image || AlternativeImg} alt="Alternative Image" width={849} height={474} className="w-full h-[474px] object-cover" />
+                                        <Image
+                                            src={item.image || AlternativeImg}
+                                            alt="Alternative Image"
+                                            width={849}
+                                            height={474}
+                                            className="w-full h-[474px] object-cover"
+                                        />
                                     </div>
                                     <div className="flex-1 pt-12 pb-20 px-[136px]">
-                                        <h3 className="text-ePrimary font-[700] text-xl mb-20">Linear Actuator</h3>
+                                        <h3 className="text-ePrimary font-[700] text-xl mb-20">
+                                            Linear Actuator
+                                        </h3>
                                         <div>
-                                            <h4 className="mb-2 font-[700] text-h3 text-g950">{item.name}</h4>
-                                            <h4 className="text-large font-[500] text-g950">{item?.[`description_${currentLanguage}`]}</h4>
+                                            <h4 className="mb-2 font-[700] text-h3 text-g950">
+                                                {item.name}
+                                            </h4>
+                                            <h4 className="text-large font-[500] text-g950">
+                                                {
+                                                    item?.[
+                                                        `description_${currentLanguage}`
+                                                    ]
+                                                }
+                                            </h4>
                                         </div>
                                     </div>
                                 </div>

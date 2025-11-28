@@ -86,7 +86,14 @@ const Sales: React.FC = () => {
     const [submitting, setSubmitting] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
 
-    const isFormComplete = !!(name.value && email.value && contact.value && account.value && content.value && privacy);
+    const isFormComplete = !!(
+        name.value &&
+        email.value &&
+        contact.value &&
+        account.value &&
+        content.value &&
+        privacy
+    );
 
     const fileAccept =
         "application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.presentationml.presentation, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, image/jpeg, image/png";
@@ -101,7 +108,9 @@ const Sales: React.FC = () => {
         setMessage(null);
 
         if (!isFormComplete) {
-            setMessage("필수 항목을 모두 입력하고 개인정보 보호정책에 동의해주세요.");
+            setMessage(
+                "필수 항목을 모두 입력하고 개인정보 보호정책에 동의해주세요."
+            );
             return;
         }
 
@@ -119,11 +128,15 @@ const Sales: React.FC = () => {
 
         try {
             setSubmitting(true);
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/contactus`, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            });
+            const res = await axios.post(
+                `${process.env.NEXT_PUBLIC_API_BASE_URL}/contactus`,
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
 
             if (res.status === 201) {
                 alert("문의가 정상적으로 접수되었습니다.");
@@ -143,32 +156,98 @@ const Sales: React.FC = () => {
         <div className="flex w-[1440px] mx-auto pt-[80px] pb-[160px] justify-between gap-[137px]">
             <ContactLeft />
             <div>
-                <h4 className="text-titleSmall text-ePrimary font-semibold">Contact Information</h4>
+                <h4 className="text-titleSmall text-ePrimary font-semibold">
+                    Contact Information
+                </h4>
                 <hr className="mt-2 mb-4 bg-g200" />
                 <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-2 gap-x-[15px] gap-y-[24px] w-[591px]">
-                        <Input {...name} label={t["contact-name"]} type="text" data-name="name" data-required={true} isRequired={true} />
-                        <Input {...email} label={t["contact-email"]} type="text" data-name="email" data-required={true} isRequired={true} />
-                        <Input {...contact} label={t["contact-contact"]} type="text" data-name="contact" data-required={true} isRequired={true} />
-                        <Input {...account} label={t["contact-account"]} type="text" data-name="account" data-required={true} isRequired={true} />
-                        <Input {...department} label={t["contact-department"]} type="text" data-name="department" data-required={false} isRequired={false} />
-                        <Input {...position} label={t["contact-position"]} type="text" data-name="position" data-required={false} isRequired={false} />
+                        <Input
+                            {...name}
+                            label={t["contact-name"]}
+                            type="text"
+                            data-name="name"
+                            data-required={true}
+                            isRequired={true}
+                        />
+                        <Input
+                            {...email}
+                            label={t["contact-email"]}
+                            type="text"
+                            data-name="email"
+                            data-required={true}
+                            isRequired={true}
+                        />
+                        <Input
+                            {...contact}
+                            label={t["contact-contact"]}
+                            type="text"
+                            data-name="contact"
+                            data-required={true}
+                            isRequired={true}
+                        />
+                        <Input
+                            {...account}
+                            label={t["contact-account"]}
+                            type="text"
+                            data-name="account"
+                            data-required={true}
+                            isRequired={true}
+                        />
+                        <Input
+                            {...department}
+                            label={t["contact-department"]}
+                            type="text"
+                            data-name="department"
+                            data-required={false}
+                            isRequired={false}
+                        />
+                        <Input
+                            {...position}
+                            label={t["contact-position"]}
+                            type="text"
+                            data-name="position"
+                            data-required={false}
+                            isRequired={false}
+                        />
                     </div>
 
                     <div className="mt-[15px] flex flex-col gap-[15px]">
-                        <Input {...site} label={t["contact-site-url"]} type="text" />
-                        <Textarea {...content} label={t["contact-content"]} data-name="content" data-required={true} isRequired={true} className="col-span-2" />
+                        <Input
+                            {...site}
+                            label={t["contact-site-url"]}
+                            type="text"
+                        />
+                        <Textarea
+                            {...content}
+                            label={t["contact-content"]}
+                            data-name="content"
+                            data-required={true}
+                            isRequired={true}
+                            className="col-span-2"
+                        />
                     </div>
 
                     <div className="mt-[24px]">
                         <div className="flex items-center gap-4">
-                            <label htmlFor="file" className="flex gap-1 text-base font-semibold text-g900 align-center cursor-pointer">
+                            <label
+                                htmlFor="file"
+                                className="flex gap-1 text-base font-semibold text-g900 align-center cursor-pointer select-none"
+                            >
                                 {t["contact-file-attach"]}
                                 <Upload width={24} height={24} />
                             </label>
-                            <input type="file" id="file" accept={fileAccept} className="w-0 h-0" onChange={onChangeFile} />
+                            <input
+                                type="file"
+                                id="file"
+                                accept={fileAccept}
+                                className="w-0 h-0"
+                                onChange={onChangeFile}
+                            />
                             <div className="flex items-center gap-2">
-                                <span className="text-small text-g400">{t["contact-file-guide"]}</span>
+                                <span className="text-small text-g400">
+                                    {t["contact-file-guide"]}
+                                </span>
                             </div>
                         </div>
                         {file && (
@@ -179,22 +258,35 @@ const Sales: React.FC = () => {
                     </div>
 
                     <div className="flex justify-between items-center mt-[111px]">
-                        <div className="flex gap-2 items-center">
+                        <div className="flex gap-2 items-center select-none">
                             <div className="rounded-[100%] flex items-center">
                                 <Checkbox
                                     checked={privacy}
                                     indeterminate={false}
                                     value="privacy"
-                                    onChange={(value, checked) => setPrivacy(checked)}
+                                    onChange={(value, checked) =>
+                                        setPrivacy(checked)
+                                    }
                                     className="w-[24px] h-[24px] rounded-[25px] overflow-hidden"
                                 />
-                                <input type="checkbox" id="privacy" onChange={(checked) => setPrivacy(checked.target.checked)} className="w-[0px] h-[0px]" />
+                                <input
+                                    type="checkbox"
+                                    id="privacy"
+                                    onChange={(checked) =>
+                                        setPrivacy(checked.target.checked)
+                                    }
+                                    className="w-[0px] h-[0px]"
+                                />
                             </div>
 
                             {/* render localized "common" with clickable policy label injected into {0} */}
-                            <label htmlFor="privacy" className="flex align-center text-small">
+                            <label
+                                htmlFor="privacy"
+                                className="flex align-center text-small"
+                            >
                                 {(() => {
-                                    const common = t["common"] || "{0}에 동의합니다.";
+                                    const common =
+                                        t["common"] || "{0}에 동의합니다.";
                                     const parts = common.split("{0}");
                                     // left part, policy clickable element, right part
                                     return (
@@ -215,7 +307,10 @@ const Sales: React.FC = () => {
                                                     setIsModalOpen(true);
                                                 }}
                                                 onKeyDown={(e) => {
-                                                    if (e.key === "Enter" || e.key === " ") {
+                                                    if (
+                                                        e.key === "Enter" ||
+                                                        e.key === " "
+                                                    ) {
                                                         e.preventDefault();
                                                         e.stopPropagation();
                                                         setIsModalOpen(true);
@@ -232,7 +327,11 @@ const Sales: React.FC = () => {
                         </div>
                         <div>
                             <Button
-                                label={submitting ? "전송중..." : t["contact-submit-success"]}
+                                label={
+                                    submitting
+                                        ? "전송중..."
+                                        : t["contact-submit-success"]
+                                }
                                 disabled={!isFormComplete || submitting}
                                 className={`w-[124px]`}
                                 size="medium"
@@ -241,7 +340,11 @@ const Sales: React.FC = () => {
                             />
                         </div>
                     </div>
-                    {message && <div className="mt-4 text-small text-g600">{message}</div>}
+                    {message && (
+                        <div className="mt-4 text-small text-g600">
+                            {message}
+                        </div>
+                    )}
                 </form>
             </div>
 
@@ -249,7 +352,15 @@ const Sales: React.FC = () => {
                 <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="bg-white w-[876px] h-[640px] p-12 flex flex-col">
                         <div className="w-full flex justify-end">
-                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="cursor-pointer" onClick={() => setIsModalOpen(false)}>
+                            <svg
+                                width="36"
+                                height="36"
+                                viewBox="0 0 36 36"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="cursor-pointer"
+                                onClick={() => setIsModalOpen(false)}
+                            >
                                 <path
                                     d="M18.0008 19.5814L10.3912 27.1913C10.1835 27.3988 9.92238 27.505 9.60788 27.51C9.29363 27.5148 9.02775 27.4085 8.81025 27.1913C8.593 26.9738 8.48438 26.7103 8.48438 26.4008C8.48438 26.0913 8.593 25.8278 8.81025 25.6103L16.4201 18.0008L8.81025 10.3913C8.60275 10.1835 8.4965 9.92238 8.4915 9.60788C8.48675 9.29363 8.593 9.02775 8.81025 8.81025C9.02775 8.593 9.29125 8.48438 9.60075 8.48438C9.91025 8.48438 10.1737 8.593 10.3912 8.81025L18.0008 16.4201L25.6103 8.81025C25.818 8.60275 26.0791 8.4965 26.3936 8.4915C26.7079 8.48675 26.9738 8.593 27.1913 8.81025C27.4085 9.02775 27.5171 9.29125 27.5171 9.60075C27.5171 9.91025 27.4085 10.1738 27.1913 10.3913L19.5814 18.0008L27.1913 25.6103C27.3988 25.818 27.505 26.0791 27.51 26.3936C27.5148 26.7079 27.4085 26.9738 27.1913 27.1913C26.9738 27.4085 26.7103 27.5171 26.4008 27.5171C26.0913 27.5171 25.8278 27.4085 25.6103 27.1913L18.0008 19.5814Z"
                                     fill="#161616"
@@ -257,9 +368,14 @@ const Sales: React.FC = () => {
                             </svg>
                         </div>
 
-                        <div className="my-6 pb-6 border-b border-g200 w-full text-2xl leading-9 tracking-[-0.2px] font-bold">주식회사 아이온 개인정보 처리방침</div>
+                        <div className="my-6 pb-6 border-b border-g200 w-full text-2xl leading-9 tracking-[-0.2px] font-bold">
+                            주식회사 아이온 개인정보 처리방침
+                        </div>
 
-                        <div className="flex-1 w-full bg-g50 overflow-y-auto p-5 text-small leading-5 text-g600 font-normal" dangerouslySetInnerHTML={{ __html: privacyPolicy }}></div>
+                        <div
+                            className="flex-1 w-full bg-g50 overflow-y-auto p-5 text-small leading-5 text-g600 font-normal"
+                            dangerouslySetInnerHTML={{ __html: privacyPolicy }}
+                        ></div>
                     </div>
                 </div>
             )}

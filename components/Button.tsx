@@ -17,7 +17,7 @@ interface ButtonProps {
             | React.MouseEvent<HTMLButtonElement>
     ) => void;
     type?: "submit" | "button" | "reset" | undefined;
-    btnType?: "primary" | "secondary";
+    btnType?: "primary" | "secondary" | "white";
     size?: "large" | "medium";
     icLeft?: React.ReactNode;
     icRight?: React.ReactNode;
@@ -38,11 +38,12 @@ export default function Button({
 }: ButtonProps) {
     const baseClass = `
         flex items-center gap-3 justify-center text-white 
-        rounded-[2px] transition-colors flex items-center justify-center gap-1 font-[600] disabled:bg-g200
+        rounded-[2px] transition-colors flex items-center justify-center gap-1 font-[600] disabled:bg-g200 select-none
     `;
     const buttonStyles = {
         primary: "bg-g950 hover:bg-ePrimary",
         secondary: "bg-ePrimary hover:bg-ePrimary/90",
+        white: "bg-white !text-g950 hover:bg-g100",
     };
 
     const buttonSizeStyles = {

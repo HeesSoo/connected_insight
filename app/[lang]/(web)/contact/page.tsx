@@ -258,7 +258,12 @@ const Sales: React.FC = () => {
                     </div>
 
                     <div className="flex justify-between items-center mt-[111px]">
-                        <div className="flex gap-2 items-center select-none">
+                        <div
+                            className="flex gap-2 items-center bg-[#f6f6f6] p-2 cursor-pointer"
+                            onClick={() => {
+                                setPrivacy(!privacy);
+                            }}
+                        >
                             <div className="rounded-[100%] flex items-center">
                                 <Checkbox
                                     checked={privacy}
@@ -267,7 +272,7 @@ const Sales: React.FC = () => {
                                     onChange={(value, checked) =>
                                         setPrivacy(checked)
                                     }
-                                    className="w-[24px] h-[24px] rounded-[25px] overflow-hidden"
+                                    className="bg-[#f6f6f6]"
                                 />
                                 <input
                                     type="checkbox"
@@ -282,7 +287,7 @@ const Sales: React.FC = () => {
                             {/* render localized "common" with clickable policy label injected into {0} */}
                             <label
                                 htmlFor="privacy"
-                                className="flex align-center text-small"
+                                className="flex align-center text-small cursor-pointer"
                             >
                                 {(() => {
                                     const common =

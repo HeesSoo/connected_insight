@@ -32,16 +32,22 @@ export function middleware(request: NextRequest) {
 
     // Admin 경로 처리
     if (pathname.startsWith("/admin")) {
-        // 로그인 페이지는 인증 체크 건너뛰기
+        const token = request.cookies.get("token")?.value;
+
+        // 로그인 페이지 처리
         if (pathname === "/admin/login") {
+            // 이미 로그인되어 있으면 /admin으로 리다이렉트
+            if (token) {
+                return NextResponse.redirect(new URL("/admin", request.url));
+            }
+            // 로그인 안 되어 있으면 로그인 페이지 표시
             return NextResponse.next();
         }
 
-        // TODO: 토큰 값 체크 로직 추가
-        // const token = request.cookies.get("admin_token");
-        // if (!token) {
-        //   return NextResponse.redirect(new URL("/admin/login", request.url));
-        // }
+        // /admin 경로 보호 (로그인 필요)
+        if (!token) {
+            return NextResponse.redirect(new URL("/admin/login", request.url));
+        }
 
         return NextResponse.next();
     }

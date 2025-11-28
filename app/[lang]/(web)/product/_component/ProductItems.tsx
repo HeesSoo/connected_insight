@@ -126,21 +126,21 @@ const ProductItem = ({
         return (
             <Link
                 href={`/product/${item.uuid}`}
-                className="w-full bg-white shadow-md hover:shadow-lg p-8 rounded-xl border border-gray-50 transition-shadow select-none"
+                className="w-full bg-white shadow-prditem hover:shadow-lg rounded-lg border border-g100 transition-shadow select-none"
             >
                 <Image
                     src={src}
                     alt={item.name}
                     width={440}
                     height={296}
-                    className="w-full mb-5 max-h-[296px] object-cover"
+                    className="w-full max-h-[296px] object-cover rounded-t-lg"
                     onError={() => {
                         /* next/image의 onError는 JSX 반환이 아니므로 빈 핸들러로 둠.
                        필요하면 상태로 대체 이미지 처리 추가 가능 */
                     }}
                 />
 
-                <div>
+                <div className="p-5">
                     <div className="mb-1 text-g400 text-base font-medium">
                         {item.type === "plus" && "LineX Plus"}
                         {item.type === "max" && "LineX Max"}
@@ -159,7 +159,7 @@ const ProductItem = ({
             <a
                 href={(item as any).url}
                 target="_blank"
-                className="w-full cursor-pointer bg-white shadow-md hover:shadow-lg p-8 rounded-xl border border-gray-50 transition-shadow select-none"
+                className="w-full cursor-pointer bg-white shadow-prditem hover:shadow-xl rounded-lg border border-g100 transition-shadow select-none"
                 rel="noopener noreferrer"
             >
                 <Image
@@ -167,14 +167,14 @@ const ProductItem = ({
                     alt={item.name}
                     width={440}
                     height={296}
-                    className="w-full mb-5 h-[296px] object-cover"
+                    className="w-full h-[296px] object-cover rounded-t-lg"
                     onError={() => {
                         /* next/image의 onError는 JSX 반환이 아니므로 빈 핸들러로 둠.
                        필요하면 상태로 대체 이미지 처리 추가 가능 */
                     }}
                 />
 
-                <div>
+                <div className="p-5">
                     <div className="mb-1 text-g400 text-base font-medium">
                         {type === "lingchen" && "LINGCHEN"}
                         {type === "tokk" && "TOKK"}

@@ -1,25 +1,40 @@
 "use client";
 
-import Image from "next/image";
-import case1 from "@/public/solutions/cis-application/cis_case_1.png";
 import Button from "@/components/Button";
+import { useState } from "react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 
 const Support: React.FC = () => {
+    const [componentSwiper, setComponentSwiper] = useState<SwiperClass>();
+    const [demoSwiper, setDemoSwiper] = useState<SwiperClass>();
+
+    const handlePrev = ({ type }: { type: "comp" | "demo" }) => {
+        if (type === "comp") {
+            componentSwiper?.slidePrev();
+        } else {
+            demoSwiper?.slidePrev();
+        }
+    };
+    const handleNext = ({ type }: { type: "comp" | "demo" }) => {
+        if (type === "comp") {
+            componentSwiper?.slideNext();
+        } else {
+            demoSwiper?.slideNext();
+        }
+    };
+
     return (
         <div className="w-full px-8">
             <div className="w-full max-w-[1440px] pt-[120px] pb-[160px] mx-auto text-g950">
                 {/* Main Image */}
-                <Image
-                    src={case1}
-                    alt="Main Case"
-                    width={1440}
-                    height={420}
-                    className="w-full h-[420px]"
-                />
+                <div className="w-full h-[420px] bg-black"></div>
 
                 {/* EYEON Vision */}
                 <div className="mt-12 w-full flex mb-[160px]">
-                    <div className="mr-[137px] w-[591px]">
+                    <div className="mr-[137px] flex-1">
                         <h3 className="mb-2 text-h3 font-bold">
                             EYEON Vision & Robotics Lab
                         </h3>
@@ -28,7 +43,7 @@ const Support: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="text-large font-[500]">
+                    <div className="w-[712px] text-large font-[500]">
                         주식회사 아이온은 산업 자동화의 핵심이 되는&nbsp;
                         <span className="text-ePrimary font-[600]">
                             머신비전 CIS카메라와
@@ -56,8 +71,55 @@ const Support: React.FC = () => {
 
                 {/* 컴포넌트 연구 파트 */}
                 <div className="w-full flex mb-[160px]">
-                    <div className="mr-[137px] w-[591px] h-[520px] bg-black"></div>
-                    <div className="flex-1 h-auto flex flex-col justify-between">
+                    <div className="mr-[137px] flex-1 h-[520px] bg-black relative">
+                        <Swiper
+                            modules={[Navigation]}
+                            onSwiper={(e) => {
+                                setComponentSwiper(e);
+                            }}
+                        >
+                            <SwiperSlide>
+                                <div className="w-full h-full bg-black"></div>
+                            </SwiperSlide>
+                        </Swiper>
+
+                        <button
+                            className="absolute top-1/2 -translate-y-[50%] -left-[30px] z-[1] w-[60px] h-[60px] rounded-full bg-ePrimary hover:bg-ePrimary/90 transition-colors flex justify-center items-center cursor-pointer"
+                            onClick={() => handlePrev({ type: "comp" })}
+                        >
+                            <svg
+                                width="24"
+                                height="18"
+                                viewBox="0 0 24 18"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M9.23063 17.4808L10.8116 15.854L5.08275 10.1252H23.25V7.87516H5.08275L10.8116 2.14628L9.23063 0.519531L0.75 9.00016L9.23063 17.4808Z"
+                                    fill="white"
+                                />
+                            </svg>
+                        </button>
+                        <button
+                            className="absolute top-1/2 -translate-y-[50%] -right-[30px] z-[1] w-[60px] h-[60px] rounded-full bg-ePrimary hover:bg-ePrimary/90 transition-colors flex justify-center items-center cursor-pointer"
+                            onClick={() => handleNext({ type: "comp" })}
+                        >
+                            <svg
+                                width="24"
+                                height="18"
+                                viewBox="0 0 24 18"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M14.7694 17.4808L13.1884 15.854L18.9173 10.1252H0.75V7.87516H18.9173L13.1884 2.14628L14.7694 0.519531L23.25 9.00016L14.7694 17.4808Z"
+                                    fill="white"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div className="w-[712px] h-auto flex flex-col justify-between">
                         <div>
                             <h3 className="text-h3 font-bold mb-2">
                                 VISION 컴포넌트 연구 파트
@@ -133,8 +195,54 @@ const Support: React.FC = () => {
 
                 {/* 데모 스테이션 */}
                 <div className="w-full flex mb-[160px]">
-                    <div className="mr-[137px] w-[591px] h-[520px] bg-black"></div>
-                    <div className="flex-1 h-auto flex flex-col justify-between">
+                    <div className="mr-[137px] flex-1 h-[520px] bg-black relative">
+                        <Swiper
+                            modules={[Navigation]}
+                            onSwiper={(e) => {
+                                setDemoSwiper(e);
+                            }}
+                        >
+                            <SwiperSlide>
+                                <div className="w-full h-full bg-black"></div>
+                            </SwiperSlide>
+                        </Swiper>
+
+                        <button
+                            className="absolute top-1/2 -translate-y-[50%] -left-[30px] z-[1] w-[60px] h-[60px] rounded-full bg-ePrimary hover:bg-ePrimary/90 transition-colors flex justify-center items-center cursor-pointer"
+                            onClick={() => handlePrev({ type: "demo" })}
+                        >
+                            <svg
+                                width="24"
+                                height="18"
+                                viewBox="0 0 24 18"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M9.23063 17.4808L10.8116 15.854L5.08275 10.1252H23.25V7.87516H5.08275L10.8116 2.14628L9.23063 0.519531L0.75 9.00016L9.23063 17.4808Z"
+                                    fill="white"
+                                />
+                            </svg>
+                        </button>
+                        <button
+                            className="absolute top-1/2 -translate-y-[50%] -right-[30px] z-[1] w-[60px] h-[60px] rounded-full bg-ePrimary hover:bg-ePrimary/90 transition-colors flex justify-center items-center cursor-pointer"
+                            onClick={() => handleNext({ type: "demo" })}
+                        >
+                            <svg
+                                width="24"
+                                height="18"
+                                viewBox="0 0 24 18"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M14.7694 17.4808L13.1884 15.854L18.9173 10.1252H0.75V7.87516H18.9173L13.1884 2.14628L14.7694 0.519531L23.25 9.00016L14.7694 17.4808Z"
+                                    fill="white"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                    <div className="w-[712px] h-auto flex flex-col justify-between">
                         <div>
                             <h3 className="text-h3 font-bold mb-2">
                                 Linear Actuator 데모 스테이션

@@ -6,7 +6,13 @@ import { Arrow2UpIco } from "@/icons/icons";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Filter as FilterType } from "./ProductListClient";
 
-export default function Filter({ filter, setFilter }: { filter: FilterType; setFilter: Dispatch<SetStateAction<FilterType>> }) {
+export default function Filter({
+    filter,
+    setFilter,
+}: {
+    filter: FilterType;
+    setFilter: Dispatch<SetStateAction<FilterType>>;
+}) {
     // 섹션 확장/축소 상태
     const [sectionExpanded, setSectionExpanded] = useState({
         type: true,
@@ -74,10 +80,26 @@ export default function Filter({ filter, setFilter }: { filter: FilterType; setF
         Object.entries(typeFilters).forEach(([key, value]) => {
             if (key === type) {
                 if (!value) {
-                    types.push(key === "PLUS" ? "plus" : key === "MAX" ? "max" : key === "MAX_PRO" ? "max pro" : "color");
+                    types.push(
+                        key === "PLUS"
+                            ? "plus"
+                            : key === "MAX"
+                            ? "max"
+                            : key === "MAX_PRO"
+                            ? "max pro"
+                            : "color"
+                    );
                 }
             } else if (value) {
-                types.push(key === "PLUS" ? "plus" : key === "MAX" ? "max" : key === "MAX_PRO" ? "max pro" : "color");
+                types.push(
+                    key === "PLUS"
+                        ? "plus"
+                        : key === "MAX"
+                        ? "max"
+                        : key === "MAX_PRO"
+                        ? "max pro"
+                        : "color"
+                );
             }
         });
 
@@ -88,7 +110,9 @@ export default function Filter({ filter, setFilter }: { filter: FilterType; setF
     };
 
     // Resolution 체크박스 핸들러
-    const handleResolutionChange = (resolution: keyof typeof resolutionFilters) => {
+    const handleResolutionChange = (
+        resolution: keyof typeof resolutionFilters
+    ) => {
         setResolutionFilters((prev) => ({
             ...prev,
             [resolution]: !prev[resolution],
@@ -98,10 +122,34 @@ export default function Filter({ filter, setFilter }: { filter: FilterType; setF
         Object.entries(resolutionFilters).forEach(([key, value]) => {
             if (key === resolution) {
                 if (!value) {
-                    resolutions.push(key === "300DPI" ? 300 : key === "600DPI" ? 600 : key === "900DPI" ? 900 : key === "1200DPI" ? 1200 : key === "1800DPI" ? 1800 : 3600);
+                    resolutions.push(
+                        key === "300DPI"
+                            ? 300
+                            : key === "600DPI"
+                            ? 600
+                            : key === "900DPI"
+                            ? 900
+                            : key === "1200DPI"
+                            ? 1200
+                            : key === "1800DPI"
+                            ? 1800
+                            : 3600
+                    );
                 }
             } else if (value) {
-                resolutions.push(key === "300DPI" ? 300 : key === "600DPI" ? 600 : key === "900DPI" ? 900 : key === "1200DPI" ? 1200 : key === "1800DPI" ? 1800 : 3600);
+                resolutions.push(
+                    key === "300DPI"
+                        ? 300
+                        : key === "600DPI"
+                        ? 600
+                        : key === "900DPI"
+                        ? 900
+                        : key === "1200DPI"
+                        ? 1200
+                        : key === "1800DPI"
+                        ? 1800
+                        : 3600
+                );
             }
         });
 
@@ -153,7 +201,8 @@ export default function Filter({ filter, setFilter }: { filter: FilterType; setF
     const handleSectionCheckboxClick = (section: "type" | "resolution") => {
         if (section === "type") {
             const currentState = getSectionCheckboxState("type");
-            const shouldSelectAll = !currentState.checked || currentState.indeterminate;
+            const shouldSelectAll =
+                !currentState.checked || currentState.indeterminate;
 
             setTypeFilters({
                 PLUS: shouldSelectAll,
@@ -175,7 +224,8 @@ export default function Filter({ filter, setFilter }: { filter: FilterType; setF
             }
         } else if (section === "resolution") {
             const currentState = getSectionCheckboxState("resolution");
-            const shouldSelectAll = !currentState.checked || currentState.indeterminate;
+            const shouldSelectAll =
+                !currentState.checked || currentState.indeterminate;
 
             setResolutionFilters({
                 "300DPI": shouldSelectAll,
@@ -201,15 +251,41 @@ export default function Filter({ filter, setFilter }: { filter: FilterType; setF
     };
 
     // 체크박스 컴포넌트
-    const CheckboxItem = ({ checked, onChange, label, value }: { checked: boolean; onChange: () => void; label: string; value: string }) => (
+    const CheckboxItem = ({
+        checked,
+        onChange,
+        label,
+        value,
+    }: {
+        checked: boolean;
+        onChange: () => void;
+        label: string;
+        value: string;
+    }) => (
         <div className="flex items-center gap-1">
             <div className="w-4 h-[1px] bg-g200"></div>
-            <Checkbox checked={checked} onChange={onChange} label={label} value={value} textCls="text-sm !font-medium text-g500" />
+            <Checkbox
+                checked={checked}
+                onChange={onChange}
+                label={label}
+                value={value}
+                textCls="text-sm !font-medium text-g500"
+            />
         </div>
     );
 
     // 섹션 헤더 컴포넌트
-    const SectionHeader = ({ title, isExpanded, onToggle, section }: { title: string; isExpanded: boolean; onToggle: () => void; section: "type" | "resolution" }) => {
+    const SectionHeader = ({
+        title,
+        isExpanded,
+        onToggle,
+        section,
+    }: {
+        title: string;
+        isExpanded: boolean;
+        onToggle: () => void;
+        section: "type" | "resolution";
+    }) => {
         const checkboxState = getSectionCheckboxState(section);
 
         return (
@@ -225,7 +301,12 @@ export default function Filter({ filter, setFilter }: { filter: FilterType; setF
                     />
                 </div>
 
-                <div className={`cursor-pointer ${isExpanded ? "rotate-0" : "rotate-180"} transition-transform duration-200`} onClick={onToggle}>
+                <div
+                    className={`cursor-pointer ${
+                        isExpanded ? "rotate-0" : "rotate-180"
+                    } transition-transform duration-200`}
+                    onClick={onToggle}
+                >
                     <Arrow2UpIco />
                 </div>
             </div>
@@ -259,31 +340,91 @@ export default function Filter({ filter, setFilter }: { filter: FilterType; setF
     };
 
     return (
-        <div className="w-[329px] bg-white mt-[46px]">
+        <div className="w-[329px] bg-white mt-[46px] select-none">
             {/* Type 섹션 */}
             <div className="border-b border-g200 pb-4">
-                <SectionHeader title="Model" isExpanded={sectionExpanded.type} onToggle={() => handleSectionToggle("type")} section="type" />
+                <SectionHeader
+                    title="Model"
+                    isExpanded={sectionExpanded.type}
+                    onToggle={() => handleSectionToggle("type")}
+                    section="type"
+                />
                 {sectionExpanded.type && (
                     <div className="mt-3 space-y-2">
-                        <CheckboxItem checked={typeFilters.PLUS} onChange={() => handleTypeChange("PLUS")} label="PLUS (300dpi, 600dpi, 1200dpi)" value="PLUS" />
-                        <CheckboxItem checked={typeFilters.MAX} onChange={() => handleTypeChange("MAX")} label="MAX (900dpi, 1800dpi)" value="MAX" />
-                        <CheckboxItem checked={typeFilters.MAX_PRO} onChange={() => handleTypeChange("MAX_PRO")} label="MAX PRO (3600dpi)" value="MAX_PRO" />
-                        <CheckboxItem checked={typeFilters.COLOR} onChange={() => handleTypeChange("COLOR")} label="COLOR (300dpi, 600dpi, 900dpi, 1800dpi)" value="COLOR" />
+                        <CheckboxItem
+                            checked={typeFilters.PLUS}
+                            onChange={() => handleTypeChange("PLUS")}
+                            label="PLUS (300dpi, 600dpi, 1200dpi)"
+                            value="PLUS"
+                        />
+                        <CheckboxItem
+                            checked={typeFilters.MAX}
+                            onChange={() => handleTypeChange("MAX")}
+                            label="MAX (900dpi, 1800dpi)"
+                            value="MAX"
+                        />
+                        <CheckboxItem
+                            checked={typeFilters.MAX_PRO}
+                            onChange={() => handleTypeChange("MAX_PRO")}
+                            label="MAX PRO (3600dpi)"
+                            value="MAX_PRO"
+                        />
+                        <CheckboxItem
+                            checked={typeFilters.COLOR}
+                            onChange={() => handleTypeChange("COLOR")}
+                            label="COLOR (300dpi, 600dpi, 900dpi, 1800dpi)"
+                            value="COLOR"
+                        />
                     </div>
                 )}
             </div>
 
             {/* Resolution 섹션 */}
             <div className="border-b border-g200 py-4">
-                <SectionHeader title="Resolution (DPI)" isExpanded={sectionExpanded.resolution} onToggle={() => handleSectionToggle("resolution")} section="resolution" />
+                <SectionHeader
+                    title="Resolution (DPI)"
+                    isExpanded={sectionExpanded.resolution}
+                    onToggle={() => handleSectionToggle("resolution")}
+                    section="resolution"
+                />
                 {sectionExpanded.resolution && (
                     <div className="mt-3 space-y-1">
-                        <CheckboxItem checked={resolutionFilters["300DPI"]} onChange={() => handleResolutionChange("300DPI")} label="300DPI" value="300DPI" />
-                        <CheckboxItem checked={resolutionFilters["600DPI"]} onChange={() => handleResolutionChange("600DPI")} label="600DPI" value="600DPI" />
-                        <CheckboxItem checked={resolutionFilters["900DPI"]} onChange={() => handleResolutionChange("900DPI")} label="900DPI" value="900DPI" />
-                        <CheckboxItem checked={resolutionFilters["1200DPI"]} onChange={() => handleResolutionChange("1200DPI")} label="1200DPI" value="1200DPI" />
-                        <CheckboxItem checked={resolutionFilters["1800DPI"]} onChange={() => handleResolutionChange("1800DPI")} label="1800DPI" value="1800DPI" />
-                        <CheckboxItem checked={resolutionFilters["3600DPI"]} onChange={() => handleResolutionChange("3600DPI")} label="3600DPI" value="3600DPI" />
+                        <CheckboxItem
+                            checked={resolutionFilters["300DPI"]}
+                            onChange={() => handleResolutionChange("300DPI")}
+                            label="300DPI"
+                            value="300DPI"
+                        />
+                        <CheckboxItem
+                            checked={resolutionFilters["600DPI"]}
+                            onChange={() => handleResolutionChange("600DPI")}
+                            label="600DPI"
+                            value="600DPI"
+                        />
+                        <CheckboxItem
+                            checked={resolutionFilters["900DPI"]}
+                            onChange={() => handleResolutionChange("900DPI")}
+                            label="900DPI"
+                            value="900DPI"
+                        />
+                        <CheckboxItem
+                            checked={resolutionFilters["1200DPI"]}
+                            onChange={() => handleResolutionChange("1200DPI")}
+                            label="1200DPI"
+                            value="1200DPI"
+                        />
+                        <CheckboxItem
+                            checked={resolutionFilters["1800DPI"]}
+                            onChange={() => handleResolutionChange("1800DPI")}
+                            label="1800DPI"
+                            value="1800DPI"
+                        />
+                        <CheckboxItem
+                            checked={resolutionFilters["3600DPI"]}
+                            onChange={() => handleResolutionChange("3600DPI")}
+                            label="3600DPI"
+                            value="3600DPI"
+                        />
                     </div>
                 )}
             </div>
@@ -299,7 +440,9 @@ export default function Filter({ filter, setFilter }: { filter: FilterType; setF
                     unit="kHz"
                     parseValue={(text) => {
                         const cleaned = text.replace(/[^0-9.-]/g, "");
-                        return Number.isFinite(Number(cleaned)) ? Number(cleaned) : 11;
+                        return Number.isFinite(Number(cleaned))
+                            ? Number(cleaned)
+                            : 11;
                     }}
                 />
 
@@ -313,7 +456,9 @@ export default function Filter({ filter, setFilter }: { filter: FilterType; setF
                     unit="mm"
                     parseValue={(text) => {
                         const cleaned = text.replace(/[^0-9.-]/g, "");
-                        return Number.isFinite(Number(cleaned)) ? Number(cleaned) : 165;
+                        return Number.isFinite(Number(cleaned))
+                            ? Number(cleaned)
+                            : 165;
                     }}
                 />
 
@@ -327,7 +472,9 @@ export default function Filter({ filter, setFilter }: { filter: FilterType; setF
                     unit="mm"
                     parseValue={(text) => {
                         const cleaned = text.replace(/[^0-9.-]/g, "");
-                        return Number.isFinite(Number(cleaned)) ? Number(cleaned) : 7;
+                        return Number.isFinite(Number(cleaned))
+                            ? Number(cleaned)
+                            : 7;
                     }}
                 />
             </div>

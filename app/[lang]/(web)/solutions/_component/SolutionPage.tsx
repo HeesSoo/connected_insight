@@ -1,10 +1,12 @@
 import { SolutionItem } from "@/types/solution";
 import axios from "axios";
-import SolutionItems from "./SolutionItems";
+import SolutionComponent from "./SolutionComponent";
 
 async function getApplications(): Promise<SolutionItem[]> {
     try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution`);
+        const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution`
+        );
         if (response.status === 200) {
             return response.data.data || [];
         }
@@ -14,15 +16,14 @@ async function getApplications(): Promise<SolutionItem[]> {
     return [];
 }
 
-const CISApplication: React.FC = async ({}) => {
+const SolutionPage: React.FC = async ({}) => {
     const [applications] = await Promise.all([getApplications()]);
 
     return (
-        <div className="w-full max-w-[1440px] mx-auto pt-[80px] pb-[160px]">
-            <h3 className="title text-title mb-[48px] font-semibold">CIS Application</h3>
-            <SolutionItems data={applications} />
+        <div className="w-full max-w-[1440px] mx-auto pt-[120px] pb-[160px]">
+            <SolutionComponent data={applications} />
         </div>
     );
 };
 
-export default CISApplication;
+export default SolutionPage;

@@ -15,6 +15,11 @@ const nextConfig = {
                 hostname: "eyeon-bucket-pjt.s3.ap-northeast-2.amazonaws.com",
                 pathname: "/**",
             },
+            {
+                protocol: "https",
+                hostname: "eyeon.bucket.s3.ap-northeast-2.amazonaws.com",
+                pathname: "/**",
+            },
         ],
         unoptimized: true
     },

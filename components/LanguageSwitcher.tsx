@@ -66,7 +66,7 @@ export default function LanguageSwitcher({
                     language === "ko"
                         ? "bg-g950 hover:bg-g800"
                         : "bg-g200 hover:bg-g300"
-                } text-white px-3 text-small leading-5 rounded-xl transition-colors`}
+                } text-white px-3 text-small leading-5 rounded-xl transition-colors select-none`}
                 onClick={() => handleLanguageChange("ko")}
             >
                 KR
@@ -76,7 +76,7 @@ export default function LanguageSwitcher({
                     language === "en"
                         ? "bg-g950 hover:bg-g800"
                         : "bg-g200 hover:bg-g300"
-                } text-white px-3 text-small leading-5 rounded-xl transition-colors`}
+                } text-white px-3 text-small leading-5 rounded-xl transition-colors select-none`}
                 onClick={() => handleLanguageChange("en")}
             >
                 EN

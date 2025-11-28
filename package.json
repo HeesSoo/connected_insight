@@ -9,12 +9,14 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@emotion/react": "^11.14.0",
         "@svgr/webpack": "^8.1.0",
         "axios": "^1.10.0",
         "dotenv": "^17.0.1",
         "googleapis": "^161.0.0",
         "next": "14.2.3",
         "react": "^18",
+        "react-awesome-reveal": "^4.3.1",
         "react-dom": "^18",
         "swiper": "^11.2.10",
         "zustand": "^5.0.8"

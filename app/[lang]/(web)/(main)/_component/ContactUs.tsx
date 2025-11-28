@@ -13,13 +13,15 @@ export default function Contactus() {
     return (
         <div className="w-full h-[360px] mx-auto relative">
             <div className="absolute w-full h-[360px] p-[60px]">
-                <h3 className="text-title font-semibold text-white mb-6">Contact Us</h3>
+                <h3 className="text-title font-semibold text-white mb-6">
+                    Contact Us
+                </h3>
                 <div className="text-large text-white mb-12">
                     {t["main-contact-us-guide_1"].replace("  \n", "")}
                     <br />
                     {t["main-contact-us-guide_2"]}
                 </div>
-                <Link href="/contact" className="inline-flex">
+                <Link href="/contact" className="w-fit block">
                     <Button
                         label={t["main-contact-us-inquiry"]}
                         btnType="secondary"
@@ -32,7 +34,13 @@ export default function Contactus() {
                     />
                 </Link>
             </div>
-            <Image src={ContactUs.src} alt="Contact Us" width={1440} height={400} className="w-full h-[360px]" />
+            <Image
+                src={ContactUs.src}
+                alt="Contact Us"
+                width={1440}
+                height={400}
+                className="w-full h-[360px]"
+            />
         </div>
     );
 }

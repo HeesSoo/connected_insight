@@ -21,7 +21,12 @@ export function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
     // API 라우트, _next, static 파일, public 파일은 무시
-    if (pathname.startsWith("/api") || pathname.startsWith("/_next") || pathname.startsWith("/translations") || pathname.includes(".")) {
+    if (
+        pathname.startsWith("/api") ||
+        pathname.startsWith("/_next") ||
+        pathname.startsWith("/translations") ||
+        pathname.includes(".")
+    ) {
         return NextResponse.next();
     }
 
@@ -49,9 +54,18 @@ export function middleware(request: NextRequest) {
 
     // 언어 코드가 있는지 확인
     const locale = getLocale(pathname);
-    const pathnameWithoutLocale = locale ? pathname.replace(`/${locale}`, "") || "/" : pathname;
+    const pathnameWithoutLocale = locale
+        ? pathname.replace(`/${locale}`, "") || "/"
+        : pathname;
 
-    const allowUrl = ["/", "/solutions", "/product", "/product/:id", "/contact"];
+    const allowUrl = [
+        "/",
+        "/solutions",
+        "/product",
+        "/product/:id",
+        "/contact",
+        "/support",
+    ];
 
     // allowUrl에 포함된 경로인지 확인 (언어 코드 제외한 경로로 체크)
     const isAllowedUrl = allowUrl.some((url) => {
@@ -66,7 +80,10 @@ export function middleware(request: NextRequest) {
             return pathnameWithoutLocale === "/";
         }
         // 그 외 경로는 정확히 일치하거나 해당 경로로 시작하는지 확인 (예: /product, /product/123)
-        return pathnameWithoutLocale === url || pathnameWithoutLocale.startsWith(url + "/");
+        return (
+            pathnameWithoutLocale === url ||
+            pathnameWithoutLocale.startsWith(url + "/")
+        );
     });
 
     // allowUrl에 없는 경로면 루트(/)로 리다이렉트

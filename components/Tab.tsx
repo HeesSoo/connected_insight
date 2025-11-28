@@ -33,13 +33,15 @@ export default function Tab({ items, defaultTab, onChange }: TabProps) {
     };
 
     return (
-        <div className="w-full">
+        <div className="w-full select-none">
             <div className="flex border-b-2 border-g200">
                 {items.map((item) => (
                     <div
                         key={item.value}
                         className={`w-fit cursor-pointer px-9 pb-4 text-[24px] leading-[36px] transition-all duration-150 ${
-                            tab === item.value ? "border-b-4 border-ePrimary text-ePrimary font-semibold mb-[-2px]" : "border-none text-g400 font-medium"
+                            tab === item.value
+                                ? "border-b-4 border-ePrimary text-ePrimary font-semibold mb-[-2px]"
+                                : "border-none text-g400 font-medium"
                         }`}
                         onClick={() => handleTabChange(item.value)}
                     >
@@ -47,7 +49,9 @@ export default function Tab({ items, defaultTab, onChange }: TabProps) {
                     </div>
                 ))}
             </div>
-            {items.find((item) => item.value === tab)?.children && <div>{items.find((item) => item.value === tab)?.children}</div>}
+            {items.find((item) => item.value === tab)?.children && (
+                <div>{items.find((item) => item.value === tab)?.children}</div>
+            )}
         </div>
     );
 }

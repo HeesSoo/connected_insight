@@ -1,15 +1,19 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-    content: ["./pages/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx,mdx}", "./app/**/*.{js,ts,jsx,tsx,mdx}"],
+    content: [
+        "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+        "./components/**/*.{js,ts,jsx,tsx,mdx}",
+        "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    ],
     theme: {
         screens: {
-            'sm': '640px',
-            'md': '768px',
-            'lg': '1024px',
-            'xl': '1280px',
-            'max': '1440px',  // 커스텀 breakpoint
-            '2xl': '1536px',
+            sm: "640px",
+            md: "768px",
+            lg: "1024px",
+            xl: "1280px",
+            max: "1440px", // 커스텀 breakpoint
+            "2xl": "1536px",
         },
         extend: {
             colors: {
@@ -52,12 +56,27 @@ const config: Config = {
                 base: "4.5rem",
             },
             fontSize: {
-                small: ["14px", { lineHeight: "21px", letterSpacing: "-0.2px" }],
+                small: [
+                    "14px",
+                    { lineHeight: "21px", letterSpacing: "-0.2px" },
+                ],
                 base: ["16px", { lineHeight: "24px", letterSpacing: "-0.2px" }],
-                large: ["20px", { lineHeight: "30px", letterSpacing: "-0.2px" }],
-                titleSmall: ["24px", { lineHeight: "36px", letterSpacing: "-0.2px" }],
-                title: ["32px", { lineHeight: "48px", letterSpacing: "-0.2px" }],
-                titleXl: ["48px", { lineHeight: "72px", letterSpacing: "-0.2px" }],
+                large: [
+                    "20px",
+                    { lineHeight: "30px", letterSpacing: "-0.2px" },
+                ],
+                titleSmall: [
+                    "24px",
+                    { lineHeight: "36px", letterSpacing: "-0.2px" },
+                ],
+                title: [
+                    "32px",
+                    { lineHeight: "48px", letterSpacing: "-0.2px" },
+                ],
+                titleXl: [
+                    "48px",
+                    { lineHeight: "72px", letterSpacing: "-0.2px" },
+                ],
                 h3: ["28px", { lineHeight: "42px", letterSpacing: "-0.2px" }],
                 xl: ["36px", { lineHeight: "54px", letterSpacing: "-0.2px" }],
             },
@@ -73,6 +92,9 @@ const config: Config = {
             },
             borderRadius: {
                 base: "2rem",
+            },
+            boxShadow: {
+                prditem: "0px 4px 12px rgba(0, 0, 0, 0.1)",
             },
         },
     },

@@ -150,7 +150,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
                     </Swiper>
 
                     <button
-                        className="absolute top-1/2 -translate-y-[50%] -left-24 [@media(max-width:1600px)]:-left-[2%] z-[1] w-12 h-12 rounded-full bg-ePrimary hover:bg-ePrimary/90 transition-colors flex justify-center items-center cursor-pointer"
+                        className="absolute top-1/2 -translate-y-[50%] -left-24 [@media(max-width:1600px)]:-left-[2%] z-[1] w-12 h-12 rounded-full bg-ePrimary hover:bg-[#C92F2E] transition-colors flex justify-center items-center cursor-pointer"
                         onClick={handlePrev}
                     >
                         <svg
@@ -167,7 +167,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
                         </svg>
                     </button>
                     <button
-                        className="absolute top-1/2 -translate-y-[50%] -right-24 [@media(max-width:1600px)]:-right-[2%] z-[1] w-12 h-12 rounded-full bg-ePrimary hover:bg-ePrimary/90 transition-colors flex justify-center items-center cursor-pointer"
+                        className="absolute top-1/2 -translate-y-[50%] -right-24 [@media(max-width:1600px)]:-right-[2%] z-[1] w-12 h-12 rounded-full bg-ePrimary hover:bg-[#C92F2E] transition-colors flex justify-center items-center cursor-pointer"
                         onClick={handleNext}
                     >
                         <svg

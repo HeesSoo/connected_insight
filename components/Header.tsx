@@ -20,13 +20,18 @@ const renderNavigationItem = (
 ): React.ReactNode => {
     const hasLink = item.href && item.href !== "#";
     const [external, setExternal] = useState<NavigationItem[]>([]);
+    const [isHovered, setIsHovered] = useState(false);
 
     const commonProps = {
         onKeyDown: (e: React.KeyboardEvent) => onKeyDown(e, item.id),
-        className: `flex gap-x-2 text-large text-medium text-g950 ${
+        onMouseEnter: () => setIsHovered(true),
+        onMouseLeave: () => setIsHovered(false),
+        className: `flex gap-x-2 text-large text-medium text-g950 hover:text-ePrimary ${
             isActive ? "text-ePrimary" : ""
         }`,
     };
+
+    const arrowFill = isHovered || isActive ? "#E83837" : "#111111";
 
     return (
         <>
@@ -38,10 +43,10 @@ const renderNavigationItem = (
                     {item?.children && item?.children?.length && (
                         <span
                             className={`inline-flex items-center transition-transform duration-200 ${
-                                isActive ? "text-ePrimary" : ""
-                            } ${isOpen ? "rotate-180" : ""}`}
+                                isOpen ? "rotate-180" : ""
+                            }`}
                         >
-                            <ArrowIco />
+                            <ArrowIco fill={arrowFill} />
                         </span>
                     )}
                 </Link>
@@ -54,10 +59,10 @@ const renderNavigationItem = (
                     {item?.children && item?.children?.length && (
                         <span
                             className={`inline-flex items-center transition-transform duration-200 ${
-                                isActive ? "text-ePrimary" : ""
-                            } ${isOpen ? "rotate-180" : ""}`}
+                                isOpen ? "rotate-180" : ""
+                            }`}
                         >
-                            <ArrowIco />
+                            <ArrowIco fill={arrowFill} />
                         </span>
                     )}
                 </button>
@@ -86,7 +91,7 @@ const renderNavigationItem = (
                         {item.children &&
                             item.children.length > 0 &&
                             item.children.map((child, childIndex) => (
-                                <div key={child.id}>
+                                <div key={child.id} className="">
                                     <li
                                         role="none"
                                         className="relative min-w-[120px] flex group"
@@ -101,7 +106,7 @@ const renderNavigationItem = (
                                                     ? localizedPath(child.href)
                                                     : "#"
                                             }
-                                            className="relative min-w-[120px] group-hover:block hover:text-ePrimary select-none w-full px-6 py-3 hover:bg-g50"
+                                            className="relative min-w-[120px] w-full group-hover:block hover:text-ePrimary select-none w-full px-6 py-3 hover:bg-g50"
                                         >
                                             {child.label}
                                         </Link>
@@ -124,17 +129,18 @@ const renderNavigationItem = (
                     >
                         {external && external.length > 0 && (
                             <>
-                                <div className="w-[1px] h-full bg-g200 ml-6"></div>
-                                <ul className={`flex flex-col`}>
+                                {/* <div className="w-[1px] h-full bg-g200 ml-6"></div> */}
+                                <div className="w-[1px] h-full bg-g200"></div>
+                                <ul className={`flex flex-col w-max`}>
                                     {external.map((external) => (
                                         <li
                                             key={external.id}
                                             role="none"
-                                            className="min-w-[120px] w-full"
+                                            className="w-full"
                                         >
                                             <Link
                                                 href={external.href}
-                                                className="min-w-[280px] w-full flex justify-between items-center hover:text-ePrimary select-none hover:bg-g50 px-6 py-3"
+                                                className="w-full flex justify-between items-center hover:text-ePrimary select-none hover:bg-g50 px-6 py-3 whitespace-nowrap gap-4"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                             >

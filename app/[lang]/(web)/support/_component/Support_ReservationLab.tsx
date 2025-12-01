@@ -19,7 +19,6 @@ export default function Support_ReservationLab({
 }: {
     data: ReservationItem[];
 }) {
-    console.log({ data });
     const router = useRouter();
     const { currentLanguage } = useTranslationStore();
 

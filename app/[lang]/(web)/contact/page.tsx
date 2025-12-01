@@ -7,7 +7,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import Upload from "@/public/svgs/upload.svg";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ContactLeft from "./_component/contact_left";
 import Input from "./_component/Input";
 import Textarea from "./_component/Textarea";
@@ -85,6 +85,23 @@ const Sales: React.FC = () => {
     const [file, setFile] = useState<File | null>(null);
     const [submitting, setSubmitting] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
+
+    // ESC 키로 모달 닫기
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === "Escape" && isModalOpen) {
+                setIsModalOpen(false);
+            }
+        };
+
+        if (isModalOpen) {
+            document.addEventListener("keydown", handleEscape);
+        }
+
+        return () => {
+            document.removeEventListener("keydown", handleEscape);
+        };
+    }, [isModalOpen]);
 
     const isFormComplete = !!(
         name.value &&
@@ -259,7 +276,8 @@ const Sales: React.FC = () => {
 
                     <div className="flex justify-between items-center mt-[111px]">
                         <div
-                            className="flex gap-2 items-center bg-[#f6f6f6] p-2 cursor-pointer"
+                            // className="flex gap-2 items-center bg-[#f6f6f6] p-2 cursor-pointer"
+                            className="flex gap-2 items-center bg-[#FFE46B80] p-2 cursor-pointer"
                             onClick={() => {
                                 setPrivacy(!privacy);
                             }}
@@ -354,8 +372,14 @@ const Sales: React.FC = () => {
             </div>
 
             {isModalOpen && (
-                <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="bg-white w-[876px] h-[640px] p-12 flex flex-col">
+                <div
+                    className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50"
+                    onClick={() => setIsModalOpen(false)}
+                >
+                    <div
+                        className="bg-white w-[876px] h-[640px] p-12 flex flex-col"
+                        onClick={(e) => e.stopPropagation()}
+                    >
                         <div className="w-full flex justify-end">
                             <svg
                                 width="36"

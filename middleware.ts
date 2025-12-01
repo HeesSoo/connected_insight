@@ -67,6 +67,27 @@ export function middleware(request: NextRequest) {
         "/support",
     ];
 
+    // 차단할 경로 목록
+    const blockUrl = [
+        "/support/download",
+    ];
+
+    // blockUrl에 포함된 경로인지 확인
+    const isBlockedUrl = blockUrl.some((url) => {
+        return (
+            pathnameWithoutLocale === url ||
+            pathnameWithoutLocale.startsWith(url + "/")
+        );
+    });
+
+    // 차단된 경로면 루트(/)로 리다이렉트
+    if (isBlockedUrl) {
+        const url = request.nextUrl.clone();
+        url.pathname = locale ? `/${locale}` : "/";
+        url.searchParams.set("redirected", "true");
+        return NextResponse.redirect(url);
+    }
+
     // allowUrl에 포함된 경로인지 확인 (언어 코드 제외한 경로로 체크)
     const isAllowedUrl = allowUrl.some((url) => {
         // :id와 같은 동적 경로 처리

@@ -11,7 +11,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
-import { Fade } from "react-awesome-reveal";
+import MotionWrapper from "@/components/MotionWrapper";
 
 interface MainSolutionProps {
   data: SolutionItem[];
@@ -31,7 +31,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
   };
 
   return (
-    <div>
+    <MotionWrapper delay={200} duration={0.8} direction="up" amount={0.3}>
       <h2 className="font-bold text-xl text-g950 mb-[58px]">CIS Application</h2>
 
       {!data || data.length === 0 ? (
@@ -115,6 +115,6 @@ export default function MainSolution({ data }: MainSolutionProps) {
           </button>
         </div>
       )}
-    </div>
+    </MotionWrapper>
   );
 }

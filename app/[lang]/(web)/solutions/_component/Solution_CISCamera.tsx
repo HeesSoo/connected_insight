@@ -1,10 +1,10 @@
 "use client";
 
 import Card from "@/components/Card";
+import MotionWrapper from "@/components/MotionWrapper";
 import { useTranslationStore } from "@/stores/translationStore";
 import { Solution, SolutionItem } from "@/types/solution";
 import { getYouTubeEmbedUrl } from "@/utils/youtube";
-import { Fade } from "react-awesome-reveal";
 
 export default function SolutionCISCamera({ data }: { data: Solution }) {
   const { currentLanguage } = useTranslationStore();
@@ -35,25 +35,25 @@ export default function SolutionCISCamera({ data }: { data: Solution }) {
               allowFullScreen
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500">
-              유효하지 않은 YouTube URL입니다.
-            </div>
+            <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500">유효하지 않은 YouTube URL입니다.</div>
           )}
         </div>
       </div>
 
       {data?.solutions?.length > 0 ? (
-        <div className="grid grid-cols-3 gap-x-4 gap-y-20">
-          {data?.solutions?.map((item, index) => (
-            <Card
-              key={index}
-              item={{
-                ...item,
-                name: item?.[`name_${currentLanguage}`],
-              }}
-            />
-          ))}
-        </div>
+        <MotionWrapper delay={200} duration={0.8} direction="up" amount={0.3}>
+          <div className="grid grid-cols-3 gap-x-4 gap-y-20">
+            {data?.solutions?.map((item, index) => (
+              <Card
+                key={index}
+                item={{
+                  ...item,
+                  name: item?.[`name_${currentLanguage}`],
+                }}
+              />
+            ))}
+          </div>
+        </MotionWrapper>
       ) : (
         <div className="w-full h-[300px] text-gray-500 text-center flex flex-col justify-center">CIS Application이 존재하지 않습니다.</div>
       )}

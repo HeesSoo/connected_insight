@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslationStore } from "@/stores/translationStore";
+import Image from "next/image";
 import { Solution } from "@/types/solution";
 
 export default function SolutionLingchen({ data }: { data: Solution }) {
@@ -24,7 +25,9 @@ export default function SolutionLingchen({ data }: { data: Solution }) {
       </div>
 
       <div className="flex-1">
-        <div className="w-full h-[590px] bg-black text-white flex justify-center items-center">IMG</div>
+        <div className="w-full h-[590px] text-white flex justify-center items-center">
+          <Image src={data.file_url} alt={data.name} width={1920} height={400} className="w-full h-[590px] object-cover" />
+        </div>
 
         <div className="h-0.5 w-full bg-g200 my-6"></div>
 
@@ -33,7 +36,7 @@ export default function SolutionLingchen({ data }: { data: Solution }) {
           {/* 4 Control Solution Frameworks for Industrial Automation */}
         </div>
 
-        <div className="text-g950 font-[500] text-large">
+        <div className="text-g950 font-[500] text-large whitespace-pre-wrap">
           {data[`description${currentLanguage === "ko" ? "" : "_en"}`]}
           {/* Lingchen Technology offers four industrial control solutions designed for smart manufacturing environments. From PC-based motion control and PC-based
           PLCs to dedicated motion controllers and third-party controller solutions, we provide a wide range of options.

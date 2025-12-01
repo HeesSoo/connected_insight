@@ -9,7 +9,6 @@ import Linchen from "./_component/Lingchen";
 import RedirectAlert from "./_component/RedirectAlert";
 import MainSolution from "./_component/Solution";
 import Tokk from "./_component/Tokk";
-import { Fade } from "react-awesome-reveal";
 
 async function getBanners(): Promise<MainBanner[]> {
   try {
@@ -71,9 +70,7 @@ export default async function Home() {
       <Banner banners={banners} />
 
       <section className="w-full max-w-[1504px] mx-auto mt-[120px] mb-[160px] flex flex-col gap-[120px] px-8">
-        <Fade delay={200} triggerOnce>
-          <MainSolution data={solutions} />
-        </Fade>
+        <MainSolution data={solutions} />
 
         <Linchen data={lingchenData} />
 

@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useTranslationStore } from "@/stores/translationStore";
 import Support_ReservationLab_Banner from "@/public/support/reservation-lab/Reservationlab_Banner.png";
 import Support_ReservationLab_ContactBg from "@/public/support/reservation-lab/Support_ReservationLab_ContactBg.png";
+import MotionWrapper from "@/components/MotionWrapper";
 
 export default function Support_ReservationLab({
     data,
@@ -85,183 +86,197 @@ export default function Support_ReservationLab({
                         </div>
                     </div>
 
-                    {data &&
-                        data.length > 0 &&
-                        data.map((v, idx) => {
-                            return (
-                                <div
-                                    className="w-full flex justify-between mb-[160px]"
-                                    key={v.uuid}
-                                >
-                                    <div className="w-[591px] h-[520px] bg-black relative">
-                                        <Swiper
-                                            modules={[Navigation]}
-                                            onSwiper={(e) => {
-                                                setSwipers((prev) => {
-                                                    const newSwipers = [
-                                                        ...prev,
-                                                    ];
-                                                    newSwipers[idx] = e;
-                                                    return newSwipers;
-                                                });
-                                            }}
-                                            className="w-full h-full"
-                                        >
-                                            {v.images.map((image) => {
-                                                return (
-                                                    <SwiperSlide
-                                                        key={image.uuid}
-                                                    >
-                                                        <div>
-                                                            <Image
-                                                                src={
-                                                                    image.file
-                                                                        .s3_url
-                                                                }
-                                                                alt="Alternative Image"
-                                                                width={591}
-                                                                height={444}
-                                                                className="object-cover"
-                                                            />
-                                                            <div className="w-full py-5 text-center text-titleSmall text-white font-semibold">
-                                                                {currentLanguage ===
-                                                                "en"
-                                                                    ? image.name_en
-                                                                    : image.name}
-                                                            </div>
-                                                        </div>
-                                                    </SwiperSlide>
-                                                );
-                                            })}
-                                        </Swiper>
-
-                                        <button
-                                            className="absolute top-1/2 -translate-y-[50%] -left-[30px] z-[1] w-[60px] h-[60px] rounded-full bg-ePrimary hover:bg-ePrimary/90 transition-colors flex justify-center items-center cursor-pointer"
-                                            onClick={() => handlePrev({ idx })}
-                                        >
-                                            <svg
-                                                width="24"
-                                                height="18"
-                                                viewBox="0 0 24 18"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                    d="M9.23063 17.4808L10.8116 15.854L5.08275 10.1252H23.25V7.87516H5.08275L10.8116 2.14628L9.23063 0.519531L0.75 9.00016L9.23063 17.4808Z"
-                                                    fill="white"
-                                                />
-                                            </svg>
-                                        </button>
-                                        <button
-                                            className="absolute top-1/2 -translate-y-[50%] -right-[30px] z-[1] w-[60px] h-[60px] rounded-full bg-ePrimary hover:bg-ePrimary/90 transition-colors flex justify-center items-center cursor-pointer"
-                                            onClick={() => handleNext({ idx })}
-                                        >
-                                            <svg
-                                                width="24"
-                                                height="18"
-                                                viewBox="0 0 24 18"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                    d="M14.7694 17.4808L13.1884 15.854L18.9173 10.1252H0.75V7.87516H18.9173L13.1884 2.14628L14.7694 0.519531L23.25 9.00016L14.7694 17.4808Z"
-                                                    fill="white"
-                                                />
-                                            </svg>
-                                        </button>
-                                    </div>
-
-                                    <div className="w-[712px] h-auto flex flex-col justify-between">
-                                        <div>
-                                            <h3 className="text-h3 font-bold mb-2">
-                                                {currentLanguage === "en"
-                                                    ? v.name_en
-                                                    : v.name}
-                                            </h3>
-                                            <div className="text-large font-[500] mb-5">
-                                                {currentLanguage === "en"
-                                                    ? v.description_en
-                                                    : v.description}
-                                            </div>
-                                            <Button
-                                                label={
-                                                    currentLanguage === "en"
-                                                        ? v.button_text_en
-                                                        : v.button_text
-                                                }
-                                                size="medium"
-                                                icRight={
-                                                    <svg
-                                                        width="24"
-                                                        height="24"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                    >
-                                                        <path
-                                                            d="M16.8165 12.7568H5.43945C5.22662 12.7568 5.04845 12.685 4.90495 12.5413C4.76129 12.3978 4.68945 12.2197 4.68945 12.0068C4.68945 11.794 4.76129 11.6158 4.90495 11.4723C5.04845 11.3287 5.22662 11.2568 5.43945 11.2568H16.8165L11.6472 6.08759C11.4985 5.93893 11.4251 5.76493 11.427 5.56559C11.429 5.36626 11.5075 5.18901 11.6625 5.03384C11.8176 4.88901 11.9933 4.81401 12.1895 4.80884C12.3856 4.80368 12.5613 4.87868 12.7165 5.03384L19.0567 11.3741C19.1504 11.4678 19.2164 11.5665 19.2547 11.6703C19.2932 11.7742 19.3125 11.8863 19.3125 12.0068C19.3125 12.1273 19.2932 12.2395 19.2547 12.3433C19.2164 12.4472 19.1504 12.5459 19.0567 12.6396L12.7165 18.9798C12.578 19.1183 12.4065 19.1892 12.202 19.1923C11.9975 19.1955 11.8176 19.1247 11.6625 18.9798C11.5075 18.8247 11.43 18.6465 11.43 18.4453C11.43 18.244 11.5075 18.0658 11.6625 17.9106L16.8165 12.7568Z"
-                                                            fill="white"
-                                                        />
-                                                    </svg>
-                                                }
-                                                onClick={() => {
-                                                    router.push(
-                                                        `/${currentLanguage}${v.button_url.replace(
-                                                            "products",
-                                                            "product"
-                                                        )}`
-                                                    );
+                    {data && data.length > 0 && (
+                        <MotionWrapper
+                            delay={200}
+                            duration={0.8}
+                            direction="up"
+                            amount={0.3}
+                        >
+                            {data.map((v, idx) => {
+                                return (
+                                    <div
+                                        className="w-full flex justify-between mb-[160px]"
+                                        key={v.uuid}
+                                    >
+                                        <div className="w-[591px] h-[520px] bg-black relative">
+                                            <Swiper
+                                                modules={[Navigation]}
+                                                onSwiper={(e) => {
+                                                    setSwipers((prev) => {
+                                                        const newSwipers = [
+                                                            ...prev,
+                                                        ];
+                                                        newSwipers[idx] = e;
+                                                        return newSwipers;
+                                                    });
                                                 }}
-                                            />
-                                        </div>
-
-                                        <div>
-                                            <div className="w-full grid grid-cols-2 gap-4">
-                                                {v.features.map(
-                                                    (feature, idx) => {
-                                                        const isLast =
-                                                            idx ===
-                                                            v.features.length -
-                                                                1;
-                                                        const isOdd =
-                                                            v.features.length %
-                                                                2 !==
-                                                            0;
-
-                                                        return (
-                                                            <div
-                                                                className={`bg-g50 p-4 ${
-                                                                    isLast &&
-                                                                    isOdd
-                                                                        ? "col-span-2"
-                                                                        : ""
-                                                                }`}
-                                                                key={
-                                                                    feature.uuid
-                                                                }
-                                                            >
-                                                                <h5 className="text-base font-semibold text-ePrimary mb-3">
+                                                className="w-full h-full"
+                                            >
+                                                {v.images.map((image) => {
+                                                    return (
+                                                        <SwiperSlide
+                                                            key={image.uuid}
+                                                        >
+                                                            <div>
+                                                                <Image
+                                                                    src={
+                                                                        image
+                                                                            .file
+                                                                            .s3_url
+                                                                    }
+                                                                    alt="Alternative Image"
+                                                                    width={591}
+                                                                    height={444}
+                                                                    className="object-cover"
+                                                                />
+                                                                <div className="w-full py-5 text-center text-titleSmall text-white font-semibold">
                                                                     {currentLanguage ===
                                                                     "en"
-                                                                        ? feature.title_en
-                                                                        : feature.title}
-                                                                </h5>
-                                                                <div className="text-base font-[500] text-g800">
-                                                                    {currentLanguage ===
-                                                                    "en"
-                                                                        ? feature.description_en
-                                                                        : feature.description}
+                                                                        ? image.name_en
+                                                                        : image.name}
                                                                 </div>
                                                             </div>
-                                                        );
+                                                        </SwiperSlide>
+                                                    );
+                                                })}
+                                            </Swiper>
+
+                                            <button
+                                                className="absolute top-1/2 -translate-y-[50%] -left-[30px] z-[1] w-[60px] h-[60px] rounded-full bg-ePrimary hover:bg-ePrimary/90 transition-colors flex justify-center items-center cursor-pointer"
+                                                onClick={() =>
+                                                    handlePrev({ idx })
+                                                }
+                                            >
+                                                <svg
+                                                    width="24"
+                                                    height="18"
+                                                    viewBox="0 0 24 18"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path
+                                                        d="M9.23063 17.4808L10.8116 15.854L5.08275 10.1252H23.25V7.87516H5.08275L10.8116 2.14628L9.23063 0.519531L0.75 9.00016L9.23063 17.4808Z"
+                                                        fill="white"
+                                                    />
+                                                </svg>
+                                            </button>
+                                            <button
+                                                className="absolute top-1/2 -translate-y-[50%] -right-[30px] z-[1] w-[60px] h-[60px] rounded-full bg-ePrimary hover:bg-ePrimary/90 transition-colors flex justify-center items-center cursor-pointer"
+                                                onClick={() =>
+                                                    handleNext({ idx })
+                                                }
+                                            >
+                                                <svg
+                                                    width="24"
+                                                    height="18"
+                                                    viewBox="0 0 24 18"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path
+                                                        d="M14.7694 17.4808L13.1884 15.854L18.9173 10.1252H0.75V7.87516H18.9173L13.1884 2.14628L14.7694 0.519531L23.25 9.00016L14.7694 17.4808Z"
+                                                        fill="white"
+                                                    />
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                        <div className="w-[712px] h-auto flex flex-col justify-between">
+                                            <div>
+                                                <h3 className="text-h3 font-bold mb-2">
+                                                    {currentLanguage === "en"
+                                                        ? v.name_en
+                                                        : v.name}
+                                                </h3>
+                                                <div className="text-large font-[500] mb-5">
+                                                    {currentLanguage === "en"
+                                                        ? v.description_en
+                                                        : v.description}
+                                                </div>
+                                                <Button
+                                                    label={
+                                                        currentLanguage === "en"
+                                                            ? v.button_text_en
+                                                            : v.button_text
                                                     }
-                                                )}
+                                                    size="medium"
+                                                    icRight={
+                                                        <svg
+                                                            width="24"
+                                                            height="24"
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                d="M16.8165 12.7568H5.43945C5.22662 12.7568 5.04845 12.685 4.90495 12.5413C4.76129 12.3978 4.68945 12.2197 4.68945 12.0068C4.68945 11.794 4.76129 11.6158 4.90495 11.4723C5.04845 11.3287 5.22662 11.2568 5.43945 11.2568H16.8165L11.6472 6.08759C11.4985 5.93893 11.4251 5.76493 11.427 5.56559C11.429 5.36626 11.5075 5.18901 11.6625 5.03384C11.8176 4.88901 11.9933 4.81401 12.1895 4.80884C12.3856 4.80368 12.5613 4.87868 12.7165 5.03384L19.0567 11.3741C19.1504 11.4678 19.2164 11.5665 19.2547 11.6703C19.2932 11.7742 19.3125 11.8863 19.3125 12.0068C19.3125 12.1273 19.2932 12.2395 19.2547 12.3433C19.2164 12.4472 19.1504 12.5459 19.0567 12.6396L12.7165 18.9798C12.578 19.1183 12.4065 19.1892 12.202 19.1923C11.9975 19.1955 11.8176 19.1247 11.6625 18.9798C11.5075 18.8247 11.43 18.6465 11.43 18.4453C11.43 18.244 11.5075 18.0658 11.6625 17.9106L16.8165 12.7568Z"
+                                                                fill="white"
+                                                            />
+                                                        </svg>
+                                                    }
+                                                    onClick={() => {
+                                                        router.push(
+                                                            `/${currentLanguage}${v.button_url.replace(
+                                                                "products",
+                                                                "product"
+                                                            )}`
+                                                        );
+                                                    }}
+                                                />
+                                            </div>
+
+                                            <div>
+                                                <div className="w-full grid grid-cols-2 gap-4">
+                                                    {v.features.map(
+                                                        (feature, idx) => {
+                                                            const isLast =
+                                                                idx ===
+                                                                v.features
+                                                                    .length -
+                                                                    1;
+                                                            const isOdd =
+                                                                v.features
+                                                                    .length %
+                                                                    2 !==
+                                                                0;
+
+                                                            return (
+                                                                <div
+                                                                    className={`bg-g50 p-4 ${
+                                                                        isLast &&
+                                                                        isOdd
+                                                                            ? "col-span-2"
+                                                                            : ""
+                                                                    }`}
+                                                                    key={
+                                                                        feature.uuid
+                                                                    }
+                                                                >
+                                                                    <h5 className="text-base font-semibold text-ePrimary mb-3">
+                                                                        {currentLanguage ===
+                                                                        "en"
+                                                                            ? feature.title_en
+                                                                            : feature.title}
+                                                                    </h5>
+                                                                    <div className="text-base font-[500] text-g800">
+                                                                        {currentLanguage ===
+                                                                        "en"
+                                                                            ? feature.description_en
+                                                                            : feature.description}
+                                                                    </div>
+                                                                </div>
+                                                            );
+                                                        }
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            );
-                        })}
+                                );
+                            })}
+                        </MotionWrapper>
+                    )}
 
                     {/* 방문 예약 안내 */}
                     <div className="w-full h-[464px] mx-auto relative mb-[80px]">

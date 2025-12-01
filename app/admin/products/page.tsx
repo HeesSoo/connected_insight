@@ -2,6 +2,9 @@ import axios from "axios";
 import { Suspense } from "react";
 import ProductList from "./_component/ProductList";
 
+// 빌드 타임이 아닌 요청 타임에 렌더링하도록 설정
+export const dynamic = 'force-dynamic';
+
 async function fetchProducts() {
     try {
         const res = await axios.get(

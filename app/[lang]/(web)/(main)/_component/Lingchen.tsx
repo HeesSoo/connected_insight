@@ -10,6 +10,7 @@ import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import { LingchenItem } from "@/types/lingchen";
+import { Fade } from "react-awesome-reveal";
 
 interface LingchenProps {
     data: LingchenItem[];
@@ -21,8 +22,9 @@ export default function Lingchen({ data }: LingchenProps) {
     const [swiper, setSwiper] = useState<SwiperClass>();
 
     return (
-        <div>
-            {!data || data.length === 0 ? (
+        <Fade delay={200} direction="up" duration={1500} triggerOnce fraction={0.3}>
+            <div>
+                {!data || data.length === 0 ? (
                 <div className="w-full flex">
                     <div className="flex-1 pt-12 pb-20 px-[136px]">
                         <h3 className="text-ePrimary font-[700] text-xl mb-20">
@@ -97,7 +99,8 @@ export default function Lingchen({ data }: LingchenProps) {
                         ))}
                     </Swiper>
                 </div>
-            )}
-        </div>
+                )}
+            </div>
+        </Fade>
     );
 }

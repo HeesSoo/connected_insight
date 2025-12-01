@@ -12,92 +12,75 @@ import Tokk from "./_component/Tokk";
 import { Fade } from "react-awesome-reveal";
 
 async function getBanners(): Promise<MainBanner[]> {
-    try {
-        const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/main/banner`
-        );
-        if (response.status === 200) {
-            return response.data.data || [];
-        }
-    } catch (error) {
-        console.error("Error fetching banners:", error);
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/main/banner`);
+    if (response.status === 200) {
+      return response.data.data || [];
     }
-    return [];
+  } catch (error) {
+    console.error("Error fetching banners:", error);
+  }
+  return [];
 }
 
 async function getSolutions(): Promise<SolutionItem[]> {
-    try {
-        const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution`
-        );
-        if (response.status === 200) {
-            return response.data.data || [];
-        }
-    } catch (error) {
-        console.error("Error fetching solutions:", error);
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution`);
+    if (response.status === 200) {
+      return response.data.data || [];
     }
-    return [];
+  } catch (error) {
+    console.error("Error fetching solutions:", error);
+  }
+  return [];
 }
 
 async function getLingchen(): Promise<LingchenItem[]> {
-    try {
-        const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/lingchen`
-        );
-        if (response.status === 200) {
-            return response.data.data || [];
-        }
-    } catch (error) {
-        console.error("Error fetching lingchen:", error);
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/lingchen`);
+    if (response.status === 200) {
+      return response.data.data || [];
     }
-    return [];
+  } catch (error) {
+    console.error("Error fetching lingchen:", error);
+  }
+  return [];
 }
 
 async function getTokk(): Promise<LingchenItem[]> {
-    try {
-        const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/tokk`
-        );
-        if (response.status === 200) {
-            return response.data.data || [];
-        }
-    } catch (error) {
-        console.error("Error fetching tokk:", error);
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/tokk`);
+    if (response.status === 200) {
+      return response.data.data || [];
     }
-    return [];
+  } catch (error) {
+    console.error("Error fetching tokk:", error);
+  }
+  return [];
 }
 
 export default async function Home() {
-    // 서버에서 병렬로 데이터 fetch
-    const [banners, solutions, lingchenData, tokkData] = await Promise.all([
-        getBanners(),
-        getSolutions(),
-        getLingchen(),
-        getTokk(),
-    ]);
+  // 서버에서 병렬로 데이터 fetch
+  const [banners, solutions, lingchenData, tokkData] = await Promise.all([getBanners(), getSolutions(), getLingchen(), getTokk()]);
 
-    return (
-        <main className="min-h-screen">
-            <Suspense fallback={null}>
-                <RedirectAlert />
-            </Suspense>
-            <Banner banners={banners} />
+  return (
+    <main className="min-h-screen">
+      <Suspense fallback={null}>
+        <RedirectAlert />
+      </Suspense>
+      <Banner banners={banners} />
 
-            <section className="w-full max-w-[1504px] mx-auto mt-[120px] mb-[160px] flex flex-col gap-[120px] px-8">
-                <Fade delay={200} triggerOnce>
-                    <MainSolution data={solutions} />
-                </Fade>
+      <section className="w-full max-w-[1504px] mx-auto mt-[120px] mb-[160px] flex flex-col gap-[120px] px-8">
+        <Fade delay={200} triggerOnce>
+          <MainSolution data={solutions} />
+        </Fade>
 
-                <Fade delay={200} triggerOnce>
-                    <Linchen data={lingchenData} />
-                </Fade>
+        <Linchen data={lingchenData} />
 
-                <Fade delay={200} triggerOnce>
-                    <Tokk data={tokkData} />
-                </Fade>
+        <Tokk data={tokkData} />
 
-                <Contactus />
-            </section>
-        </main>
-    );
+        <Contactus />
+      </section>
+    </main>
+  );
 }

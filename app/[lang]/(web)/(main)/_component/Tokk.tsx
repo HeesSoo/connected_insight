@@ -10,6 +10,7 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import { LingchenItem } from "@/types/lingchen";
+import { Fade } from "react-awesome-reveal";
 
 interface LingchenProps {
     data: LingchenItem[];
@@ -21,8 +22,9 @@ export default function Tokk({ data }: LingchenProps) {
     const [swiper, setSwiper] = useState<SwiperClass>();
 
     return (
-        <div>
-            {!data || data.length === 0 ? (
+        <Fade delay={200} direction="up" duration={1500} triggerOnce fraction={0.3}>
+            <div>
+                {!data || data.length === 0 ? (
                 <div className="w-full flex">
                     <div className="w-[712px] h-[474px] flex justify-center items-center bg-[#EFEFEF]">
                         <Image
@@ -96,7 +98,8 @@ export default function Tokk({ data }: LingchenProps) {
                         ))}
                     </Swiper>
                 </div>
-            )}
-        </div>
+                )}
+            </div>
+        </Fade>
     );
 }

@@ -10,7 +10,11 @@ interface Props {
     };
 }
 
-export default function DownloadButton({ label = "Download", type = "g950", file }: Props) {
+export default function DownloadButton({
+    label = "Download",
+    type = "g950",
+    file,
+}: Props) {
     const onClick = () => {
         const { name, url } = file;
 
@@ -29,10 +33,23 @@ export default function DownloadButton({ label = "Download", type = "g950", file
     };
 
     return (
-        <Button size="medium" btnType="primary" label="Download" icRight={<DownloadIco fill={"#ffffff"} />} onClick={onClick} />
-        // <button className={`h-12 flex gap-3 items-center px-5 rounded-sm ${type === "g950" ? "bg-g950" : "bg-ePrimary"}`} onClick={onClick}>
-        //     <div className="text-white">{label}</div>
-        //     <DownloadIco fill={"#ffffff"} />
-        // </button>
+        <>
+            <Button
+                size="medium"
+                btnType="primary"
+                label="Download"
+                icRight={<DownloadIco fill={"#ffffff"} />}
+                className="max-md:hidden"
+                onClick={onClick}
+            />
+            <button
+                className={`hidden max-md:flex items-center gap-3 justify-center text-white 
+        rounded-[2px] transition-colors font-[600] disabled:bg-g200 select-none bg-g950 hover:bg-ePrimary text-base h-[40px] px-2`}
+                onClick={onClick}
+                type="button"
+            >
+                <DownloadIco fill={"#ffffff"} />
+            </button>
+        </>
     );
 }

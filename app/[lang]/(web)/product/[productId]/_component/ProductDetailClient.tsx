@@ -58,17 +58,17 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
     const [thumbnailIndex, setThumbnailIndex] = useState<number>(0);
     const [swiper, setSwiper] = useState<SwiperClass>();
 
+    console.log("thumbnailIndex:", thumbnailIndex);
     if (!data) {
-        console.log("Product Detail >>>> ", data)
         return <div>No product data available.</div>;
     }
     return (
-        <div className="max-w-[1488px] min-w-[1248px] px-6 w-full mx-auto my-[80px]">
-            <section className="w-full flex gap-[137px]">
-                <div className="w-[712px]">
+        <div className="max-w-[1488px] px-6 w-full mx-auto my-[80px] max-md:mt-0 max-md:mb-[96px] max-md:px-0">
+            <section className="w-full flex gap-[137px] max-md:block">
+                <div className="w-[712px] max-md:w-full">
                     <div className="relative">
                         <Swiper
-                            className="mb-6"
+                            className="mb-6 max-md:mb-14"
                             onSlideChange={(swiper) => {
                                 setThumbnailIndex(swiper.activeIndex);
                             }}
@@ -78,16 +78,24 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
                         >
                             {data.thumbnail.map((v) => (
                                 <SwiperSlide key={v.order}>
-                                    <div className="w-full h-[475px] bg-[#EFEFEF] flex justify-center items-center">
-                                        <Image src={v.s3_url || DummyImage} alt="product" width={712} height={476} className="w-full" />
+                                    <div className="w-full h-[475px] bg-[#EFEFEF] flex justify-center items-center max-md:h-[250px]">
+                                        <Image
+                                            src={v.s3_url || DummyImage}
+                                            alt="product"
+                                            width={712}
+                                            height={476}
+                                            className="w-full"
+                                        />
                                     </div>
                                 </SwiperSlide>
                             ))}
                         </Swiper>
                         <button
                             className={`w-12 h-12 ${
-                                thumbnailIndex === 0 ? "bg-g300 cursor-default" : "bg-g950 cursor-pointer"
-                            } rounded-full flex justify-center items-center absolute top-1/2 left-4 transform -translate-y-1/2 z-10`}
+                                thumbnailIndex === 0
+                                    ? "bg-g300 cursor-default"
+                                    : "bg-g950 cursor-pointer"
+                            } rounded-full flex justify-center items-center absolute top-1/2 left-4 transform -translate-y-1/2 z-10 max-md:hidden`}
                             onClick={() => {
                                 if (thumbnailIndex === 0) {
                                     return;
@@ -95,9 +103,27 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
                                 swiper?.slidePrev();
                             }}
                         >
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <mask id="mask0_2067_11491" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-                                    <rect width="24" height="24" transform="matrix(-1 0 0 1 24 0)" fill="#D9D9D9" />
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <mask
+                                    id="mask0_2067_11491"
+                                    maskUnits="userSpaceOnUse"
+                                    x="0"
+                                    y="0"
+                                    width="24"
+                                    height="24"
+                                >
+                                    <rect
+                                        width="24"
+                                        height="24"
+                                        transform="matrix(-1 0 0 1 24 0)"
+                                        fill="#D9D9D9"
+                                    />
                                 </mask>
                                 <g mask="url(#mask0_2067_11491)">
                                     <path
@@ -110,18 +136,40 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
 
                         <button
                             className={`w-12 h-12 ${
-                                thumbnailIndex === data.thumbnail.length - 1 ? "bg-g300 cursor-default" : "bg-g950 cursor-pointer"
-                            } rounded-full flex justify-center items-center absolute top-1/2 right-4 transform -translate-y-1/2 z-10`}
+                                thumbnailIndex === data.thumbnail.length - 1
+                                    ? "bg-g300 cursor-default"
+                                    : "bg-g950 cursor-pointer"
+                            } rounded-full flex justify-center items-center absolute top-1/2 right-4 transform -translate-y-1/2 z-10 max-md:hidden`}
                             onClick={() => {
-                                if (thumbnailIndex === data.thumbnail.length - 1) {
+                                if (
+                                    thumbnailIndex ===
+                                    data.thumbnail.length - 1
+                                ) {
                                     return;
                                 }
                                 swiper?.slideNext();
                             }}
                         >
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <mask id="mask0_2067_11487" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-                                    <rect width="24" height="24" fill="#D9D9D9" />
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <mask
+                                    id="mask0_2067_11487"
+                                    maskUnits="userSpaceOnUse"
+                                    x="0"
+                                    y="0"
+                                    width="24"
+                                    height="24"
+                                >
+                                    <rect
+                                        width="24"
+                                        height="24"
+                                        fill="#D9D9D9"
+                                    />
                                 </mask>
                                 <g mask="url(#mask0_2067_11487)">
                                     <path
@@ -131,91 +179,170 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
                                 </g>
                             </svg>
                         </button>
+
+                        <div className="hidden max-md:block">
+                            <div className="absolute -bottom-[20px] left-1/2 transform -translate-x-1/2 flex gap-3">
+                                {data.thumbnail.map((v, idx) => {
+                                    return (
+                                        <div
+                                            key={idx}
+                                            className={`w-2 h-2 ${
+                                                idx === thumbnailIndex
+                                                    ? "bg-ePrimary"
+                                                    : "bg-g200"
+                                            }`}
+                                            onClick={() => {
+                                                swiper?.slideTo(idx);
+                                            }}
+                                        ></div>
+                                    );
+                                })}
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="w-full grid grid-cols-6 gap-2">
+                    <div className="w-full grid grid-cols-6 gap-2 max-md:hidden">
                         {data.thumbnail.map((v, idx) => {
                             return (
                                 <div
                                     key={v.order}
-                                    className={`w-full aspect-square bg-[#EFEFEF] flex justify-center items-center cursor-pointer ${thumbnailIndex === idx ? "border border-ePrimary" : ""}`}
+                                    className={`w-full aspect-square bg-[#EFEFEF] flex justify-center items-center cursor-pointer ${
+                                        thumbnailIndex === idx
+                                            ? "border border-ePrimary"
+                                            : ""
+                                    }`}
                                     style={{ aspectRatio: "1 / 1" }}
                                     onClick={() => {
                                         swiper?.slideTo(idx);
                                     }}
                                 >
-                                    <Image src={v.s3_url} alt={v.name} width={112} height={112} />
+                                    <Image
+                                        src={v.s3_url}
+                                        alt={v.name}
+                                        width={112}
+                                        height={112}
+                                    />
                                 </div>
                             );
                         })}
                     </div>
                 </div>
 
-                <section className="flex flex-col gap-12 flex-1">
+                <section className="flex flex-col gap-12 flex-1 max-md:px-4 max-md:gap-9">
                     <div>
-                        <div className="text-g950 font-semibold text-base mb-2">
+                        <div className="text-g950 font-semibold text-base mb-2 max-md:text-sm max-md:mb-1">
                             {data.type === "plus" && "LineX Plus"}
                             {data.type === "max" && "LineX Max"}
                             {data.type === "max pro" && "LineX MAX PRO"}
                             {data.type === "color" && "LineX Color"}
                         </div>
-                        <h1 className="text-[32px] font-bold text-g950">{data.name}</h1>
+                        <h1 className="text-[32px] font-bold text-g950 max-md:text-large">
+                            {data.name}
+                        </h1>
                     </div>
 
                     <div>
-                        <h2 className="text-ePrimary text-large font-bold pb-2 border-b border-g200 mb-4">Key Feature</h2>
+                        <h2 className="text-ePrimary text-large font-bold pb-2 border-b border-g200 mb-4 max-md:text-base max-md:mb-3">
+                            Key Feature
+                        </h2>
 
-                        <div className="grid grid-cols-2 gap-y-9">
+                        <div className="grid grid-cols-2 gap-y-9 max-md:gap-y-3">
                             <div>
-                                <div className="text-g400 font-medium text-sm mb-0.5">Resolution (DPI)</div>
-                                <div className="text-g950 font-semibold text-large ">{data.resolution}</div>
+                                <div className="text-g400 font-medium text-sm mb-0.5 max-md:text-xs max-md:leading-[18px]">
+                                    Resolution (DPI)
+                                </div>
+                                <div className="text-g950 font-semibold text-large max-md:text-base">
+                                    {data.resolution}
+                                </div>
                             </div>
                             <div>
-                                <div className="text-g400 font-medium text-sm mb-0.5">Accuracy (μm)</div>
-                                <div className="text-g950 font-semibold text-large ">{data.accuracy}</div>
+                                <div className="text-g400 font-medium text-sm mb-0.5 max-md:text-xs max-md:leading-[18px]">
+                                    Accuracy (μm)
+                                </div>
+                                <div className="text-g950 font-semibold text-large max-md:text-base">
+                                    {data.accuracy}
+                                </div>
                             </div>
                             <div>
-                                <div className="text-g400 font-medium text-sm mb-0.5">Line Frequency (kHz)</div>
-                                <div className="text-g950 font-semibold text-large ">{data.line_rate}</div>
+                                <div className="text-g400 font-medium text-sm mb-0.5 max-md:text-xs max-md:leading-[18px]">
+                                    Line Frequency (kHz)
+                                </div>
+                                <div className="text-g950 font-semibold text-large max-md:text-base">
+                                    {data.line_rate}
+                                </div>
                             </div>
                             <div>
-                                <div className="text-g400 font-medium text-sm mb-0.5">Interface</div>
-                                <div className="text-g950 font-semibold text-large ">{data.interface}</div>
+                                <div className="text-g400 font-medium text-sm mb-0.5 max-md:text-xs max-md:leading-[18px]">
+                                    Interface
+                                </div>
+                                <div className="text-g950 font-semibold text-large max-md:text-base">
+                                    {data.interface}
+                                </div>
                             </div>
                             <div>
-                                <div className="text-g400 font-medium text-sm mb-0.5">FOV (mm)</div>
-                                <div className="text-g950 font-semibold text-large ">{data.fov}</div>
+                                <div className="text-g400 font-medium text-sm mb-0.5 max-md:text-xs max-md:leading-[18px]">
+                                    FOV (mm)
+                                </div>
+                                <div className="text-g950 font-semibold text-large max-md:text-base">
+                                    {data.fov}
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div>
-                        <h2 className="text-ePrimary text-large font-bold pb-2 border-b border-g200 mb-4">Options</h2>
+                        <h2 className="text-ePrimary text-large font-bold pb-2 border-b border-g200 mb-4 max-md:text-base max-md:mb-3">
+                            Options
+                        </h2>
 
-                        <div className="grid grid-cols-2 gap-y-9">
+                        <div className="grid grid-cols-2 gap-y-9 max-md:gap-y-3">
                             <div>
-                                <div className="text-g400 font-medium text-sm mb-0.5">Mono or Color</div>
-                                <div className="text-g950 font-semibold text-large">{data.mono_or_color}</div>
+                                <div className="text-g400 font-medium text-sm mb-0.5 max-md:text-xs max-md:leading-[18px]">
+                                    Mono or Color
+                                </div>
+                                <div className="text-g950 font-semibold text-large max-md:text-base">
+                                    {data.mono_or_color}
+                                </div>
                             </div>
                             <div>
-                                <div className="text-g400 font-medium text-sm mb-0.5">Ethernet Port</div>
-                                <div className="text-g950 font-semibold text-large">{data.ethernet_port}</div>
+                                <div className="text-g400 font-medium text-sm mb-0.5 max-md:text-xs max-md:leading-[18px]">
+                                    Ethernet Port
+                                </div>
+                                <div className="text-g950 font-semibold text-large max-md:text-base">
+                                    {data.ethernet_port}
+                                </div>
                             </div>
                             <div>
-                                <div className="text-g400 font-medium text-sm mb-0.5">WD (mm)</div>
-                                <div className="text-g950 font-semibold text-large">{data.wd}</div>
+                                <div className="text-g400 font-medium text-sm mb-0.5 max-md:text-xs max-md:leading-[18px]">
+                                    WD (mm)
+                                </div>
+                                <div className="text-g950 font-semibold text-large max-md:text-base">
+                                    {data.wd}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
             </section>
 
-            <section className="mt-[144px]">
+            <section className="mt-[144px] max-md:mt-14">
                 <Tab
                     items={[
-                        { value: "specifications", label: "Specifications", children: <ProductSpecifications data={data} /> },
-                        { value: "downloads", label: "Downloads", children: <ProductDownloads data={data} /> },
-                        { value: "drawing", label: "Drawing", children: <ProductDrawing data={data} /> },
+                        {
+                            value: "specifications",
+                            label: "Specifications",
+                            children: <ProductSpecifications data={data} />,
+                        },
+                        {
+                            value: "downloads",
+                            label: "Downloads",
+                            children: <ProductDownloads data={data} />,
+                        },
+                        {
+                            value: "drawing",
+                            label: "Drawing",
+                            children: <ProductDrawing data={data} />,
+                        },
                     ]}
                     defaultTab="specifications"
                 />

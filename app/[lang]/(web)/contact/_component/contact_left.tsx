@@ -9,8 +9,14 @@ const ContactLeft: React.FC = () => {
 
     return (
         <div className="w-full relative">
-            <Image src={contactLeft.src} alt="EYEON" width={560} height={560} className="w-full h-[402px] object-cover" />
-            <div className="text-white text-large text-center mx-auto py-[48px] bg-g950">
+            <Image
+                src={contactLeft.src}
+                alt="EYEON"
+                width={560}
+                height={560}
+                className="w-full h-[402px] object-cover"
+            />
+            <div className="text-white text-large text-center mx-auto py-[48px] bg-g950 px-6 max-md:text-sm max-md:py-6">
                 {t["contact-guide-1"]}
                 <br />
                 {t["contact-guide-2"]}

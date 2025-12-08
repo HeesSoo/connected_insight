@@ -23,8 +23,6 @@ export default function Support_ReservationLab({
     const { currentLanguage } = useTranslationStore();
 
     const [swipers, setSwipers] = useState<SwiperClass[]>([]);
-    const [componentSwiper, setComponentSwiper] = useState<SwiperClass>();
-    const [demoSwiper, setDemoSwiper] = useState<SwiperClass>();
 
     const handlePrev = ({ idx }: { idx: number }) => {
         swipers[idx]?.slidePrev();
@@ -49,51 +47,55 @@ export default function Support_ReservationLab({
             <div className="w-full px-8">
                 <div className="w-full max-w-[1440px] pt-[120px] pb-[160px] mx-auto text-g950">
                     {/* EYEON Vision */}
-                    <div className="w-full flex mb-[160px]">
-                        <div className="mr-[137px] flex-1">
-                            <h3 className="mb-2 text-h3 font-bold">
-                                EYEON Vision & Robotics Lab
-                            </h3>
-                            <div className="text-titleSmall font-bold">
-                                핵심 컴포넌트 기술을 경험하는 공간
+                    <MotionWrapper delay={200} duration={0.8} direction="up">
+                        <div className="w-full flex mb-[160px]">
+                            <div className="mr-[137px] flex-1">
+                                <h3 className="mb-2 text-h3 font-bold">
+                                    EYEON Vision & Robotics Lab
+                                </h3>
+                                <div className="text-titleSmall font-bold">
+                                    핵심 컴포넌트 기술을 경험하는 공간
+                                </div>
+                            </div>
+
+                            <div className="w-[712px] text-large font-[500]">
+                                주식회사 아이온은 산업 자동화의 핵심이
+                                되는&nbsp;
+                                <span className="text-ePrimary font-[600]">
+                                    머신비전 CIS카메라와
+                                </span>
+                                <br />
+                                <span className="text-ePrimary font-[600]">
+                                    고성능 리니어 액츄에이터 컴포넌트
+                                </span>
+                                를 전문적으로 공급하는 기업입니다.
+                                <br />
+                                저희의 기술력이 집약된 공간, EYEON Vision &
+                                Robotics Lab을 소개합니다.
+                                <br />
+                                <br />
+                                이곳은 고객 여러분이 저희 컴포넌트의 실제 성능과
+                                적용 가능성을 직접 확인하고,
+                                <br />
+                                최적의 시스템 구축 방안을 논의할 수 있도록
+                                조성된{" "}
+                                <span className="text-ePrimary font-[600]">
+                                    기술 시연 및 협력 허브
+                                </span>
+                                입니다.
                             </div>
                         </div>
+                    </MotionWrapper>
 
-                        <div className="w-[712px] text-large font-[500]">
-                            주식회사 아이온은 산업 자동화의 핵심이 되는&nbsp;
-                            <span className="text-ePrimary font-[600]">
-                                머신비전 CIS카메라와
-                            </span>
-                            <br />
-                            <span className="text-ePrimary font-[600]">
-                                고성능 리니어 액츄에이터 컴포넌트
-                            </span>
-                            를 전문적으로 공급하는 기업입니다.
-                            <br />
-                            저희의 기술력이 집약된 공간, EYEON Vision & Robotics
-                            Lab을 소개합니다.
-                            <br />
-                            <br />
-                            이곳은 고객 여러분이 저희 컴포넌트의 실제 성능과
-                            적용 가능성을 직접 확인하고,
-                            <br />
-                            최적의 시스템 구축 방안을 논의할 수 있도록 조성된{" "}
-                            <span className="text-ePrimary font-[600]">
-                                기술 시연 및 협력 허브
-                            </span>
-                            입니다.
-                        </div>
-                    </div>
-
-                    {data && data.length > 0 && (
-                        <MotionWrapper
-                            delay={200}
-                            duration={0.8}
-                            direction="up"
-                            amount={0.3}
-                        >
-                            {data.map((v, idx) => {
-                                return (
+                    {data &&
+                        data.length > 0 &&
+                        data.map((v, idx) => {
+                            return (
+                                <MotionWrapper
+                                    delay={200}
+                                    duration={0.8}
+                                    direction="up"
+                                >
                                     <div
                                         className="w-full flex justify-between mb-[160px]"
                                         key={v.uuid}
@@ -272,10 +274,9 @@ export default function Support_ReservationLab({
                                             </div>
                                         </div>
                                     </div>
-                                );
-                            })}
-                        </MotionWrapper>
-                    )}
+                                </MotionWrapper>
+                            );
+                        })}
 
                     {/* 방문 예약 안내 */}
                     <div className="w-full h-[464px] mx-auto relative mb-[80px]">

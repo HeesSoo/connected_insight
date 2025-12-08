@@ -9,12 +9,13 @@
 
 * {
     font-family: "Pretendard", sans-serif;
+    letter-spacing: -0.2px;
 }
 
 /* Swiper pagination 텍스트만 표시 */
 .mySwiper .swiper-pagination-bullet {
     border: none;
-    width: auto;
+    width: 185px;
     height: auto;
     display: flex;
     border-radius: 23px;
@@ -31,6 +32,7 @@
 
 .mySwiper .swiper-pagination-bullet:is(.swiper-pagination-bullet-active) {
     background-color: var(--brand-primary);
+    width: auto;
 }
 .mySwiper .swiper-pagination-bullet:is(.swiper-pagination-bullet-active):hover {
     background-color: rgb(232 56 55 / 0.9);

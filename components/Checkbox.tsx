@@ -35,7 +35,7 @@ export default function Checkbox({
 
     return (
         <div
-            className={`w-fit bg-white cursor-pointer flex items-center gap-2 ${className}`}
+            className={`w-fit cursor-pointer flex items-center gap-2 ${className}`}
             onClick={onClickCheckbox}
         >
             <div className="w-6 h-6 flex justify-center items-center">

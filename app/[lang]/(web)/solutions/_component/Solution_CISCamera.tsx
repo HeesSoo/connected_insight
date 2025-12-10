@@ -47,7 +47,7 @@ export default function SolutionCISCamera({ data }: { data: Solution }) {
                     delay={200}
                     duration={0.8}
                     direction="up"
-                    amount={0.3}
+                    amount={0.05}
                 >
                     <div className="grid grid-cols-3 gap-x-4 gap-y-20">
                         {data?.solutions?.map((item, index) => (

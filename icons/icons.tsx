@@ -1,5 +1,11 @@
 export const ArrowIco = ({ fill = "#111111" }: { fill?: string }) => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <path
             d="M11.5203 13.7912L8.369 10.6402C8.32567 10.5967 8.2915 10.5481 8.2665 10.4944C8.2415 10.4409 8.229 10.3835 8.229 10.3222C8.229 10.1997 8.27042 10.0932 8.35325 10.0027C8.43609 9.91235 8.54525 9.86719 8.68075 9.86719H15.3193C15.4548 9.86719 15.5639 9.91285 15.6468 10.0042C15.7296 10.0954 15.771 10.2018 15.771 10.3234C15.771 10.3539 15.7243 10.4595 15.6308 10.6402L12.4798 13.7912C12.4074 13.8637 12.3326 13.9166 12.2553 13.9499C12.1779 13.9833 12.0928 13.9999 12 13.9999C11.9072 13.9999 11.8221 13.9833 11.7448 13.9499C11.6674 13.9166 11.5926 13.8637 11.5203 13.7912Z"
             fill={fill}
@@ -7,8 +13,25 @@ export const ArrowIco = ({ fill = "#111111" }: { fill?: string }) => (
     </svg>
 );
 
-export const ArrowRightIco = ({ fill = "#111111" }: { fill?: string }) => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const ArrowRightIco = ({
+    fill = "#111111",
+    width = "24",
+    height = "24",
+    className = "",
+}: {
+    fill?: string;
+    width?: string;
+    height?: string;
+    className?: string;
+}) => (
+    <svg
+        width={width}
+        height={height}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={className}
+    >
         <path
             d="M16.8155 12.7559H5.43851C5.22567 12.7559 5.04751 12.684 4.90401 12.5404C4.76034 12.3969 4.68851 12.2187 4.68851 12.0059C4.68851 11.793 4.76034 11.6149 4.90401 11.4714C5.04751 11.3277 5.22567 11.2559 5.43851 11.2559H16.8155L11.6463 6.08662C11.4976 5.93795 11.4242 5.76395 11.426 5.56462C11.428 5.36528 11.5065 5.18803 11.6615 5.03287C11.8167 4.88803 11.9923 4.81303 12.1885 4.80787C12.3847 4.8027 12.5603 4.8777 12.7155 5.03287L19.0558 11.3731C19.1494 11.4668 19.2154 11.5655 19.2538 11.6694C19.2923 11.7732 19.3115 11.8854 19.3115 12.0059C19.3115 12.1264 19.2923 12.2385 19.2538 12.3424C19.2154 12.4462 19.1494 12.5449 19.0558 12.6386L12.7155 18.9789C12.577 19.1174 12.4055 19.1882 12.201 19.1914C11.9965 19.1945 11.8167 19.1237 11.6615 18.9789C11.5065 18.8237 11.429 18.6455 11.429 18.4444C11.429 18.243 11.5065 18.0648 11.6615 17.9096L16.8155 12.7559Z"
             fill={fill}
@@ -17,8 +40,22 @@ export const ArrowRightIco = ({ fill = "#111111" }: { fill?: string }) => (
 );
 
 export const Arrow2UpIco = () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <mask id="mask0_15_393" style={{ maskType: "alpha" }} maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+    <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <mask
+            id="mask0_15_393"
+            style={{ maskType: "alpha" }}
+            maskUnits="userSpaceOnUse"
+            x="0"
+            y="0"
+            width="24"
+            height="24"
+        >
             <rect width="24" height="24" fill="#D9D9D9" />
         </mask>
         <g mask="url(#mask0_15_393)">
@@ -31,8 +68,22 @@ export const Arrow2UpIco = () => (
 );
 
 export const Arrow2DownIco = () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <mask id="mask0_15_394" style={{ maskType: "alpha" }} maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+    <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <mask
+            id="mask0_15_394"
+            style={{ maskType: "alpha" }}
+            maskUnits="userSpaceOnUse"
+            x="0"
+            y="0"
+            width="24"
+            height="24"
+        >
             <rect width="24" height="24" fill="#D9D9D9" />
         </mask>
         <g mask="url(#mask0_15_394)">
@@ -45,7 +96,13 @@ export const Arrow2DownIco = () => (
 );
 
 export const DownloadIco = ({ fill = "#111111" }: { fill?: string }) => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <path
             d="M12 15.7885L7.73075 11.5192L8.78475 10.4348L11.25 12.9V4.5H12.75V12.9L15.2153 10.4348L16.2693 11.5192L12 15.7885ZM6.30775 19.5C5.80258 19.5 5.375 19.325 5.025 18.975C4.675 18.625 4.5 18.1974 4.5 17.6923V14.9808H6V17.6923C6 17.7692 6.03208 17.8398 6.09625 17.9038C6.16025 17.9679 6.23075 18 6.30775 18H17.6923C17.7692 18 17.8398 17.9679 17.9038 17.9038C17.9679 17.8398 18 17.7692 18 17.6923V14.9808H19.5V17.6923C19.5 18.1974 19.325 18.625 18.975 18.975C18.625 19.325 18.1974 19.5 17.6923 19.5H6.30775Z"
             fill={fill}
@@ -54,7 +111,13 @@ export const DownloadIco = ({ fill = "#111111" }: { fill?: string }) => (
 );
 
 export const UploadIco = ({ fill = "#111111" }: { fill?: string }) => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <path
             d="M11.25 15.7885V7.3885L8.78475 9.85375L7.73075 8.76925L12 4.5L16.2693 8.76925L15.2153 9.85375L12.75 7.3885V15.7885H11.25ZM6.30775 19.5C5.80258 19.5 5.375 19.325 5.025 18.975C4.675 18.625 4.5 18.1974 4.5 17.6923V14.9808H6V17.6923C6 17.7692 6.03208 17.8398 6.09625 17.9038C6.16025 17.9679 6.23075 18 6.30775 18H17.6923C17.7692 18 17.8398 17.9679 17.9038 17.9038C17.9679 17.8398 18 17.7692 18 17.6923V14.9808H19.5V17.6923C19.5 18.1974 19.325 18.625 18.975 18.975C18.625 19.325 18.1974 19.5 17.6923 19.5H6.30775Z"
             fill={fill}

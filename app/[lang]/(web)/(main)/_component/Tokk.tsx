@@ -22,7 +22,7 @@ export default function Tokk({ data }: LingchenProps) {
     const [swiper, setSwiper] = useState<SwiperClass>();
 
     return (
-        <MotionWrapper delay={200} direction="up" duration={0.8} amount={0.3}>
+        <MotionWrapper delay={200} direction="up" duration={0.8} amount={0.05}>
             <div>
                 {!data || data.length === 0 ? (
                     <div className="w-full flex">
@@ -59,15 +59,15 @@ export default function Tokk({ data }: LingchenProps) {
                             pagination={{
                                 clickable: true,
                                 renderBullet: (index, className) => {
-                                    return `<span class="${className} font-semibold text-large text-white bg-g200 px-5 py-2 select-none">${data[index].name}</span>`;
+                                    return `<span class="${className} font-semibold text-large text-white bg-g200 px-5 py-2 select-none max-sm:whitespace-nowrap max-sm:text-base">${data[index].name}</span>`;
                                 },
                             }}
                             className="mainTokkSwiper"
                         >
                             {data.map((item, index) => (
                                 <SwiperSlide key={index}>
-                                    <div className="w-full h-[474px] flex select-none">
-                                        <div className="w-[712px]">
+                                    <div className="w-full h-[474px] flex select-none max-sm:h-auto max-sm:flex-col">
+                                        <div className="w-[712px] max-sm:w-full">
                                             <Image
                                                 src={
                                                     item.image || AlternativeImg
@@ -75,18 +75,18 @@ export default function Tokk({ data }: LingchenProps) {
                                                 alt="Alternative Image"
                                                 width={849}
                                                 height={474}
-                                                className="w-full h-[474px] object-cover"
+                                                className="w-full h-[474px] object-cover max-sm:h-[228px]"
                                             />
                                         </div>
-                                        <div className="flex-1 pt-12 pb-20 px-[136px]">
-                                            <h3 className="text-ePrimary font-[700] text-xl mb-20">
+                                        <div className="flex-1 pt-12 pb-20 px-[136px] max-sm:px-0 max-sm:p-0 max-sm:pt-6">
+                                            <h3 className="text-ePrimary font-[700] text-xl mb-20 max-sm:mb-6 max-sm:text-xl-mobile">
                                                 Linear Actuator
                                             </h3>
                                             <div>
-                                                <h4 className="mb-2 font-[700] text-h3 text-g950">
+                                                <h4 className="mb-2 font-[700] text-h3 text-g950 max-sm:text-large">
                                                     {item.name}
                                                 </h4>
-                                                <h4 className="text-large font-[500] text-g950">
+                                                <h4 className="text-large font-[500] text-g950 max-sm:text-base">
                                                     {
                                                         item?.[
                                                             `description_${currentLanguage}`

@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @import 'swiper/css'; */
+/* @import 'swiper/css/pagination'; */
+
 :root {
     --brand-primary: #e83837;
 }
@@ -126,4 +129,26 @@
     text-align: center;
     flex-direction: row;
     gap: 16px;
+}
+
+@media screen and (max-width: 768px) {
+    .mySwiper .swiper-pagination-bullet {
+        display: none;
+    }
+
+    :is(.mainLingchenSwiper, .mainTokkSwiper)
+        .swiper-horizontal
+        > .swiper-pagination-bullets,
+    :is(.mainLingchenSwiper, .mainTokkSwiper)
+        .swiper-pagination-bullets.swiper-pagination-horizontal,
+    :is(.mainLingchenSwiper, .mainTokkSwiper)
+        .swiper-pagination-bullets
+        .swiper-pagination,
+    :is(.mainLingchenSwiper, .mainTokkSwiper)
+        .swiper-pagination-bullets.swiper-pagination-horizontal
+        .swiper-pagination {
+        overflow-x: auto;
+        position: relative;
+        justify-content: flex-start;
+    }
 }

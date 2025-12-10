@@ -49,55 +49,63 @@ export default function Support_ReservationLab({
             <div className="w-full px-8">
                 <div className="w-full max-w-[1440px] pt-[120px] pb-[160px] mx-auto text-g950">
                     {/* EYEON Vision */}
-                    <div className="w-full flex mb-[160px]">
-                        <div className="mr-[137px] flex-1">
-                            <h3 className="mb-2 text-h3 font-bold">
-                                EYEON Vision & Robotics Lab
-                            </h3>
-                            <div className="text-titleSmall font-bold">
-                                핵심 컴포넌트 기술을 경험하는 공간
+                    <MotionWrapper
+                        delay={200}
+                        duration={0.8}
+                        direction="up"
+                        amount={0.05}
+                    >
+                        <div className="w-full flex mb-[160px]">
+                            <div className="mr-[137px] flex-1">
+                                <h3 className="mb-2 text-h3 font-bold">
+                                    EYEON Vision & Robotics Lab
+                                </h3>
+                                <div className="text-titleSmall font-bold">
+                                    핵심 컴포넌트 기술을 경험하는 공간
+                                </div>
+                            </div>
+
+                            <div className="w-[712px] text-large font-[500]">
+                                주식회사 아이온은 산업 자동화의 핵심이
+                                되는&nbsp;
+                                <span className="text-ePrimary font-[600]">
+                                    머신비전 CIS카메라와
+                                </span>
+                                <br />
+                                <span className="text-ePrimary font-[600]">
+                                    고성능 리니어 액츄에이터 컴포넌트
+                                </span>
+                                를 전문적으로 공급하는 기업입니다.
+                                <br />
+                                저희의 기술력이 집약된 공간, EYEON Vision &
+                                Robotics Lab을 소개합니다.
+                                <br />
+                                <br />
+                                이곳은 고객 여러분이 저희 컴포넌트의 실제 성능과
+                                적용 가능성을 직접 확인하고,
+                                <br />
+                                최적의 시스템 구축 방안을 논의할 수 있도록
+                                조성된{" "}
+                                <span className="text-ePrimary font-[600]">
+                                    기술 시연 및 협력 허브
+                                </span>
+                                입니다.
                             </div>
                         </div>
+                    </MotionWrapper>
 
-                        <div className="w-[712px] text-large font-[500]">
-                            주식회사 아이온은 산업 자동화의 핵심이 되는&nbsp;
-                            <span className="text-ePrimary font-[600]">
-                                머신비전 CIS카메라와
-                            </span>
-                            <br />
-                            <span className="text-ePrimary font-[600]">
-                                고성능 리니어 액츄에이터 컴포넌트
-                            </span>
-                            를 전문적으로 공급하는 기업입니다.
-                            <br />
-                            저희의 기술력이 집약된 공간, EYEON Vision & Robotics
-                            Lab을 소개합니다.
-                            <br />
-                            <br />
-                            이곳은 고객 여러분이 저희 컴포넌트의 실제 성능과
-                            적용 가능성을 직접 확인하고,
-                            <br />
-                            최적의 시스템 구축 방안을 논의할 수 있도록 조성된{" "}
-                            <span className="text-ePrimary font-[600]">
-                                기술 시연 및 협력 허브
-                            </span>
-                            입니다.
-                        </div>
-                    </div>
-
-                    {data && data.length > 0 && (
-                        <MotionWrapper
-                            delay={200}
-                            duration={0.8}
-                            direction="up"
-                            amount={0.3}
-                        >
-                            {data.map((v, idx) => {
-                                return (
-                                    <div
-                                        className="w-full flex justify-between mb-[160px]"
-                                        key={v.uuid}
-                                    >
+                    {data &&
+                        data.length > 0 &&
+                        data.map((v, idx) => {
+                            return (
+                                <MotionWrapper
+                                    delay={200}
+                                    duration={0.8}
+                                    direction="up"
+                                    amount={0.05}
+                                    key={v.uuid}
+                                >
+                                    <div className="w-full flex justify-between mb-[160px]">
                                         <div className="w-[591px] h-[520px] bg-black relative">
                                             <Swiper
                                                 modules={[Navigation]}
@@ -272,82 +280,90 @@ export default function Support_ReservationLab({
                                             </div>
                                         </div>
                                     </div>
-                                );
-                            })}
-                        </MotionWrapper>
-                    )}
+                                </MotionWrapper>
+                            );
+                        })}
 
                     {/* 방문 예약 안내 */}
-                    <div className="w-full h-[464px] mx-auto relative mb-[80px]">
-                        <div className="absolute w-full h-[464px] py-12 flex flex-col text-white text-center z-10">
-                            <h3 className="mb-3 text-h3 font-bold">
-                                방문 예약 안내
-                            </h3>
+                    <MotionWrapper
+                        delay={200}
+                        duration={0.8}
+                        direction="up"
+                        amount={0.05}
+                    >
+                        <div className="w-full h-[464px] mx-auto relative mb-[80px]">
+                            <div className="absolute w-full h-[464px] py-12 flex flex-col text-white text-center z-10">
+                                <h3 className="mb-3 text-h3 font-bold">
+                                    방문 예약 안내
+                                </h3>
 
-                            <div className="text-g200 text-large font-[500] mb-12">
-                                EYEON Lab 방문을 예약하시고, VISION 기술을
-                                경험해보세요.
+                                <div className="text-g200 text-large font-[500] mb-12">
+                                    EYEON Lab 방문을 예약하시고, VISION 기술을
+                                    경험해보세요.
+                                </div>
+
+                                <div className="mx-auto flex gap-8 items-center mb-12">
+                                    <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
+                                        방문예약
+                                    </div>
+                                    <ArrowIco />
+                                    <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
+                                        영업팀 상담
+                                    </div>
+                                    <ArrowIco />
+                                    <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
+                                        랩 방문
+                                    </div>
+                                    <ArrowIco />
+                                    <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
+                                        Test 진행
+                                    </div>
+                                    <ArrowIco />
+                                    <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
+                                        Test
+                                        <br />
+                                        결과 안내
+                                    </div>
+                                </div>
+
+                                <Button
+                                    label="Contact"
+                                    size="medium"
+                                    btnType="white"
+                                    className="w-fit mx-auto"
+                                    icRight={
+                                        <svg
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M16.8165 12.7568H5.43945C5.22662 12.7568 5.04845 12.685 4.90495 12.5413C4.76129 12.3978 4.68945 12.2197 4.68945 12.0068C4.68945 11.794 4.76129 11.6158 4.90495 11.4723C5.04845 11.3287 5.22662 11.2568 5.43945 11.2568H16.8165L11.6472 6.08759C11.4985 5.93893 11.4251 5.76493 11.427 5.56559C11.429 5.36626 11.5075 5.18901 11.6625 5.03384C11.8176 4.88901 11.9933 4.81401 12.1895 4.80884C12.3856 4.80368 12.5613 4.87868 12.7165 5.03384L19.0567 11.3741C19.1504 11.4678 19.2164 11.5665 19.2547 11.6703C19.2932 11.7742 19.3125 11.8863 19.3125 12.0068C19.3125 12.1273 19.2932 12.2395 19.2547 12.3433C19.2164 12.4472 19.1504 12.5459 19.0567 12.6396L12.7165 18.9798C12.578 19.1183 12.4065 19.1892 12.202 19.1923C11.9975 19.1955 11.8176 19.1247 11.6625 18.9798C11.5075 18.8247 11.43 18.6465 11.43 18.4453C11.43 18.244 11.5075 18.0658 11.6625 17.9106L16.8165 12.7568Z"
+                                                fill="#111111"
+                                            />
+                                        </svg>
+                                    }
+                                    onClick={() => {
+                                        router.push(
+                                            `/${currentLanguage}/contact`
+                                        );
+                                    }}
+                                />
                             </div>
-
-                            <div className="mx-auto flex gap-8 items-center mb-12">
-                                <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
-                                    방문예약
-                                </div>
-                                <ArrowIco />
-                                <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
-                                    영업팀 상담
-                                </div>
-                                <ArrowIco />
-                                <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
-                                    랩 방문
-                                </div>
-                                <ArrowIco />
-                                <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
-                                    Test 진행
-                                </div>
-                                <ArrowIco />
-                                <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
-                                    Test
-                                    <br />
-                                    결과 안내
-                                </div>
+                            <div className="absolute w-full h-[464px] bg-black opacity-30 z-[1]"></div>
+                            <div className="w-full h-[464px]">
+                                <Image
+                                    src={Support_ReservationLab_ContactBg}
+                                    alt="Contact Background"
+                                    width={1920}
+                                    height={464}
+                                    className="w-full h-full object-cover"
+                                />
                             </div>
-
-                            <Button
-                                label="Contact"
-                                size="medium"
-                                btnType="white"
-                                className="w-fit mx-auto"
-                                icRight={
-                                    <svg
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M16.8165 12.7568H5.43945C5.22662 12.7568 5.04845 12.685 4.90495 12.5413C4.76129 12.3978 4.68945 12.2197 4.68945 12.0068C4.68945 11.794 4.76129 11.6158 4.90495 11.4723C5.04845 11.3287 5.22662 11.2568 5.43945 11.2568H16.8165L11.6472 6.08759C11.4985 5.93893 11.4251 5.76493 11.427 5.56559C11.429 5.36626 11.5075 5.18901 11.6625 5.03384C11.8176 4.88901 11.9933 4.81401 12.1895 4.80884C12.3856 4.80368 12.5613 4.87868 12.7165 5.03384L19.0567 11.3741C19.1504 11.4678 19.2164 11.5665 19.2547 11.6703C19.2932 11.7742 19.3125 11.8863 19.3125 12.0068C19.3125 12.1273 19.2932 12.2395 19.2547 12.3433C19.2164 12.4472 19.1504 12.5459 19.0567 12.6396L12.7165 18.9798C12.578 19.1183 12.4065 19.1892 12.202 19.1923C11.9975 19.1955 11.8176 19.1247 11.6625 18.9798C11.5075 18.8247 11.43 18.6465 11.43 18.4453C11.43 18.244 11.5075 18.0658 11.6625 17.9106L16.8165 12.7568Z"
-                                            fill="#111111"
-                                        />
-                                    </svg>
-                                }
-                                onClick={() => {
-                                    router.push(`/${currentLanguage}/contact`);
-                                }}
-                            />
                         </div>
-                        <div className="absolute w-full h-[464px] bg-black opacity-30 z-[1]"></div>
-                        <div className="w-full h-[464px]">
-                            <Image
-                                src={Support_ReservationLab_ContactBg}
-                                alt="Contact Background"
-                                width={1920}
-                                height={464}
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                    </div>
+                    </MotionWrapper>
                 </div>
             </div>
         </>

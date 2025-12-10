@@ -8,12 +8,14 @@ const config: Config = {
     ],
     theme: {
         screens: {
-            sm: "640px",
-            md: "768px",
+            sm: "768px",
+            md: "769px",
             lg: "1024px",
-            xl: "1280px",
-            max: "1440px", // 커스텀 breakpoint
-            "2xl": "1536px",
+            // max-width breakpoints (이하)
+            "max-sm": { max: "767px" }, // 767px 이하
+            // xl: "1280px",
+            // max: "1440px",
+            // "2xl": "1536px",
         },
         extend: {
             colors: {
@@ -79,6 +81,10 @@ const config: Config = {
                 ],
                 h3: ["28px", { lineHeight: "42px", letterSpacing: "-0.2px" }],
                 xl: ["36px", { lineHeight: "54px", letterSpacing: "-0.2px" }],
+                "xl-mobile": [
+                    "24px",
+                    { lineHeight: "36px", letterSpacing: "-0.2px" },
+                ],
             },
             width: {
                 base: "200px",

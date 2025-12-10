@@ -170,15 +170,15 @@ const Sales: React.FC = () => {
     };
 
     return (
-        <div className="flex w-[1440px] mx-auto pt-[80px] pb-[160px] justify-between gap-[137px]">
+        <div className="flex max-w-[1440px] w-full mx-auto pt-[80px] pb-[160px] justify-between gap-[137px] max-md:block max-md:pt-10 max-md:pb-24">
             <ContactLeft />
-            <div>
-                <h4 className="text-titleSmall text-ePrimary font-semibold">
+            <div className="max-md:mt-12">
+                <h4 className="text-titleSmall text-ePrimary font-semibold max-md:text-base max-md:font-bold">
                     Contact Information
                 </h4>
-                <hr className="mt-2 mb-4 bg-g200" />
+                <hr className="mt-2 mb-4 bg-g200 max-md:mb-6" />
                 <form onSubmit={handleSubmit}>
-                    <div className="grid grid-cols-2 gap-x-[15px] gap-y-[24px] w-[591px]">
+                    <div className="grid grid-cols-2 gap-x-[15px] gap-y-[24px] w-[591px] max-md:flex max-md:flex-col max-md:gap-6 max-md:w-full">
                         <Input
                             {...name}
                             label={t["contact-name"]}
@@ -229,7 +229,7 @@ const Sales: React.FC = () => {
                         />
                     </div>
 
-                    <div className="mt-[15px] flex flex-col gap-[15px]">
+                    <div className="mt-[15px] flex flex-col gap-[15px] max-md:mt-6 max-md:gap-6">
                         <Input
                             {...site}
                             label={t["contact-site-url"]}
@@ -245,11 +245,11 @@ const Sales: React.FC = () => {
                         />
                     </div>
 
-                    <div className="mt-[24px]">
-                        <div className="flex items-center gap-4">
+                    <div className="mt-[24px] max-md:flex max-md:flex-wrap max-md:items-center max-md:gap-4">
+                        <div className="flex items-center gap-4 max-md:flex-col-reverse max-md:items-start">
                             <label
                                 htmlFor="file"
-                                className="flex gap-1 text-base font-semibold text-g900 align-center cursor-pointer select-none"
+                                className="flex gap-1 items-center text-base font-semibold text-g900 align-center cursor-pointer select-none max-md:text-sm"
                             >
                                 {t["contact-file-attach"]}
                                 <Upload width={24} height={24} />
@@ -258,23 +258,43 @@ const Sales: React.FC = () => {
                                 type="file"
                                 id="file"
                                 accept={fileAccept}
-                                className="w-0 h-0"
+                                className="w-0 h-0 hidden"
                                 onChange={onChangeFile}
                             />
-                            <div className="flex items-center gap-2">
-                                <span className="text-small text-g400">
+                            <div
+                                className={`flex items-center gap-2 ${
+                                    file && "max-md:hidden"
+                                }`}
+                            >
+                                <span className="text-small text-g400 max-md:text-[11px] max-md:leading-[18px]">
                                     {t["contact-file-guide"]}
                                 </span>
                             </div>
                         </div>
                         {file && (
-                            <div className="mt-2 text-small text-g600">
+                            <div className="mt-2 text-small text-g600 max-md:mt-0 max-md:leading-5 max-md:flex max-md:gap-2 max-md:items-center">
                                 {t["contact-file-attach"]}: {file.name}
+                                <svg
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="hidden max-md:block cursor-pointer"
+                                    onClick={() => {
+                                        setFile(null);
+                                    }}
+                                >
+                                    <path
+                                        d="M8.4 16.6538L12 13.0538L15.6 16.6538L16.6538 15.6L13.0538 12L16.6538 8.4L15.6 7.34625L12 10.9462L8.4 7.34625L7.34625 8.4L10.9462 12L7.34625 15.6L8.4 16.6538ZM12.0017 21.5C10.6877 21.5 9.45267 21.2507 8.2965 20.752C7.14033 20.2533 6.13467 19.5766 5.2795 18.7218C4.42433 17.8669 3.74725 16.8617 3.24825 15.706C2.74942 14.5503 2.5 13.3156 2.5 12.0017C2.5 10.6877 2.74933 9.45267 3.248 8.2965C3.74667 7.14033 4.42342 6.13467 5.27825 5.2795C6.13308 4.42433 7.13833 3.74725 8.294 3.24825C9.44967 2.74942 10.6844 2.5 11.9983 2.5C13.3123 2.5 14.5473 2.74933 15.7035 3.248C16.8597 3.74667 17.8653 4.42342 18.7205 5.27825C19.5757 6.13308 20.2528 7.13833 20.7518 8.294C21.2506 9.44967 21.5 10.6844 21.5 11.9983C21.5 13.3123 21.2507 14.5473 20.752 15.7035C20.2533 16.8597 19.5766 17.8653 18.7218 18.7205C17.8669 19.5757 16.8617 20.2528 15.706 20.7518C14.5503 21.2506 13.3156 21.5 12.0017 21.5Z"
+                                        fill="#111111"
+                                    />
+                                </svg>
                             </div>
                         )}
                     </div>
 
-                    <div className="flex justify-between items-center mt-[111px]">
+                    <div className="flex justify-between items-center mt-[111px] max-md:block max-md:mt-12">
                         <div
                             // className="flex gap-2 items-center bg-[#f6f6f6] p-2 cursor-pointer"
                             className="flex gap-2 items-center bg-[#FFE46B80] p-2 cursor-pointer"
@@ -290,7 +310,6 @@ const Sales: React.FC = () => {
                                     onChange={(value, checked) =>
                                         setPrivacy(checked)
                                     }
-                                    className="bg-[#f6f6f6]"
                                 />
                                 <input
                                     type="checkbox"
@@ -348,7 +367,7 @@ const Sales: React.FC = () => {
                                 })()}
                             </label>
                         </div>
-                        <div>
+                        <div className="max-md:mt-12">
                             <Button
                                 label={
                                     submitting
@@ -356,7 +375,7 @@ const Sales: React.FC = () => {
                                         : t["contact-submit-success"]
                                 }
                                 disabled={!isFormComplete || submitting}
-                                className={`w-[124px]`}
+                                className={`w-[124px] max-md:w-full`}
                                 size="medium"
                                 btnType="secondary"
                                 onClick={() => handleSubmit()}
@@ -373,21 +392,21 @@ const Sales: React.FC = () => {
 
             {isModalOpen && (
                 <div
-                    className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50"
+                    className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50 max-md:px-4 max-md:py-[46px]"
                     onClick={() => setIsModalOpen(false)}
                 >
                     <div
-                        className="bg-white w-[876px] h-[640px] p-12 flex flex-col"
+                        className="bg-white w-[876px] h-[640px] p-12 flex flex-col max-md:w-full max-md:h-full max-md:p-0"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <div className="w-full flex justify-end">
+                        <div className="w-full flex justify-end max-md:px-3 max-md:py-3 max-md:border-b max-md:border-g200">
                             <svg
                                 width="36"
                                 height="36"
                                 viewBox="0 0 36 36"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="cursor-pointer"
+                                className="cursor-pointer max-md:w-6 max-md:h-6"
                                 onClick={() => setIsModalOpen(false)}
                             >
                                 <path
@@ -397,12 +416,12 @@ const Sales: React.FC = () => {
                             </svg>
                         </div>
 
-                        <div className="my-6 pb-6 border-b border-g200 w-full text-2xl leading-9 tracking-[-0.2px] font-bold">
+                        <div className="my-6 pb-6 border-b border-g200 w-full text-2xl leading-9 tracking-[-0.2px] font-bold max-md:text-base max-md:leading-5 max-md:mb-3 max-md:pb-3 max-md:mx-3 max-md:w-[calc(100%-24px)]">
                             주식회사 아이온 개인정보 처리방침
                         </div>
 
                         <div
-                            className="flex-1 w-full bg-g50 overflow-y-auto p-5 text-small leading-5 text-g600 font-normal"
+                            className="flex-1 w-full bg-g50 overflow-y-auto p-5 text-small leading-5 text-g600 font-normal max-md:text-xs max-md:leading-[18px] max-md:text-[400] max-md:mx-3 max-md:w-[calc(100%-24px)]"
                             dangerouslySetInnerHTML={{ __html: privacyPolicy }}
                         ></div>
                     </div>

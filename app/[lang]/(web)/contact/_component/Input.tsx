@@ -56,15 +56,19 @@ export default function Input({
     return (
         <div className="flex-1 relative">
             {!value && label !== "" && (
-                <div className="text-base text-g400 absolute top-[50%] left-[4px] translate-y-[-50%]">
+                <div className="text-base text-g400 absolute top-[50%] left-[4px] translate-y-[-50%] max-md:text-sm">
                     {label}
-                    {isRequired && <span className="text-base text-ePrimary ml-1">*</span>}
+                    {isRequired && (
+                        <span className="text-base text-ePrimary ml-1 max-md:text-sm">
+                            *
+                        </span>
+                    )}
                 </div>
             )}
 
-            <div className={`w-full h-[46px] flex gap-2`}>
+            <div className={`w-full h-10 flex gap-2 max-md:h-9`}>
                 <input
-                    className={`flex-1 h-[40px] border-0 border-b border-g200 pl-[4px] text-base outline-none`}
+                    className={`flex-1 h-10 border-0 border-b border-g200 pl-[4px] text-base outline-none max-md:h-9`}
                     type={type}
                     value={value}
                     onChange={onChange}

@@ -95,7 +95,7 @@ const renderNavigationItem = (
                                 <div key={child.id} className="">
                                     <li
                                         role="none"
-                                        className="relative min-w-[120px] flex group"
+                                        className="relative min-w-[120px] flex group px-4"
                                         onMouseEnter={() => {
                                             setExternal(child.external);
                                         }}
@@ -107,7 +107,7 @@ const renderNavigationItem = (
                                                     ? localizedPath(child.href)
                                                     : "#"
                                             }
-                                            className="relative min-w-[120px] w-full group-hover:block hover:text-ePrimary select-none w-full px-6 py-3 hover:bg-g50"
+                                            className="relative min-w-[120px] w-full rounded-lg group-hover:block hover:text-ePrimary select-none px-6 py-3 hover:bg-g50"
                                         >
                                             {child.label}
                                         </Link>
@@ -137,11 +137,11 @@ const renderNavigationItem = (
                                         <li
                                             key={external.id}
                                             role="none"
-                                            className="w-full"
+                                            className="w-full px-4"
                                         >
                                             <Link
                                                 href={external.href}
-                                                className="w-full flex justify-between items-center hover:text-ePrimary select-none hover:bg-g50 px-6 py-3 whitespace-nowrap gap-4"
+                                                className="w-full flex justify-between items-center rounded-lg hover:text-ePrimary select-none hover:bg-g50 px-6 py-3 whitespace-nowrap gap-4"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                             >

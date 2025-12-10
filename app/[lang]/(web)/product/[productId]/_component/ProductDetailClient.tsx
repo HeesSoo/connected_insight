@@ -325,7 +325,7 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
                 </section>
             </section>
 
-            <section className="mt-[144px] max-md:mt-14">
+            <section className="mt-[144px] max-md:mt-14 max-md:px-4">
                 <Tab
                     items={[
                         {

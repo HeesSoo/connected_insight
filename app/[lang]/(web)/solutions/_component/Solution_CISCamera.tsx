@@ -11,13 +11,13 @@ export default function SolutionCISCamera({ data }: { data: Solution }) {
     const safeEmbedUrl = getYouTubeEmbedUrl(data.link || "");
 
     return (
-        <div className="mt-20">
-            <div className="w-full flex gap-4 mb-20">
-                <div className="w-[470px]">
-                    <div className="mb-2 text-ePrimary font-semibold text-titleSmall">
+        <div className="mt-20 max-md:mt-14">
+            <div className="w-full flex gap-4 mb-20 max-md:block">
+                <div className="w-[470px] max-md:w-full max-md:mb-6">
+                    <div className="mb-2 text-ePrimary font-semibold text-titleSmall max-md:mb-1 max-md:text-base">
                         {data.caption}
                     </div>
-                    <h2 className="text-h3 text-g950 font-bold">
+                    <h2 className="text-h3 text-g950 font-bold max-md:text-large">
                         {data[`name${currentLanguage === "ko" ? "" : "_en"}`]}
                         {/* Introducing the CIS Cameras
                         <br />
@@ -25,7 +25,7 @@ export default function SolutionCISCamera({ data }: { data: Solution }) {
                     </h2>
                 </div>
 
-                <div className="flex-1 h-[538px]">
+                <div className="flex-1 h-[538px] max-md:h-[212px] max-md:w-[calc(100%+32px)] max-md:-ml-4">
                     {safeEmbedUrl ? (
                         <iframe
                             className="w-full h-full"
@@ -47,9 +47,9 @@ export default function SolutionCISCamera({ data }: { data: Solution }) {
                     delay={200}
                     duration={0.8}
                     direction="up"
-                    amount={0.3}
+                    amount={0}
                 >
-                    <div className="grid grid-cols-3 gap-x-4 gap-y-20">
+                    <div className="grid grid-cols-3 gap-x-4 gap-y-20 max-md:grid-cols-1 max-md:gap-y-12">
                         {data?.solutions?.map((item, index) => (
                             <Card
                                 key={index}

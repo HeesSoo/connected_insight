@@ -23,6 +23,7 @@ export default function Support_ReservationLab({
     const { currentLanguage } = useTranslationStore();
 
     const [swipers, setSwipers] = useState<SwiperClass[]>([]);
+    const [activeIndexes, setActiveIndexes] = useState<number[]>([]);
 
     const handlePrev = ({ idx }: { idx: number }) => {
         swipers[idx]?.slidePrev();
@@ -35,36 +36,39 @@ export default function Support_ReservationLab({
     return (
         <>
             {/* Main Image */}
-            <div className="w-full">
+            <div className="w-full max-md:h-[300px]">
                 <Image
                     src={Support_ReservationLab_Banner}
                     alt="EYEON Vision & Robotics Lab Banner"
                     width={1920}
                     height={400}
-                    className="object-cover"
+                    className="object-cover max-md:h-[300px]"
                 />
             </div>
-            <div className="w-full px-8">
-                <div className="w-full max-w-[1440px] pt-[120px] pb-[160px] mx-auto text-g950">
+            <div className="w-full px-8 max-md:px-4">
+                <div className="w-full max-w-[1440px] pt-[120px] pb-[160px] mx-auto text-g950 max-md:pb-[96px] max-md:pt-9">
                     {/* EYEON Vision */}
                     <MotionWrapper delay={200} duration={0.8} direction="up">
-                        <div className="w-full flex mb-[160px]">
-                            <div className="mr-[137px] flex-1">
-                                <h3 className="mb-2 text-h3 font-bold">
+                        <div className="w-full flex mb-[160px] max-md:block max-md:mb-[80px]">
+                            <div className="mr-[137px] flex-1 max-md:mr-0 max-md:mb-6">
+                                <h3 className="mb-2 text-h3 font-bold max-md:text-large max-md:mb-1">
                                     EYEON Vision & Robotics Lab
                                 </h3>
-                                <div className="text-titleSmall font-bold">
+                                <div className="text-titleSmall font-bold max-md:text-base">
                                     핵심 컴포넌트 기술을 경험하는 공간
                                 </div>
                             </div>
 
-                            <div className="w-[712px] text-large font-[500]">
+                            <div className="w-[712px] text-large font-[500] max-md:w-full max-md:text-base">
                                 주식회사 아이온은 산업 자동화의 핵심이
                                 되는&nbsp;
                                 <span className="text-ePrimary font-[600]">
                                     머신비전 CIS카메라와
                                 </span>
-                                <br />
+                                <br className="max-md:hidden" />
+                                <span className="hidden max-md:inline">
+                                    &nbsp;
+                                </span>
                                 <span className="text-ePrimary font-[600]">
                                     고성능 리니어 액츄에이터 컴포넌트
                                 </span>
@@ -76,7 +80,7 @@ export default function Support_ReservationLab({
                                 <br />
                                 이곳은 고객 여러분이 저희 컴포넌트의 실제 성능과
                                 적용 가능성을 직접 확인하고,
-                                <br />
+                                <br className="max-md:hidden" />
                                 최적의 시스템 구축 방안을 논의할 수 있도록
                                 조성된{" "}
                                 <span className="text-ePrimary font-[600]">
@@ -97,10 +101,10 @@ export default function Support_ReservationLab({
                                     direction="up"
                                 >
                                     <div
-                                        className="w-full flex justify-between mb-[160px]"
+                                        className="w-full flex justify-between mb-[160px] max-md:block max-md:mb-[80px]"
                                         key={v.uuid}
                                     >
-                                        <div className="w-[591px] h-[520px] bg-black relative">
+                                        <div className="w-[591px] h-[520px] bg-black relative max-md:w-full max-md:h-[304px]">
                                             <Swiper
                                                 modules={[Navigation]}
                                                 onSwiper={(e) => {
@@ -111,6 +115,22 @@ export default function Support_ReservationLab({
                                                         newSwipers[idx] = e;
                                                         return newSwipers;
                                                     });
+                                                    setActiveIndexes((prev) => {
+                                                        const newIndexes = [
+                                                            ...prev,
+                                                        ];
+                                                        newIndexes[idx] = 0;
+                                                        return newIndexes;
+                                                    });
+                                                }}
+                                                onSlideChange={(swiper) => {
+                                                    let activeIdxs =
+                                                        activeIndexes;
+                                                    activeIdxs[idx] =
+                                                        swiper.activeIndex;
+                                                    setActiveIndexes([
+                                                        ...activeIdxs,
+                                                    ]);
                                                 }}
                                                 className="w-full h-full"
                                             >
@@ -129,9 +149,9 @@ export default function Support_ReservationLab({
                                                                     alt="Alternative Image"
                                                                     width={591}
                                                                     height={444}
-                                                                    className="object-cover"
+                                                                    className="object-cover max-md:h-[256px]"
                                                                 />
-                                                                <div className="w-full py-5 text-center text-titleSmall text-white font-semibold">
+                                                                <div className="w-full py-5 text-center text-titleSmall text-white font-semibold max-md:py-3 max-md:text-base">
                                                                     {currentLanguage ===
                                                                     "en"
                                                                         ? image.name_en
@@ -144,7 +164,7 @@ export default function Support_ReservationLab({
                                             </Swiper>
 
                                             <button
-                                                className="absolute top-1/2 -translate-y-[50%] -left-[30px] z-[1] w-[60px] h-[60px] rounded-full bg-ePrimary hover:bg-ePrimary/90 transition-colors flex justify-center items-center cursor-pointer"
+                                                className="absolute top-1/2 -translate-y-[50%] -left-[30px] z-[1] w-[60px] h-[60px] rounded-full bg-ePrimary hover:bg-ePrimary/90 transition-colors flex justify-center items-center cursor-pointer max-md:hidden"
                                                 onClick={() =>
                                                     handlePrev({ idx })
                                                 }
@@ -163,7 +183,7 @@ export default function Support_ReservationLab({
                                                 </svg>
                                             </button>
                                             <button
-                                                className="absolute top-1/2 -translate-y-[50%] -right-[30px] z-[1] w-[60px] h-[60px] rounded-full bg-ePrimary hover:bg-ePrimary/90 transition-colors flex justify-center items-center cursor-pointer"
+                                                className="absolute top-1/2 -translate-y-[50%] -right-[30px] z-[1] w-[60px] h-[60px] rounded-full bg-ePrimary hover:bg-ePrimary/90 transition-colors flex justify-center items-center cursor-pointer max-md:hidden"
                                                 onClick={() =>
                                                     handleNext({ idx })
                                                 }
@@ -181,16 +201,45 @@ export default function Support_ReservationLab({
                                                     />
                                                 </svg>
                                             </button>
+
+                                            <div className="hidden max-md:block">
+                                                <div className="absolute -bottom-[20px] left-1/2 transform -translate-x-1/2 flex gap-3">
+                                                    {v.images.map(
+                                                        (image, imgIdx) => {
+                                                            return (
+                                                                <div
+                                                                    key={imgIdx}
+                                                                    className={`w-2 h-2 ${
+                                                                        imgIdx ===
+                                                                        activeIndexes[
+                                                                            idx
+                                                                        ]
+                                                                            ? "bg-ePrimary"
+                                                                            : "bg-g200"
+                                                                    }`}
+                                                                    onClick={() => {
+                                                                        swipers[
+                                                                            idx
+                                                                        ]?.slideTo(
+                                                                            imgIdx
+                                                                        );
+                                                                    }}
+                                                                ></div>
+                                                            );
+                                                        }
+                                                    )}
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <div className="w-[712px] h-auto flex flex-col justify-between">
+                                        <div className="w-[712px] h-auto flex flex-col justify-between max-md:w-full max-md:mt-14">
                                             <div>
-                                                <h3 className="text-h3 font-bold mb-2">
+                                                <h3 className="text-h3 font-bold mb-2 max-md:text-large max-md:mb-1">
                                                     {currentLanguage === "en"
                                                         ? v.name_en
                                                         : v.name}
                                                 </h3>
-                                                <div className="text-large font-[500] mb-5">
+                                                <div className="text-large font-[500] mb-5 max-md:text-base max-md:mb-6">
                                                     {currentLanguage === "en"
                                                         ? v.description_en
                                                         : v.description}
@@ -216,6 +265,7 @@ export default function Support_ReservationLab({
                                                             />
                                                         </svg>
                                                     }
+                                                    className="max-md:h-10 max-md:px-4"
                                                     onClick={() => {
                                                         router.push(
                                                             `/${currentLanguage}${v.button_url.replace(
@@ -227,50 +277,46 @@ export default function Support_ReservationLab({
                                                 />
                                             </div>
 
-                                            <div>
-                                                <div className="w-full grid grid-cols-2 gap-4">
-                                                    {v.features.map(
-                                                        (feature, idx) => {
-                                                            const isLast =
-                                                                idx ===
-                                                                v.features
-                                                                    .length -
-                                                                    1;
-                                                            const isOdd =
-                                                                v.features
-                                                                    .length %
-                                                                    2 !==
-                                                                0;
+                                            <div className="w-full grid grid-cols-2 gap-4 max-md:grid-cols-1 max-md:mt-6 max-md:gap-2">
+                                                {v.features.map(
+                                                    (feature, idx) => {
+                                                        const isLast =
+                                                            idx ===
+                                                            v.features.length -
+                                                                1;
+                                                        const isOdd =
+                                                            v.features.length %
+                                                                2 !==
+                                                            0;
 
-                                                            return (
-                                                                <div
-                                                                    className={`bg-g50 p-4 ${
-                                                                        isLast &&
-                                                                        isOdd
-                                                                            ? "col-span-2"
-                                                                            : ""
-                                                                    }`}
-                                                                    key={
-                                                                        feature.uuid
-                                                                    }
-                                                                >
-                                                                    <h5 className="text-base font-semibold text-ePrimary mb-3">
-                                                                        {currentLanguage ===
-                                                                        "en"
-                                                                            ? feature.title_en
-                                                                            : feature.title}
-                                                                    </h5>
-                                                                    <div className="text-base font-[500] text-g800">
-                                                                        {currentLanguage ===
-                                                                        "en"
-                                                                            ? feature.description_en
-                                                                            : feature.description}
-                                                                    </div>
+                                                        return (
+                                                            <div
+                                                                className={`bg-g50 p-4 ${
+                                                                    isLast &&
+                                                                    isOdd
+                                                                        ? "col-span-2 max-md:col-span-1"
+                                                                        : ""
+                                                                }`}
+                                                                key={
+                                                                    feature.uuid
+                                                                }
+                                                            >
+                                                                <h5 className="text-base font-semibold text-ePrimary mb-3">
+                                                                    {currentLanguage ===
+                                                                    "en"
+                                                                        ? feature.title_en
+                                                                        : feature.title}
+                                                                </h5>
+                                                                <div className="text-base font-[500] text-g800">
+                                                                    {currentLanguage ===
+                                                                    "en"
+                                                                        ? feature.description_en
+                                                                        : feature.description}
                                                                 </div>
-                                                            );
-                                                        }
-                                                    )}
-                                                </div>
+                                                            </div>
+                                                        );
+                                                    }
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -279,18 +325,19 @@ export default function Support_ReservationLab({
                         })}
 
                     {/* 방문 예약 안내 */}
-                    <div className="w-full h-[464px] mx-auto relative mb-[80px]">
-                        <div className="absolute w-full h-[464px] py-12 flex flex-col text-white text-center z-10">
-                            <h3 className="mb-3 text-h3 font-bold">
+                    <div className="w-full h-[464px] mx-auto relative mb-[80px] max-md:mb-0 max-md:h-[274px]">
+                        <div className="absolute w-full h-[464px] py-12 flex flex-col text-white text-center z-10 max-md:h-[274px] max-md:py-0 max-md:justify-center">
+                            <h3 className="mb-3 text-h3 font-bold max-md:text-large">
                                 방문 예약 안내
                             </h3>
 
-                            <div className="text-g200 text-large font-[500] mb-12">
-                                EYEON Lab 방문을 예약하시고, VISION 기술을
-                                경험해보세요.
+                            <div className="text-g200 text-large font-[500] mb-12 max-md:text-base">
+                                EYEON Lab 방문을 예약하시고,
+                                <br className="hidden max-md:block" />
+                                VISION 기술을 경험해보세요.
                             </div>
 
-                            <div className="mx-auto flex gap-8 items-center mb-12">
+                            <div className="mx-auto flex gap-8 items-center mb-12 max-md:hidden">
                                 <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
                                     방문예약
                                 </div>
@@ -318,7 +365,7 @@ export default function Support_ReservationLab({
                                 label="Contact"
                                 size="medium"
                                 btnType="white"
-                                className="w-fit mx-auto"
+                                className="w-fit mx-auto max-md:h-10 max-md:px-4"
                                 icRight={
                                     <svg
                                         width="24"
@@ -338,8 +385,8 @@ export default function Support_ReservationLab({
                                 }}
                             />
                         </div>
-                        <div className="absolute w-full h-[464px] bg-black opacity-30 z-[1]"></div>
-                        <div className="w-full h-[464px]">
+                        <div className="absolute w-full h-[464px] bg-black opacity-30 z-[1] max-md:h-[274px]"></div>
+                        <div className="w-full h-[464px] max-md:h-[274px]">
                             <Image
                                 src={Support_ReservationLab_ContactBg}
                                 alt="Contact Background"

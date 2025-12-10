@@ -6,7 +6,7 @@ export default function ProductSpecifications({
     data: ProductDetail;
 }) {
     return (
-        <div className="w-full flex mt-[80px] max-md:mt-14 max-md:px-4">
+        <div className="w-full flex mt-[80px] max-md:mt-14">
             <h2 className="flex-1 pl-9 text-title font-bold text-g950 max-md:hidden">
                 Information
             </h2>

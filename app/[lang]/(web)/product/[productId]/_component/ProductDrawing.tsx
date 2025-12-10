@@ -3,7 +3,7 @@ import { ProductDetail } from "./ProductDetailClient";
 
 export default function ProductDrawing({ data }: { data: ProductDetail }) {
     return (
-        <div className="w-full flex mt-[80px] max-md:mt-14">
+        <div className="w-full flex mt-[80px] max-md:mt-14 max-md:w-[calc(100%+32px)] max-md:-mx-4">
             <h2 className="flex-1 pl-9 text-title font-bold text-g950 max-md:hidden">
                 Drawing
             </h2>

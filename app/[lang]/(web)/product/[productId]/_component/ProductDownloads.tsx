@@ -25,7 +25,7 @@ export default function ProductDownloads({ data }: { data: ProductDetail }) {
     const downloadMap = downloadNames.map((name) => data[name] || null);
 
     return (
-        <div className="w-full flex mt-[80px] max-md:mt-14 max-md:px-4">
+        <div className="w-full flex mt-[80px] max-md:mt-14">
             <h2 className="flex-1 pl-9 text-title font-bold text-g950 max-md:hidden">
                 Documents
             </h2>

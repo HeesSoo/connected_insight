@@ -59,7 +59,10 @@ export default function Rangebar({
         onChange(updated);
     };
 
-    const displayed = (n: number) => (typeof formatValue === "function" ? formatValue(n) : String(Math.round(n)));
+    const displayed = (n: number) =>
+        typeof formatValue === "function"
+            ? formatValue(n)
+            : String(Math.round(n));
 
     const parsed = (t: string) => {
         if (typeof parseValue === "function") return parseValue(t);
@@ -76,28 +79,42 @@ export default function Rangebar({
 
     return (
         <div className={className}>
-            {label && <div className="mb-4 text-base leading-6 font-semibold text-g950">{label}</div>}
+            {label && (
+                <div className="mb-4 text-base leading-6 font-semibold text-g950">
+                    {label}
+                </div>
+            )}
 
             {/* Slider */}
-            <div className="relative h-6 select-none">
+            <div className="relative h-6 select-none max-md:h-5">
                 {/* Base track */}
-                <div ref={trackRef} className="absolute left-0 right-0 top-1/2 h-1 -translate-y-1/2 rounded bg-g200" />
+                <div
+                    ref={trackRef}
+                    className="absolute left-0 right-0 top-1/2 h-1 -translate-y-1/2 rounded bg-g200"
+                />
                 {/* Active range */}
                 <div
                     className="absolute top-1/2 h-1 -translate-y-1/2 rounded bg-ePrimary"
-                    style={{ left: `${leftPercent}%`, right: `${100 - rightPercent}%` }}
+                    style={{
+                        left: `${leftPercent}%`,
+                        right: `${100 - rightPercent}%`,
+                    }}
                 />
                 {/* Click/drag overlay to move nearest thumb */}
                 <div
-                    className="absolute left-0 top-0 h-6 w-full cursor-pointer z-0"
+                    className="absolute left-0 top-0 h-6 w-full cursor-pointer z-0 max-md:h-5"
                     onPointerDown={(e) => {
                         if (!trackRef.current) return;
                         const rect = trackRef.current.getBoundingClientRect();
-                        const ratio = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+                        const ratio = Math.min(
+                            1,
+                            Math.max(0, (e.clientX - rect.left) / rect.width)
+                        );
                         const val = snapToStep(min + ratio * range);
                         const distMin = Math.abs(val - local[0]);
                         const distMax = Math.abs(val - local[1]);
-                        const target: "min" | "max" = distMin <= distMax ? "min" : "max";
+                        const target: "min" | "max" =
+                            distMin <= distMax ? "min" : "max";
                         draggingRef.current = target;
                         if (target === "min") {
                             handleMinChange(val);
@@ -105,9 +122,13 @@ export default function Rangebar({
                             handleMaxChange(val);
                         }
                         const handleMove = (ev: PointerEvent) => {
-                            if (!trackRef.current || !draggingRef.current) return;
+                            if (!trackRef.current || !draggingRef.current)
+                                return;
                             const r = trackRef.current.getBoundingClientRect();
-                            const rr = Math.min(1, Math.max(0, (ev.clientX - r.left) / r.width));
+                            const rr = Math.min(
+                                1,
+                                Math.max(0, (ev.clientX - r.left) / r.width)
+                            );
                             const v = snapToStep(min + rr * range);
                             if (draggingRef.current === "min") {
                                 handleMinChange(v);
@@ -117,9 +138,15 @@ export default function Rangebar({
                         };
                         const handleUp = () => {
                             draggingRef.current = null;
-                            window.removeEventListener("pointermove", handleMove);
+                            window.removeEventListener(
+                                "pointermove",
+                                handleMove
+                            );
                             window.removeEventListener("pointerup", handleUp);
-                            window.removeEventListener("pointercancel", handleUp);
+                            window.removeEventListener(
+                                "pointercancel",
+                                handleUp
+                            );
                         };
                         window.addEventListener("pointermove", handleMove);
                         window.addEventListener("pointerup", handleUp);
@@ -135,7 +162,7 @@ export default function Rangebar({
                     value={local[0]}
                     disabled={disabled}
                     onChange={(e) => handleMinChange(Number(e.target.value))}
-                    className={`absolute left-0 top-0 h-6 w-full appearance-none bg-transparent [&::-webkit-slider-thumb]:relative z-10 ${
+                    className={`absolute left-0 top-0 h-6 w-full appearance-none bg-transparent [&::-webkit-slider-thumb]:relative z-10 max-md:h-5 ${
                         smooth ? "transition-all" : ""
                     }`}
                     aria-label={label ? `${label} minimum` : "minimum"}
@@ -149,7 +176,7 @@ export default function Rangebar({
                     value={local[1]}
                     disabled={disabled}
                     onChange={(e) => handleMaxChange(Number(e.target.value))}
-                    className={`absolute left-0 top-0 h-6 w-full appearance-none bg-transparent [&::-webkit-slider-thumb]:relative z-10 ${
+                    className={`absolute left-0 top-0 h-6 w-full appearance-none bg-transparent [&::-webkit-slider-thumb]:relative z-10 max-md:h-5 ${
                         smooth ? "transition-all" : ""
                     }`}
                     aria-label={label ? `${label} maximum` : "maximum"}
@@ -166,11 +193,22 @@ export default function Rangebar({
                             inputMode="numeric"
                             className="min-w-0 flex-1 h-5 text-right text-sm text-g950 outline-none"
                             value={displayed(local[0])}
-                            onChange={(e) => setLocal([snapToStep(parsed(e.target.value)), local[1]])}
-                            onBlur={(e) => handleMinChange(parsed(e.target.value))}
+                            onChange={(e) =>
+                                setLocal([
+                                    snapToStep(parsed(e.target.value)),
+                                    local[1],
+                                ])
+                            }
+                            onBlur={(e) =>
+                                handleMinChange(parsed(e.target.value))
+                            }
                             disabled={disabled}
                         />
-                        {unit && <span className="pointer-events-none text-sm text-g400">{unit}</span>}
+                        {unit && (
+                            <span className="pointer-events-none text-sm text-g400">
+                                {unit}
+                            </span>
+                        )}
                     </div>
                 </div>
                 <div>
@@ -181,11 +219,22 @@ export default function Rangebar({
                             inputMode="numeric"
                             className="min-w-0 flex-1 h-5 text-right text-sm text-g950 outline-none"
                             value={displayed(local[1])}
-                            onChange={(e) => setLocal([local[0], snapToStep(parsed(e.target.value))])}
-                            onBlur={(e) => handleMaxChange(parsed(e.target.value))}
+                            onChange={(e) =>
+                                setLocal([
+                                    local[0],
+                                    snapToStep(parsed(e.target.value)),
+                                ])
+                            }
+                            onBlur={(e) =>
+                                handleMaxChange(parsed(e.target.value))
+                            }
                             disabled={disabled}
                         />
-                        {unit && <span className="pointer-events-none text-sm text-g400">{unit}</span>}
+                        {unit && (
+                            <span className="pointer-events-none text-sm text-g400">
+                                {unit}
+                            </span>
+                        )}
                     </div>
                 </div>
             </div>

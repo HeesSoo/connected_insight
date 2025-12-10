@@ -50,9 +50,18 @@ export interface Filter {
     wd_max: number | null;
 }
 
-export default function ProductListClient({ initialData }: { initialData: { cis?: CisData[]; lingchen?: LingchenData[]; tokk?: TokkData[] } }) {
+export default function ProductListClient({
+    initialData,
+}: {
+    initialData: {
+        cis?: CisData[];
+        lingchen?: LingchenData[];
+        tokk?: TokkData[];
+    };
+}) {
     const searchParams = useSearchParams();
-    const category = (searchParams?.get("t") as "cis" | "lingchen" | "tokk") || "cis";
+    const category =
+        (searchParams?.get("t") as "cis" | "lingchen" | "tokk") || "cis";
 
     const [tab, setTab] = useState<"cis" | "lingchen" | "tokk">(category);
     const [filter, setFilter] = useState<Filter>({
@@ -66,15 +75,23 @@ export default function ProductListClient({ initialData }: { initialData: { cis?
         wd_max: 48,
     });
 
-    const [allCisData, setAllCisData] = useState<CisData[]>(initialData.cis || []);
-    const [lingchenData, setLingchenData] = useState<LingchenData[]>(initialData.lingchen || []);
-    const [tokkData, setTokkData] = useState<TokkData[]>(initialData.tokk || []);
+    const [allCisData, setAllCisData] = useState<CisData[]>(
+        initialData.cis || []
+    );
+    const [lingchenData, setLingchenData] = useState<LingchenData[]>(
+        initialData.lingchen || []
+    );
+    const [tokkData, setTokkData] = useState<TokkData[]>(
+        initialData.tokk || []
+    );
 
-    const [data, setData] = useState<CisData[] | LingchenData[] | TokkData[]>(() => {
-        if (category === "cis") return initialData.cis || [];
-        if (category === "lingchen") return initialData.lingchen || [];
-        return initialData.tokk || [];
-    });
+    const [data, setData] = useState<CisData[] | LingchenData[] | TokkData[]>(
+        () => {
+            if (category === "cis") return initialData.cis || [];
+            if (category === "lingchen") return initialData.lingchen || [];
+            return initialData.tokk || [];
+        }
+    );
 
     useEffect(() => {
         setAllCisData(initialData.cis || []);
@@ -87,7 +104,8 @@ export default function ProductListClient({ initialData }: { initialData: { cis?
     }, [tab, initialData]);
 
     useEffect(() => {
-        const category = (searchParams?.get("t") as "cis" | "lingchen" | "tokk") || "cis";
+        const category =
+            (searchParams?.get("t") as "cis" | "lingchen" | "tokk") || "cis";
         setTab(category);
     }, [searchParams]);
 
@@ -96,14 +114,38 @@ export default function ProductListClient({ initialData }: { initialData: { cis?
 
         if (tab === "cis") {
             filteredData = [...allCisData];
-            if (filter.type && filter.type.length >= 0) filteredData = filteredData.filter((item) => filter.type.includes(item.type));
-            if (filter.resolution && filter.resolution.length >= 0) filteredData = filteredData.filter((item) => filter.resolution.includes(item.resolution));
-            if (filter.line_rate_min !== null) filteredData = filteredData.filter((item) => item.line_rate >= filter.line_rate_min!);
-            if (filter.line_rate_max !== null) filteredData = filteredData.filter((item) => item.line_rate <= filter.line_rate_max!);
-            if (filter.fov_min !== null) filteredData = filteredData.filter((item) => item.fov >= filter.fov_min!);
-            if (filter.fov_max !== null) filteredData = filteredData.filter((item) => item.fov <= filter.fov_max!);
-            if (filter.wd_min !== null) filteredData = filteredData.filter((item) => item.wd >= filter.wd_min!);
-            if (filter.wd_max !== null) filteredData = filteredData.filter((item) => item.wd <= filter.wd_max!);
+            if (filter.type && filter.type.length >= 0)
+                filteredData = filteredData.filter((item) =>
+                    filter.type.includes(item.type)
+                );
+            if (filter.resolution && filter.resolution.length >= 0)
+                filteredData = filteredData.filter((item) =>
+                    filter.resolution.includes(item.resolution)
+                );
+            if (filter.line_rate_min !== null)
+                filteredData = filteredData.filter(
+                    (item) => item.line_rate >= filter.line_rate_min!
+                );
+            if (filter.line_rate_max !== null)
+                filteredData = filteredData.filter(
+                    (item) => item.line_rate <= filter.line_rate_max!
+                );
+            if (filter.fov_min !== null)
+                filteredData = filteredData.filter(
+                    (item) => item.fov >= filter.fov_min!
+                );
+            if (filter.fov_max !== null)
+                filteredData = filteredData.filter(
+                    (item) => item.fov <= filter.fov_max!
+                );
+            if (filter.wd_min !== null)
+                filteredData = filteredData.filter(
+                    (item) => item.wd >= filter.wd_min!
+                );
+            if (filter.wd_max !== null)
+                filteredData = filteredData.filter(
+                    (item) => item.wd <= filter.wd_max!
+                );
         } else if (tab === "lingchen") {
             filteredData = [...lingchenData];
         } else if (tab === "tokk") {
@@ -120,7 +162,7 @@ export default function ProductListClient({ initialData }: { initialData: { cis?
     };
 
     return (
-        <div className="max-w-[1872px] min-w-[1248px] px-6 w-full mx-auto pt-[120px] pb-[160px]">
+        <div className="max-w-[1872px] min-w-[1248px] px-6 w-full mx-auto pt-[120px] pb-[160px] max-md:min-w-0 max-md:px-4 max-md:pt-8 max-md:pb-24">
             <Tab
                 items={[
                     { value: "cis", label: "CIS Camera" },
@@ -131,8 +173,14 @@ export default function ProductListClient({ initialData }: { initialData: { cis?
                 onChange={handleTabChange}
             />
 
-            <div className={`${tab === "cis" ? "mt-[40px]" : "mt-[80px]"} w-full flex gap-[131px]`}>
-                {tab === "cis" && <Filter filter={filter} setFilter={setFilter} />}
+            <div
+                className={`${
+                    tab === "cis" ? "mt-[40px]" : "mt-[80px]"
+                } w-full flex gap-[131px] max-md:mt-14 max-md:block max-md:gap-0`}
+            >
+                {tab === "cis" && (
+                    <Filter filter={filter} setFilter={setFilter} />
+                )}
                 <ProductItems tab={tab} data={data} hasFilter={tab === "cis"} />
             </div>
         </div>

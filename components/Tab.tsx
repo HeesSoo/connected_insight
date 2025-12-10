@@ -62,7 +62,7 @@ export default function Tab({ items, defaultTab, onChange }: TabProps) {
 
             {/* Mobile SelectBox */}
             <div className="md:hidden">
-                <div className="relative mb-4 px-4">
+                <div className="relative mb-4">
                     <div
                         className="w-full cursor-pointer px-4 py-2.5 bg-g50 rounded-full flex justify-between items-center border border-g200"
                         onClick={() => setIsOpen(!isOpen)}
@@ -76,7 +76,7 @@ export default function Tab({ items, defaultTab, onChange }: TabProps) {
                             viewBox="0 0 24 24"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            className={`transition-transform duration-200 ${
+                            className={`transition-transform duration-200 w-5 h-5 ${
                                 isOpen ? "rotate-180" : ""
                             }`}
                         >
@@ -88,7 +88,7 @@ export default function Tab({ items, defaultTab, onChange }: TabProps) {
                     </div>
 
                     {isOpen && (
-                        <div className="absolute w-[calc(100%-32px)] mt-1 bg-white border border-g200 rounded-lg shadow-lg z-10 max-h-[300px] overflow-y-auto">
+                        <div className="absolute w-full mt-1 bg-white border border-g200 rounded-lg shadow-lg z-10 max-h-[300px] overflow-y-auto">
                             {items.map((item) => (
                                 <div
                                     key={item.value}

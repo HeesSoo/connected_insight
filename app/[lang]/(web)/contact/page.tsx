@@ -396,17 +396,17 @@ const Sales: React.FC = () => {
                     onClick={() => setIsModalOpen(false)}
                 >
                     <div
-                        className="bg-white w-[876px] h-[640px] p-12 flex flex-col max-md:w-full max-md:h-full max-md:p-3"
+                        className="bg-white w-[876px] h-[640px] p-12 flex flex-col max-md:w-full max-md:h-full max-md:p-0"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <div className="w-full flex justify-end">
+                        <div className="w-full flex justify-end max-md:px-3 max-md:py-3 max-md:border-b max-md:border-g200">
                             <svg
                                 width="36"
                                 height="36"
                                 viewBox="0 0 36 36"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="cursor-pointer"
+                                className="cursor-pointer max-md:w-6 max-md:h-6"
                                 onClick={() => setIsModalOpen(false)}
                             >
                                 <path
@@ -416,12 +416,12 @@ const Sales: React.FC = () => {
                             </svg>
                         </div>
 
-                        <div className="my-6 pb-6 border-b border-g200 w-full text-2xl leading-9 tracking-[-0.2px] font-bold max-md:mb-3 max-md:pb-3">
+                        <div className="my-6 pb-6 border-b border-g200 w-full text-2xl leading-9 tracking-[-0.2px] font-bold max-md:text-base max-md:leading-5 max-md:mb-3 max-md:pb-3 max-md:mx-3 max-md:w-[calc(100%-24px)]">
                             주식회사 아이온 개인정보 처리방침
                         </div>
 
                         <div
-                            className="flex-1 w-full bg-g50 overflow-y-auto p-5 text-small leading-5 text-g600 font-normal max-md:text-xs max-md:leading-[18px] max-md:text-[400]"
+                            className="flex-1 w-full bg-g50 overflow-y-auto p-5 text-small leading-5 text-g600 font-normal max-md:text-xs max-md:leading-[18px] max-md:text-[400] max-md:mx-3 max-md:w-[calc(100%-24px)]"
                             dangerouslySetInnerHTML={{ __html: privacyPolicy }}
                         ></div>
                     </div>

@@ -9,7 +9,7 @@ export default function Footer() {
     const localizedPath = useLocalizedPath();
     const { t } = useTranslation();
 
-    console.log("translations:::", t);
+    // console.log("translations:::", t);
 
     return (
         <footer role="contentinfo" className="bg-g950 text-white">
@@ -59,26 +59,40 @@ export default function Footer() {
                         <address className="contact-info not-italic">
                             <dl className="">
                                 <div className="flex text-g300 text-small max-md:text-xs max-md:leading-[18px]">
-                                    <dt>주소&nbsp;:&nbsp;</dt>
+                                    {/* <dt>주소&nbsp;:&nbsp;</dt> */}
+                                    <dt>
+                                        {t["footer-address-label"]}&nbsp;:&nbsp;
+                                    </dt>
                                     <dd>
-                                        충청남도 천안시 서북구 불당36길 63,
-                                        충남지식산업센터 307호
+                                        {t["footer-address-value"]}
+                                        {/* 충청남도 천안시 서북구 불당36길 63,
+                                        충남지식산업센터 307호 */}
                                     </dd>
                                 </div>
 
                                 <div className="flex text-g300 text-small max-md:text-xs max-md:leading-[18px]">
-                                    <dt>사업자등록번호&nbsp;:&nbsp;</dt>
+                                    {/* <dt>사업자등록번호&nbsp;:&nbsp;</dt> */}
+                                    <dt>
+                                        {t["footer-business-number-label"]}
+                                        &nbsp;:&nbsp;
+                                    </dt>
                                     <dd>771-86-03145</dd>
                                 </div>
 
                                 <div className="flex text-g300 text-small mt-[20px] max-md:text-xs max-md:leading-[18px]">
-                                    <dt>대표자&nbsp;:&nbsp;</dt>
-                                    <dd>김경배</dd>
+                                    <dt>
+                                        {t["footer-representative-label"]}
+                                        &nbsp;:&nbsp;
+                                    </dt>
+                                    <dd>{t["footer-representative-value"]}</dd>
                                 </div>
 
                                 <div className="flex gap-[24px]">
                                     <div className="flex text-g300 text-small max-md:text-xs max-md:leading-[18px]">
-                                        <dt>대표전화&nbsp;:&nbsp;</dt>
+                                        <dt>
+                                            {t["footer-main-phone-label"]}
+                                            &nbsp;:&nbsp;
+                                        </dt>
                                         <dd>070-8880-3145</dd>
                                     </div>
 

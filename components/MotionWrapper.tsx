@@ -18,7 +18,7 @@ export default function MotionWrapper({
   delay = 0,
   duration = 0.8,
   direction = "up",
-  amount = 0.3,
+  amount = 0.05,
   once = true,
   className = "",
 }: MotionWrapperProps) {

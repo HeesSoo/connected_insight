@@ -8,7 +8,6 @@ import AlternativeImg from "@/public/common/alternativeImg.png";
 import { useTranslationStore } from "@/stores/translationStore";
 import Image from "next/image";
 import "swiper/css";
-import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import MotionWrapper from "@/components/MotionWrapper";
@@ -22,6 +21,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
     const { currentLanguage } = useTranslationStore();
 
     const [swiper, setSwiper] = useState<SwiperClass>();
+    const [activeIndex, setActiveIndex] = useState(0);
 
     const handlePrev = () => {
         swiper?.slidePrev();
@@ -30,9 +30,17 @@ export default function MainSolution({ data }: MainSolutionProps) {
         swiper?.slideNext();
     };
 
+    const handleSlideChange = (swiper: SwiperClass) => {
+        setActiveIndex(swiper.activeIndex);
+    };
+
+    const goToSlide = (index: number) => {
+        swiper?.slideTo(index);
+    };
+
     return (
-        <MotionWrapper delay={200} duration={0.8} direction="up" amount={0.3}>
-            <h2 className="font-bold text-xl text-g950 mb-[58px]">
+        <MotionWrapper delay={200} duration={0.8} direction="up" amount={0.05}>
+            <h2 className="font-bold text-xl text-g950 mb-[58px] max-md:text-xl-mobile max-md:mb-6 ">
                 CIS Application
             </h2>
 
@@ -76,35 +84,36 @@ export default function MainSolution({ data }: MainSolutionProps) {
                     </div>
                 </div>
             ) : (
-                <div className="relative h-[474px]">
+                <div className="relative h-[474px] max-md:h-auto">
                     <Swiper
                         modules={[Navigation]}
                         onSwiper={(e) => {
                             setSwiper(e);
                         }}
+                        onSlideChange={handleSlideChange}
                         className="mainCisSwiper"
                     >
                         {data.map((item, index) => (
                             <SwiperSlide key={index}>
-                                <div className="w-full flex">
+                                <div className="w-full flex max-md:flex-col">
                                     <div className="flex-1">
                                         <Image
                                             src={item.image}
                                             alt={item.name}
                                             width={849}
                                             height={474}
-                                            className="w-full h-[474px] object-cover"
+                                            className="w-full h-[474px] object-cover max-md:h-[192px]"
                                         />
                                     </div>
-                                    <div className="w-[591px] bg-g50 px-12 pt-12 pb-20 flex flex-col justify-between select-none">
-                                        <h3 className="g-950 text-[32px] leading-[48px] tracking-[-0.2px] font-bold">
+                                    <div className="w-[591px] bg-g50 px-12 pt-12 pb-20 flex flex-col justify-between select-none max-md:w-full max-md:h-[238px] max-md:py-8 max-md:px-3 ">
+                                        <h3 className="g-950 text-[32px] leading-[48px] tracking-[-0.2px] font-bold max-md:text-lg max-md:mb-6">
                                             {item?.[`name_${currentLanguage}`]}
                                         </h3>
 
                                         <div>
                                             {item.core_inspector_target_ko && (
                                                 <div className="mb-6">
-                                                    <div className="text-ePrimary text-base mb-1 font-[500]">
+                                                    <div className="text-ePrimary text-base mb-1 font-[500] max-md:text-small">
                                                         {
                                                             t[
                                                                 "solution-core-inspector-target"
@@ -112,7 +121,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
                                                         }
                                                     </div>
                                                     <div
-                                                        className={`text-large text-g950 font-[600]`}
+                                                        className={`text-large text-g950 font-[600] max-md:text-base`}
                                                     >
                                                         {
                                                             item?.[
@@ -124,7 +133,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
                                             )}
                                             {item.core_value_ko && (
                                                 <div>
-                                                    <div className="text-ePrimary text-base mb-1 font-[500]">
+                                                    <div className="text-ePrimary text-base mb-1 font-[500] max-md:text-small">
                                                         {
                                                             t[
                                                                 "solution-core-value"
@@ -132,7 +141,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
                                                         }
                                                     </div>
                                                     <div
-                                                        className={`text-large text-g950 font-[600]`}
+                                                        className={`text-large text-g950 font-[600] max-md:text-base`}
                                                     >
                                                         {
                                                             item?.[
@@ -149,8 +158,26 @@ export default function MainSolution({ data }: MainSolutionProps) {
                         ))}
                     </Swiper>
 
+                    {/* Custom Pagination */}
+                    {data.length > 1 && (
+                        <div className="hidden justify-center items-center gap-2 max-md:mt-4 max-md:flex">
+                            {data.map((_, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => goToSlide(index)}
+                                    className={`w-2 h-2 transition-colors cursor-pointer ${
+                                        activeIndex === index
+                                            ? "bg-ePrimary"
+                                            : "bg-g300 hover:bg-g400"
+                                    }`}
+                                    aria-label={`Go to slide ${index + 1}`}
+                                />
+                            ))}
+                        </div>
+                    )}
+
                     <button
-                        className="absolute top-1/2 -translate-y-[50%] -left-24 [@media(max-width:1600px)]:-left-[2%] z-[1] w-12 h-12 rounded-full bg-ePrimary hover:bg-[#C92F2E] transition-colors flex justify-center items-center cursor-pointer"
+                        className="absolute top-1/2 -translate-y-[50%] -left-24 [@media(max-width:1600px)]:-left-[2%] z-[1] w-12 h-12 rounded-full bg-ePrimary hover:bg-[#C92F2E] transition-colors flex justify-center items-center cursor-pointer max-md:hidden"
                         onClick={handlePrev}
                     >
                         <svg
@@ -167,7 +194,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
                         </svg>
                     </button>
                     <button
-                        className="absolute top-1/2 -translate-y-[50%] -right-24 [@media(max-width:1600px)]:-right-[2%] z-[1] w-12 h-12 rounded-full bg-ePrimary hover:bg-[#C92F2E] transition-colors flex justify-center items-center cursor-pointer"
+                        className="absolute top-1/2 -translate-y-[50%] -right-24 [@media(max-width:1600px)]:-right-[2%] z-[1] w-12 h-12 rounded-full bg-ePrimary hover:bg-[#C92F2E] transition-colors flex justify-center items-center cursor-pointer max-md:hidden"
                         onClick={handleNext}
                     >
                         <svg

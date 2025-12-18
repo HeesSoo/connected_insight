@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @import 'swiper/css'; */
+/* @import 'swiper/css/pagination'; */
+
 :root {
     --brand-primary: #e83837;
 }
@@ -15,7 +18,7 @@
 /* Swiper pagination 텍스트만 표시 */
 .mySwiper .swiper-pagination-bullet {
     border: none;
-    width: 185px;
+    width: 220px;
     height: auto;
     display: flex;
     border-radius: 23px;
@@ -32,7 +35,7 @@
 
 .mySwiper .swiper-pagination-bullet:is(.swiper-pagination-bullet-active) {
     background-color: var(--brand-primary);
-    width: auto;
+    /* width: auto; */
 }
 .mySwiper .swiper-pagination-bullet:is(.swiper-pagination-bullet-active):hover {
     background-color: rgb(232 56 55 / 0.9);
@@ -128,4 +131,31 @@
     text-align: center;
     flex-direction: row;
     gap: 16px;
+}
+
+.bg-download-banner {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                linear-gradient(270deg, #000000 0%, rgba(0, 0, 0, 0) 50%, #000000 100%);
+}
+
+@media screen and (max-width: 768px) {
+    .mySwiper .swiper-pagination-bullet {
+        display: none;
+    }
+
+    :is(.mainLingchenSwiper, .mainTokkSwiper)
+        .swiper-horizontal
+        > .swiper-pagination-bullets,
+    :is(.mainLingchenSwiper, .mainTokkSwiper)
+        .swiper-pagination-bullets.swiper-pagination-horizontal,
+    :is(.mainLingchenSwiper, .mainTokkSwiper)
+        .swiper-pagination-bullets
+        .swiper-pagination,
+    :is(.mainLingchenSwiper, .mainTokkSwiper)
+        .swiper-pagination-bullets.swiper-pagination-horizontal
+        .swiper-pagination {
+        overflow-x: auto;
+        position: relative;
+        justify-content: flex-start;
+    }
 }

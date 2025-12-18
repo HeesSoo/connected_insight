@@ -13,6 +13,7 @@ const formatDateToYYMMDD = (date: string | Date): string => {
 
 const type = {
     drawing: "Drawing",
+    Speecification: "specification",
     manual: "Manual",
     catalog: "Catalog",
     sdk: "SDK",
@@ -20,7 +21,14 @@ const type = {
 };
 
 export default function ProductDownloads({ data }: { data: ProductDetail }) {
-    const downloadNames = ["drawing", "manual", "catalog", "sdk", "etc"];
+    const downloadNames = [
+        "drawing",
+        "specification",
+        "manual",
+        "catalog",
+        "sdk",
+        "etc",
+    ];
 
     const downloadMap = downloadNames.map((name) => data[name] || null);
 

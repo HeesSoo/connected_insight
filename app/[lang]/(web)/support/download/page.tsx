@@ -1,40 +1,65 @@
-import Tab from "@/components/Tab";
-import DownloadCISCamera from "./_components/Download_CISCamera";
-import DownloadIndustrialControlDevices from "./_components/Download_IndustrialControlDevices";
-import DownloadLinearActuator from "./_components/Download_LinearActuator";
+import DownloadClient from "./_components/DownloadClient";
+import axios from "axios";
 
-const Download: React.FC = () => {
-    return (
-        <div className="w-full">
-            <div className="flex items-end justify-start w-full h-[400px] bg-g950">
-                <h2 className="text-white text-[32px] font-bold line-height-[48px] pb-[80px] pl-[240px]">
-                    Downloads
-                </h2>
-            </div>
-            <div className="w-full max-w-[1440px] flex mx-auto pt-[120px] pb-[160px]">
-                <Tab
-                    items={[
-                        {
-                            value: "cis",
-                            label: "CIS Camera",
-                            children: <DownloadCISCamera />,
-                        },
-                        {
-                            value: "icd",
-                            label: "Industrial Control Devices",
-                            children: <DownloadIndustrialControlDevices />,
-                        },
-                        {
-                            value: "linear",
-                            label: "Linear Actuator",
-                            children: <DownloadLinearActuator />,
-                        },
-                    ]}
-                    defaultTab="cis"
-                />
-            </div>
-        </div>
-    );
-};
+enum DownloadType {
+    "CIS Camera" = "cis",
+    "Industrial Control Devices" = "lingchen",
+    "Linear Actuator" = "tokk",
+}
 
-export default Download;
+interface File {
+    created_at: string;
+    updated_at: string;
+    deleted_at: string | null;
+    is_deleted: boolean;
+    uuid: string;
+    name: string;
+    s3_key: string;
+    s3_url: string;
+    mime_type: string;
+    size: string;
+    bucket: string;
+}
+
+export interface DownloadItem {
+    created_at: string;
+    updated_at: string;
+    deleted_at: string | null;
+    is_deleted: boolean;
+    uuid: string;
+    name: string;
+    type: DownloadType;
+    file: File;
+}
+
+export interface DownloadData {
+    cis?: DownloadItem[];
+    lingchen?: DownloadItem[];
+    tokk?: DownloadItem[];
+}
+
+async function getAllDownload(): Promise<DownloadData> {
+    try {
+        const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/download`,
+            {
+                headers: {
+                    "Cache-Control": "no-cache",
+                },
+            }
+        );
+
+        if (response.status === 200) {
+            return response.data.data || {};
+        }
+    } catch (error) {
+        console.error("Error fetching downloads:", error);
+    }
+    return {};
+}
+
+export default async function Download() {
+    const data = await getAllDownload();
+
+    return <DownloadClient initialData={data} />;
+}

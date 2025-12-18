@@ -13,6 +13,7 @@ import { useTranslationStore } from "@/stores/translationStore";
 import Support_ReservationLab_Banner from "@/public/support/reservation-lab/Reservationlab_Banner.png";
 import Support_ReservationLab_ContactBg from "@/public/support/reservation-lab/Support_ReservationLab_ContactBg.png";
 import MotionWrapper from "@/components/MotionWrapper";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function Support_ReservationLab({
     data,
@@ -21,6 +22,7 @@ export default function Support_ReservationLab({
 }) {
     const router = useRouter();
     const { currentLanguage } = useTranslationStore();
+    const { t } = useTranslation();
 
     const [swipers, setSwipers] = useState<SwiperClass[]>([]);
     const [activeIndexes, setActiveIndexes] = useState<number[]>([]);
@@ -32,6 +34,8 @@ export default function Support_ReservationLab({
     const handleNext = ({ idx }: { idx: number }) => {
         swipers[idx]?.slideNext();
     };
+
+    console.log(data, " : data");
 
     return (
         <>
@@ -48,19 +52,44 @@ export default function Support_ReservationLab({
             <div className="w-full px-8 max-md:px-4">
                 <div className="w-full max-w-[1440px] pt-[120px] pb-[160px] mx-auto text-g950 max-md:pb-[96px] max-md:pt-9">
                     {/* EYEON Vision */}
-                    <MotionWrapper delay={200} duration={0.8} direction="up">
-                        <div className="w-full flex mb-[160px] max-md:block max-md:mb-[80px]">
-                            <div className="mr-[137px] flex-1 max-md:mr-0 max-md:mb-6">
-                                <h3 className="mb-2 text-h3 font-bold max-md:text-large max-md:mb-1">
+                    <MotionWrapper
+                        delay={200}
+                        duration={0.8}
+                        direction="up"
+                        amount={0.05}
+                    >
+                        <div className="w-full flex mb-[160px]">
+                            <div className="mr-[137px] flex-1">
+                                <h3 className="mb-2 text-h3 font-bold">
                                     EYEON Vision & Robotics Lab
                                 </h3>
-                                <div className="text-titleSmall font-bold max-md:text-base">
-                                    핵심 컴포넌트 기술을 경험하는 공간
+                                <div className="text-titleSmall font-bold">
+                                    {/* 핵심 컴포넌트 기술을 경험하는 공간 */}
+                                    {t["reservation-sub-title"]}
                                 </div>
                             </div>
 
-                            <div className="w-[712px] text-large font-[500] max-md:w-full max-md:text-base">
-                                주식회사 아이온은 산업 자동화의 핵심이
+                            <div className="w-[712px] text-large font-[500] max-md:w-full max-md:text-base whitespace-pre-wrap">
+                                {t["reservation-description-1"]
+                                    .split("{0}")
+                                    .map((part, index) => (
+                                        <span key={index}>
+                                            {part}
+                                            {index === 0 && (
+                                                <span className="text-ePrimary font-[600]">
+                                                    {
+                                                        t[
+                                                            "reservation-desecription-core"
+                                                        ]
+                                                    }
+                                                </span>
+                                            )}
+                                        </span>
+                                    ))}
+                                <br />
+                                <br />
+                                {t["reservation-description-2"]}
+                                {/* 주식회사 아이온은 산업 자동화의 핵심이
                                 되는&nbsp;
                                 <span className="text-ePrimary font-[600]">
                                     머신비전 CIS카메라와
@@ -86,7 +115,7 @@ export default function Support_ReservationLab({
                                 <span className="text-ePrimary font-[600]">
                                     기술 시연 및 협력 허브
                                 </span>
-                                입니다.
+                                입니다. */}
                             </div>
                         </div>
                     </MotionWrapper>
@@ -99,6 +128,8 @@ export default function Support_ReservationLab({
                                     delay={200}
                                     duration={0.8}
                                     direction="up"
+                                    amount={0.05}
+                                    key={v.uuid}
                                 >
                                     <div
                                         className="w-full flex justify-between mb-[160px] max-md:block max-md:mb-[80px]"
@@ -244,37 +275,44 @@ export default function Support_ReservationLab({
                                                         ? v.description_en
                                                         : v.description}
                                                 </div>
-                                                <Button
-                                                    label={
-                                                        currentLanguage === "en"
-                                                            ? v.button_text_en
-                                                            : v.button_text
-                                                    }
-                                                    size="medium"
-                                                    icRight={
-                                                        <svg
-                                                            width="24"
-                                                            height="24"
-                                                            viewBox="0 0 24 24"
-                                                            fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                        >
-                                                            <path
-                                                                d="M16.8165 12.7568H5.43945C5.22662 12.7568 5.04845 12.685 4.90495 12.5413C4.76129 12.3978 4.68945 12.2197 4.68945 12.0068C4.68945 11.794 4.76129 11.6158 4.90495 11.4723C5.04845 11.3287 5.22662 11.2568 5.43945 11.2568H16.8165L11.6472 6.08759C11.4985 5.93893 11.4251 5.76493 11.427 5.56559C11.429 5.36626 11.5075 5.18901 11.6625 5.03384C11.8176 4.88901 11.9933 4.81401 12.1895 4.80884C12.3856 4.80368 12.5613 4.87868 12.7165 5.03384L19.0567 11.3741C19.1504 11.4678 19.2164 11.5665 19.2547 11.6703C19.2932 11.7742 19.3125 11.8863 19.3125 12.0068C19.3125 12.1273 19.2932 12.2395 19.2547 12.3433C19.2164 12.4472 19.1504 12.5459 19.0567 12.6396L12.7165 18.9798C12.578 19.1183 12.4065 19.1892 12.202 19.1923C11.9975 19.1955 11.8176 19.1247 11.6625 18.9798C11.5075 18.8247 11.43 18.6465 11.43 18.4453C11.43 18.244 11.5075 18.0658 11.6625 17.9106L16.8165 12.7568Z"
-                                                                fill="white"
+                                                <div className="flex gap-2">
+                                                    {v.buttons.map((button) => (
+                                                        <>
+                                                            <Button
+                                                                label={
+                                                                    currentLanguage ===
+                                                                    "en"
+                                                                        ? button.button_text_en
+                                                                        : button.button_text
+                                                                }
+                                                                size="medium"
+                                                                icRight={
+                                                                    <svg
+                                                                        width="24"
+                                                                        height="24"
+                                                                        viewBox="0 0 24 24"
+                                                                        fill="none"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                    >
+                                                                        <path
+                                                                            d="M16.8165 12.7568H5.43945C5.22662 12.7568 5.04845 12.685 4.90495 12.5413C4.76129 12.3978 4.68945 12.2197 4.68945 12.0068C4.68945 11.794 4.76129 11.6158 4.90495 11.4723C5.04845 11.3287 5.22662 11.2568 5.43945 11.2568H16.8165L11.6472 6.08759C11.4985 5.93893 11.4251 5.76493 11.427 5.56559C11.429 5.36626 11.5075 5.18901 11.6625 5.03384C11.8176 4.88901 11.9933 4.81401 12.1895 4.80884C12.3856 4.80368 12.5613 4.87868 12.7165 5.03384L19.0567 11.3741C19.1504 11.4678 19.2164 11.5665 19.2547 11.6703C19.2932 11.7742 19.3125 11.8863 19.3125 12.0068C19.3125 12.1273 19.2932 12.2395 19.2547 12.3433C19.2164 12.4472 19.1504 12.5459 19.0567 12.6396L12.7165 18.9798C12.578 19.1183 12.4065 19.1892 12.202 19.1923C11.9975 19.1955 11.8176 19.1247 11.6625 18.9798C11.5075 18.8247 11.43 18.6465 11.43 18.4453C11.43 18.244 11.5075 18.0658 11.6625 17.9106L16.8165 12.7568Z"
+                                                                            fill="white"
+                                                                        />
+                                                                    </svg>
+                                                                }
+                                                                className="w-[240px] max-md:h-10 max-md:px-4"
+                                                                onClick={() => {
+                                                                    router.push(
+                                                                        `/${currentLanguage}${button.button_url.replace(
+                                                                            "products",
+                                                                            "product"
+                                                                        )}`
+                                                                    );
+                                                                }}
                                                             />
-                                                        </svg>
-                                                    }
-                                                    className="max-md:h-10 max-md:px-4"
-                                                    onClick={() => {
-                                                        router.push(
-                                                            `/${currentLanguage}${v.button_url.replace(
-                                                                "products",
-                                                                "product"
-                                                            )}`
-                                                        );
-                                                    }}
-                                                />
+                                                        </>
+                                                    ))}
+                                                </div>
                                             </div>
 
                                             <div className="w-full grid grid-cols-2 gap-4 max-md:grid-cols-1 max-md:mt-6 max-md:gap-2">
@@ -328,36 +366,44 @@ export default function Support_ReservationLab({
                     <div className="w-full h-[464px] mx-auto relative mb-[80px] max-md:mb-0 max-md:h-[274px]">
                         <div className="absolute w-full h-[464px] py-12 flex flex-col text-white text-center z-10 max-md:h-[274px] max-md:py-0 max-md:justify-center">
                             <h3 className="mb-3 text-h3 font-bold max-md:text-large">
-                                방문 예약 안내
+                                {/* 방문 예약 안내 */}
+                                {t["reservation-visit-title"]}
                             </h3>
 
                             <div className="text-g200 text-large font-[500] mb-12 max-md:text-base">
-                                EYEON Lab 방문을 예약하시고,
+                                {/* EYEON Lab 방문을 예약하시고, */}
+                                {t["reservation-visit-sub-title-1"]}
                                 <br className="hidden max-md:block" />
-                                VISION 기술을 경험해보세요.
+                                {t["reservation-visit-sub-title-2"]}
+                                {/* VISION 기술을 경험해보세요. */}
                             </div>
 
                             <div className="mx-auto flex gap-8 items-center mb-12 max-md:hidden">
-                                <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
-                                    방문예약
+                                <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold whitespace-pre-wrap">
+                                    {/* 방문예약 */}
+                                    {t["reservation-visit-process-1"]}
                                 </div>
                                 <ArrowIco />
-                                <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
-                                    영업팀 상담
+                                <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold whitespace-pre-wrap">
+                                    {/* 영업팀 상담 */}
+                                    {t["reservation-visit-process-2"]}
                                 </div>
                                 <ArrowIco />
-                                <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
-                                    랩 방문
+                                <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold whitespace-pre-wrap">
+                                    {/* 랩 방문 */}
+                                    {t["reservation-visit-process-3"]}
                                 </div>
                                 <ArrowIco />
-                                <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
-                                    Test 진행
+                                <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold whitespace-pre-wrap">
+                                    {/* Test 진행 */}
+                                    {t["reservation-visit-process-4"]}
                                 </div>
                                 <ArrowIco />
-                                <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold">
-                                    Test
+                                <div className="w-[140px] h-[140px] rounded-full bg-white text-g950 flex items-center justify-center text-large font-bold whitespace-pre-wrap">
+                                    {/* Test
                                     <br />
-                                    결과 안내
+                                    결과 안내 */}
+                                    {t["reservation-visit-process-5"]}
                                 </div>
                             </div>
 

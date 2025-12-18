@@ -60,7 +60,7 @@ export default function ProductCreate() {
 
     const handleCancel = () => {
         // TODO: Implement cancel logic (navigate back)
-        console.log("Cancel");
+        // console.log("Cancel");
     };
 
     return (

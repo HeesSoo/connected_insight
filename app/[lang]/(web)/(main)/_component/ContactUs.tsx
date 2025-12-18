@@ -4,6 +4,7 @@ import Button from "@/components/Button";
 import { useTranslation } from "@/hooks/useTranslation";
 import ContactUs from "@/public/main/contact_us.png";
 import ArrowRight from "@/public/svgs/arrow-right.svg";
+import { ArrowRightIco } from "@/icons/icons";
 import Image from "next/image";
 import Link from "next/link";
 import router from "next/router";
@@ -11,12 +12,12 @@ import router from "next/router";
 export default function Contactus() {
     const { t } = useTranslation();
     return (
-        <div className="w-full h-[360px] mx-auto relative">
-            <div className="absolute w-full h-[360px] p-[60px]">
-                <h3 className="text-title font-semibold text-white mb-6">
+        <div className="w-full h-[360px] mx-auto relative max-md:h-[250px]">
+            <div className="absolute w-full h-[360px] p-[60px] max-md:h-full max-md:px-4 max-md:py-5">
+                <h3 className="text-title font-semibold text-white mb-6 max-md:text-large">
                     Contact Us
                 </h3>
-                <div className="text-large text-white mb-12">
+                <div className="text-large text-white mb-12 max-md:text-base">
                     {t["main-contact-us-guide_1"].replace("  \n", "")}
                     <br />
                     {t["main-contact-us-guide_2"]}
@@ -25,12 +26,17 @@ export default function Contactus() {
                     <Button
                         label={t["main-contact-us-inquiry"]}
                         btnType="secondary"
-                        icRight={<ArrowRight />}
+                        icRight={
+                            <ArrowRightIco
+                                fill="#FFF"
+                                className="w-9 h-9 max-md:w-6 max-md:h-6"
+                            />
+                        }
                         onClick={() => {
                             router.push("/contact");
                         }}
                         size="large"
-                        className="text-titleSmall"
+                        className="text-titleSmall max-md:text-base max-md:h-[40px]"
                     />
                 </Link>
             </div>
@@ -39,7 +45,7 @@ export default function Contactus() {
                 alt="Contact Us"
                 width={1440}
                 height={400}
-                className="w-full h-[360px]"
+                className="w-full h-[360px] max-md:h-full max-md:object-cover"
             />
         </div>
     );

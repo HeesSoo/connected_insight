@@ -55,13 +55,14 @@ export interface ReservationItem {
     name_en: string;
     description: string;
     description_en: string;
-    button_text: string;
-    button_text_en: string;
-    button_url: string;
+    // button_text: string;
+    // button_text_en: string;
+    // button_url: string;
     display_order: number;
     is_active: boolean;
     images: ReservationImage[];
     features: ReservationFeature[];
+    buttons: Record<string, any>[];
 }
 
 async function getAllReservations(): Promise<ReservationItem[]> {

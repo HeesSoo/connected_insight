@@ -59,15 +59,15 @@ export default function Tokk({ data }: LingchenProps) {
                             pagination={{
                                 clickable: true,
                                 renderBullet: (index, className) => {
-                                    return `<span class="${className} font-semibold text-large text-white bg-g200 px-5 py-2 select-none max-sm:whitespace-nowrap max-sm:text-base">${data[index].name}</span>`;
+                                    return `<span class="${className} font-semibold text-large text-white bg-g200 px-5 py-2 select-none max-md:whitespace-nowrap max-md:text-base">${data[index].name}</span>`;
                                 },
                             }}
                             className="mainTokkSwiper"
                         >
                             {data.map((item, index) => (
                                 <SwiperSlide key={index}>
-                                    <div className="w-full h-[474px] flex select-none max-sm:h-auto max-sm:flex-col">
-                                        <div className="w-[712px] max-sm:w-full">
+                                    <div className="w-full h-[474px] flex select-none max-md:h-auto max-md:flex-col">
+                                        <div className="w-[712px] max-md:w-full">
                                             <Image
                                                 src={
                                                     item.image || AlternativeImg
@@ -75,18 +75,18 @@ export default function Tokk({ data }: LingchenProps) {
                                                 alt="Alternative Image"
                                                 width={849}
                                                 height={474}
-                                                className="w-full h-[474px] object-cover max-sm:h-[228px]"
+                                                className="w-full h-[474px] object-cover max-md:h-[228px]"
                                             />
                                         </div>
-                                        <div className="flex-1 pt-12 pb-20 px-[136px] max-sm:px-0 max-sm:p-0 max-sm:pt-6">
-                                            <h3 className="text-ePrimary font-[700] text-xl mb-20 max-sm:mb-6 max-sm:text-xl-mobile">
+                                        <div className="flex-1 pt-12 pb-20 px-[136px] max-md:px-0 max-md:p-0 max-md:pt-6">
+                                            <h3 className="text-ePrimary font-[700] text-xl mb-20 max-md:mb-6 max-md:text-xl-mobile">
                                                 Linear Actuator
                                             </h3>
                                             <div>
-                                                <h4 className="mb-2 font-[700] text-h3 text-g950 max-sm:text-large">
+                                                <h4 className="mb-2 font-[700] text-h3 text-g950 max-md:text-large">
                                                     {item.name}
                                                 </h4>
-                                                <h4 className="text-large font-[500] text-g950 max-sm:text-base">
+                                                <h4 className="text-large font-[500] text-g950 max-md:text-base">
                                                     {
                                                         item?.[
                                                             `description_${currentLanguage}`

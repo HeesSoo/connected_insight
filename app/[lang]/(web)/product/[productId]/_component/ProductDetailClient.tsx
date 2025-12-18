@@ -58,7 +58,7 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
     const [thumbnailIndex, setThumbnailIndex] = useState<number>(0);
     const [swiper, setSwiper] = useState<SwiperClass>();
 
-    console.log("thumbnailIndex:", thumbnailIndex);
+    console.log("data: ", data);
     if (!data) {
         return <div>No product data available.</div>;
     }

@@ -24,14 +24,14 @@ export default function ProductList({
     const router = useRouter();
 
     const handleEdit = (uuid: string) => {
-        console.log("Edit product:", uuid);
+        // console.log("Edit product:", uuid);
         // TODO: Navigate to edit page
         // router.push(`/admin/products/edit/${uuid}`);
     };
 
     const handleDelete = (uuid: string) => {
         if (confirm("정말 삭제하시겠습니까?")) {
-            console.log("Delete product:", uuid);
+            // console.log("Delete product:", uuid);
             // TODO: Implement delete logic
         }
     };

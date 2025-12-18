@@ -4,7 +4,7 @@ import { ContactUs } from "../../page";
 import { useRouter } from "next/navigation";
 
 export default function ContactUsDetail({ data }: { data: ContactUs | null }) {
-    console.log("ContactUsDetail data:", data);
+    // console.log("ContactUsDetail data:", data);
     const router = useRouter();
 
     if (!data) {

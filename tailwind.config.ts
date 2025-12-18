@@ -11,8 +11,6 @@ const config: Config = {
             sm: "768px",
             md: "769px",
             lg: "1024px",
-            // max-width breakpoints (이하)
-            "max-sm": { max: "767px" }, // 767px 이하
             // xl: "1280px",
             // max: "1440px",
             // "2xl": "1536px",

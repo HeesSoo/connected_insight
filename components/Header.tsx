@@ -204,7 +204,7 @@ export default function Header({ lang, gnbData }: HeaderProps) {
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
-    console.log("gnbData in Header:", gnbData);
+    // console.log("gnbData in Header:", gnbData);
 
     // 모바일 메뉴 열릴 때 body overflow hidden
     useEffect(() => {
@@ -254,7 +254,7 @@ export default function Header({ lang, gnbData }: HeaderProps) {
             role="banner"
         >
             <div className="max-w-[1440px] mx-auto">
-                <div className="flex items-center justify-between px-4 lg:px-0">
+                <div className="flex items-center justify-between px-4 lg:px-0 max-md:h-[56px]">
                     {/* Logo */}
                     <div className="flex-shrink-0">
                         <Link
@@ -342,7 +342,7 @@ export default function Header({ lang, gnbData }: HeaderProps) {
             >
                 <nav className="h-full flex flex-col">
                     <div className="flex-1 overflow-y-auto py-4">
-                        <ul className="space-y-2 max-sm:flex max-sm:gap-5 max-sm:flex-col">
+                        <ul className="max-md:flex max-md:gap-5 max-md:flex-col">
                             {gnbData.items.map((item) => {
                                 const isParentActive =
                                     isItemOrChildActive(item);
@@ -354,17 +354,15 @@ export default function Header({ lang, gnbData }: HeaderProps) {
                                 return (
                                     <li
                                         key={item.id}
-                                        className={`px-4 group/parent ${
-                                            isCurrentActive
-                                                ? "is-active bg-g50"
-                                                : ""
+                                        className={`group/parent${
+                                            isCurrentActive ? "is-active" : ""
                                         }`}
                                     >
                                         {item.children &&
                                         item.children.length > 0 ? (
-                                            <details className="group/menu max-sm:flex max-sm:gap-5 max-sm:flex-col">
+                                            <details className="group/menu max-md:flex max-md:flex-col">
                                                 <summary
-                                                    className={`w-full flex items-center justify-between py-4 text-large cursor-pointer list-none transition-colors max-sm:py-0 max-sm:gap-5 max-sm:align-center ${
+                                                    className={`w-full flex items-center justify-between p-4 text-large cursor-pointer list-none transition-colors max-md:py-0 max-md:gap-5 max-md:align-center ${
                                                         isCurrentActive
                                                             ? "text-ePrimary"
                                                             : "text-g950"
@@ -387,7 +385,7 @@ export default function Header({ lang, gnbData }: HeaderProps) {
                                                         />
                                                     </svg>
                                                 </summary>
-                                                <ul className="pb-4 space-y-2 max-sm:flex max-sm:gap-5 max-sm:flex-col">
+                                                <ul className="max-md:flex max-md:gap-5 max-md:flex-col max-md:mt-5 bg-g50 p-4">
                                                     {item.children.map(
                                                         (child) => {
                                                             const childPath =
@@ -420,7 +418,7 @@ export default function Header({ lang, gnbData }: HeaderProps) {
                                                                             child.href ||
                                                                                 "#"
                                                                         )}
-                                                                        className={`block py-2 transition-colors max-sm:py-0 ${
+                                                                        className={`block py-2 transition-colors max-md:py-0 ${
                                                                             isChildActive
                                                                                 ? "text-ePrimary font-medium"
                                                                                 : "text-g700 hover:text-ePrimary"
@@ -440,7 +438,7 @@ export default function Header({ lang, gnbData }: HeaderProps) {
                                                                             .external
                                                                             .length >
                                                                             0 && (
-                                                                            <ul className="pl-6 space-y-2 mt-2 max-sm:flex max-sm:gap-5 max-sm:flex-col">
+                                                                            <ul className="pl-6 mt-5 max-md:flex max-md:gap-5 max-md:flex-col">
                                                                                 {child.external.map(
                                                                                     (
                                                                                         ext
@@ -455,7 +453,7 @@ export default function Header({ lang, gnbData }: HeaderProps) {
                                                                                                 href={
                                                                                                     ext.href
                                                                                                 }
-                                                                                                className="flex items-center gap-2 py-2 text-g600 hover:text-ePrimary transition-colors max-sm:py-0"
+                                                                                                className="flex items-center gap-2 py-2 text-g600 hover:text-ePrimary transition-colors max-md:py-0"
                                                                                                 target="_blank"
                                                                                                 rel="noopener noreferrer"
                                                                                                 onClick={() =>
@@ -495,7 +493,7 @@ export default function Header({ lang, gnbData }: HeaderProps) {
                                                 href={localizedPath(
                                                     item.href || "#"
                                                 )}
-                                                className={`block text-large transition-colors ${
+                                                className={`block text-large transition-colors px-4 ${
                                                     isCurrentActive
                                                         ? "text-ePrimary font-medium"
                                                         : "text-g950 hover:text-ePrimary"

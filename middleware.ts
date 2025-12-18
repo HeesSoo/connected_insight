@@ -69,7 +69,7 @@ export function middleware(request: NextRequest) {
 
     // 차단할 경로 목록
     const blockUrl = [
-        "/support/download",
+        // "/support/download",
     ];
 
     // blockUrl에 포함된 경로인지 확인

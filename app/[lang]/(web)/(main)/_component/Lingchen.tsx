@@ -61,23 +61,23 @@ export default function Lingchen({ data }: LingchenProps) {
                             pagination={{
                                 clickable: true,
                                 renderBullet: (index, className) => {
-                                    return `<span class="${className} font-semibold text-large text-white bg-g200 px-5 py-2 select-none max-sm:whitespace-nowrap max-sm:text-base">${data[index].name}</span>`;
+                                    return `<span class="${className} font-semibold text-large text-white bg-g200 px-5 py-2 select-none max-md:whitespace-nowrap max-md:text-base">${data[index].name}</span>`;
                                 },
                             }}
                             className="mainLingchenSwiper"
                         >
                             {data.map((item, index) => (
                                 <SwiperSlide key={index}>
-                                    <div className="w-full h-[474px] flex select-none max-sm:h-auto max-sm:flex-col-reverse">
-                                        <div className="flex-1 pt-12 pb-20 px-[136px] max-sm:px-0 max-sm:pt-6 max-sm:pb-0">
-                                            <h3 className="text-ePrimary font-[700] text-xl mb-20 max-sm:text-xl-mobile max-sm:mb-6">
+                                    <div className="w-full h-[474px] flex select-none max-md:h-auto max-md:flex-col-reverse">
+                                        <div className="flex-1 pt-12 pb-20 px-[136px] max-md:px-0 max-md:pt-6 max-md:pb-0">
+                                            <h3 className="text-ePrimary font-[700] text-xl mb-20 max-md:text-xl-mobile max-md:mb-6">
                                                 Industrial Control Devices
                                             </h3>
                                             <div>
-                                                <h4 className="mb-2 font-[700] text-h3 text-g950 max-sm:text-large max-sm:mb-2">
+                                                <h4 className="mb-2 font-[700] text-h3 text-g950 max-md:text-large max-md:mb-2">
                                                     {item.name}
                                                 </h4>
-                                                <h4 className="text-large font-[500] text-g950 max-sm:test-base">
+                                                <h4 className="text-large font-[500] text-g950 max-md:test-base">
                                                     {
                                                         item?.[
                                                             `description_${currentLanguage}`
@@ -86,7 +86,7 @@ export default function Lingchen({ data }: LingchenProps) {
                                                 </h4>
                                             </div>
                                         </div>
-                                        <div className="w-[712px] max-sm:w-full">
+                                        <div className="w-[712px] max-md:w-full">
                                             {/* <div className="w-[591px] bg-g50 px-12 py-20 flex flex-col justify-between"> */}
                                             <Image
                                                 src={
@@ -95,7 +95,7 @@ export default function Lingchen({ data }: LingchenProps) {
                                                 alt="Alternative Image"
                                                 width={849}
                                                 height={474}
-                                                className="w-full h-[474px] object-cover max-sm:h-[228px]"
+                                                className="w-full h-[474px] object-cover max-md:h-[228px]"
                                             />
                                         </div>
                                     </div>

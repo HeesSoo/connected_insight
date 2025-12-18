@@ -40,7 +40,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
 
     return (
         <MotionWrapper delay={200} duration={0.8} direction="up" amount={0.05}>
-            <h2 className="font-bold text-xl text-g950 mb-[58px] max-sm:text-xl-mobile max-sm:mb-6 ">
+            <h2 className="font-bold text-xl text-g950 mb-[58px] max-md:text-xl-mobile max-md:mb-6 ">
                 CIS Application
             </h2>
 
@@ -84,7 +84,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
                     </div>
                 </div>
             ) : (
-                <div className="relative h-[474px] max-sm:h-auto">
+                <div className="relative h-[474px] max-md:h-auto">
                     <Swiper
                         modules={[Navigation]}
                         onSwiper={(e) => {
@@ -95,25 +95,25 @@ export default function MainSolution({ data }: MainSolutionProps) {
                     >
                         {data.map((item, index) => (
                             <SwiperSlide key={index}>
-                                <div className="w-full flex max-sm:flex-col">
+                                <div className="w-full flex max-md:flex-col">
                                     <div className="flex-1">
                                         <Image
                                             src={item.image}
                                             alt={item.name}
                                             width={849}
                                             height={474}
-                                            className="w-full h-[474px] object-cover max-sm:h-[192px]"
+                                            className="w-full h-[474px] object-cover max-md:h-[192px]"
                                         />
                                     </div>
-                                    <div className="w-[591px] bg-g50 px-12 pt-12 pb-20 flex flex-col justify-between select-none max-sm:w-full max-sm:h-[238px] max-sm:py-8 max-sm:px-3 ">
-                                        <h3 className="g-950 text-[32px] leading-[48px] tracking-[-0.2px] font-bold max-sm:text-lg max-sm:mb-6">
+                                    <div className="w-[591px] bg-g50 px-12 pt-12 pb-20 flex flex-col justify-between select-none max-md:w-full max-md:h-[238px] max-md:py-8 max-md:px-3 ">
+                                        <h3 className="g-950 text-[32px] leading-[48px] tracking-[-0.2px] font-bold max-md:text-lg max-md:mb-6">
                                             {item?.[`name_${currentLanguage}`]}
                                         </h3>
 
                                         <div>
                                             {item.core_inspector_target_ko && (
                                                 <div className="mb-6">
-                                                    <div className="text-ePrimary text-base mb-1 font-[500] max-sm:text-small">
+                                                    <div className="text-ePrimary text-base mb-1 font-[500] max-md:text-small">
                                                         {
                                                             t[
                                                                 "solution-core-inspector-target"
@@ -121,7 +121,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
                                                         }
                                                     </div>
                                                     <div
-                                                        className={`text-large text-g950 font-[600] max-sm:text-base`}
+                                                        className={`text-large text-g950 font-[600] max-md:text-base`}
                                                     >
                                                         {
                                                             item?.[
@@ -133,7 +133,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
                                             )}
                                             {item.core_value_ko && (
                                                 <div>
-                                                    <div className="text-ePrimary text-base mb-1 font-[500] max-sm:text-small">
+                                                    <div className="text-ePrimary text-base mb-1 font-[500] max-md:text-small">
                                                         {
                                                             t[
                                                                 "solution-core-value"
@@ -141,7 +141,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
                                                         }
                                                     </div>
                                                     <div
-                                                        className={`text-large text-g950 font-[600] max-sm:text-base`}
+                                                        className={`text-large text-g950 font-[600] max-md:text-base`}
                                                     >
                                                         {
                                                             item?.[
@@ -160,7 +160,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
 
                     {/* Custom Pagination */}
                     {data.length > 1 && (
-                        <div className="hidden justify-center items-center gap-2 max-sm:mt-4 max-sm:flex">
+                        <div className="hidden justify-center items-center gap-2 max-md:mt-4 max-md:flex">
                             {data.map((_, index) => (
                                 <button
                                     key={index}
@@ -177,7 +177,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
                     )}
 
                     <button
-                        className="absolute top-1/2 -translate-y-[50%] -left-24 [@media(max-width:1600px)]:-left-[2%] z-[1] w-12 h-12 rounded-full bg-ePrimary hover:bg-[#C92F2E] transition-colors flex justify-center items-center cursor-pointer max-sm:hidden"
+                        className="absolute top-1/2 -translate-y-[50%] -left-24 [@media(max-width:1600px)]:-left-[2%] z-[1] w-12 h-12 rounded-full bg-ePrimary hover:bg-[#C92F2E] transition-colors flex justify-center items-center cursor-pointer max-md:hidden"
                         onClick={handlePrev}
                     >
                         <svg
@@ -194,7 +194,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
                         </svg>
                     </button>
                     <button
-                        className="absolute top-1/2 -translate-y-[50%] -right-24 [@media(max-width:1600px)]:-right-[2%] z-[1] w-12 h-12 rounded-full bg-ePrimary hover:bg-[#C92F2E] transition-colors flex justify-center items-center cursor-pointer max-sm:hidden"
+                        className="absolute top-1/2 -translate-y-[50%] -right-24 [@media(max-width:1600px)]:-right-[2%] z-[1] w-12 h-12 rounded-full bg-ePrimary hover:bg-[#C92F2E] transition-colors flex justify-center items-center cursor-pointer max-md:hidden"
                         onClick={handleNext}
                     >
                         <svg

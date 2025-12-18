@@ -2,6 +2,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { navigationConfig } from "@/data/navigation";
 import axios from "axios";
+import { Suspense } from "react";
 
 interface WebLayoutProps {
     children: React.ReactNode;
@@ -77,7 +78,9 @@ export default async function WebLayout({ children, params }: WebLayoutProps) {
 
     return (
         <>
-            <Header lang={lang} gnbData={gnbData} />
+            <Suspense fallback={null}>
+                <Header lang={lang} gnbData={gnbData} />
+            </Suspense>
             <main>{children}</main>
             <Footer />
         </>

@@ -77,9 +77,9 @@ export default async function Home() {
 
     return (
         <main className="min-h-screen">
-            {/* <Suspense fallback={null}>
+            <Suspense fallback={null}>
                 <RedirectAlert />
-            </Suspense> */}
+            </Suspense>
             <Banner banners={banners} />
 
             <section className="w-full max-w-[1504px] mx-auto mt-[120px] mb-[160px] flex flex-col gap-[120px] px-8">

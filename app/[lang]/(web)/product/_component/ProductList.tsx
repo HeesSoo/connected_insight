@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Suspense } from "react";
 import ProductListClient from "./ProductListClient";
 
 async function fetchProducts() {
@@ -19,7 +20,9 @@ const ProductList: React.FC = async () => {
     return (
         <div>
             {/* server-side fetched initialData 전달 */}
-            <ProductListClient initialData={initialData} />
+            <Suspense fallback={<div className="w-full h-screen"></div>}>
+                <ProductListClient initialData={initialData} />
+            </Suspense>
         </div>
     );
 };

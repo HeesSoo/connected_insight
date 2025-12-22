@@ -58,12 +58,12 @@ export default function Support_ReservationLab({
                         direction="up"
                         amount={0.05}
                     >
-                        <div className="w-full flex mb-[160px]">
-                            <div className="mr-[137px] flex-1">
-                                <h3 className="mb-2 text-h3 font-bold">
+                        <div className="w-full flex mb-[160px] max-md:mb-[80px] max-md:flex-col">
+                            <div className="mr-[137px] flex-1 max-md:mr-0 max-md-mb-[24px]">
+                                <h3 className="mb-2 text-h3 font-bold max-md:text-lg max-md:mb-1">
                                     EYEON Vision & Robotics Lab
                                 </h3>
-                                <div className="text-titleSmall font-bold">
+                                <div className="text-titleSmall font-bold max-md:text-base">
                                     {/* 핵심 컴포넌트 기술을 경험하는 공간 */}
                                     {t["reservation-sub-title"]}
                                 </div>
@@ -163,7 +163,7 @@ export default function Support_ReservationLab({
                                                         ...activeIdxs,
                                                     ]);
                                                 }}
-                                                className="w-full h-full"
+                                                className="w-full h-full max-md:mb-[56px]"
                                             >
                                                 {v.images.map((image) => {
                                                     return (
@@ -263,7 +263,7 @@ export default function Support_ReservationLab({
                                             </div>
                                         </div>
 
-                                        <div className="w-[712px] h-auto flex flex-col justify-between ml-[40px] max-md:w-full max-md:mt-14">
+                                        <div className="w-[712px] h-auto flex flex-col justify-between ml-[40px] max-md:w-full max-md:mt-14 max-md:ml-0">
                                             <div className="mb-[40px]">
                                                 <h3 className="text-h3 font-bold mb-2 max-md:text-large max-md:mb-1">
                                                     {currentLanguage === "en"
@@ -275,7 +275,7 @@ export default function Support_ReservationLab({
                                                         ? v.description_en
                                                         : v.description}
                                                 </div>
-                                                <div className="flex gap-2">
+                                                <div className="flex gap-2 max-md:flex-col">
                                                     {v.buttons.map((button) => (
                                                         <>
                                                             <Button

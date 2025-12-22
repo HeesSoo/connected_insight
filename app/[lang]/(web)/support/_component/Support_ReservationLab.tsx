@@ -46,7 +46,7 @@ export default function Support_ReservationLab({
                     alt="EYEON Vision & Robotics Lab Banner"
                     width={1920}
                     height={400}
-                    className="object-cover max-md:h-[300px]"
+                    className="object-cover w-full h-[400px] max-md:h-[300px]"
                 />
             </div>
             <div className="w-full px-8 max-md:px-4">
@@ -263,8 +263,8 @@ export default function Support_ReservationLab({
                                             </div>
                                         </div>
 
-                                        <div className="w-[712px] h-auto flex flex-col justify-between max-md:w-full max-md:mt-14">
-                                            <div>
+                                        <div className="w-[712px] h-auto flex flex-col justify-between ml-[40px] max-md:w-full max-md:mt-14">
+                                            <div className="mb-[40px]">
                                                 <h3 className="text-h3 font-bold mb-2 max-md:text-large max-md:mb-1">
                                                     {currentLanguage === "en"
                                                         ? v.name_en
@@ -410,7 +410,7 @@ export default function Support_ReservationLab({
                             <Button
                                 label="Contact"
                                 size="medium"
-                                btnType="white"
+                                btnType="secondary"
                                 className="w-fit mx-auto max-md:h-10 max-md:px-4"
                                 icRight={
                                     <svg
@@ -422,7 +422,7 @@ export default function Support_ReservationLab({
                                     >
                                         <path
                                             d="M16.8165 12.7568H5.43945C5.22662 12.7568 5.04845 12.685 4.90495 12.5413C4.76129 12.3978 4.68945 12.2197 4.68945 12.0068C4.68945 11.794 4.76129 11.6158 4.90495 11.4723C5.04845 11.3287 5.22662 11.2568 5.43945 11.2568H16.8165L11.6472 6.08759C11.4985 5.93893 11.4251 5.76493 11.427 5.56559C11.429 5.36626 11.5075 5.18901 11.6625 5.03384C11.8176 4.88901 11.9933 4.81401 12.1895 4.80884C12.3856 4.80368 12.5613 4.87868 12.7165 5.03384L19.0567 11.3741C19.1504 11.4678 19.2164 11.5665 19.2547 11.6703C19.2932 11.7742 19.3125 11.8863 19.3125 12.0068C19.3125 12.1273 19.2932 12.2395 19.2547 12.3433C19.2164 12.4472 19.1504 12.5459 19.0567 12.6396L12.7165 18.9798C12.578 19.1183 12.4065 19.1892 12.202 19.1923C11.9975 19.1955 11.8176 19.1247 11.6625 18.9798C11.5075 18.8247 11.43 18.6465 11.43 18.4453C11.43 18.244 11.5075 18.0658 11.6625 17.9106L16.8165 12.7568Z"
-                                            fill="#111111"
+                                            fill="#FFFFFF"
                                         />
                                     </svg>
                                 }

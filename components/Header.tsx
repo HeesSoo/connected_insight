@@ -295,7 +295,7 @@ export default function Header({ lang, gnbData }: HeaderProps) {
                     </div>
 
                     {/* Mobile Menu Button */}
-                    <label className="lg:hidden flex items-center justify-center w-10 h-10 cursor-pointer">
+                    <label className="hidden max-md:flex items-center justify-center w-10 h-10 cursor-pointer">
                         <input
                             type="checkbox"
                             className="peer hidden"

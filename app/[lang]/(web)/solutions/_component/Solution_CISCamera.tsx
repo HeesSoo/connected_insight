@@ -28,7 +28,7 @@ export default function SolutionCISCamera({ data }: { data: Solution }) {
                 <div className="flex-1 h-[538px] max-md:h-[212px] max-md:w-[calc(100%+32px)] max-md:-ml-4">
                     {safeEmbedUrl ? (
                         <iframe
-                            className="w-full h-full"
+                            className="w-full h-full max-md:h-auto"
                             src={safeEmbedUrl}
                             title="YouTube video player"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

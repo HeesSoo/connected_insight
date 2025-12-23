@@ -180,7 +180,7 @@ export default function Support_ReservationLab({
                                                                     alt="Alternative Image"
                                                                     width={591}
                                                                     height={444}
-                                                                    className="object-cover max-md:h-[256px]"
+                                                                    className="object-cover max-md:w-full max-md:h-[256px]"
                                                                 />
                                                                 <div className="w-full py-5 text-center text-titleSmall text-white font-semibold max-md:py-3 max-md:text-base">
                                                                     {currentLanguage ===

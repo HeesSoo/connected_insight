@@ -18,7 +18,7 @@ export default function Card({ item }: { item: SolutionItem }) {
                         alt={item.name}
                         width={469}
                         height={352}
-                        className="w-auto h-[352px] object-cover max-md:h-[257px]"
+                        className="w-auto h-[352px] object-cover max-md:w-full max-md:h-[257px]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                     <div className="absolute bottom-6 left-6">

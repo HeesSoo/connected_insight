@@ -58,11 +58,11 @@ export function middleware(request: NextRequest) {
         ? pathname.replace(`/${locale}`, "") || "/"
         : pathname;
 
+    console.log(pathnameWithoutLocale, " : pathname")
     const allowUrl = [
         "/",
         "/solutions",
         "/product",
-        "/product/:id",
         "/contact",
         "/support",
     ];
@@ -82,6 +82,7 @@ export function middleware(request: NextRequest) {
 
     // 차단된 경로면 루트(/)로 리다이렉트
     if (isBlockedUrl) {
+        console.log(isBlockedUrl, " : isBlockedUrl");
         const url = request.nextUrl.clone();
         url.pathname = locale ? `/${locale}` : "/";
         url.searchParams.set("redirected", "true");
@@ -110,6 +111,7 @@ export function middleware(request: NextRequest) {
     // allowUrl에 없는 경로면 루트(/)로 리다이렉트
     if (!isAllowedUrl) {
         const url = request.nextUrl.clone();
+        console.log(isAllowedUrl, url);
         url.pathname = locale ? `/${locale}` : "/";
         url.searchParams.set("redirected", "true");
         return NextResponse.redirect(url);

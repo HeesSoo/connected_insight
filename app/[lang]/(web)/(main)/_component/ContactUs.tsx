@@ -8,9 +8,11 @@ import { ArrowRightIco } from "@/icons/icons";
 import Image from "next/image";
 import Link from "next/link";
 import router from "next/router";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 
 export default function Contactus() {
     const { t } = useTranslation();
+    const localizedPath = useLocalizedPath();
     return (
         <div className="w-full h-[360px] mx-auto relative max-md:h-[250px]">
             <div className="absolute w-full h-[360px] p-[60px] max-md:h-full max-md:px-4 max-md:py-5">
@@ -22,7 +24,7 @@ export default function Contactus() {
                     <br />
                     {t["main-contact-us-guide_2"]}
                 </div>
-                <Link href="/contact" className="w-fit block">
+                <Link href={localizedPath('/contact')} className="w-fit block">
                     <Button
                         label={t["main-contact-us-inquiry"]}
                         btnType="secondary"
@@ -33,7 +35,7 @@ export default function Contactus() {
                             />
                         }
                         onClick={() => {
-                            router.push("/contact");
+                            router.push(`${localizedPath('/contact')}`);
                         }}
                         size="large"
                         className="text-titleSmall max-md:text-base max-md:h-[40px]"

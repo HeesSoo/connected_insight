@@ -4,6 +4,7 @@ import DownloadButton from "@/components/DownloadButton";
 import { ProductDetail } from "./ProductDetailClient";
 
 const formatDateToYYMMDD = (date: string | Date): string => {
+    if (!date) return;
     const d = typeof date === "string" ? new Date(date) : date;
     const year = String(d.getFullYear()).slice(-2);
     const month = String(d.getMonth() + 1).padStart(2, "0");
@@ -13,7 +14,7 @@ const formatDateToYYMMDD = (date: string | Date): string => {
 
 const type = {
     drawing: "Drawing",
-    Speecification: "specification",
+    specification: "Specification",
     manual: "Manual",
     catalog: "Catalog",
     sdk: "SDK",
@@ -39,6 +40,7 @@ export default function ProductDownloads({ data }: { data: ProductDetail }) {
             </h2>
             <div className="w-[955px] flex flex-col gap-6 max-md:gap-3">
                 {downloadMap.map((v, index) => {
+                    console.log(v)
                     return v ? (
                         <div
                             key={index}

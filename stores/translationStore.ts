@@ -82,7 +82,9 @@ export const useTranslationStore = create<TranslationState>()(
             partialize: (state) => ({
                 currentLanguage: state.currentLanguage,
             }),
-            skipHydration: false,
+            // skipHydration을 true로 설정하여 초기 렌더링 시 로컬 스토리지 무시
+            // 대신 서버에서 전달된 언어를 LanguageInitializer에서 설정
+            skipHydration: true,
         }
     )
 );

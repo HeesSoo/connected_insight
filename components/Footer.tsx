@@ -79,12 +79,21 @@ export default function Footer() {
                                     <dd>771-86-03145</dd>
                                 </div>
 
-                                <div className="flex text-g300 text-small mt-[20px] max-md:text-xs max-md:leading-[18px]">
-                                    <dt>
-                                        {t["footer-representative-label"]}
-                                        &nbsp;:&nbsp;
-                                    </dt>
-                                    <dd>{t["footer-representative-value"]}</dd>
+                                <div className="flex gap-[24px]">
+                                    <div className="flex text-g300 text-small mt-[20px] max-md:text-xs max-md:leading-[18px]">
+                                        <dt>
+                                            {t["footer-representative-label"]}
+                                            &nbsp;:&nbsp;
+                                        </dt>
+                                        <dd>{t["footer-representative-value"]}</dd>
+                                    </div>
+                                    <div className="flex text-g300 text-small mt-[20px] ml-[50px] max-md:text-xs max-md:leading-[18px] max-md:ml-[43px]">
+                                        <dt>
+                                            Fax
+                                            &nbsp;:&nbsp;
+                                        </dt>
+                                        <dd>0505-418-9859</dd>
+                                    </div>
                                 </div>
 
                                 <div className="flex gap-[24px]">

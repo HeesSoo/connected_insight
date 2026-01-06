@@ -94,7 +94,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
                         className="mainCisSwiper"
                     >
                         {data.map((item, index) => (
-                            <SwiperSlide key={index}>
+                            <SwiperSlide key={item.uuid}>
                                 <div className="w-full flex max-md:flex-col">
                                     <div className="flex-1">
                                         <Image

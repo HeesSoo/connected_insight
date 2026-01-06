@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { LanguageInitializer } from "@/components/LanguageInitializer";
 
 interface LangLayoutProps {
     children: ReactNode;
@@ -8,9 +9,14 @@ interface LangLayoutProps {
 }
 
 export default async function LangLayout({ children, params }: LangLayoutProps) {
-    // 언어별 레이아웃 처리가 필요하면 여기서 구현
-    await params; // params를 await 처리
-    return <>{children}</>;
+    const { lang } = await params;
+
+    return (
+        <>
+            <LanguageInitializer language={lang} />
+            {children}
+        </>
+    );
 }
 
 // 정적 생성을 위한 언어 목록

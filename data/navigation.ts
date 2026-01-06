@@ -4,7 +4,7 @@ export const navigationConfig: NavigationConfig = {
   items: [
     {
       id: "solutions",
-      label: "Solutions",
+      label: "Applications",
       href: "/solutions",
     },
     {

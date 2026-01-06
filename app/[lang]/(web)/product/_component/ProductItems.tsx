@@ -3,6 +3,7 @@ import AlternativeImg from "@/public/common/alternativeImg.png";
 import TokkFinderImg from "@/public/main/tokk_finder.png";
 import Image from "next/image";
 import Link from "next/link";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import { CisData, LingchenData, TokkData } from "./ProductListClient";
 
 const dummyData: CisData | LingchenData | TokkData = {
@@ -113,6 +114,7 @@ const ProductItem = ({
     item: CisData | LingchenData | TokkData;
     type: "cis" | "lingchen" | "tokk";
 }) => {
+    const localizedPath = useLocalizedPath();
     const src =
         "thumbnail" in item
             ? item.thumbnail
@@ -121,7 +123,7 @@ const ProductItem = ({
     if (type === "cis") {
         return (
             <Link
-                href={`/product/${item.uuid}`}
+                href={localizedPath(`/product/${item.uuid}`)}
                 className="w-full bg-white shadow-prditem hover:shadow-lg rounded-lg border border-g100 transition-shadow select-none"
             >
                 <Image

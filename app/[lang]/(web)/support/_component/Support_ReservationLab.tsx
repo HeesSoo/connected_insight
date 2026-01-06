@@ -45,8 +45,8 @@ export default function Support_ReservationLab({
                     src={Support_ReservationLab_Banner}
                     alt="EYEON Vision & Robotics Lab Banner"
                     width={1920}
-                    height={400}
-                    className="object-cover w-full h-[400px] max-md:h-[300px]"
+                    height={600}
+                    className="object-cover w-full h-[600px] max-md:h-[300px]"
                 />
             </div>
             <div className="w-full px-8 max-md:px-4">

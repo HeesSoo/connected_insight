@@ -25,17 +25,19 @@ export default function SolutionCISCamera({ data }: { data: Solution }) {
                     </h2>
                 </div>
 
-                <div className="flex-1 h-[538px] max-md:h-[212px] max-md:w-[calc(100%+32px)] max-md:-ml-4">
+                <div className="flex-1 max-md:w-[calc(100%+32px)] max-md:-ml-4">
                     {safeEmbedUrl ? (
-                        <iframe
-                            className="w-full h-full max-md:h-auto"
-                            src={safeEmbedUrl}
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen
-                        />
+                        <div className="relative w-full aspect-video">
+                            <iframe
+                                className="absolute top-0 left-0 w-full h-full"
+                                src={safeEmbedUrl}
+                                title="YouTube video player"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                            />
+                        </div>
                     ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500">
+                        <div className="w-full aspect-video flex items-center justify-center bg-gray-100 text-gray-500">
                             유효하지 않은 YouTube URL입니다.
                         </div>
                     )}

@@ -254,7 +254,7 @@ export default function Header({ lang, gnbData }: HeaderProps) {
             role="banner"
         >
             <div className="max-w-[1440px] mx-auto">
-                <div className="flex items-center justify-between px-4 lg:px-0 max-md:h-[56px]">
+                <div className="flex items-center justify-between px-4 max-md:h-[56px]">
                     {/* Logo */}
                     <div className="flex-shrink-0">
                         <Link
@@ -267,7 +267,7 @@ export default function Header({ lang, gnbData }: HeaderProps) {
 
                     {/* Desktop Navigation */}
                     <nav
-                        className="ml-[80px] hidden lg:block"
+                        className="ml-[80px] max-md:hidden"
                         role="navigation"
                     >
                         <ul role="menubar" className="flex gap-6 ">
@@ -290,7 +290,7 @@ export default function Header({ lang, gnbData }: HeaderProps) {
                         </ul>
                     </nav>
 
-                    <div className="hidden lg:block">
+                    <div className="max-md:hidden">
                         <LanguageSwitcher initialLang={lang} />
                     </div>
 
@@ -336,7 +336,7 @@ export default function Header({ lang, gnbData }: HeaderProps) {
 
             {/* Mobile Menu Overlay */}
             <div
-                className={`lg:hidden fixed inset-0 top-[57px] bg-white z-40 transform transition-transform duration-300 w-full ${
+                className={`hidden fixed inset-0 top-[57px] bg-white z-40 transform transition-transform duration-300 w-full max-md:block ${
                     isMenuOpen ? "translate-x-0" : "translate-x-full"
                 }`}
             >

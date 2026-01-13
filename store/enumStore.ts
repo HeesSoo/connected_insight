@@ -24,7 +24,8 @@ export const useEnumStore = create<EnumState>((set) => ({
     fetchEnum: async () => {
         set({ isLoading: true, error: null });
         try {
-            const response = await Apis.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/main/enum`);
+            const response = await Apis.get(`/api/main/enum`);
+            // const response = await Apis.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/main/enum`);
             set({
                 data: response.data.data || response.data,
                 isLoading: false,

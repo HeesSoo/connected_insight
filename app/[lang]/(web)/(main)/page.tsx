@@ -9,11 +9,13 @@ import Linchen from "./_component/Lingchen";
 import RedirectAlert from "./_component/RedirectAlert";
 import MainSolution from "./_component/Solution";
 import Tokk from "./_component/Tokk";
+import Apis from "@/hooks/api";
 
 async function getBanners(): Promise<MainBanner[]> {
     try {
-        const response = await axios.get(
+        const response = await Apis.get(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/api/main/banner`
+            // `/main/banner`
         );
         if (response.status === 200) {
             return response.data.data || [];

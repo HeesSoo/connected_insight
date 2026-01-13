@@ -246,3 +246,66 @@ export async function DELETE(request: NextRequest, { params }: { params: { path:
     return NextResponse.json({ error: "Failed to fetch from backend" }, { status: 500 });
   }
 }
+
+export async function PATCH(request: NextRequest, { params }: { params: { path: string[] } }) {
+  const path = params.path.join("/");
+  const queryString = request.nextUrl.search;
+  const url = `${BACKEND_URL}/api/${path}${queryString}`;
+
+  try {
+    const contentType = request.headers.get("content-type") || "";
+
+    let body: FormData | string;
+    let headers: HeadersInit = {};
+
+    if (contentType.includes("multipart/form-data")) {
+      body = await request.formData();
+      // multipart/form-data의 경우 헤더를 전달하지 않음 (fetch가 자동으로 설정)
+    } else if (contentType.includes("application/json")) {
+      const jsonBody = await request.json();
+      body = JSON.stringify(jsonBody);
+      headers = {
+        "Content-Type": "application/json",
+      };
+    } else {
+      body = await request.text();
+      const headersObj: Record<string, string> = {};
+      request.headers.forEach((value, key) => {
+        if (key.toLowerCase() !== "host" && key.toLowerCase() !== "content-length") {
+          headersObj[key] = value;
+        }
+      });
+      headers = headersObj;
+    }
+
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers,
+      body,
+    });
+
+    // 응답 텍스트를 먼저 읽기
+    const responseText = await response.text();
+
+    // JSON 파싱 시도
+    let data: any;
+    try {
+      data = responseText ? JSON.parse(responseText) : {};
+    } catch (e) {
+      console.error("Failed to parse JSON response:", responseText);
+      data = { error: "Invalid JSON response from backend", rawResponse: responseText };
+    }
+
+    // Set-Cookie 헤더를 클라이언트로 전달
+    const nextResponse = NextResponse.json(data, { status: response.status });
+    const setCookie = response.headers.get("set-cookie");
+    if (setCookie) {
+      nextResponse.headers.set("Set-Cookie", setCookie);
+    }
+
+    return nextResponse;
+  } catch (error) {
+    console.error("Proxy error:", error);
+    return NextResponse.json({ error: "Failed to fetch from backend" }, { status: 500 });
+  }
+}

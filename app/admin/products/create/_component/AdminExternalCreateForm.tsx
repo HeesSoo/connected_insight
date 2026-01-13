@@ -72,7 +72,7 @@ export default function AdminExternalCreateForm({ onCancel }: AdminExternalCreat
 
 
             const response = await Apis.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/external`,
+                `/cis/external`,
                 formData,
                 {
                     headers: {

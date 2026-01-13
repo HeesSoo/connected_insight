@@ -129,7 +129,7 @@ export default function CisFilesClient({ data }: { data: FileIfc[] }) {
             formData.append("items", JSON.stringify(items));
 
             const response = await Apis.patch(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/files`,
+                `/cis/files`,
                 formData,
                 {
                     headers: {

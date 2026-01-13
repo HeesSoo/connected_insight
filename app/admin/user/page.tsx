@@ -40,7 +40,7 @@ export default function UserCreate() {
             }
 
             const response = await Apis.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/create`,
+                `/user/create`,
                 formData
             );
 

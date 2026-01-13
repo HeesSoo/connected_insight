@@ -51,7 +51,7 @@ export default function AdminCisDetailClient({ data }: { data: Record<string, an
                 }
             });
 
-            const response = await Apis.patch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis`, formData);
+            const response = await Apis.patch(`/cis`, formData);
             alert("제품 정보가 성공적으로 수정되었습니다.");
         } catch(err) {
             console.error("Update Product Error >>>> ", err);

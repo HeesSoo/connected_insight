@@ -37,7 +37,7 @@ export default function AdminCisCreateForm({ onCancel }: AdminCisCreateFormProps
 
 
             const response = await Apis.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/product`,
+                `/cis/product`,
                 formData
             );
 

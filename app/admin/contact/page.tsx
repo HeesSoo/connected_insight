@@ -37,7 +37,7 @@ export interface ContactUs {
 async function fetchContacts(): Promise<ContactUs[] | null> {
     try {
         // Apis는 서버/클라이언트 환경을 자동으로 감지하여 토큰 추가
-        const res = await Apis.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/contactus`);
+        const res = await Apis.get(`/contactus`);
 
         if (res.status === 200) {
             return res.data.data || null;

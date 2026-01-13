@@ -124,7 +124,7 @@ export default function SolutionClient({ data }: { data: Solution[] }) {
             formDataRequest.append('file', uploadedFile);
 
             const response = await Apis.patch(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution/category/${selectedApplication}`,
+                `/solution/category/${selectedApplication}`,
                 formDataRequest,
                 {
                     headers: {

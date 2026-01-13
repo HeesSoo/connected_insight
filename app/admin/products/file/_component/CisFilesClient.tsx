@@ -35,7 +35,7 @@ export default function CisFilesClient({ data }: { data: FileIfc[] }) {
 
     useEffect(() => {
         const fetchCisDocument = async () => {
-            const response = await Apis.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/files?type={selectedType}`);
+            const response = await Apis.get(`/cis/files?type=${selectedType}`);
             setFiles(response.data?.data || response.data);
         }
 

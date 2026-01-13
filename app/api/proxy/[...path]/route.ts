@@ -4,7 +4,8 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_SERVER_URL || "http://api.eyeon.co.k
 
 export async function GET(request: NextRequest, { params }: { params: { path: string[] } }) {
   const path = params.path.join("/");
-  const url = `${BACKEND_URL}/api/${path}`;
+  const queryString = request.nextUrl.search; // ?type=plus 같은 query parameter
+  const url = `${BACKEND_URL}/api/${path}${queryString}`;
 
   try {
     // 원본 요청의 헤더 복사
@@ -16,6 +17,8 @@ export async function GET(request: NextRequest, { params }: { params: { path: st
       }
     });
 
+    console.log(url, " : proxy url")
+    console.log(params, " : proxy params")
     const response = await fetch(url, {
       method: "GET",
       headers,

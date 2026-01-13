@@ -11,11 +11,11 @@ export default function ThumbnailManagementClient() {
     const enumData = useEnumStore((state) => state.data);
     const cisEnum = enumData?.cis || [];
 
-    const [selectedType, setSelectedType] = useState<string>("");
+    const [selectedType, setSelectedType] = useState<string>("plus");
     const [thumbnails, setThumbnails] = useState<ThumbnailItem[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
-
+    console.log(thumbnails)
     // CIS 타입에 따른 model enum 값 반환 (CisProductEnum - 공백 포함)
     const getModelEnumValue = (cisType: string): string => {
         const modelMap: Record<string, string> = {
@@ -45,13 +45,12 @@ export default function ThumbnailManagementClient() {
         const fetchThumbnails = async () => {
             setIsLoading(true);
             try {
-                // selectedType을 CisFileType enum 값으로 변환
-                const fileType = encodeURIComponent(selectedType);
-
                 const response = await Apis.get(
-                    `/cis/thumbnail?type=${fileType}`
+                    `/cis/thumbnail?type=${selectedType}`
                 );
 
+                console.log(selectedType);
+                console.log(response)
                 const cisProducts = response.data.data || [];
 
                 // 백엔드 데이터를 ThumbnailItem 형식으로 변환

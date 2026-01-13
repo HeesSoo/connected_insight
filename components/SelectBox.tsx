@@ -40,11 +40,13 @@ const Selectbox: React.FC<SelectboxProps> = ({
     const selectboxRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (initialValue && options) {
-            const option = options.filter((v) => v.value === initialValue)[0];
-            if (option) setSelectedOption(option.label);
+        if (initialValue !== undefined && initialValue !== null && options && options.length > 0) {
+            const option = options.find((v) => v.value === initialValue);
+            if (option) {
+                setSelectedOption(option.label);
+            }
         }
-    }, [initialValue]);
+    }, [initialValue, options]);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {

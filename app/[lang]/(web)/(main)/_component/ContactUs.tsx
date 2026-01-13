@@ -15,14 +15,14 @@ export default function Contactus() {
     const localizedPath = useLocalizedPath();
     return (
         <div className="w-full h-[360px] mx-auto relative max-md:h-[250px]">
-            <div className="absolute w-full h-[360px] p-[60px] max-md:h-full max-md:px-4 max-md:py-5">
-                <h3 className="text-title font-semibold text-white mb-6 max-md:text-large">
-                    Contact Us
-                </h3>
-                <div className="text-large text-white mb-12 max-md:text-base">
-                    {t["main-contact-us-guide_1"].replace("  \n", "")}
-                    <br />
-                    {t["main-contact-us-guide_2"]}
+            <div className="absolute w-full h-[360px] p-[60px] flex flex-col justify-between max-md:h-full max-md:px-4 max-md:py-5">
+                <div>
+                    <h3 className="text-title font-semibold text-white mb-6 max-md:text-large">
+                        Contact Us
+                    </h3>
+                    <div className="text-large text-white whitespace-pre-line max-md:text-base">
+                        {t["main-contact-us-guide_1"].replace("  \n", "")}
+                    </div>
                 </div>
                 <Link href={localizedPath('/contact')} className="w-fit block">
                     <Button

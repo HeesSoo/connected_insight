@@ -74,7 +74,7 @@ export const useAuthStore = create<AuthState>((set) => ({
         }
         try {
             // 토큰이 있으면 사용자 정보 조회
-            const response = await Apis.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/me`);
+            const response = await Apis.get(`/user/me`);
             // const response = await Apis.get(`http://localhost:8080/api/user/me`);
             console.log(response.data?.data, " : respomse");
             set({

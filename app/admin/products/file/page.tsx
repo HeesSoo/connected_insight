@@ -1,6 +1,8 @@
 import CisFilesClient from "./_component/CisFilesClient";
 import Apis from "@/hooks/api";
 
+export const dynamic = 'force-dynamic';
+
 async function getCisFile() {
     try {
         const response = await Apis.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/files?type=plus`);

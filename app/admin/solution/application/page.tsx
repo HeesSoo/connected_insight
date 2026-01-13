@@ -1,6 +1,8 @@
 import SolutionApplicationClient from "./_component/SolutionApplicationClient";
 import Apis from "@/hooks/api";
 
+export const dynamic = 'force-dynamic';
+
 async function getSolutionApplications() {
     try {
         const response = await Apis.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution`);

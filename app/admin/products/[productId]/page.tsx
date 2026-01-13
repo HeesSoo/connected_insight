@@ -5,6 +5,8 @@ import {
     ProductDetail as ProductDetailType,
 } from "@/app/[lang]/(web)/product/[productId]/_component/ProductDetailClient";
 
+export const dynamic = 'force-dynamic';
+
 async function fetchProduct(
     productId: string
 ): Promise<ProductDetailType | null> {

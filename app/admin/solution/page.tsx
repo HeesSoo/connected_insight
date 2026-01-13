@@ -1,6 +1,8 @@
 import SolutionClient from "./_component/SolutionClient";
 import Apis from "@/hooks/api";
 
+export const dynamic = 'force-dynamic';
+
 async function getSolutions() {
     try {
         const response = await Apis.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution/category`);

@@ -149,6 +149,10 @@
         display: none;
     }
 
+    :is(.mainLingchenSwiper, .mainTokkSwiper) .swiper-pagination-bullet {
+        display: none;
+    }
+
     :is(.mainLingchenSwiper, .mainTokkSwiper)
         .swiper-horizontal
         > .swiper-pagination-bullets,

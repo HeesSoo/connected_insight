@@ -1,5 +1,6 @@
 import { SpinnerProvider } from "@/components/Spinner";
 import TranslationProvider from "@/components/TranslationProvider";
+import EnumProvider from "@/components/EnumProvider";
 import { initializeTranslationScheduler } from "@/lib/translations";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -33,9 +34,11 @@ export default function RootLayout({
                 {/* <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> */}
             </head>
             <body className={inter.className}>
-                <TranslationProvider>
-                    <SpinnerProvider>{children}</SpinnerProvider>
-                </TranslationProvider>
+                <EnumProvider>
+                    <TranslationProvider>
+                        <SpinnerProvider>{children}</SpinnerProvider>
+                    </TranslationProvider>
+                </EnumProvider>
             </body>
         </html>
     );

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useAuthStore } from "@/store/authStore";
 
 interface MenuItem {
     id: string;
@@ -19,6 +20,21 @@ const menuItems: MenuItem[] = [
     //     href: "/admin",
     // },
     {
+        id: 'user',
+        label: '유저',
+        children: [
+            { id: 'user-create', label: '유저 생성', href: '/admin/user/create' }
+        ]
+    },
+    {
+        id: "solution",
+        label: "솔루션 관리",
+        children: [
+            { id: "product-list", label: "솔루션", href: "/admin/solution" },
+            { id: "product-application", label: "솔루션 Application", href: "/admin/solution/application" },
+        ]
+    },
+    {
         id: "products",
         label: "제품 관리",
         children: [
@@ -28,25 +44,36 @@ const menuItems: MenuItem[] = [
                 label: "제품 생성",
                 href: "/admin/products/create",
             },
+            {
+                id: "product-thumbnail",
+                label: "제품 썸네일 관리",
+                href: "/admin/products/thumbnail",
+            },
+            {
+                id: "product-file",
+                label: "Cis 파일 관리",
+                href: "/admin/products/file",
+            },
         ],
     },
     {
         id: "contact",
         label: "Contact Us",
         href: "/admin/contact",
-        // children: [
-        //     { id: "contact-history", label: "문의 내역", href: "/admin/contact/history" },
-        //     { id: "contact-settings", label: "설정", href: "/admin/contact/settings" },
-        // ],
     },
 ];
 
 export default function AdminLNB() {
     const pathname = usePathname();
+    const user = useAuthStore((state) => state.user);
     const [openMenus, setOpenMenus] = useState<string[]>([
+        "solution",
         "products",
         "contact",
     ]);
+
+    // Admin 권한 체크 - role이 'Admin'인 경우에만 true
+    const isAdmin = user?.role === 'Admin';
 
     const toggleMenu = (menuId: string) => {
         setOpenMenus((prev) =>
@@ -130,7 +157,15 @@ export default function AdminLNB() {
                         메뉴
                     </h2>
                 </div>
-                {menuItems.map((item) => renderMenuItem(item))}
+                {menuItems
+                    .filter((item) => {
+                        // 'user' 메뉴는 Admin일 때만 표시
+                        if (item.id === 'user') {
+                            return isAdmin;
+                        }
+                        return true;
+                    })
+                    .map((item) => renderMenuItem(item))}
             </nav>
         </aside>
     );

@@ -40,7 +40,6 @@ export default function ProductDownloads({ data }: { data: ProductDetail }) {
             </h2>
             <div className="w-[955px] flex flex-col gap-6 max-md:gap-3">
                 {downloadMap.map((v, index) => {
-                    console.log(v)
                     return v ? (
                         <div
                             key={index}

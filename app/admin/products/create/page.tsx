@@ -1,66 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { useInput } from "@/hooks/hooks";
+import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
-import Upload from "@/public/svgs/upload.svg";
+import Selectbox from "@/components/SelectBox";
+
+// CIS 생성 폼 import
+import AdminCisCreateForm from "./_component/AdminCisCreateForm";
+// External 생성 폼 import
+import AdminExternalCreateForm from "./_component/AdminExternalCreateForm";
 
 export default function ProductCreate() {
-    const productName = useInput("");
-    const category = useInput("");
-    const shortDescription = useInput("");
-    const detailDescription = useInput("");
-    const price = useInput("");
-    const stock = useInput("");
-    const sku = useInput("");
-    const specifications = useInput("");
+    const router = useRouter();
+    const [productCategory, setProductCategory] = useState<string>("");
 
-    const [images, setImages] = useState<File[]>([]);
-
-    const isFormComplete =
-        productName.value && category.value && shortDescription.value;
-
-    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files) {
-            setImages(Array.from(e.target.files));
-        }
-    };
-
-    const validateForm = () => {
-        if (productName.value === "") {
-            alert("제품명을 입력해 주세요.");
-            return false;
-        } else if (category.value === "") {
-            alert("카테고리를 입력해 주세요.");
-            return false;
-        } else if (shortDescription.value === "") {
-            alert("간단한 설명을 입력해 주세요.");
-            return false;
-        }
-        return true;
-    };
-
-    const handleSave = () => {
-        if (!validateForm()) {
-            return;
-        }
-        // TODO: Implement save logic
-        // console.log("Product save:", {
-        //     productName: productName.value,
-        //     category: category.value,
-        //     shortDescription: shortDescription.value,
-        //     detailDescription: detailDescription.value,
-        //     price: price.value,
-        //     stock: stock.value,
-        //     sku: sku.value,
-        //     specifications: specifications.value,
-        //     images,
-        // });
-    };
+    const productCategoryOptions = [
+        { label: "CIS", value: "cis" },
+        { label: "External (Lingchen/Tokk)", value: "external" },
+    ];
 
     const handleCancel = () => {
-        // TODO: Implement cancel logic (navigate back)
-        // console.log("Cancel");
+        router.push('/admin/products');
     };
 
     return (
@@ -78,212 +38,39 @@ export default function ProductCreate() {
 
                 {/* Form Container */}
                 <div className="bg-white rounded-lg shadow-sm p-12">
-                    {/* Basic Information */}
+                    {/* Product Category Selection */}
                     <div className="mb-12">
                         <h3 className="text-titleSmall text-ePrimary font-semibold mb-2">
-                            기본 정보
+                            제품 카테고리 선택
                         </h3>
                         <hr className="mb-6 bg-g200" />
 
-                        <div className="grid grid-cols-2 gap-x-[15px] gap-y-[24px]">
-                            {/* Product Name */}
-                            <div className="relative">
-                                {!productName.value && (
-                                    <div className="text-base text-g400 absolute top-[50%] left-[4px] translate-y-[-50%] pointer-events-none">
-                                        제품명{" "}
-                                        <span className="text-ePrimary">*</span>
-                                    </div>
-                                )}
-                                <input
-                                    className="w-full h-[46px] border-0 border-b border-g200 pl-[4px] text-base focus:outline-none focus:border-ePrimary transition-colors"
-                                    type="text"
-                                    value={productName.value}
-                                    onChange={productName.onChange}
-                                />
-                            </div>
-
-                            {/* Category */}
-                            <div className="relative">
-                                {!category.value && (
-                                    <div className="text-base text-g400 absolute top-[50%] left-[4px] translate-y-[-50%] pointer-events-none">
-                                        카테고리{" "}
-                                        <span className="text-ePrimary">*</span>
-                                    </div>
-                                )}
-                                <input
-                                    className="w-full h-[46px] border-0 border-b border-g200 pl-[4px] text-base focus:outline-none focus:border-ePrimary transition-colors"
-                                    type="text"
-                                    value={category.value}
-                                    onChange={category.onChange}
-                                />
-                            </div>
-
-                            {/* SKU */}
-                            <div className="relative">
-                                {!sku.value && (
-                                    <div className="text-base text-g400 absolute top-[50%] left-[4px] translate-y-[-50%] pointer-events-none">
-                                        SKU
-                                    </div>
-                                )}
-                                <input
-                                    className="w-full h-[46px] border-0 border-b border-g200 pl-[4px] text-base focus:outline-none focus:border-ePrimary transition-colors"
-                                    type="text"
-                                    value={sku.value}
-                                    onChange={sku.onChange}
-                                />
-                            </div>
-
-                            {/* Price */}
-                            <div className="relative">
-                                {!price.value && (
-                                    <div className="text-base text-g400 absolute top-[50%] left-[4px] translate-y-[-50%] pointer-events-none">
-                                        가격
-                                    </div>
-                                )}
-                                <input
-                                    className="w-full h-[46px] border-0 border-b border-g200 pl-[4px] text-base focus:outline-none focus:border-ePrimary transition-colors"
-                                    type="number"
-                                    value={price.value}
-                                    onChange={price.onChange}
-                                />
-                            </div>
-
-                            {/* Stock */}
-                            <div className="relative col-span-2">
-                                {!stock.value && (
-                                    <div className="text-base text-g400 absolute top-[50%] left-[4px] translate-y-[-50%] pointer-events-none">
-                                        재고 수량
-                                    </div>
-                                )}
-                                <input
-                                    className="w-full h-[46px] border-0 border-b border-g200 pl-[4px] text-base focus:outline-none focus:border-ePrimary transition-colors"
-                                    type="number"
-                                    value={stock.value}
-                                    onChange={stock.onChange}
-                                />
-                            </div>
-
-                            {/* Short Description */}
-                            <div className="col-span-2 relative">
-                                {!shortDescription.value && (
-                                    <div className="text-base text-g400 absolute top-[12px] left-[4px] pointer-events-none">
-                                        간단한 설명{" "}
-                                        <span className="text-ePrimary">*</span>
-                                    </div>
-                                )}
-                                <textarea
-                                    className="w-full h-[120px] border-0 border-b border-g200 pl-[4px] pt-[12px] text-base resize-none focus:outline-none focus:border-ePrimary transition-colors"
-                                    value={shortDescription.value}
-                                    onChange={shortDescription.onChange}
-                                />
-                            </div>
-
-                            {/* Detail Description */}
-                            <div className="col-span-2 relative">
-                                {!detailDescription.value && (
-                                    <div className="text-base text-g400 absolute top-[12px] left-[4px] pointer-events-none">
-                                        상세 설명
-                                    </div>
-                                )}
-                                <textarea
-                                    className="w-full h-[200px] border-0 border-b border-g200 pl-[4px] pt-[12px] text-base resize-none focus:outline-none focus:border-ePrimary transition-colors"
-                                    value={detailDescription.value}
-                                    onChange={detailDescription.onChange}
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Specifications */}
-                    <div className="mb-12">
-                        <h3 className="text-titleSmall text-ePrimary font-semibold mb-2">
-                            스펙
-                        </h3>
-                        <hr className="mb-6 bg-g200" />
-
-                        <div className="relative">
-                            {!specifications.value && (
-                                <div className="text-base text-g400 absolute top-[12px] left-[4px] pointer-events-none">
-                                    제품 스펙을 입력하세요 (예: 크기, 무게, 성능
-                                    등)
-                                </div>
-                            )}
-                            <textarea
-                                className="w-full h-[200px] border-0 border-b border-g200 pl-[4px] pt-[12px] text-base resize-none focus:outline-none focus:border-ePrimary transition-colors"
-                                value={specifications.value}
-                                onChange={specifications.onChange}
+                        <div className="max-w-md">
+                            <Selectbox
+                                label="제품 카테고리"
+                                placeholder="카테고리를 선택하세요"
+                                options={productCategoryOptions}
+                                initialValue={productCategory}
+                                onChange={(value) => setProductCategory(value.toString())}
+                                isRequired={true}
                             />
                         </div>
                     </div>
 
-                    {/* Image Upload */}
-                    <div className="mb-12">
-                        <h3 className="text-titleSmall text-ePrimary font-semibold mb-2">
-                            제품 이미지
-                        </h3>
-                        <hr className="mb-6 bg-g200" />
+                    {/* Conditional Form Rendering */}
+                    {productCategory === "cis" && (
+                        <AdminCisCreateForm onCancel={handleCancel} />
+                    )}
 
-                        <div className="flex items-center gap-4">
-                            <label
-                                htmlFor="product-images"
-                                className="flex gap-2 items-center px-6 py-3 border border-g200 rounded-[2px] cursor-pointer hover:border-ePrimary transition-colors"
-                            >
-                                <Upload width={24} height={24} />
-                                <span className="text-base font-semibold text-g900">
-                                    이미지 업로드
-                                </span>
-                            </label>
-                            <input
-                                type="file"
-                                id="product-images"
-                                accept="image/*"
-                                multiple
-                                onChange={handleImageUpload}
-                                className="w-0 h-0"
-                            />
-                            <span className="text-small text-g400">
-                                이미지 파일을 업로드해 주세요 (JPG, PNG, 최대
-                                10MB)
-                            </span>
+                    {productCategory === "external" && (
+                        <AdminExternalCreateForm onCancel={handleCancel} />
+                    )}
+
+                    {!productCategory && (
+                        <div className="text-center py-12 text-g400">
+                            제품 카테고리를 선택하면 입력 폼이 나타납니다.
                         </div>
-
-                        {images.length > 0 && (
-                            <div className="mt-4">
-                                <p className="text-base text-g700 mb-2">
-                                    선택된 파일: {images.length}개
-                                </p>
-                                <ul className="space-y-1">
-                                    {images.map((file, index) => (
-                                        <li
-                                            key={index}
-                                            className="text-small text-g500"
-                                        >
-                                            {file.name}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex justify-end gap-4 pt-6 border-t border-g200">
-                        <Button
-                            label="취소"
-                            onClick={handleCancel}
-                            btnType="primary"
-                            size="medium"
-                            className="w-[140px]"
-                        />
-                        <Button
-                            label="저장"
-                            onClick={handleSave}
-                            disabled={!isFormComplete}
-                            btnType="secondary"
-                            size="medium"
-                            className="w-[140px]"
-                        />
-                    </div>
+                    )}
                 </div>
             </div>
         </div>

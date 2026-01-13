@@ -140,7 +140,7 @@ const Filters = ({
         setTypeFilters({
             PLUS: filter.type.includes("plus"),
             MAX: filter.type.includes("max"),
-            MAX_PRO: filter.type.includes("max pro"),
+            MAX_PRO: filter.type.includes("maxpro"),
             COLOR: filter.type.includes("color"),
         });
 
@@ -175,7 +175,7 @@ const Filters = ({
                             : key === "MAX"
                             ? "max"
                             : key === "MAX_PRO"
-                            ? "max pro"
+                            ? "maxpro"
                             : "color"
                     );
                 }
@@ -186,7 +186,7 @@ const Filters = ({
                         : key === "MAX"
                         ? "max"
                         : key === "MAX_PRO"
-                        ? "max pro"
+                        ? "maxpro"
                         : "color"
                 );
             }
@@ -303,7 +303,7 @@ const Filters = ({
             if (shouldSelectAll) {
                 setFilter((prev) => ({
                     ...prev,
-                    type: ["plus", "max", "max pro", "color"],
+                    type: ["plus", "max", "maxpro", "color"],
                 }));
             } else {
                 setFilter((prev) => ({

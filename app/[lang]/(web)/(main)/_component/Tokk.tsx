@@ -20,6 +20,7 @@ export default function Tokk({ data }: LingchenProps) {
     const { currentLanguage } = useTranslationStore();
 
     const [swiper, setSwiper] = useState<SwiperClass>();
+    const [activeIndex, setActiveIndex] = useState<number>(0);
 
     return (
         <MotionWrapper delay={200} direction="up" duration={0.8} amount={0.05}>
@@ -55,6 +56,10 @@ export default function Tokk({ data }: LingchenProps) {
                             modules={[Pagination]}
                             onSwiper={(e) => {
                                 setSwiper(e);
+                                setActiveIndex(0);
+                            }}
+                            onSlideChange={(swiper) => {
+                                setActiveIndex(swiper.activeIndex);
                             }}
                             pagination={{
                                 clickable: true,
@@ -77,6 +82,24 @@ export default function Tokk({ data }: LingchenProps) {
                                                 height={474}
                                                 className="w-full h-[474px] object-cover max-md:h-[228px]"
                                             />
+                                            {/* Mobile Dot Navigation */}
+                                            <div className="hidden max-md:block">
+                                                <div className="relative flex justify-center mt-[12px] gap-3">
+                                                    {data.map((_, dotIdx) => (
+                                                        <div
+                                                            key={dotIdx}
+                                                            className={`w-2 h-2 cursor-pointer ${
+                                                                dotIdx === activeIndex
+                                                                    ? "bg-ePrimary"
+                                                                    : "bg-g200"
+                                                            }`}
+                                                            onClick={() => {
+                                                                swiper?.slideTo(dotIdx);
+                                                            }}
+                                                        ></div>
+                                                    ))}
+                                                </div>
+                                            </div>
                                         </div>
                                         <div className="flex-1 pt-12 pb-20 px-[136px] max-md:px-0 max-md:p-0 max-md:pt-6">
                                             <h3 className="text-ePrimary font-[700] text-xl mb-20 max-md:mb-6 max-md:text-xl-mobile">

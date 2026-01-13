@@ -142,7 +142,7 @@ const ProductItem = ({
                     <div className="mb-1 text-g400 text-base font-medium max-md:text-sm">
                         {item.type === "plus" && "LineX Plus"}
                         {item.type === "max" && "LineX Max"}
-                        {item.type === "max pro" && "LineX MAX PRO"}
+                        {item.type === "maxpro" && "LineX MAX PRO"}
                         {item.type === "color" && "LineX COLOR"}
                         {item.type === "-" && "-"}
                     </div>

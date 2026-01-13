@@ -41,7 +41,7 @@ export default function ContactUsList({ data }: { data: ContactUs[] }) {
                 {/* Table */}
                 <div className="bg-white rounded-lg shadow-sm overflow-hidden">
                     <div className="overflow-x-auto">
-                        <table className="w-full">
+                        <table className="w-full min-w-[1440px]">
                             <thead className="bg-g950 text-white">
                                 <tr>
                                     <th className="px-6 py-4 text-left text-base font-semibold">
@@ -62,17 +62,15 @@ export default function ContactUsList({ data }: { data: ContactUs[] }) {
                                     <th className="px-6 py-4 text-left text-base font-semibold">
                                         날짜
                                     </th>
-                                    <th className="px-6 py-4 text-center text-base font-semibold">
-                                        액션
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-g200">
-                                {data.length > 0 ? (
+                                {data?.length > 0 ? (
                                     data.map((contact, index) => (
                                         <tr
                                             key={contact.uuid}
-                                            className="hover:bg-g50 transition-colors"
+                                            className="hover:bg-g50 transition-colors cursor-pointer"
+                                            onClick={() => router.push(`/admin/contact/${contact.uuid}`)}
                                         >
                                             <td className="px-6 py-4 text-base text-g700">
                                                 {index + 1}
@@ -94,20 +92,6 @@ export default function ContactUsList({ data }: { data: ContactUs[] }) {
                                                     0,
                                                     10
                                                 )}
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                <div className="flex justify-center gap-2">
-                                                    <button
-                                                        onClick={() =>
-                                                            handleViewDetail(
-                                                                contact.uuid
-                                                            )
-                                                        }
-                                                        className="px-3 py-1 bg-g950 text-white text-small rounded-[2px] hover:bg-ePrimary transition-colors"
-                                                    >
-                                                        상세보기
-                                                    </button>
-                                                </div>
                                             </td>
                                         </tr>
                                     ))

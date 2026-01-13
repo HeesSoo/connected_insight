@@ -20,6 +20,7 @@ export default function Lingchen({ data }: LingchenProps) {
     const { currentLanguage } = useTranslationStore();
 
     const [swiper, setSwiper] = useState<SwiperClass>();
+    const [activeIndex, setActiveIndex] = useState<number>(0);
 
     return (
         <MotionWrapper delay={200} direction="up" duration={0.8} amount={0.05}>
@@ -57,11 +58,15 @@ export default function Lingchen({ data }: LingchenProps) {
                             spaceBetween={0}
                             onSwiper={(e) => {
                                 setSwiper(e);
+                                setActiveIndex(0);
+                            }}
+                            onSlideChange={(swiper) => {
+                                setActiveIndex(swiper.activeIndex);
                             }}
                             pagination={{
                                 clickable: true,
                                 renderBullet: (index, className) => {
-                                    return `<span class="${className} font-semibold text-large text-white bg-g200 px-5 py-2 select-none max-md:whitespace-nowrap max-md:text-base">${data[index].name}</span>`;
+                                    return `<span class="${className} font-semibold text-large text-white bg-g200 px-5 py-2 select-none hidden max-md:flex max-md:whitespace-nowrap max-md:text-base">${data[index].name}</span>`;
                                 },
                             }}
                             className="mainLingchenSwiper"
@@ -86,7 +91,7 @@ export default function Lingchen({ data }: LingchenProps) {
                                                 </h4>
                                             </div>
                                         </div>
-                                        <div className="w-[712px] max-md:w-full">
+                                        <div className="w-[712px] max-md:w-full relative">
                                             {/* <div className="w-[591px] bg-g50 px-12 py-20 flex flex-col justify-between"> */}
                                             <Image
                                                 src={
@@ -97,6 +102,25 @@ export default function Lingchen({ data }: LingchenProps) {
                                                 height={474}
                                                 className="w-full h-[474px] object-cover max-md:h-[228px]"
                                             />
+
+                                            {/* Mobile Dot Navigation */}
+                                            <div className="hidden max-md:block">
+                                                <div className="relative flex justify-center mt-[12px] gap-3">
+                                                    {data.map((_, dotIdx) => (
+                                                        <div
+                                                            key={dotIdx}
+                                                            className={`w-2 h-2 cursor-pointer ${
+                                                                dotIdx === activeIndex
+                                                                    ? "bg-ePrimary"
+                                                                    : "bg-g200"
+                                                            }`}
+                                                            onClick={() => {
+                                                                swiper?.slideTo(dotIdx);
+                                                            }}
+                                                        ></div>
+                                                    ))}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </SwiperSlide>

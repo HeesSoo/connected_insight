@@ -9,7 +9,6 @@ export default function Footer() {
     const localizedPath = useLocalizedPath();
     const { t } = useTranslation();
 
-    // console.log("translations:::", t);
 
     return (
         <footer role="contentinfo" className="bg-g950 text-white">

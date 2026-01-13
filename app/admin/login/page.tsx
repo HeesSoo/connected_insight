@@ -5,26 +5,36 @@ import { useInput } from "@/hooks/hooks";
 import Button from "@/components/Button";
 import Logo from "@/public/svgs/logo.svg";
 import Apis from "@/hooks/api";
+import { useAuthStore } from "@/store/authStore";
 
 export default function AdminLogin() {
     const router = useRouter();
+    const login = useAuthStore((state) => state.login);
     const id = useInput("");
     const password = useInput("");
 
     const isFormComplete = id.value && password.value;
 
+    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // 기본 form submit 동작 방지
+            handleLogin();
+        }
+    };
+
     const handleLogin = async () => {
         try {
-            const loginResponse = await Apis.post('/auth/login', { id: id.value, password: password.value });
-            console.log('Login Response >>>> ', loginResponse?.data);
+            const loginResponse = await Apis.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/login`, { id: id.value, password: password.value });
+            // const loginResponse = await Apis.post(`http://localhost:8080/api/user/loigin`, { id: id.value, password: password.value });
 
-            // 로그인 성공 시 /admin으로 리다이렉트
+            // 로그인 성공 시 accessToken을 쿠키에 저장
             if (loginResponse?.data?.accessToken) {
+                login(loginResponse.data.accessToken, loginResponse.data.user);
                 router.push("/admin");
             }
         } catch (err) {
             console.error('Login Error >>>> ', err);
-            // TODO: 에러 메시지 표시
+            alert('아이디 또는 비밀번호를 확인해주세요.')
         }
     };
 
@@ -46,13 +56,14 @@ export default function AdminLogin() {
                     <div className="relative">
                         {!id.value && (
                             <div className="text-base text-g400 absolute top-[50%] left-[4px] translate-y-[-50%] pointer-events-none">
-                                이메일 <span className="text-ePrimary">*</span>
+                                아이디
                             </div>
                         )}
                         <input
                             className="w-full h-[46px] border-0 border-b border-g200 pl-[4px] text-base focus:outline-none focus:border-ePrimary transition-colors"
                             value={id.value}
                             onChange={id.onChange}
+                            onKeyDown={onKeyDown}
                         />
                     </div>
 
@@ -60,7 +71,7 @@ export default function AdminLogin() {
                     <div className="relative">
                         {!password.value && (
                             <div className="text-base text-g400 absolute top-[50%] left-[4px] translate-y-[-50%] pointer-events-none">
-                                비밀번호 <span className="text-ePrimary">*</span>
+                                비밀번호
                             </div>
                         )}
                         <input
@@ -68,6 +79,7 @@ export default function AdminLogin() {
                             type="password"
                             value={password.value}
                             onChange={password.onChange}
+                            onKeyDown={onKeyDown}
                         />
                     </div>
 

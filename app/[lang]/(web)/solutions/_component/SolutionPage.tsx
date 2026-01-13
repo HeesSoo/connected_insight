@@ -5,7 +5,8 @@ import SolutionComponent from "./SolutionComponent";
 async function getApplications(): Promise<Solution> {
     try {
         const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution/with-category`
+            // `${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution/with-category`
+            `http://localhost:8080/api/solution/with-category`
         );
         if (response.status === 200) {
             return response.data.data || [];

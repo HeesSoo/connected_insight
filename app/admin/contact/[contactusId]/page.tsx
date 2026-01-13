@@ -2,6 +2,7 @@ import axios from "axios";
 import { ContactUs } from "../page";
 import { Suspense } from "react";
 import ContactUsDetail from "./_component/ContactUsDetail";
+import Apis from "@/hooks/api";
 
 // 빌드 타임이 아닌 요청 타임에 렌더링하도록 설정
 export const dynamic = 'force-dynamic';
@@ -12,21 +13,8 @@ async function fetchContacts({
     contactusId: string;
 }): Promise<ContactUs | null> {
     try {
-        // 환경 변수에서 토큰을 가져오거나, 없으면 빌드 시 스킵
-        const accessToken = process.env.ADMIN_ACCESS_TOKEN;
-
-        if (!accessToken) {
-            console.warn("ADMIN_ACCESS_TOKEN is not set. Skipping data fetch.");
-            return null;
-        }
-
-        const res = await axios.get(
+        const res = await Apis.get(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/api/contactus/${contactusId}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            }
         );
 
         if (res.status === 200) {

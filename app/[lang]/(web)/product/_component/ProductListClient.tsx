@@ -13,7 +13,7 @@ export interface CisData {
     name: string;
     resolution: 300 | 600 | 900 | 1200 | 1800 | 3600;
     thumbnail: string | StaticImageData;
-    type: "plus" | "max" | "max pro" | "color" | "-";
+    type: "plus" | "max" | "maxpro" | "color" | "-";
     uuid: string;
     wd: number;
 }
@@ -40,7 +40,7 @@ export interface TokkData {
 }
 
 export interface Filter {
-    type: ("plus" | "max" | "max pro" | "color")[];
+    type: ("plus" | "max" | "maxpro" | "color")[];
     resolution: (300 | 600 | 900 | 1200 | 1800 | 3600)[];
     line_rate_min: number | null;
     line_rate_max: number | null;
@@ -65,7 +65,7 @@ export default function ProductListClient({
 
     const [tab, setTab] = useState<"cis" | "lingchen" | "tokk">(category);
     const [filter, setFilter] = useState<Filter>({
-        type: ["plus", "max", "max pro", "color"],
+        type: ["plus", "max", "maxpro", "color"],
         resolution: [300, 600, 900, 1200, 1800, 3600],
         line_rate_min: 10,
         line_rate_max: 160,

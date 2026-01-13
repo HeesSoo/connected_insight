@@ -1,6 +1,6 @@
-import axios from "axios";
 import { Suspense } from "react";
 import ContactUsList from "./_component/ContactUsList";
+import Apis from "@/hooks/api";
 
 // 빌드 타임이 아닌 요청 타임에 렌더링하도록 설정
 export const dynamic = 'force-dynamic';
@@ -36,22 +36,8 @@ export interface ContactUs {
 
 async function fetchContacts(): Promise<ContactUs[] | null> {
     try {
-        // 환경 변수에서 토큰을 가져오거나, 없으면 빌드 시 스킵
-        const accessToken = process.env.ADMIN_ACCESS_TOKEN;
-
-        if (!accessToken) {
-            console.warn("ADMIN_ACCESS_TOKEN is not set. Skipping data fetch.");
-            return null;
-        }
-
-        const res = await axios.get(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/contactus`,
-            {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            }
-        );
+        // Apis는 서버/클라이언트 환경을 자동으로 감지하여 토큰 추가
+        const res = await Apis.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/contactus`);
 
         if (res.status === 200) {
             return res.data.data || null;

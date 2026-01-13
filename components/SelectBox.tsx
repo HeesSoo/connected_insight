@@ -16,10 +16,10 @@ interface SelectboxProps {
     label?: string;
     isRequired?: boolean;
     placeholder?: string;
-    options: { value: string; label: string }[];
+    options: { value: string | number; label: string }[];
     className?: string;
-    initialValue?: string;
-    onChange?: (value: string) => void;
+    initialValue?: string | number;
+    onChange?: (value: string | number) => void;
     isErr?: boolean;
     errMsg?: string;
 }
@@ -40,7 +40,7 @@ const Selectbox: React.FC<SelectboxProps> = ({
     const selectboxRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (initialValue) {
+        if (initialValue && options) {
             const option = options.filter((v) => v.value === initialValue)[0];
             if (option) setSelectedOption(option.label);
         }
@@ -59,7 +59,7 @@ const Selectbox: React.FC<SelectboxProps> = ({
         };
     }, []);
 
-    const handleSelect = (option: string) => {
+    const handleSelect = (option: string | number) => {
         setSelectedOption(options.filter((v) => v.value === option)[0].label);
         setIsOpen(false);
         onChange?.(option);

@@ -4,7 +4,7 @@ import Card from "@/components/Card";
 import MotionWrapper from "@/components/MotionWrapper";
 import { useTranslationStore } from "@/stores/translationStore";
 import { Solution, SolutionItem } from "@/types/solution";
-import { getYouTubeEmbedUrl } from "@/utils/youtube";
+import { getYouTubeEmbedUrl } from "@/lib/youtube";
 
 export default function SolutionCISCamera({ data }: { data: Solution }) {
     const { currentLanguage } = useTranslationStore();

@@ -2,19 +2,19 @@
 
 import Link from "next/link";
 import Logo from "@/public/svgs/logo.svg";
+import { useAuthStore } from "@/store/authStore";
 
 interface AdminGNBProps {
     userId?: string;
     onLogout?: () => void;
 }
 
-export default function AdminGNB({ userId = "admin@example.com", onLogout }: AdminGNBProps) {
+export default function AdminGNB({ onLogout }: AdminGNBProps) {
+    const userData = useAuthStore((state) => state.user);
+    console.log(userData)
     const handleLogout = () => {
         if (onLogout) {
             onLogout();
-        } else {
-            // TODO: Implement logout logic
-            console.log("Logout clicked");
         }
     };
 
@@ -30,7 +30,7 @@ export default function AdminGNB({ userId = "admin@example.com", onLogout }: Adm
 
                 {/* User Info & Logout */}
                 <div className="flex items-center gap-6">
-                    <span className="text-base text-g700">{userId}</span>
+                    <span className="text-base text-g700">{userData?.id}</span>
                     <button
                         onClick={handleLogout}
                         className="px-4 py-2 bg-g950 text-white text-base rounded-[2px] hover:bg-ePrimary transition-colors"

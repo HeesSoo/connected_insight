@@ -35,8 +35,6 @@ export default function Support_ReservationLab({
         swipers[idx]?.slideNext();
     };
 
-    console.log(data, " : data");
-
     return (
         <>
             {/* Main Image */}

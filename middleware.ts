@@ -32,7 +32,7 @@ export function middleware(request: NextRequest) {
 
     // Admin 경로 처리
     if (pathname.startsWith("/admin")) {
-        const token = request.cookies.get("token")?.value;
+        const token = request.cookies.get("accessToken")?.value;
 
         // 로그인 페이지 처리
         if (pathname === "/admin/login") {
@@ -52,13 +52,12 @@ export function middleware(request: NextRequest) {
         return NextResponse.next();
     }
 
-    // 언어 코드가 있는지 확인
+    // 언어 코드가 있는지 확인지금 토큰이 만료가 됐는데 lnb랑 header가 그대로 남아있어. 로그인 페이지로 아예 
     const locale = getLocale(pathname);
     const pathnameWithoutLocale = locale
         ? pathname.replace(`/${locale}`, "") || "/"
         : pathname;
 
-    console.log(pathnameWithoutLocale, " : pathname")
     const allowUrl = [
         "/",
         "/solutions",
@@ -82,7 +81,6 @@ export function middleware(request: NextRequest) {
 
     // 차단된 경로면 루트(/)로 리다이렉트
     if (isBlockedUrl) {
-        console.log(isBlockedUrl, " : isBlockedUrl");
         const url = request.nextUrl.clone();
         url.pathname = locale ? `/${locale}` : "/";
         url.searchParams.set("redirected", "true");
@@ -111,7 +109,6 @@ export function middleware(request: NextRequest) {
     // allowUrl에 없는 경로면 루트(/)로 리다이렉트
     if (!isAllowedUrl) {
         const url = request.nextUrl.clone();
-        console.log(isAllowedUrl, url);
         url.pathname = locale ? `/${locale}` : "/";
         url.searchParams.set("redirected", "true");
         return NextResponse.redirect(url);

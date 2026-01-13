@@ -204,8 +204,6 @@ export default function Header({ lang, gnbData }: HeaderProps) {
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
-    // console.log("gnbData in Header:", gnbData);
-
     // 모바일 메뉴 열릴 때 body overflow hidden
     useEffect(() => {
         if (isMenuOpen) {

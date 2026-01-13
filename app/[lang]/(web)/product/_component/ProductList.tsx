@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Suspense } from "react";
 import ProductListClient from "./ProductListClient";
+import Apis from "@/hooks/api";
 
 async function fetchProducts() {
     try {

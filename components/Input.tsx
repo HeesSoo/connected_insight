@@ -20,8 +20,8 @@ interface PropsType {
     label?: string;
     value: any;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    placeholder: string;
-    type: string;
+    placeholder?: string;
+    type?: string;
     isRequired?: boolean;
     isErr?: boolean;
     errMsg?: string;
@@ -40,7 +40,7 @@ export default function Input({
     value,
     onChange,
     placeholder,
-    type,
+    type = "text",
     isErr = false,
     errMsg,
     isRequired = false,

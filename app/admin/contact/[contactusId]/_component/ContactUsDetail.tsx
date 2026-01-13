@@ -4,7 +4,6 @@ import { ContactUs } from "../../page";
 import { useRouter } from "next/navigation";
 
 export default function ContactUsDetail({ data }: { data: ContactUs | null }) {
-    // console.log("ContactUsDetail data:", data);
     const router = useRouter();
 
     if (!data) {
@@ -90,7 +89,7 @@ export default function ContactUsDetail({ data }: { data: ContactUs | null }) {
                 </div>
 
                 {/* Reply Section */}
-                <div className="bg-white rounded-lg shadow-sm p-8 mb-6">
+                {/* <div className="bg-white rounded-lg shadow-sm p-8 mb-6">
                     <div className="flex justify-between items-start mb-4">
                         <h3 className="text-large font-semibold text-g950">
                             운영 관리자
@@ -103,7 +102,7 @@ export default function ContactUsDetail({ data }: { data: ContactUs | null }) {
                         문의주신 내용에 대해서 답변드립니다.
                     </p>
                     <p className="text-base text-g700">감사합니다.</p>
-                </div>
+                </div> */}
 
                 {/* Action Button */}
                 <div className="flex justify-center">

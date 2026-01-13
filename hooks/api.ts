@@ -1,24 +1,8 @@
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from "axios";
+import { getAccessToken } from "@/store/authStore";
 
 // API Base URL 설정 (Next.js 프록시를 통해 요청)
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '/api/proxy';
-
-// 쿠키에서 토큰 읽기 (클라이언트 사이드)
-const getTokenFromCookie = (): string | null => {
-  if (typeof window === "undefined") return null;
-
-  const name = "token=";
-  const decodedCookie = decodeURIComponent(document.cookie);
-  const cookieArray = decodedCookie.split(";");
-
-  for (let i = 0; i < cookieArray.length; i++) {
-    let cookie = cookieArray[i].trim();
-    if (cookie.indexOf(name) === 0) {
-      return cookie.substring(name.length, cookie.length);
-    }
-  }
-  return null;
-};
 
 // Axios 인스턴스 생성
 const Apis: AxiosInstance = axios.create({
@@ -30,11 +14,31 @@ const Apis: AxiosInstance = axios.create({
   withCredentials: true, // Cookie 자동 전송 (httpOnly JWT 사용 시)
 });
 
+// 서버/클라이언트 환경에 맞게 토큰을 가져오는 함수
+async function getToken(): Promise<string | null> {
+  // 클라이언트 환경
+  if (typeof window !== "undefined") {
+    return getAccessToken();
+  }
+
+  // 서버 환경 - cookies()를 직접 사용
+  try {
+    const { cookies } = await import("next/headers");
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get("accessToken");
+    return accessToken?.value || null;
+  } catch (error) {
+    console.error("Failed to get server access token:", error);
+    return null;
+  }
+}
+
 // Request 인터셉터
 Apis.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
-    // 쿠키에서 토큰을 읽어서 Authorization 헤더에 추가
-    const token = getTokenFromCookie();
+  async (config: InternalAxiosRequestConfig) => {
+    // 서버/클라이언트 환경에 맞게 accessToken을 읽어서 Authorization 헤더에 추가
+    const token = await getToken();
+
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -59,13 +63,33 @@ Apis.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        // Refresh token 로직을 여기에 추가할 수 있습니다
-        // const { data } = await axios.post(`${API_BASE_URL}/auth/refresh`);
-        // return Apis(originalRequest);
+        // Refresh Token으로 새로운 Access Token 발급
+        // refreshToken은 httpOnly 쿠키에 저장되어 있어 자동으로 전송됨
+        const { data } = await axios.post(`${API_BASE_URL}/auth/refresh`, {}, {
+          withCredentials: true, // httpOnly 쿠키 전송
+        });
+
+        // 새로운 accessToken을 쿠키에 저장
+        if (data.data?.accessToken) {
+          const maxAge = 9 * 60 * 60; // 9 hours
+          document.cookie = `accessToken=${data.data.accessToken}; path=/; max-age=${maxAge}; SameSite=Strict`;
+
+          // 원래 요청의 Authorization 헤더 업데이트
+          if (originalRequest.headers) {
+            originalRequest.headers.Authorization = `Bearer ${data.data.accessToken}`;
+          }
+
+          // 원래 요청 재시도
+          return Apis(originalRequest);
+        }
       } catch (refreshError) {
-        // Refresh 실패 시 로그인 페이지로 리다이렉트
+        // Refresh 실패 시 쿠키 삭제 및 로그인 페이지로 리다이렉트
         if (typeof window !== "undefined") {
-          window.location.href = "/login";
+          document.cookie = "accessToken=; path=/; max-age=0";
+          document.cookie = "refreshToken=; path=/; max-age=0";
+
+          // 강제 리디렉트로 middleware가 동작하도록 함
+          window.location.href = "/admin/login";
         }
         return Promise.reject(refreshError);
       }

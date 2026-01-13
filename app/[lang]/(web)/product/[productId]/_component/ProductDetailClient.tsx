@@ -58,7 +58,6 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
     const [thumbnailIndex, setThumbnailIndex] = useState<number>(0);
     const [swiper, setSwiper] = useState<SwiperClass>();
 
-    console.log("data: ", data);
     if (!data) {
         return <div>No product data available.</div>;
     }
@@ -233,7 +232,7 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
                         <div className="text-g950 font-semibold text-base mb-2 max-md:text-sm max-md:mb-1">
                             {data.type === "plus" && "LineX Plus"}
                             {data.type === "max" && "LineX Max"}
-                            {data.type === "max pro" && "LineX MAX PRO"}
+                            {data.type === "maxpro" && "LineX MAX PRO"}
                             {data.type === "color" && "LineX Color"}
                         </div>
                         <h1 className="text-[32px] font-bold text-g950 max-md:text-large">

@@ -8,6 +8,8 @@ import {
 } from "@/app/[lang]/(web)/product/_component/ProductListClient";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
+import { useEnumStore } from '@/store/enumStore';
+import { getEnumLabel } from "@/lib/enumUtils";
 
 type TabType = "cis" | "lingchen" | "tokk";
 
@@ -22,19 +24,9 @@ export default function ProductList({
 }) {
     const [activeTab, setActiveTab] = useState<TabType>("cis");
     const router = useRouter();
-
-    const handleEdit = (uuid: string) => {
-        // console.log("Edit product:", uuid);
-        // TODO: Navigate to edit page
-        // router.push(`/admin/products/edit/${uuid}`);
-    };
-
-    const handleDelete = (uuid: string) => {
-        if (confirm("정말 삭제하시겠습니까?")) {
-            // console.log("Delete product:", uuid);
-            // TODO: Implement delete logic
-        }
-    };
+    const enumData = useEnumStore((state) => state.data);
+    const cisEnum = enumData?.cis || [];
+    const externalProductEnum = enumData?.external_product || [];
 
     const handleCreate = () => {
         router.push("/admin/products/create");
@@ -42,7 +34,7 @@ export default function ProductList({
 
     const renderCisTable = (data: CisData[]) => (
         <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full min-w-[1440px]">
                 <thead className="bg-g950 text-white">
                     <tr>
                         <th className="px-6 py-4 text-left text-base font-semibold">
@@ -66,17 +58,15 @@ export default function ProductList({
                         <th className="px-6 py-4 text-left text-base font-semibold">
                             Line Rate
                         </th>
-                        <th className="px-6 py-4 text-center text-base font-semibold">
-                            액션
-                        </th>
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-g200">
-                    {data && data.length > 0 ? (
+                    {cisEnum && data && data.length > 0 ? (
                         data.map((item, index) => (
                             <tr
                                 key={item.uuid}
-                                className="hover:bg-g50 transition-colors"
+                                onClick={() => router.push(`/admin/products/${item.uuid}`)}
+                                className="hover:bg-g50 transition-colors cursor-pointer"
                             >
                                 <td className="px-6 py-4 text-base text-g700">
                                     {index + 1}
@@ -85,7 +75,7 @@ export default function ProductList({
                                     {item.name}
                                 </td>
                                 <td className="px-6 py-4 text-base text-g700">
-                                    {item.type}
+                                    {getEnumLabel(cisEnum, item.type) || item.type}
                                 </td>
                                 <td className="px-6 py-4 text-base text-g700">
                                     {item.resolution}
@@ -98,26 +88,6 @@ export default function ProductList({
                                 </td>
                                 <td className="px-6 py-4 text-base text-g700">
                                     {item.line_rate}
-                                </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex justify-center gap-2">
-                                        <button
-                                            onClick={() =>
-                                                handleEdit(item.uuid)
-                                            }
-                                            className="px-3 py-1 bg-ePrimary text-white text-small rounded-[2px] hover:bg-opacity-80 transition-colors"
-                                        >
-                                            수정
-                                        </button>
-                                        <button
-                                            onClick={() =>
-                                                handleDelete(item.uuid)
-                                            }
-                                            className="px-3 py-1 bg-g400 text-white text-small rounded-[2px] hover:bg-opacity-80 transition-colors"
-                                        >
-                                            삭제
-                                        </button>
-                                    </div>
                                 </td>
                             </tr>
                         ))
@@ -138,7 +108,7 @@ export default function ProductList({
 
     const renderLingchenTable = (data: LingchenData[]) => (
         <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full min-w-[1440px]">
                 <thead className="bg-g950 text-white">
                     <tr>
                         <th className="px-6 py-4 text-left text-base font-semibold">
@@ -153,9 +123,6 @@ export default function ProductList({
                         <th className="px-6 py-4 text-left text-base font-semibold">
                             URL
                         </th>
-                        <th className="px-6 py-4 text-center text-base font-semibold">
-                            액션
-                        </th>
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-g200">
@@ -163,7 +130,8 @@ export default function ProductList({
                         data.map((item, index) => (
                             <tr
                                 key={item.uuid}
-                                className="hover:bg-g50 transition-colors"
+                                onClick={() => router.push(`/admin/products/${item.uuid}`)}
+                                className="hover:bg-g50 transition-colors cursor-pointer"
                             >
                                 <td className="px-6 py-4 text-base text-g700">
                                     {index + 1}
@@ -172,30 +140,10 @@ export default function ProductList({
                                     {item.name}
                                 </td>
                                 <td className="px-6 py-4 text-base text-g700">
-                                    {item.type}
+                                    {getEnumLabel(externalProductEnum, item.type) || item.type}
                                 </td>
                                 <td className="px-6 py-4 text-base text-g700 max-w-[300px] truncate">
                                     {(item as any).url || "-"}
-                                </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex justify-center gap-2">
-                                        <button
-                                            onClick={() =>
-                                                handleEdit(item.uuid)
-                                            }
-                                            className="px-3 py-1 bg-ePrimary text-white text-small rounded-[2px] hover:bg-opacity-80 transition-colors"
-                                        >
-                                            수정
-                                        </button>
-                                        <button
-                                            onClick={() =>
-                                                handleDelete(item.uuid)
-                                            }
-                                            className="px-3 py-1 bg-g400 text-white text-small rounded-[2px] hover:bg-opacity-80 transition-colors"
-                                        >
-                                            삭제
-                                        </button>
-                                    </div>
                                 </td>
                             </tr>
                         ))
@@ -216,7 +164,7 @@ export default function ProductList({
 
     const renderTokkTable = (data: TokkData[]) => (
         <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full min-w-[1440px]">
                 <thead className="bg-g950 text-white">
                     <tr>
                         <th className="px-6 py-4 text-left text-base font-semibold">
@@ -231,9 +179,6 @@ export default function ProductList({
                         <th className="px-6 py-4 text-left text-base font-semibold">
                             URL
                         </th>
-                        <th className="px-6 py-4 text-center text-base font-semibold">
-                            액션
-                        </th>
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-g200">
@@ -241,7 +186,8 @@ export default function ProductList({
                         data.map((item, index) => (
                             <tr
                                 key={item.uuid}
-                                className="hover:bg-g50 transition-colors"
+                                onClick={() => router.push(`/admin/products/${item.uuid}`)}
+                                className="hover:bg-g50 transition-colors cursor-pointer"
                             >
                                 <td className="px-6 py-4 text-base text-g700">
                                     {index + 1}
@@ -250,30 +196,10 @@ export default function ProductList({
                                     {item.name}
                                 </td>
                                 <td className="px-6 py-4 text-base text-g700">
-                                    {item.type}
+                                    {getEnumLabel(externalProductEnum, item.type) || item.type}
                                 </td>
                                 <td className="px-6 py-4 text-base text-g700 max-w-[300px] truncate">
                                     {(item as any).url || "-"}
-                                </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex justify-center gap-2">
-                                        <button
-                                            onClick={() =>
-                                                handleEdit(item.uuid)
-                                            }
-                                            className="px-3 py-1 bg-ePrimary text-white text-small rounded-[2px] hover:bg-opacity-80 transition-colors"
-                                        >
-                                            수정
-                                        </button>
-                                        <button
-                                            onClick={() =>
-                                                handleDelete(item.uuid)
-                                            }
-                                            className="px-3 py-1 bg-g400 text-white text-small rounded-[2px] hover:bg-opacity-80 transition-colors"
-                                        >
-                                            삭제
-                                        </button>
-                                    </div>
                                 </td>
                             </tr>
                         ))
@@ -294,7 +220,7 @@ export default function ProductList({
 
     return (
         <div className="min-h-screen">
-            <div className="max-w-[1440px] mx-auto p-8">
+            <div className="max-w-[1440px] mx-auto">
                 {/* Header */}
                 <div className="mb-12 flex justify-between items-end">
                     <div>
@@ -306,7 +232,7 @@ export default function ProductList({
                         </p>
                     </div>
                     <Button
-                        label="제품 생성"
+                        label="제품 등록"
                         onClick={handleCreate}
                         btnType="secondary"
                         size="medium"

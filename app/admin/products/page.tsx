@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 async function fetchProducts() {
     try {
         const res = await Apis.get(
-            `/cis`
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis`
         );
         if (res.status === 200) {
             return res.data.data || { cis: [], lingchen: [], tokk: [] };

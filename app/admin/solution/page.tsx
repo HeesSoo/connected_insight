@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 async function getSolutions() {
     try {
-        const response = await Apis.get(`/solution/category`);
+        const response = await Apis.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution/category`);
         return response.data?.data || response.data;
     } catch (error) {
         console.error("Failed to fetch solutions:", error);

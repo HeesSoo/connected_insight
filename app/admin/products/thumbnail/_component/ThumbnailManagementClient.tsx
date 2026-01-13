@@ -49,7 +49,7 @@ export default function ThumbnailManagementClient() {
                 const fileType = encodeURIComponent(selectedType);
 
                 const response = await Apis.get(
-                    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/thumbnail?type=${fileType}`
+                    `/cis/thumbnail?type=${fileType}`
                 );
 
                 const cisProducts = response.data.data || [];
@@ -117,7 +117,7 @@ export default function ThumbnailManagementClient() {
 
             // API 호출
             await Apis.patch(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/thumbnail`,
+                `/cis/thumbnail`,
                 formData,
                 {
                     headers: {

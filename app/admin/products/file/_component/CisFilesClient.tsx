@@ -35,8 +35,7 @@ export default function CisFilesClient({ data }: { data: FileIfc[] }) {
 
     useEffect(() => {
         const fetchCisDocument = async () => {
-            // const response = await Apis.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/files?type={selectedType}`);
-            const response = await Apis.get(`http://localhost:8080/api/cis/files?type=${selectedType}`);
+            const response = await Apis.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/files?type={selectedType}`);
             setFiles(response.data?.data || response.data);
         }
 
@@ -130,8 +129,7 @@ export default function CisFilesClient({ data }: { data: FileIfc[] }) {
             formData.append("items", JSON.stringify(items));
 
             const response = await Apis.patch(
-                // `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/files`,
-                `http://localhost:8080/api/cis/files`,
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/files`,
                 formData,
                 {
                     headers: {

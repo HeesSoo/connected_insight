@@ -96,8 +96,7 @@ export default function AdminExternalProductDetailClient({ data }: { data: Recor
             }
 
             const response = await Apis.patch(
-                // `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/external`,
-                `http://localhost:8080/api/cis/external`,
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis/external`,
                 formData,
                 {
                     headers: {

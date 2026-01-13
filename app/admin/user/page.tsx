@@ -40,7 +40,7 @@ export default function UserCreate() {
             }
 
             const response = await Apis.post(
-                `http://localhost:8080/api/user/create`,
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/create`,
                 formData
             );
 

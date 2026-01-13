@@ -127,7 +127,7 @@ export default function SolutionApplicationClient({ data }: { data: SolutionAppl
             }
 
             const response = await Apis.patch(
-                `http://localhost:8080/api/solution`,
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/api/solution`,
                 formDataRequest,
                 {
                     headers: {

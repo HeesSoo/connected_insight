@@ -25,7 +25,6 @@ export default function AdminLogin() {
     const handleLogin = async () => {
         try {
             const loginResponse = await Apis.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/login`, { id: id.value, password: password.value });
-            // const loginResponse = await Apis.post(`http://localhost:8080/api/user/loigin`, { id: id.value, password: password.value });
 
             // 로그인 성공 시 accessToken을 쿠키에 저장
             if (loginResponse?.data?.accessToken) {

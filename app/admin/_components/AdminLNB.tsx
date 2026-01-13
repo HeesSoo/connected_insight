@@ -23,7 +23,7 @@ const menuItems: MenuItem[] = [
         id: 'user',
         label: '유저',
         children: [
-            { id: 'user-create', label: '유저 생성', href: '/admin/user/create' }
+            { id: 'user-create', label: '유저 생성', href: '/admin/user' }
         ]
     },
     {

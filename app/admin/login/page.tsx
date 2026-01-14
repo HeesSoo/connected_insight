@@ -23,8 +23,11 @@ export default function AdminLogin() {
     };
 
     const handleLogin = async () => {
+        const currentId = id.value;
+        const currentPassword = password.value;
+
         try {
-            const loginResponse = await Apis.post(`/user/login`, { id: id.value, password: password.value });
+            const loginResponse = await Apis.post(`/user/login`, { id: currentId, password: currentPassword });
 
             // 로그인 성공 시 accessToken을 쿠키에 저장
             if (loginResponse?.data?.accessToken) {
@@ -33,7 +36,9 @@ export default function AdminLogin() {
             }
         } catch (err) {
             console.error('Login Error >>>> ', err);
-            alert('아이디 또는 비밀번호를 확인해주세요.')
+            console.log(id, password, " : value check")
+            // 에러 발생 시 input 값 유지
+            alert('아이디 또는 비밀번호를 확인해주세요.');
         }
     };
 

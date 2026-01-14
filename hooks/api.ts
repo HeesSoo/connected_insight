@@ -59,7 +59,10 @@ Apis.interceptors.response.use(
     const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
 
     // 401 에러 처리 (인증 실패)
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // 로그인 요청은 401 리프레시 로직 건너뛰기
+    const isLoginRequest = originalRequest.url?.includes('/user/login') || originalRequest.url?.includes('/auth/login');
+
+    if (error.response?.status === 401 && !originalRequest._retry && !isLoginRequest) {
       originalRequest._retry = true;
 
       try {

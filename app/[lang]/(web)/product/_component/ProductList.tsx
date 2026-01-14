@@ -3,6 +3,8 @@ import { Suspense } from "react";
 import ProductListClient from "./ProductListClient";
 import Apis from "@/hooks/api";
 
+export const dynamic = 'force-dynamic';
+
 async function fetchProducts() {
     try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis`);

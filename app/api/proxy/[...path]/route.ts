@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_SERVER_URL || "http://api.eyeon.co.kr:81";
+const BACKEND_URL = process.env.NEXT_PUBLIC_SERVER_URL || "http://api.eyeon.co.kr";
 
 export async function GET(request: NextRequest, { params }: { params: { path: string[] } }) {
   const path = params.path.join("/");

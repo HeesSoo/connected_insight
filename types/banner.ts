@@ -5,4 +5,5 @@ export interface MainBanner {
   index: number;
   name: string;
   uuid: string;
+  mobile_image: string;
 }

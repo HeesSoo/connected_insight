@@ -49,6 +49,10 @@ export function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL("/admin/login", request.url));
         }
 
+        if (pathname === '/admin') {
+            console.log("test >>> ", pathname)
+            return NextResponse.redirect(new URL("/admin/products", request.url));
+        }
         return NextResponse.next();
     }
 

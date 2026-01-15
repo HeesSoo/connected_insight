@@ -11,6 +11,8 @@ import MainSolution from "./_component/Solution";
 import Tokk from "./_component/Tokk";
 import Apis from "@/hooks/api";
 
+export const dynamic = 'force-dynamic';
+
 async function getBanners(): Promise<MainBanner[]> {
     try {
         const response = await Apis.get(

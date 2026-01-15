@@ -32,7 +32,7 @@ export default function AdminLogin() {
             // 로그인 성공 시 accessToken을 쿠키에 저장
             if (loginResponse?.data?.accessToken) {
                 login(loginResponse.data.accessToken, loginResponse.data.user);
-                router.push("/admin");
+                router.push("/admin/products");
             }
         } catch (err) {
             console.error('Login Error >>>> ', err);

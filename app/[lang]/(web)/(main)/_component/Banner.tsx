@@ -65,12 +65,21 @@ export default function Banner({ banners }: BannerProps) {
                     >
                         {banners.map((item, index) => (
                             <SwiperSlide key={index}>
+                                {/* Desktop image */}
                                 <Image
                                     src={item.image}
                                     alt={item.name}
                                     width={1920}
                                     height={640}
-                                    className="w-full h-auto object-cover max-md:h-[300px]"
+                                    className="w-full h-auto object-cover max-md:hidden"
+                                />
+                                {/* Mobile image */}
+                                <Image
+                                    src={item.mobile_image || item.image}
+                                    alt={item.name}
+                                    width={768}
+                                    height={300}
+                                    className="w-full h-[300px] object-cover hidden max-md:block mobile"
                                 />
                             </SwiperSlide>
                         ))}

@@ -11,7 +11,7 @@ interface AdminGNBProps {
 
 export default function AdminGNB({ onLogout }: AdminGNBProps) {
     const userData = useAuthStore((state) => state.user);
-    console.log(userData)
+
     const handleLogout = () => {
         if (onLogout) {
             onLogout();

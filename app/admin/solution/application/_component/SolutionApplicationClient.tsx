@@ -113,14 +113,14 @@ export default function SolutionApplicationClient({ data }: { data: SolutionAppl
                     formDataRequest.append(key, value.toString());
                 }
             });
-
+            
             // 파일 처리
             if (uploadedFile) {
                 // 새로운 파일이 업로드된 경우
                 formDataRequest.append('file', uploadedFile);
-            } else if (solutionDetail?.file_uuid) {
+            } else if (solutionDetail?.file_uuid || solutionDetail?.file?.uuid) {
                 // 기존 파일을 유지하는 경우
-                formDataRequest.append('file_uuid', solutionDetail.file_uuid);
+                formDataRequest.append('file_uuid', solutionDetail.file_uuid || solutionDetail?.file?.uuid);
             } else {
                 // 이미지가 삭제된 경우
                 formDataRequest.append('file_uuid', '');

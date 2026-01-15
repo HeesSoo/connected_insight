@@ -5,5 +5,5 @@ export interface MainBanner {
   index: number;
   name: string;
   uuid: string;
-  mobile_image: File & { s3_url: string };
+  mobile_image: string;
 }

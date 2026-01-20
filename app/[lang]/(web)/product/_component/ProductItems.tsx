@@ -124,7 +124,7 @@ const ProductItem = ({
         return (
             <Link
                 href={localizedPath(`/product/${item.uuid}`)}
-                className="w-full bg-white shadow-prditem hover:shadow-lg rounded-lg border border-g100 transition-shadow select-none"
+                className="w-full bg-white shadow-prditem hover:[box-shadow:10px_12px_30px_-6px_rgba(38,57,77,0.5)] rounded-lg border border-g100 transition-shadow select-none"
             >
                 <Image
                     src={src}

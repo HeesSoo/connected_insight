@@ -6,17 +6,6 @@ import Link from "next/link";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import { CisData, LingchenData, TokkData } from "./ProductListClient";
 
-const dummyData: CisData | LingchenData | TokkData = {
-    fov: 0,
-    line_rate: 0,
-    name: "-",
-    resolution: 300,
-    thumbnail: AlternativeImg,
-    type: "-",
-    uuid: "dummy-uuid-1",
-    wd: 0,
-};
-
 export default function ProductItems({
     tab,
     data,

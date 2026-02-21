@@ -3,15 +3,13 @@
 import Card from "@/components/Card";
 import MotionWrapper from "@/components/MotionWrapper";
 import { useTranslationStore } from "@/stores/translationStore";
-import { Solution, SolutionItem } from "@/types/solution";
+import { Solution } from "@/types/solution";
 import { getYouTubeEmbedUrl } from "@/lib/youtube";
 import Image from "next/image";
 
 export default function SolutionCISCamera({ data }: { data: Solution }) {
     const { currentLanguage } = useTranslationStore();
     const safeEmbedUrl = getYouTubeEmbedUrl(data.link || "");
-
-    console.log("cis data:::", data);
 
     return (
         <div className="mt-20 max-md:mt-14">

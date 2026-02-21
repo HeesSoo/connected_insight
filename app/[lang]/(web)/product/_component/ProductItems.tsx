@@ -124,14 +124,14 @@ const ProductItem = ({
         return (
             <Link
                 href={localizedPath(`/product/${item.uuid}`)}
-                className="w-full bg-white shadow-prditem hover:shadow-lg rounded-lg border border-g100 transition-shadow select-none"
+                className="group w-full bg-white shadow-sm hover:shadow-md rounded-lg border border-g100 hover:border-g400 transition-all duration-300 select-none overflow-hidden"
             >
                 <Image
                     src={src}
                     alt={item.name}
                     width={440}
                     height={296}
-                    className="w-full max-h-[296px] object-cover rounded-t-lg max-md:h-[231px]"
+                    className="w-full aspect-[440/296] object-contain rounded-t-lg bg-white transition-transform duration-300 group-hover:scale-110"
                     onError={() => {
                         /* next/image의 onError는 JSX 반환이 아니므로 빈 핸들러로 둠.
                        필요하면 상태로 대체 이미지 처리 추가 가능 */
@@ -157,7 +157,7 @@ const ProductItem = ({
             <a
                 href={(item as any).url}
                 target="_blank"
-                className="w-full cursor-pointer bg-white shadow-prditem hover:shadow-xl rounded-lg border border-g100 transition-shadow select-none"
+                className="group w-full cursor-pointer bg-white shadow-sm hover:shadow-md rounded-lg border border-g100 hover:border-g400 transition-all select-none overflow-hidden"
                 rel="noopener noreferrer"
             >
                 <Image
@@ -165,7 +165,7 @@ const ProductItem = ({
                     alt={item.name}
                     width={440}
                     height={296}
-                    className="w-full h-[296px] object-cover rounded-t-lg max-md:h-[231px]"
+                    className="w-full aspect-[440/296] object-contain rounded-t-lg bg-white transition-transform duration-300 group-hover:scale-110"
                     onError={() => {
                         /* next/image의 onError는 JSX 반환이 아니므로 빈 핸들러로 둠.
                        필요하면 상태로 대체 이미지 처리 추가 가능 */

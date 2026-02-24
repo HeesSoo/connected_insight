@@ -1,7 +1,6 @@
 "use client";
 
 import Button from "@/components/Button";
-import Download from "@/public/svgs/download.svg";
 import { DownloadItem } from "../page";
 import { formatDateToYYMMDD } from "@/hooks/util";
 import { DownloadIco } from "@/icons/icons";
@@ -54,13 +53,7 @@ const DownloadCISCamera = ({ data }: DownloadCISCameraProps) => {
                                 size="medium"
                                 btnType="primary"
                                 label="Download"
-                                icRight={
-                                    <Download
-                                        width={24}
-                                        height={24}
-                                        fill={"#ffffff"}
-                                    />
-                                }
+                                icRight={<DownloadIco fill={"#ffffff"} />}
                                 className="max-md:hidden"
                                 onClick={() => onClickDownload(item)}
                             />

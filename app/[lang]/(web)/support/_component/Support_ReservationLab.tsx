@@ -133,7 +133,7 @@ export default function Support_ReservationLab({
                                         className="w-full flex justify-between mb-[160px] max-md:block max-md:mb-[80px]"
                                         key={v.uuid}
                                     >
-                                        <div className="w-[591px] h-[520px] bg-black relative max-md:w-full max-md:h-[304px]">
+                                        <div className="w-[591px] h-[520px] bg-black relative max-md:w-full max-md:h-full">
                                             <Swiper
                                                 modules={[Navigation]}
                                                 onSwiper={(e) => {
@@ -178,7 +178,7 @@ export default function Support_ReservationLab({
                                                                     alt="Alternative Image"
                                                                     width={591}
                                                                     height={444}
-                                                                    className="object-cover max-md:w-full max-md:h-[256px]"
+                                                                    className="aspect-[591/444] max-md:w-full max-md:h-full max-md:aspect-[343/256]"
                                                                 />
                                                                 <div className="w-full py-5 text-center text-titleSmall text-white font-semibold max-md:py-3 max-md:text-base">
                                                                     {currentLanguage ===
@@ -261,7 +261,7 @@ export default function Support_ReservationLab({
                                             </div>
                                         </div>
 
-                                        <div className="w-[712px] h-auto flex flex-col justify-between ml-[40px] max-md:w-full max-md:mt-14 max-md:ml-0">
+                                        <div className="flex-1 h-auto flex flex-col justify-between ml-[40px] max-md:w-full max-md:mt-14 max-md:ml-0">
                                             <div className="mb-[40px]">
                                                 <h3 className="text-h3 font-bold mb-2 max-md:text-large max-md:mb-1">
                                                     {currentLanguage === "en"
@@ -273,7 +273,7 @@ export default function Support_ReservationLab({
                                                         ? v.description_en
                                                         : v.description}
                                                 </div>
-                                                <div className="flex gap-2 max-md:flex-col">
+                                                <div className="flex gap-2 max-lg:flex-col max-md:flex-col">
                                                     {v.buttons.map((button) => (
                                                         <>
                                                             <Button

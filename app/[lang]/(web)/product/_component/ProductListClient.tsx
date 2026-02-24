@@ -166,7 +166,7 @@ export default function ProductListClient({
             <Tab
                 items={[
                     { value: "cis", label: "CIS Camera" },
-                    { value: "lingchen", label: "INDUSTRIAL CONTROL DEVICES" },
+                    { value: "lingchen", label: "Control Devices" },
                     { value: "tokk", label: "LINEAR ACTUATOR" },
                 ]}
                 defaultTab={tab}

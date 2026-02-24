@@ -27,32 +27,35 @@ export default function SolutionCISCamera({ data }: { data: Solution }) {
                 </div>
 
                 <div className="flex-1 max-md:w-[calc(100%+32px)] max-md:-ml-4">
-                    {safeEmbedUrl ? (
-                        <div className="relative w-full aspect-video">
-                            <iframe
-                                className="absolute top-0 left-0 w-full h-full"
-                                src={safeEmbedUrl}
-                                title="YouTube video player"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowFullScreen
-                            />
-                        </div>
+                    {data.link !== "" ? (
+                        safeEmbedUrl ? (
+                            <div className="relative w-full aspect-video">
+                                <iframe
+                                    className="absolute top-0 left-0 w-full h-full"
+                                    src={safeEmbedUrl}
+                                    title="YouTube video player"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowFullScreen
+                                />
+                            </div>
+                        ) : (
+                            <div className="w-full aspect-video flex items-center justify-center bg-gray-100 text-gray-500">
+                                유효하지 않은 YouTube URL입니다.
+                            </div>
+                        )
                     ) : (
-                        <div className="w-full aspect-video flex items-center justify-center bg-gray-100 text-gray-500">
-                            유효하지 않은 YouTube URL입니다.
-                        </div>
-                    )}
-
-                    {data.file && data.file.s3_url && (
-                        <div className="w-full h-[590px] text-white flex justify-center items-center max-md:h-[212px] mt-6">
-                            <Image
-                                src="https://eyeon-bucket-pjt.s3.ap-northeast-2.amazonaws.com/solution/Solution-Lingchen_1.png"
-                                alt={data.name}
-                                width={1920}
-                                height={400}
-                                className="w-full h-[590px] max-md:h-[212px] object-cover"
-                            />
-                        </div>
+                        data.file &&
+                        data.file.s3_url && (
+                            <div className="w-full h-auto text-white flex justify-center items-center">
+                                <Image
+                                    src={data.file.s3_url}
+                                    alt={data.name}
+                                    width={1920}
+                                    height={400}
+                                    className="w-full h-auto aspect-[955/590] max-md:aspect-[343/212]"
+                                />
+                            </div>
+                        )
                     )}
                 </div>
             </div>

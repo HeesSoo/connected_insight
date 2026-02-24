@@ -40,16 +40,20 @@ export default function SolutionLingchen({ data }: { data: Solution }) {
                             유효하지 않은 YouTube URL입니다.
                         </div>
                     )
-                ) : null}
-                <div className="w-full h-[590px] text-white flex justify-center items-center max-md:h-[212px]">
-                    <Image
-                        src={data.file_url}
-                        alt={data.name}
-                        width={1920}
-                        height={400}
-                        className="w-full h-[590px] max-md:h-[212px] object-cover"
-                    />
-                </div>
+                ) : (
+                    data.file &&
+                    data.file.s3_url && (
+                        <div className="w-full h-auto text-white flex justify-center items-center">
+                            <Image
+                                src={data.file.s3_url}
+                                alt={data.name}
+                                width={1920}
+                                height={400}
+                                className="w-full h-auto aspect-[955/590] max-md:aspect-[343/212]"
+                            />
+                        </div>
+                    )
+                )}
 
                 <div className="h-0.5 w-full bg-g200 my-6"></div>
 

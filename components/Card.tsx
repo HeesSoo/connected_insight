@@ -18,7 +18,7 @@ export default function Card({ item }: { item: SolutionItem }) {
                         alt={item.name}
                         width={469}
                         height={352}
-                        className="w-auto h-[352px] object-cover max-md:w-full max-md:h-auto"
+                        className="w-auto aspect-[469/352] max-md:w-full max-md:h-auto max-md:aspect-[343/257]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                     <div className="absolute bottom-6 left-6">

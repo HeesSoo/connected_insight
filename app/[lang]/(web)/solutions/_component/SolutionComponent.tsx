@@ -1,41 +1,56 @@
 "use client";
 
-import { Solution, SolutionItem } from "@/types/solution";
+import { Solution } from "@/types/solution";
 import SolutionCISCamera from "./Solution_CISCamera";
 import Tab from "@/components/Tab";
 import SolutionLingchen from "./Solution_Lingchen";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function SolutionComponent({ data }: { data: Solution }) {
-  const [tab, setTab] = useState<"cis" | "lingchen">("cis");
-  const [currentData, setCurrentData] = useState<Solution>(() => {
-    if (tab === "lingchen") return data[tab] || [];
-    return data[tab] || [];
-  });
+    const params = useSearchParams();
 
-  const handleTabChange = (newTab: "cis" | "lingchen") => {
-    setTab(newTab);
-    setCurrentData(data[newTab]);
-  };
+    const [tab, setTab] = useState<"cis" | "cd">("cis");
+    const [currentData, setCurrentData] = useState<Solution>(() => {
+        if (tab === "cd") return data["lingchen"] || [];
+        return data[tab] || [];
+    });
 
-  return (
-    <div>
-      <Tab
-        items={[
-          {
-            value: "cis",
-            label: "CIS Camera",
-            children: <SolutionCISCamera data={currentData} />,
-          },
-          {
-            value: "lingchen",
-            label: "LINGCHEN",
-            children: <SolutionLingchen data={currentData} />,
-          },
-        ]}
-        onChange={handleTabChange}
-        defaultTab="cis"
-      />
-    </div>
-  );
+    useEffect(() => {
+        const urlTab = params.get("tab");
+        if (urlTab === "cd" || urlTab === "cis") {
+            setTab(urlTab);
+            setCurrentData(
+                urlTab === "cd" ? data["lingchen"] || [] : data[urlTab] || []
+            );
+        }
+    }, []);
+
+    const handleTabChange = (newTab: "cis" | "cd") => {
+        setTab(newTab);
+        setCurrentData(
+            newTab === "cd" ? data["lingchen"] || [] : data[newTab] || []
+        );
+    };
+
+    return (
+        <div>
+            <Tab
+                items={[
+                    {
+                        value: "cis",
+                        label: "CIS Camera",
+                        children: <SolutionCISCamera data={currentData} />,
+                    },
+                    {
+                        value: "cd",
+                        label: "Control Devices",
+                        children: <SolutionLingchen data={currentData} />,
+                    },
+                ]}
+                onChange={handleTabChange}
+                defaultTab={tab}
+            />
+        </div>
+    );
 }

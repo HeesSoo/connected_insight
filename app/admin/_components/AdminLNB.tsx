@@ -28,10 +28,10 @@ const menuItems: MenuItem[] = [
     },
     {
         id: "solution",
-        label: "솔루션 관리",
+        label: "Application 관리",
         children: [
-            { id: "product-list", label: "솔루션", href: "/admin/solution" },
-            { id: "product-application", label: "솔루션 Application", href: "/admin/solution/application" },
+            { id: "product-list", label: "Application", href: "/admin/solution" },
+            { id: "product-application", label: "Application Item", href: "/admin/solution/application" },
         ]
     },
     {

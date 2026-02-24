@@ -10,6 +10,7 @@ const Apis: AxiosInstance = axios.create({
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
+    "Cache-Control": "no-store",
   },
   withCredentials: true, // Cookie 자동 전송 (httpOnly JWT 사용 시)
 });

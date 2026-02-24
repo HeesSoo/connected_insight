@@ -161,7 +161,7 @@ export default function Footer() {
                                             )}
                                             className="text-g300 hover:text-white transition-colors text-small"
                                         >
-                                            Industrial Control Devices
+                                            Control Devices
                                         </Link>
                                     </li>
                                     <li>

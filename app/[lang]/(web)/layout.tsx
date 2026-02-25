@@ -4,6 +4,8 @@ import { navigationConfig } from "@/data/navigation";
 import axios from "axios";
 import { Suspense } from "react";
 
+export const dynamic = 'force-dynamic';
+
 interface WebLayoutProps {
     children: React.ReactNode;
     params: {

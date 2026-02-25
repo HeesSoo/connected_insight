@@ -95,8 +95,6 @@ export default async function Home() {
                 <Tokk data={tokkData} />
 
                 <Contactus />
-
-                <HtmlRenderer src="/test/main.html" />
 </section>
         </main>
     );

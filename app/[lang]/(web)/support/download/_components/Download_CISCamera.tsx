@@ -32,41 +32,85 @@ const DownloadCISCamera = ({ data }: DownloadCISCameraProps) => {
             <h3 className="text-g950 font-bold text-title ml-9 max-md:hidden">
                 CIS Camera
             </h3>
-            <div className="w-[955px]">
-                {data &&
-                    data.map((item) => (
-                        <li
-                            key={item.uuid}
-                            className="w-full flex justify-between items-center py-6 border-b border-g200 max-md:py-3"
-                        >
-                            <div>
-                                <p className="text-g400 text-small mb-1 max-md:text-xs max-md:leading-[18px] max-md:font-medium">
-                                    {/* 25.11.23 Updated */}
-                                    {formatDateToYYMMDD(item.updated_at)}{" "}
-                                    Updated
-                                </p>
-                                <p className="text-g950 font-bold text-large max-md:text-base">
-                                    {item.name}
-                                </p>
-                            </div>
-                            <Button
-                                size="medium"
-                                btnType="primary"
-                                label="Download"
-                                icRight={<DownloadIco fill={"#ffffff"} />}
-                                className="max-md:hidden"
-                                onClick={() => onClickDownload(item)}
-                            />
-                            <button
-                                className={`hidden max-md:flex items-center gap-3 justify-center text-white 
-                                    rounded-[2px] transition-colors font-[600] disabled:bg-g200 select-none bg-g950 hover:bg-ePrimary text-base h-[40px] px-2`}
-                                onClick={() => onClickDownload(item)}
-                                type="button"
-                            >
-                                <DownloadIco fill={"#ffffff"} />
-                            </button>
-                        </li>
-                    ))}
+            <div className="w-[955px] overflow-x-auto max-md:overflow-x-visible">
+                <table className="w-full min-w-[760px] max-md:min-w-0 table-fixed border-t-2 border-g950">
+                    <colgroup>
+                        <col className="w-[8%] max-md:w-[8%]" />
+                        <col className="w-[16%] max-md:w-[18%]" />
+                        <col className="w-[44%] max-md:w-[30%]" />
+                        <col className="w-[14%] max-md:w-[22%]" />
+                        <col className="w-[18%] max-md:w-[22%]" />
+                    </colgroup>
+                    <thead>
+                        <tr className="bg-g950 text-white">
+                            <th className="py-4 px-4 text-center text-md font-semibold max-md:py-2 max-md:px-1 max-md:text-sm max-md:font-semibold">
+                                번호
+                            </th>
+                            <th className="py-4 px-4 text-center text-md font-semibold max-md:py-2 max-md:px-1 max-md:text-sm max-md:font-semibold">
+                                구분
+                            </th>
+                            <th className="py-4 px-4 text-left text-md font-semibold max-md:py-2 max-md:px-1 max-md:text-sm max-md:font-semibold">
+                                파일명
+                            </th>
+                            <th className="py-4 px-2 text-center text-md font-semibold max-md:py-2 max-md:px-0.5 max-md:text-sm max-md:font-semibold">
+                                업데이트
+                            </th>
+                            <th className="py-4 px-2 text-center text-md font-semibold max-md:py-2 max-md:px-0.5 max-md:text-sm max-md:font-semibold">
+                                다운로드
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data &&
+                            data.map((item, index) => (
+                                <tr
+                                    key={item.uuid}
+                                    className="border-b border-g200"
+                                >
+                                    <td className="py-5 px-4 text-center text-g700 text-base max-md:py-2.5 max-md:px-1 max-md:text-xs">
+                                        {index + 1}
+                                    </td>
+                                    <td className="py-5 px-4 text-center text-g700 text-base max-md:py-2.5 max-md:px-1 max-md:text-xs max-md:leading-[16px]">
+                                        CIS Camera
+                                    </td>
+                                    <td className="py-5 px-4 text-g950 font-bold text-large max-md:py-2.5 max-md:px-1 max-md:text-xs max-md:leading-[16px] max-md:font-semibold break-all">
+                                        {item.name}
+                                    </td>
+                                    <td className="py-5 px-2 text-center text-g500 text-base max-md:py-2.5 max-md:px-0.5 max-md:text-xs whitespace-nowrap">
+                                        {formatDateToYYMMDD(item.updated_at)}
+                                    </td>
+                                    <td className="py-5 px-2 max-md:py-2.5 max-md:px-0.5">
+                                        <div className="flex justify-center">
+                                            <Button
+                                                size="medium"
+                                                btnType="primary"
+                                                label="Download"
+                                                icRight={
+                                                    <DownloadIco
+                                                        fill={"#ffffff"}
+                                                    />
+                                                }
+                                                className="max-md:hidden"
+                                                onClick={() =>
+                                                    onClickDownload(item)
+                                                }
+                                            />
+                                            <button
+                                                className={`hidden max-md:flex items-center gap-0 justify-center text-white 
+                                                    rounded-[2px] transition-colors font-[600] disabled:bg-g200 select-none bg-g950 hover:bg-ePrimary h-[32px] w-[32px] min-w-[32px] p-0`}
+                                                onClick={() =>
+                                                    onClickDownload(item)
+                                                }
+                                                type="button"
+                                            >
+                                                <DownloadIco fill={"#ffffff"} />
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );

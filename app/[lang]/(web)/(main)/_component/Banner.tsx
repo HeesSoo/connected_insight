@@ -1,6 +1,7 @@
 "use client";
 
 import { Swiper, SwiperSlide, SwiperClass } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 
 import Button from "@/components/Button";
 import AlternativeImg from "@/public/common/alternativeImg.png";
@@ -46,7 +47,7 @@ export default function Banner({ banners }: BannerProps) {
             {banners && banners.length > 0 && (
                 <div className="relative">
                     <Swiper
-                        modules={[Pagination]}
+                        modules={[Pagination, Autoplay]}
                         onSwiper={(e) => {
                             setSwiper(e);
                         }}
@@ -60,6 +61,9 @@ export default function Banner({ banners }: BannerProps) {
                                 }
                                 return `<span class="${className} font-semibold text-large text-white bg-g200 px-5 py-2 select-none max-md:hidden">Product Finder</span>`;
                             },
+                        }}
+                        autoplay={{
+                            delay: 4000,
                         }}
                         className="mySwiper"
                     >

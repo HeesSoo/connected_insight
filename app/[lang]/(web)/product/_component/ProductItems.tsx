@@ -191,14 +191,14 @@ const ProductItem = ({
         );
     } else {
         const lmsUvItem = item as LMS_UV_Data;
-
+        console.log('lmsUvItem >>> ', lmsUvItem)
         return (
             <Link
                 href={localizedPath(`/product/${item.uuid}`)}
                 className="group w-full cursor-pointer bg-white shadow-sm hover:shadow-md rounded-lg border border-g100 hover:border-g400 transition-all select-none overflow-hidden"
             >
                 <Image
-                    src={lmsUvItem.thumbnail || AlternativeImg}
+                    src={lmsUvItem?.['thumbnail_files']?.[0]?.s3_url || AlternativeImg}
                     alt={lmsUvItem.name}
                     width={440}
                     height={296}

@@ -4,15 +4,20 @@ import TokkFinderImg from "@/public/main/tokk_finder.png";
 import Image from "next/image";
 import Link from "next/link";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
-import { CisData, LingchenData, TokkData } from "./ProductListClient";
+import {
+    CisData,
+    LingchenData,
+    LMS_UV_Data,
+    TokkData,
+} from "./ProductListClient";
 
 export default function ProductItems({
     tab,
     data,
     hasFilter,
 }: {
-    tab: "cis" | "lingchen" | "tokk";
-    data: CisData[] | LingchenData[] | TokkData[];
+    tab: "cis" | "lingchen" | "tokk" | "lms" | "uv";
+    data: CisData[] | LingchenData[] | TokkData[] | LMS_UV_Data[];
     hasFilter: boolean;
 }) {
     return (
@@ -87,9 +92,21 @@ export default function ProductItems({
                         hasFilter ? "grid-cols-3" : "grid-cols-4"
                     } gap-x-4 gap-y-12 max-md:grid-cols-1 max-md:gap-6`}
                 >
-                    {data.map((item: CisData | LingchenData | TokkData) => (
-                        <ProductItem key={item.uuid} type={tab} item={item} />
-                    ))}
+                    {data.map(
+                        (
+                            item:
+                                | CisData
+                                | LingchenData
+                                | TokkData
+                                | LMS_UV_Data
+                        ) => (
+                            <ProductItem
+                                key={item.uuid}
+                                type={tab}
+                                item={item}
+                            />
+                        )
+                    )}
                 </section>
             )}
         </div>
@@ -100,8 +117,8 @@ const ProductItem = ({
     item,
     type,
 }: {
-    item: CisData | LingchenData | TokkData;
-    type: "cis" | "lingchen" | "tokk";
+    item: CisData | LingchenData | TokkData | LMS_UV_Data;
+    type: "cis" | "lingchen" | "tokk" | "lms" | "uv";
 }) => {
     const localizedPath = useLocalizedPath();
     const src =
@@ -141,7 +158,7 @@ const ProductItem = ({
                 </div>
             </Link>
         );
-    } else {
+    } else if (type === "lingchen" || type === "tokk") {
         return (
             <a
                 href={(item as any).url}
@@ -171,6 +188,37 @@ const ProductItem = ({
                     </h4>
                 </div>
             </a>
+        );
+    } else {
+        const lmsUvItem = item as LMS_UV_Data;
+
+        return (
+            <Link
+                href={localizedPath(`/product/${item.uuid}`)}
+                className="group w-full cursor-pointer bg-white shadow-sm hover:shadow-md rounded-lg border border-g100 hover:border-g400 transition-all select-none overflow-hidden"
+            >
+                <Image
+                    src={lmsUvItem.thumbnail || AlternativeImg}
+                    alt={lmsUvItem.name}
+                    width={440}
+                    height={296}
+                    className="w-full aspect-[440/296] object-contain rounded-t-lg bg-white transition-transform duration-300 group-hover:scale-110"
+                    onError={() => {
+                        /* next/image의 onError는 JSX 반환이 아니므로 빈 핸들러로 둠.
+                       필요하면 상태로 대체 이미지 처리 추가 가능 */
+                    }}
+                />
+
+                <div className="p-5">
+                    <div className="mb-1 text-g400 text-base font-medium max-md:text-sm">
+                        {type === "lms" && "LMS"}
+                        {type === "uv" && "UV"}
+                    </div>
+                    <h4 className="text-g950 text-large leading-[30px] font-semibold max-md:text-base">
+                        {lmsUvItem.name}
+                    </h4>
+                </div>
+            </Link>
         );
     }
 };

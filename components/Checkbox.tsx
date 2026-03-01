@@ -67,7 +67,7 @@ export default function Checkbox({
                                 height="18"
                                 rx="2"
                                 fill="#E83837"
-                                fill-opacity="0.5"
+                                fillOpacity="0.5"
                             />
                             <rect
                                 width="12"

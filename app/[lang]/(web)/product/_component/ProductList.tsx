@@ -5,14 +5,24 @@ import Apis from "@/hooks/api";
 
 async function fetchProducts() {
     try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis`);
+        const res = await axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/cis`
+        );
         if (res.status === 200) {
-            return res.data.data || { cis: [], lingchen: [], tokk: [] };
+            return (
+                res.data.data || {
+                    cis: [],
+                    lingchen: [],
+                    tokk: [],
+                    lms: [],
+                    uv: [],
+                }
+            );
         }
     } catch (err) {
         console.error("Error fetching product list (server):", err);
     }
-    return { cis: [], lingchen: [], tokk: [] };
+    return { cis: [], lingchen: [], tokk: [], lms: [], uv: [] };
 }
 
 const ProductList: React.FC = async () => {

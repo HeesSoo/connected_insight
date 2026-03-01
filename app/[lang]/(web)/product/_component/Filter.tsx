@@ -173,10 +173,10 @@ const Filters = ({
                         key === "PLUS"
                             ? "plus"
                             : key === "MAX"
-                            ? "max"
-                            : key === "MAX_PRO"
-                            ? "maxpro"
-                            : "color"
+                              ? "max"
+                              : key === "MAX_PRO"
+                                ? "maxpro"
+                                : "color"
                     );
                 }
             } else if (value) {
@@ -184,10 +184,10 @@ const Filters = ({
                     key === "PLUS"
                         ? "plus"
                         : key === "MAX"
-                        ? "max"
-                        : key === "MAX_PRO"
-                        ? "maxpro"
-                        : "color"
+                          ? "max"
+                          : key === "MAX_PRO"
+                            ? "maxpro"
+                            : "color"
                 );
             }
         });
@@ -215,14 +215,14 @@ const Filters = ({
                         key === "300DPI"
                             ? 300
                             : key === "600DPI"
-                            ? 600
-                            : key === "900DPI"
-                            ? 900
-                            : key === "1200DPI"
-                            ? 1200
-                            : key === "1800DPI"
-                            ? 1800
-                            : 3600
+                              ? 600
+                              : key === "900DPI"
+                                ? 900
+                                : key === "1200DPI"
+                                  ? 1200
+                                  : key === "1800DPI"
+                                    ? 1800
+                                    : 3600
                     );
                 }
             } else if (value) {
@@ -230,14 +230,14 @@ const Filters = ({
                     key === "300DPI"
                         ? 300
                         : key === "600DPI"
-                        ? 600
-                        : key === "900DPI"
-                        ? 900
-                        : key === "1200DPI"
-                        ? 1200
-                        : key === "1800DPI"
-                        ? 1800
-                        : 3600
+                          ? 600
+                          : key === "900DPI"
+                            ? 900
+                            : key === "1200DPI"
+                              ? 1200
+                              : key === "1800DPI"
+                                ? 1800
+                                : 3600
                 );
             }
         });
@@ -492,6 +492,7 @@ const Filters = ({
                     <div className="mt-3 space-y-1">
                         {resolutions.map((resolution) => (
                             <CheckboxItem
+                                key={resolution}
                                 checked={
                                     resolutionFilters[
                                         resolution as keyof typeof resolutionFilters

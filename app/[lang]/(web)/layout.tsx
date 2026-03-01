@@ -4,7 +4,7 @@ import { navigationConfig } from "@/data/navigation";
 import axios from "axios";
 import { Suspense } from "react";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 interface WebLayoutProps {
     children: React.ReactNode;
@@ -33,6 +33,28 @@ async function getGnbData() {
                 );
                 if (cisChildren) {
                     cisChildren.href = "/product?t=cis";
+                }
+
+                const hasLmsChild = productsItem.children.some(
+                    (c: any) => c.id === "lms"
+                );
+                if (!hasLmsChild) {
+                    productsItem.children.push({
+                        id: "lms",
+                        label: "LMS",
+                        href: "/product?t=lms",
+                    });
+                }
+
+                const hasUvChild = productsItem.children.some(
+                    (c: any) => c.id === "uv"
+                );
+                if (!hasUvChild) {
+                    productsItem.children.push({
+                        id: "uv",
+                        label: "UV",
+                        href: "/product?t=uv",
+                    });
                 }
 
                 const lingchenChild = productsItem.children.find(

@@ -174,6 +174,26 @@ export default function Footer() {
                                             Linear Actuator
                                         </Link>
                                     </li>
+                                    <li>
+                                        <Link
+                                            href={localizedPath(
+                                                "/product?t=lms"
+                                            )}
+                                            className="text-g300 hover:text-white transition-colors text-small"
+                                        >
+                                            LMS
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href={localizedPath(
+                                                "/product?t=uv"
+                                            )}
+                                            className="text-g300 hover:text-white transition-colors text-small"
+                                        >
+                                            UV
+                                        </Link>
+                                    </li>
                                 </ul>
                             </section>
 

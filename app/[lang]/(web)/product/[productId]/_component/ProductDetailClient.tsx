@@ -76,8 +76,6 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
     
     const isCis = data.category === "cis";
     const thumbnails = (data?.thumbnail_files || data?.thumbnail) || [];
-    console.log(data)
-    console.log(data?.thumbnail_files?.[0]?.s3_url, " : url")
 
     const thumbnailSwiper = (
         <div className="w-[712px] max-md:w-full">
@@ -180,12 +178,12 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
     // ── Non-CIS layout ──────────────────────────────────────────────
     if (!isCis) {
         return (
-            <div className="max-w-[1488px] px-6 w-full mx-auto my-[80px] max-md:mt-0 max-md:mb-[96px] max-md:px-0">
+            <div className="max-w-[1488px] px-6 w-full mx-auto my-[80px] max-md:mt-0 max-md:mb-[96px] max-md:px-5">
                 {/* Row 1: Thumbnail + category_text_2 */}
                 <section className="w-full flex gap-[137px] max-md:block">
                     {thumbnailSwiper}
 
-                    <div className="flex flex-col gap-6 flex-1 max-md:px-4 max-md:mt-9">
+                    <div className="flex flex-col gap-6 flex-1 max-md:mt-9">
                         <h1 className="text-[32px] font-bold text-g950 max-md:text-large">
                             {data.name}
                         </h1>
@@ -194,13 +192,13 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
 
                 {/* Row 1: category_text_1 */}
                 {data.category_text_1 && (
-                    <section className="mt-[80px] max-md:mt-14 max-md:px-4">
+                    <section className="mt-[80px] max-md:mt-14">
                         <HtmlRenderer html={data.category_text_1} />
                     </section>
                 )}
                 {/* Row 2: category_text_2 */}
                 {data.category_text_2 && (
-                    <section className="mt-[80px] max-md:mt-14 max-md:px-4">
+                    <section className="mt-[80px] max-md:mt-14">
                         <HtmlRenderer html={data.category_text_2} />
                     </section>
                 )}
@@ -220,7 +218,7 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
 
                 {/* Row 4: category_table (표 HTML) */}
                 {data.category_table && (
-                    <section className="mt-[80px] max-md:mt-14 max-md:px-4 overflow-x-auto">
+                    <section className="mt-[80px] max-md:mt-14 overflow-x-auto">
                         <HtmlRenderer html={data.category_table} />
                     </section>
                 )}

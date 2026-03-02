@@ -52,10 +52,10 @@ export default function MainSolution({ data }: MainSolutionProps) {
                             alt="Alternative Image"
                             width={849}
                             height={474}
-                            className="w-[444px] h-[auto] object-cover"
+                            className="w-[444px] h-[auto] aspect-[849/474]"
                         />
                     </div>
-                    <div className="w-[591px] bg-g50 px-12 py-20 flex flex-col justify-between">
+                    <div className="flex-1 max-w-[591px] bg-g50 px-12 py-20 flex flex-col justify-between">
                         <h3 className="g-950 text-[32px] leading-[48px] tracking-[-0.2px] font-bold">
                             -
                         </h3>
@@ -84,7 +84,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
                     </div>
                 </div>
             ) : (
-                <div className="relative h-[474px] max-md:h-auto">
+                <div className="relative h-fit max-md:h-auto">
                     <Swiper
                         modules={[Navigation]}
                         onSwiper={(e) => {
@@ -102,10 +102,10 @@ export default function MainSolution({ data }: MainSolutionProps) {
                                             alt={item.name}
                                             width={849}
                                             height={474}
-                                            className="w-full h-[474px] object-cover max-md:h-[192px]"
+                                            className="w-full h-full aspect-[849/474]"
                                         />
                                     </div>
-                                    <div className="w-[591px] bg-g50 px-12 pt-12 pb-20 flex flex-col justify-between select-none max-md:w-full max-md:h-[238px] max-md:py-8 max-md:px-3 ">
+                                    <div className="flex-1 md:max-w-[591px] md:aspect-[591/474] bg-g50 px-12 pt-12 pb-20 flex flex-col justify-between select-none max-md:w-full max-md:h-[238px] max-md:py-8 max-md:px-3 ">
                                         <h3 className="g-950 text-[32px] leading-[48px] tracking-[-0.2px] font-bold max-md:text-lg max-md:mb-6">
                                             {item?.[`name_${currentLanguage}`]}
                                         </h3>

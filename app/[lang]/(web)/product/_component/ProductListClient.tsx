@@ -39,6 +39,21 @@ export interface TokkData {
     };
 }
 
+export interface LMS_UV_Data {
+    uuid: string;
+    name: string;
+    fov: number | null;
+    resolution: number | null;
+    wd: number | null;
+    line_rate: number | null;
+    type: string | null;
+    category: "LMS" | "UV";
+    thumbnail: string;
+    thumb_file: {
+        s3_url: string;
+    } | null;
+}
+
 export interface Filter {
     type: ("plus" | "max" | "maxpro" | "color")[];
     resolution: (300 | 600 | 900 | 1200 | 1800 | 3600)[];
@@ -57,13 +72,22 @@ export default function ProductListClient({
         cis?: CisData[];
         lingchen?: LingchenData[];
         tokk?: TokkData[];
+        lms?: LMS_UV_Data[];
+        uv?: LMS_UV_Data[];
     };
 }) {
     const searchParams = useSearchParams();
     const category =
-        (searchParams?.get("t") as "cis" | "lingchen" | "tokk") || "cis";
+        (searchParams?.get("t") as
+            | "cis"
+            | "lingchen"
+            | "tokk"
+            | "lms"
+            | "uv") || "cis";
 
-    const [tab, setTab] = useState<"cis" | "lingchen" | "tokk">(category);
+    const [tab, setTab] = useState<"cis" | "lingchen" | "tokk" | "lms" | "uv">(
+        category
+    );
     const [filter, setFilter] = useState<Filter>({
         type: ["plus", "max", "maxpro", "color"],
         resolution: [300, 600, 900, 1200, 1800, 3600],
@@ -84,23 +108,34 @@ export default function ProductListClient({
     const [tokkData, setTokkData] = useState<TokkData[]>(
         initialData.tokk || []
     );
-
-    const [data, setData] = useState<CisData[] | LingchenData[] | TokkData[]>(
-        () => {
-            if (category === "cis") return initialData.cis || [];
-            if (category === "lingchen") return initialData.lingchen || [];
-            return initialData.tokk || [];
-        }
+    const [lmsData, setLmsData] = useState<LMS_UV_Data[]>(
+        initialData.lms || []
     );
+    const [uvData, setUvData] = useState<LMS_UV_Data[]>(initialData.uv || []);
+
+    const [data, setData] = useState<
+        CisData[] | LingchenData[] | TokkData[] | LMS_UV_Data[]
+    >(() => {
+        if (category === "cis") return initialData.cis || [];
+        if (category === "lingchen") return initialData.lingchen || [];
+        if (category === "tokk") return initialData.tokk || [];
+        if (category === "lms") return initialData.lms || [];
+        if (category === "uv") return initialData.uv || [];
+        return [];
+    });
 
     useEffect(() => {
         setAllCisData(initialData.cis || []);
         setLingchenData(initialData.lingchen || []);
         setTokkData(initialData.tokk || []);
+        setLmsData(initialData.lms || []);
+        setUvData(initialData.uv || []);
         // 현재 탭에 맞춰 데이터 업데이트
         if (tab === "cis") setData(initialData.cis || []);
         if (tab === "lingchen") setData(initialData.lingchen || []);
         if (tab === "tokk") setData(initialData.tokk || []);
+        if (tab === "lms") setData(initialData.lms || []);
+        if (tab === "uv") setData(initialData.uv || []);
     }, [tab, initialData]);
 
     useEffect(() => {
@@ -150,6 +185,10 @@ export default function ProductListClient({
             filteredData = [...lingchenData];
         } else if (tab === "tokk") {
             filteredData = [...tokkData];
+        } else if (tab === "lms") {
+            filteredData = [...lmsData];
+        } else if (tab === "uv") {
+            filteredData = [...uvData];
         }
 
         setData(filteredData);
@@ -157,7 +196,9 @@ export default function ProductListClient({
 
     const router = useRouter();
 
-    const handleTabChange = (newTab: "cis" | "lingchen" | "tokk") => {
+    const handleTabChange = (
+        newTab: "cis" | "lingchen" | "tokk" | "lms" | "uv"
+    ) => {
         router.push(`/product?t=${newTab}`);
     };
 
@@ -166,8 +207,10 @@ export default function ProductListClient({
             <Tab
                 items={[
                     { value: "cis", label: "CIS Camera" },
-                    { value: "lingchen", label: "INDUSTRIAL CONTROL DEVICES" },
+                    { value: "lingchen", label: "CONTROL DEVICES" },
                     { value: "tokk", label: "LINEAR ACTUATOR" },
+                    { value: "lms", label: "LMS" },
+                    { value: "uv", label: "UV" },
                 ]}
                 defaultTab={tab}
                 onChange={handleTabChange}

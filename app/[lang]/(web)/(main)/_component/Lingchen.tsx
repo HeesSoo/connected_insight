@@ -100,7 +100,7 @@ export default function Lingchen({ data }: LingchenProps) {
                                                 alt="Alternative Image"
                                                 width={849}
                                                 height={474}
-                                                className="w-full h-[474px] object-cover max-md:h-[228px]"
+                                                className="w-full h-[474px] aspect-[712/474] max-md:h-auto max-md:aspect-[343/228]"
                                             />
 
                                             {/* Mobile Dot Navigation */}
@@ -110,12 +110,15 @@ export default function Lingchen({ data }: LingchenProps) {
                                                         <div
                                                             key={dotIdx}
                                                             className={`w-2 h-2 cursor-pointer ${
-                                                                dotIdx === activeIndex
+                                                                dotIdx ===
+                                                                activeIndex
                                                                     ? "bg-ePrimary"
                                                                     : "bg-g200"
                                                             }`}
                                                             onClick={() => {
-                                                                swiper?.slideTo(dotIdx);
+                                                                swiper?.slideTo(
+                                                                    dotIdx
+                                                                );
                                                             }}
                                                         ></div>
                                                     ))}

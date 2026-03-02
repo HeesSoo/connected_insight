@@ -22,6 +22,7 @@ export async function GET(request: NextRequest, { params }: { params: { path: st
     const response = await fetch(url, {
       method: "GET",
       headers,
+      cache: "no-store",
     });
 
     // 응답 텍스트를 먼저 읽기
@@ -90,6 +91,7 @@ export async function POST(request: NextRequest, { params }: { params: { path: s
       method: "POST",
       headers,
       body,
+      cache: "no-store",
     });
 
     // 응답 텍스트를 먼저 읽기
@@ -176,6 +178,7 @@ export async function PUT(request: NextRequest, { params }: { params: { path: st
       method: "PUT",
       headers,
       body,
+      cache: "no-store",
     });
 
     // 응답 텍스트를 먼저 읽기
@@ -219,6 +222,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { path:
     const response = await fetch(url, {
       method: "DELETE",
       headers,
+      cache: "no-store",
     });
 
     // 응답 텍스트를 먼저 읽기
@@ -282,6 +286,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { path: 
       method: "PATCH",
       headers,
       body,
+      cache: "no-store",
     });
 
     // 응답 텍스트를 먼저 읽기

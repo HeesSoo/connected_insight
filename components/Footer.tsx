@@ -9,7 +9,6 @@ export default function Footer() {
     const localizedPath = useLocalizedPath();
     const { t } = useTranslation();
 
-
     return (
         <footer role="contentinfo" className="bg-g950 text-white">
             <div className="max-w-max-full mx-auto pt-[60px] pb-[120px] max-md:py-9 px-4">
@@ -84,13 +83,12 @@ export default function Footer() {
                                             {t["footer-representative-label"]}
                                             &nbsp;:&nbsp;
                                         </dt>
-                                        <dd>{t["footer-representative-value"]}</dd>
+                                        <dd>
+                                            {t["footer-representative-value"]}
+                                        </dd>
                                     </div>
                                     <div className="flex text-g300 text-small mt-[20px] ml-[50px] max-md:text-xs max-md:leading-[18px] max-md:ml-[43px]">
-                                        <dt>
-                                            Fax
-                                            &nbsp;:&nbsp;
-                                        </dt>
+                                        <dt>Fax &nbsp;:&nbsp;</dt>
                                         <dd>0505-418-9859</dd>
                                     </div>
                                 </div>
@@ -128,6 +126,16 @@ export default function Footer() {
                                             CIS Application
                                         </Link>
                                     </li>
+                                    <li>
+                                        <Link
+                                            href={localizedPath(
+                                                "/solutions?tab=cd"
+                                            )}
+                                            className="text-g300 hover:text-white transition-colors text-small"
+                                        >
+                                            Control Devices
+                                        </Link>
+                                    </li>
                                 </ul>
                             </section>
 
@@ -153,7 +161,7 @@ export default function Footer() {
                                             )}
                                             className="text-g300 hover:text-white transition-colors text-small"
                                         >
-                                            Industrial Control Devices
+                                            Control Devices
                                         </Link>
                                     </li>
                                     <li>
@@ -164,6 +172,26 @@ export default function Footer() {
                                             className="text-g300 hover:text-white transition-colors text-small"
                                         >
                                             Linear Actuator
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href={localizedPath(
+                                                "/product?t=lms"
+                                            )}
+                                            className="text-g300 hover:text-white transition-colors text-small"
+                                        >
+                                            LMS
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href={localizedPath(
+                                                "/product?t=uv"
+                                            )}
+                                            className="text-g300 hover:text-white transition-colors text-small"
+                                        >
+                                            UV
                                         </Link>
                                     </li>
                                 </ul>

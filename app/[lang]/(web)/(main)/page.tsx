@@ -4,6 +4,7 @@ import { SolutionItem } from "@/types/solution";
 import axios from "axios";
 import { Suspense } from "react";
 import Banner from "./_component/Banner";
+import HtmlRenderer from "./_component/HtmlRenderer";
 import Contactus from "./_component/ContactUs";
 import Linchen from "./_component/Lingchen";
 import RedirectAlert from "./_component/RedirectAlert";
@@ -94,7 +95,7 @@ export default async function Home() {
                 <Tokk data={tokkData} />
 
                 <Contactus />
-            </section>
+</section>
         </main>
     );
 }

@@ -41,7 +41,7 @@ export default function MainSolution({ data }: MainSolutionProps) {
     return (
         <MotionWrapper delay={200} duration={0.8} direction="up" amount={0.05}>
             <h2 className="font-bold text-xl text-g950 mb-[58px] max-md:text-xl-mobile max-md:mb-6 ">
-                CIS Application
+                Application
             </h2>
 
             {!data || data.length === 0 ? (

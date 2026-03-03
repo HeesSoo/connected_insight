@@ -2,7 +2,7 @@
 
 import Tab from "@/components/Tab";
 import { StaticImageData } from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Filter from "./Filter";
 import ProductItems from "./ProductItems";
@@ -194,12 +194,10 @@ export default function ProductListClient({
         setData(filteredData);
     }, [tab, filter]);
 
-    const router = useRouter();
-
     const handleTabChange = (
         newTab: "cis" | "lingchen" | "tokk" | "lms" | "uv"
     ) => {
-        router.push(`/product?t=${newTab}`);
+        setTab(newTab);
     };
 
     return (
@@ -210,7 +208,7 @@ export default function ProductListClient({
                     { value: "lingchen", label: "CONTROL DEVICES" },
                     { value: "tokk", label: "LINEAR ACTUATOR" },
                     { value: "lms", label: "LMS" },
-                    { value: "uv", label: "UV" },
+                    { value: "uv", label: "UV CURING SYSTEM" },
                 ]}
                 defaultTab={tab}
                 onChange={handleTabChange}

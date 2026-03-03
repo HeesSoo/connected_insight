@@ -74,9 +74,10 @@ export default function ProductDetailClient({ data }: { data: ProductDetail }) {
         return <div>No product data available.</div>;
     }
     
-    const isCis = data.category === "cis";
-    const thumbnails = (data?.thumbnail_files || data?.thumbnail) || [];
+    const isCis = (!data.category || data?.category !== 'cis');
+    const thumbnails = (data?.thumbnail_files?.length > 0 ? data?.thumbnail_files : data?.thumbnail) || [];
 
+    console.log(data)
     const thumbnailSwiper = (
         <div className="w-[712px] max-md:w-full">
             <div className="relative">

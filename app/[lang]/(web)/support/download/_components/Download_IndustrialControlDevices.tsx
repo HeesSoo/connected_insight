@@ -32,7 +32,7 @@ const DownloadIndustrialControlDevices = ({
     return (
         <div className="w-full flex justify-between pt-[80px] max-md:pt-14">
             <h3 className="text-g950 font-bold text-title ml-9 max-md:hidden">
-                Industrial Control Devices
+                Control Devices
             </h3>
             <div className="w-[955px] overflow-x-auto max-md:overflow-x-visible">
                 <table className="w-full min-w-[760px] max-md:min-w-0 table-fixed border-t-2 border-g950">

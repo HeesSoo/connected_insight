@@ -39,7 +39,7 @@ export default function DownloadClient({ initialData }: DownloadClientProps) {
                         },
                         {
                             value: "icd",
-                            label: "Industrial Control Devices",
+                            label: "Control Devices",
                             children: (
                                 <DownloadIndustrialControlDevices
                                     data={initialData.lingchen}

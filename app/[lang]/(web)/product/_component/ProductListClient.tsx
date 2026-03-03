@@ -208,7 +208,7 @@ export default function ProductListClient({
                     { value: "lingchen", label: "CONTROL DEVICES" },
                     { value: "tokk", label: "LINEAR ACTUATOR" },
                     { value: "lms", label: "LMS" },
-                    { value: "uv", label: "UV" },
+                    { value: "uv", label: "UV CURING SYSTEM" },
                 ]}
                 defaultTab={tab}
                 onChange={handleTabChange}

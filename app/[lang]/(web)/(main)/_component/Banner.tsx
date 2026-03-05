@@ -75,7 +75,7 @@ export default function Banner({ banners }: BannerProps) {
                                     alt={item.name}
                                     width={1920}
                                     height={640}
-                                    className="w-full h-auto aspect-[1920/640] max-md:hidden"
+                                    className="w-full h-[640px] mx-auto max-md:h-auto aspect-[1920/640] max-md:hidden !max-w-[1080px] max-md:!max-w-full"
                                 />
                                 {/* Mobile image */}
                                 <Image
@@ -88,7 +88,7 @@ export default function Banner({ banners }: BannerProps) {
                             </SwiperSlide>
                         ))}
 
-                        <SwiperSlide key="custom-banner" className="relative">
+                        <SwiperSlide key="custom-banner" className="relative custom-banner">
                             <Image
                                 src={ProductFindBanner}
                                 alt="Product Finder Banner"

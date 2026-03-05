@@ -94,7 +94,7 @@ export default function Banner({ banners }: BannerProps) {
                                 alt="Product Finder Banner"
                                 width={1920}
                                 height={640}
-                                className="w-full h-[640px] aspect-[1920/640] max-md:aspect-[375/300]"
+                                className="w-full h-[640px] aspect-[1920/640] max-md:aspect-[375/300] max-md:h-auto"
                             />
                             <div className="w-full h-full absolute top-0 left-0 z-20 pr-[80px] flex justify-end items-center max-md:p-5 max-md:justify-start max-md:items-start">
                                 <div className="text-white max-md:hidden">
